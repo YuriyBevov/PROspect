@@ -2,10 +2,8 @@ import {gsap} from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
-
-const logo = document.querySelector('.anim1 #logo');
+const logo = document.querySelector('#logo');
 const paths = logo.querySelectorAll('path');
-
 
 paths.forEach((el,i) => {
   if(el.getAttribute('data-id') === 'big-letter') {
@@ -25,7 +23,7 @@ function bigLetterAnimation(el, index) {
   gsap.to(el, {
     duration: 0.5,
     delay: 0.15 * (index + 1),
-    y: 0,
+    y: '-10',
     opacity: 1,
     ease: 'ease-in'
   })
@@ -37,9 +35,9 @@ function bigLetterAnimation(el, index) {
 
 function smallLetterAnimation(el, index) {
   gsap.to(el, {
-    duration: 0.5,
-    delay: 0.15 * (index + 1),
-    x: 0,
+    duration: 1,
+    delay: 0.2 * (index + 1),
+    x: '-5',
     opacity: 1,
     ease: 'ease-in'
   })
@@ -51,8 +49,8 @@ function smallLetterAnimation(el, index) {
 
 function homeIconAnimation(el,index) {
   gsap.to(el, {
-    duration: 0.5,
-    delay: 0.15 * (index + 1),
+    duration: 1.5,
+    delay: 0.5 * (index + 1),
     y: 0,
     opacity: 1,
     ease: 'ease-in'
@@ -68,3 +66,11 @@ gsap.to(text, {
   ease: 'linear'
 })
 
+const scroller = document.querySelector('.intro__scroll');
+gsap.to(scroller, {
+  duration: 1.2,
+  delay: 3.2,
+  opacity: 1,
+  y: 0,
+  ease: 'linear'
+})

@@ -2,10 +2,10 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/scripts/modules/animation.js":
-/*!******************************************!*\
-  !*** ./src/scripts/modules/animation.js ***!
-  \******************************************/
+/***/ "./src/scripts/modules/anim2.js":
+/*!**************************************!*\
+  !*** ./src/scripts/modules/anim2.js ***!
+  \**************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -34,7 +34,7 @@ function bigLetterAnimation(el, index) {
   gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(el, {
     duration: 0.5,
     delay: 0.15 * (index + 1),
-    y: 0,
+    y: '-10',
     opacity: 1,
     ease: 'ease-in'
   });
@@ -47,7 +47,7 @@ function smallLetterAnimation(el, index) {
   gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(el, {
     duration: 1,
     delay: 0.2 * (index + 1),
-    x: 0,
+    x: '-5',
     opacity: 1,
     ease: 'ease-in'
   });
@@ -71,6 +71,14 @@ gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(text, {
   duration: 1.2,
   delay: 2.2,
   opacity: 1,
+  ease: 'linear'
+});
+var scroller = document.querySelector('.intro__scroll');
+gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(scroller, {
+  duration: 1.2,
+  delay: 3.2,
+  opacity: 1,
+  y: 0,
   ease: 'linear'
 });
 
@@ -8827,8 +8835,9 @@ var __webpack_exports__ = {};
   !*** ./src/scripts/main.js ***!
   \*****************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modules_animation_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/animation.js */ "./src/scripts/modules/animation.js");
+/* harmony import */ var _modules_anim2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/anim2.js */ "./src/scripts/modules/anim2.js");
 //import './modules/svg-animation.js';
+//import './modules/animation.js';
 
 })();
 

@@ -1,26 +1,66 @@
-.anim1 {
-  background-color: #e6e6e6 !important;
+.anim2 {
+  //background-color: #cbdedf;
   body {
-    background-color: #e6e6e6 !important;
+    //background-color: #e6e6e6;
   }
 
   .intro {
-    outline: 1px solid red;
+    //outline: 1px solid red;
+
+    &__scroll {
+      position: relative;
+      border: 1px solid #101314;
+      margin: 0 auto;
+      margin-top: 50px;
+      opacity: 0;
+      transform: translateY(300px);
+
+      border-radius: 40px;
+      width: 40px;
+      height: 80px;
+
+      &::before {
+        position: absolute;
+
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 2px;
+        height: 20px;
+        content: '';
+        background-color: #101314;
+
+        animation: scroll 0.5s 0.2s ease-in infinite;
+      }
+
+      @keyframes animation {
+        0% {
+          transform: translate(-0%, -50%);
+        }
+
+        100% {
+          transform: translate(-0%, -50%);
+        }
+      }
+    }
 
     span {
       position: relative;
 
-      width: 36px;
+      font-size: 36px;
       font-weight: 500;
       line-height: 1.2;
       color: #101314;
       text-align: center;
       text-transform: uppercase;
+
+      color: white;
+      text-shadow: 0 1px 2px black;
     }
 
     &__text {
       position: relative;
-      outline: 1px solid red;
+      //outline: 1px solid red;
       width: fit-content;
       margin: 0 auto;
 
@@ -39,8 +79,8 @@
         content: '';
 
         border-radius: 50%;
-
-        background-color: #101314;
+        border: 1px solid #101314;
+        background-color: transparent;
       }
 
       &::before {
@@ -57,7 +97,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      outline: 1px solid black;
+      //outline: 1px solid black;
       padding: 20px;
       overflow: hidden;
 
@@ -77,7 +117,7 @@
 
         path[data-id="small-letter"] {
           opacity: 0;
-          transform: translateX(500px);
+          transform: translate(500px, -10px);
         }
 
         path[data-id="home-icon"] {
@@ -88,6 +128,7 @@
         path {
           //transition: all 0.3s linear;
           //filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+          filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
         }
 
         .shadow-on {
@@ -97,3 +138,4 @@
     }
   }
 }
+
