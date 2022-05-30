@@ -3,6 +3,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const paths = document.querySelectorAll('#svg path');
+console.log(paths)
 
 function animate(path, animationRule) {
   const length = path.getTotalLength();
@@ -23,19 +24,26 @@ function animate(path, animationRule) {
     duration: 0.5,
     delay: 0.1,
     opacity: 1,
+    y: 0,
     ease: 'ease-in'
   })
 }
 
 setTimeout(() => {
-  paths.forEach(path => {
-    if(path.getAttribute('id') === 'elephant-body') {
+  paths.forEach((path,i) => {
+    /*if(path.getAttribute('id') === 'elephant-body') {
       animate(path, 'stroke-dashoffset 1.5s linear');
     }
 
     if(path.getAttribute('id') === 'elephant-eye') {
       animate(path, 'stroke-dashoffset 0.0s 1.6s ease-in-out');
-    }
+    } else { */
+      console.log('animate')
+    //}
+
+    setTimeout(() => {
+      animate(path, 'stroke-dashoffset 1.5s linear');
+    }, 600 * (i+1));
   })
 }, 500);
 
@@ -54,4 +62,4 @@ svgs.forEach((svg,i)=>{
   })
 })
 
-dot.classList.add('rotate')
+//dot.classList.add('rotate')

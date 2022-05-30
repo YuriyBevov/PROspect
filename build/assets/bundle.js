@@ -2,10 +2,10 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/scripts/modules/svg-animation.js":
-/*!**********************************************!*\
-  !*** ./src/scripts/modules/svg-animation.js ***!
-  \**********************************************/
+/***/ "./src/scripts/modules/animation.js":
+/*!******************************************!*\
+  !*** ./src/scripts/modules/animation.js ***!
+  \******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -14,54 +14,65 @@ __webpack_require__.r(__webpack_exports__);
 
 
 gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__["default"]);
-var paths = document.querySelectorAll('#svg path');
+var logo = document.querySelector('#logo');
+var paths = logo.querySelectorAll('path');
+paths.forEach(function (el, i) {
+  if (el.getAttribute('data-id') === 'big-letter') {
+    bigLetterAnimation(el, i);
+  }
 
-function animate(path, animationRule) {
-  var length = path.getTotalLength(); // Clear any previous transition
+  if (el.getAttribute('data-id') === 'small-letter') {
+    smallLetterAnimation(el, i);
+  }
 
-  path.style.transition = path.style.WebkitTransition = 'none'; // Set up the starting positions
+  if (el.getAttribute('data-id') === 'home-icon') {
+    homeIconAnimation(el, i);
+  }
+});
 
-  path.style.strokeDasharray = length + ' ' + length;
-  path.style.strokeDashoffset = length; // Trigger a layout so styles are calculated & the browser
-  // picks up the starting position before animating
-
-  path.getBoundingClientRect(); // Define our transition
-
-  path.style.transition = path.style.WebkitTransition = animationRule; // Go!
-
-  path.style.strokeDashoffset = '0';
-  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(path, {
+function bigLetterAnimation(el, index) {
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(el, {
     duration: 0.5,
-    delay: 0.1,
+    delay: 0.15 * (index + 1),
+    y: 0,
+    opacity: 1,
+    ease: 'ease-in'
+  });
+  setTimeout(function () {
+    el.classList.add('shadow-on');
+  }, 2000);
+}
+
+function smallLetterAnimation(el, index) {
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(el, {
+    duration: 0.5,
+    delay: 0.15 * (index + 1),
+    x: 0,
+    opacity: 1,
+    ease: 'ease-in'
+  });
+  setTimeout(function () {
+    el.classList.add('shadow-on');
+  }, 2000);
+}
+
+function homeIconAnimation(el, index) {
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(el, {
+    duration: 0.5,
+    delay: 0.15 * (index + 1),
+    y: 0,
     opacity: 1,
     ease: 'ease-in'
   });
 }
 
-setTimeout(function () {
-  paths.forEach(function (path) {
-    if (path.getAttribute('id') === 'elephant-body') {
-      animate(path, 'stroke-dashoffset 1.5s linear');
-    }
-
-    if (path.getAttribute('id') === 'elephant-eye') {
-      animate(path, 'stroke-dashoffset 0.0s 1.6s ease-in-out');
-    }
-  });
-}, 500);
-var svgs = document.querySelectorAll('.littleweb svg');
-var dot = document.querySelector('#dot'); //animate(dot, 'stroke-dashoffset 0.0s 2.1s ease-in-out');
-
-svgs.forEach(function (svg, i) {
-  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(svg, {
-    duration: 0.5,
-    delay: 0.15 * (i + 1),
-    opacity: 1,
-    y: '0',
-    ease: 'ease-in'
-  });
+var text = document.querySelector('.intro__text');
+gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(text, {
+  duration: 1.2,
+  delay: 2.2,
+  opacity: 1,
+  ease: 'linear'
 });
-dot.classList.add('rotate');
 
 /***/ }),
 
@@ -8816,7 +8827,8 @@ var __webpack_exports__ = {};
   !*** ./src/scripts/main.js ***!
   \*****************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modules_svg_animation_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/svg-animation.js */ "./src/scripts/modules/svg-animation.js");
+/* harmony import */ var _modules_animation_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/animation.js */ "./src/scripts/modules/animation.js");
+//import './modules/svg-animation.js';
 
 })();
 
