@@ -2,6 +2,10 @@
 body {
   background-color: #EDF0F5;
 }
+
+header,footer {
+  display: none;
+}
 .anim2 {
   //background-color: #cbdedf;
   body {
@@ -10,6 +14,8 @@ body {
 
   .intro {
     //outline: 1px solid red;
+    height: 100vh;
+    display: flex;
 
     &__scroll {
       position: relative;
