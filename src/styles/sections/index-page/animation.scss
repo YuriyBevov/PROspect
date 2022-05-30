@@ -1,5 +1,5 @@
 .anim1 {
-  background-color: #e6e6e6 !important;
+  //background-color: #e6e6e6 !important;
   body {
     background-color: #e6e6e6 !important;
   }
@@ -80,7 +80,7 @@
           transform: translateX(500px);
         }
 
-        path[data-id="home-icon"] {
+        g[data-id="home-icon"] {
           opacity: 0;
           transform: translateY(350px);
         }

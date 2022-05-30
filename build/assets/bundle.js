@@ -2,9 +2,9 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/scripts/modules/anim2.js":
+/***/ "./src/scripts/modules/anim3.js":
 /*!**************************************!*\
-  !*** ./src/scripts/modules/anim2.js ***!
+  !*** ./src/scripts/modules/anim3.js ***!
   \**************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -15,72 +15,51 @@ __webpack_require__.r(__webpack_exports__);
 
 gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var logo = document.querySelector('#logo');
-var paths = logo.querySelectorAll('path');
-paths.forEach(function (el, i) {
-  if (el.getAttribute('data-id') === 'big-letter') {
-    bigLetterAnimation(el, i);
-  }
+var houses = logo.querySelectorAll('g');
+var windows = logo.querySelectorAll('path[data-id="house-window"]');
+var title = logo.querySelector('g[data-id="name-container"]');
+console.log(windows);
+houses.forEach(function (el, i) {
+  if (el.getAttribute('data-id') === 'big-letter') {}
 
-  if (el.getAttribute('data-id') === 'small-letter') {
-    smallLetterAnimation(el, i);
-  }
+  if (el.getAttribute('data-id') === 'small-letter') {}
 
-  if (el.getAttribute('data-id') === 'home-icon') {
+  if (el.getAttribute('data-id') === 'house-icon') {
     homeIconAnimation(el, i);
+    console.log('ane');
   }
 });
-
-function bigLetterAnimation(el, index) {
-  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(el, {
-    duration: 0.5,
-    delay: 0.15 * (index + 1),
-    y: '-10',
-    opacity: 1,
-    ease: 'ease-in'
-  });
-  setTimeout(function () {
-    el.classList.add('shadow-on');
-  }, 2000);
-}
-
-function smallLetterAnimation(el, index) {
-  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(el, {
-    duration: 1,
-    delay: 0.2 * (index + 1),
-    x: '-5',
-    opacity: 1,
-    ease: 'ease-in'
-  });
-  setTimeout(function () {
-    el.classList.add('shadow-on');
-  }, 2000);
-}
+windows.forEach(function (el, i) {
+  fadeInAnimation(el, i);
+});
 
 function homeIconAnimation(el, index) {
   gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(el, {
     duration: 1.5,
-    delay: 0.5 * (index + 1),
+    delay: 0.1 * (index + 1),
     y: 0,
     opacity: 1,
     ease: 'ease-in'
   });
 }
 
-var text = document.querySelector('.intro__text');
-gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(text, {
-  duration: 1.2,
-  delay: 2.2,
+function fadeInAnimation(el, index) {
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(el, {
+    duration: 1.5,
+    delay: 0.3 * (index + 1),
+    opacity: 1,
+    ease: 'ease-in'
+  });
+}
+
+fadeInAnimation(title, 3);
+var prospect = document.querySelector('#prospect');
+/*gsap.to(prospect, {
+  duration: 0.3,
+  delay: 0.5,
   opacity: 1,
-  ease: 'linear'
-});
-var scroller = document.querySelector('.intro__scroll');
-gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(scroller, {
-  duration: 1.2,
-  delay: 3.2,
-  opacity: 1,
-  y: 0,
-  ease: 'linear'
-});
+  ease: 'ease-in'
+}) */
 
 /***/ }),
 
@@ -8835,9 +8814,10 @@ var __webpack_exports__ = {};
   !*** ./src/scripts/main.js ***!
   \*****************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modules_anim2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/anim2.js */ "./src/scripts/modules/anim2.js");
+/* harmony import */ var _modules_anim3_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/anim3.js */ "./src/scripts/modules/anim3.js");
 //import './modules/svg-animation.js';
 //import './modules/animation.js';
+//import './modules/anim2.js'
 
 })();
 
