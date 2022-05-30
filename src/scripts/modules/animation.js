@@ -36,8 +36,8 @@ function bigLetterAnimation(el, index) {
 
 function smallLetterAnimation(el, index) {
   gsap.to(el, {
-    duration: 0.5,
-    delay: 0.15 * (index + 1),
+    duration: 1,
+    delay: 0.2 * (index + 1),
     x: 0,
     opacity: 1,
     ease: 'ease-in'
@@ -50,8 +50,8 @@ function smallLetterAnimation(el, index) {
 
 function homeIconAnimation(el,index) {
   gsap.to(el, {
-    duration: 0.5,
-    delay: 0.15 * (index + 1),
+    duration: 1.5,
+    delay: 0.5 * (index + 1),
     y: 0,
     opacity: 1,
     ease: 'ease-in'
