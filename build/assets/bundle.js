@@ -18,10 +18,13 @@ __webpack_require__.r(__webpack_exports__);
 gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 setTimeout(function () {
-  var scene = document.getElementById('scene');
+  var scenes = document.querySelectorAll('g[data-id="parallax-container"]');
+  console.log(scenes);
 
-  if (scene) {
-    var parallaxInstance = new (parallax_js__WEBPACK_IMPORTED_MODULE_2___default())(scene);
+  if (scenes) {
+    scenes.forEach(function (scene) {
+      new (parallax_js__WEBPACK_IMPORTED_MODULE_2___default())(scene);
+    });
   }
 }, 2400);
 var logo = document.querySelector('#logo');

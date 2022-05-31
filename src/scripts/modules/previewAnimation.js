@@ -5,10 +5,14 @@ gsap.registerPlugin(ScrollTrigger);
 import Parallax from 'parallax-js'
 
 setTimeout(() => {
-  let scene = document.getElementById('scene');
+  let scenes = document.querySelectorAll('g[data-id="parallax-container"]');
 
-  if(scene) {
-  const parallaxInstance = new Parallax(scene);
+  console.log(scenes)
+
+  if(scenes) {
+    scenes.forEach(scene => {
+      new Parallax(scene);
+    })
   }
 }, 2400);
 
