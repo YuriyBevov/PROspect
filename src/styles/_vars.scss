@@ -9,13 +9,13 @@
     --container-offset: 15px;
     --container-width: calc(var(--content-width) + (var(--container-offset) * 2));
     --container-fluid-width: calc(var(--content-fluid-width) + (var(--container-offset) * 2));
-  
+
     // colors
-    
-    --light-color: #fff;
+
+    --white--color: #ffffff;
+    --light-color: #EDF0F5;
     --accent-color: #d52027;
     --dark-color: #141024;
-    --text-color: rgba(20, 16, 36, 0.7);
 
     --main-bg-color: var(--light-color);
 

@@ -7,12 +7,12 @@
 @import "extends";
 
 /* Компоненты */
-@import "./components/modal";
-/* Секции */
+//@import "./components/modal";
+@import "./components/main-header";
 
-//@import "./sections/index-page/intro";
-@import "./sections/index-page/animation";
-@import "./sections/index-page/anim2";
+/* Секции */
+@import "./sections/index-page/hero";
+
 /* Модальные окна */
 
 

@@ -1,0 +1,40 @@
+.hero {
+  height: 100vh;
+  display: flex;
+
+  &__preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    padding: 20px;
+    overflow: hidden;
+
+    svg {
+      width: 85vw;
+      height: 80vh;
+      min-width: 300px;
+      min-height: 250px;
+      max-height: 700px;
+
+      g[data-id="house-icon"] {
+        opacity: 0;
+        transform: translateY(150px);
+      }
+
+      path[data-id="house-window"] {
+        opacity: 0;
+      }
+
+      g[data-id="name-container"] {
+        opacity: 0;
+        path {
+          filter: drop-shadow(0px 0px 10px rgb(0 0 0 / 0.4));
+          transform: translateY(-15px);
+        }
+      }
+    }
+  }
+}

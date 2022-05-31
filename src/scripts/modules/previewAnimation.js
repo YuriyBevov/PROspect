@@ -2,7 +2,18 @@ import {gsap} from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
+import Parallax from 'parallax-js'
+
+setTimeout(() => {
+  let scene = document.getElementById('scene');
+
+  if(scene) {
+  const parallaxInstance = new Parallax(scene);
+  }
+}, 2400);
+
 const logo = document.querySelector('#logo');
+if(logo) {
 const houses = logo.querySelectorAll('g');
 const windows = logo.querySelectorAll('path[data-id="house-window"]')
 
@@ -58,3 +69,4 @@ let prospect = document.querySelector('#prospect');
   opacity: 1,
   ease: 'ease-in'
 }) */
+}
