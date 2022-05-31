@@ -7,8 +7,6 @@ import Parallax from 'parallax-js'
 setTimeout(() => {
   let scenes = document.querySelectorAll('g[data-id="parallax-container"]');
 
-  console.log(scenes)
-
   if(scenes) {
     scenes.forEach(scene => {
       new Parallax(scene);
@@ -18,33 +16,19 @@ setTimeout(() => {
 
 const logo = document.querySelector('#logo');
 if(logo) {
-const houses = logo.querySelectorAll('g');
+const houses = logo.querySelectorAll('g[data-id="house"');
 const windows = logo.querySelectorAll('path[data-id="house-window"]')
-
 const title = logo.querySelector('g[data-id="name-container"]');
 
-console.log(windows)
-
 houses.forEach((el,i) => {
-  if(el.getAttribute('data-id') === 'big-letter') {
-
-  }
-
-  if(el.getAttribute('data-id') === 'small-letter') {
-
-  }
-
-  if(el.getAttribute('data-id') === 'house-icon') {
-    homeIconAnimation(el,i);
-    console.log('ane')
-  }
+  homeIconAnimation(el,i);
 })
 
 windows.forEach((el,i) => {
   fadeInAnimation(el,i)
 })
 
-function homeIconAnimation(el,index) {
+function homeIconAnimation(el,index, isBigHouse) {
   gsap.to(el, {
     duration: 1.5,
     delay: 0.1 * (index + 1),

@@ -19,7 +19,6 @@ gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPAC
 
 setTimeout(function () {
   var scenes = document.querySelectorAll('g[data-id="parallax-container"]');
-  console.log(scenes);
 
   if (scenes) {
     scenes.forEach(function (scene) {
@@ -30,25 +29,17 @@ setTimeout(function () {
 var logo = document.querySelector('#logo');
 
 if (logo) {
-  var houses = logo.querySelectorAll('g');
+  var houses = logo.querySelectorAll('g[data-id="house"');
   var windows = logo.querySelectorAll('path[data-id="house-window"]');
   var title = logo.querySelector('g[data-id="name-container"]');
-  console.log(windows);
   houses.forEach(function (el, i) {
-    if (el.getAttribute('data-id') === 'big-letter') {}
-
-    if (el.getAttribute('data-id') === 'small-letter') {}
-
-    if (el.getAttribute('data-id') === 'house-icon') {
-      homeIconAnimation(el, i);
-      console.log('ane');
-    }
+    homeIconAnimation(el, i);
   });
   windows.forEach(function (el, i) {
     fadeInAnimation(el, i);
   });
 
-  function homeIconAnimation(el, index) {
+  function homeIconAnimation(el, index, isBigHouse) {
     gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(el, {
       duration: 1.5,
       delay: 0.1 * (index + 1),

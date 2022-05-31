@@ -19,7 +19,7 @@
       min-height: 250px;
       max-height: 700px;
 
-      g[data-id="house-icon"] {
+      g[data-id="house"] {
         opacity: 0;
         transform: translateY(150px);
       }
@@ -31,7 +31,7 @@
       g[data-id="name-container"] {
         opacity: 0;
         path {
-          filter: drop-shadow(0px 0px 10px rgb(0 0 0 / 0.4));
+          //filter: drop-shadow(0px 0px 10px rgb(0 0 0 / 0.4));
           transform: translateY(-15px);
         }
       }

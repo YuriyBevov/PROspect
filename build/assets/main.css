@@ -661,7 +661,7 @@ ul {
   min-height: 250px;
   max-height: 700px;
 }
-.hero__preview svg g[data-id=house-icon] {
+.hero__preview svg g[data-id=house] {
   opacity: 0;
   -webkit-transform: translateY(150px);
   -ms-transform: translateY(150px);
@@ -674,8 +674,6 @@ ul {
   opacity: 0;
 }
 .hero__preview svg g[data-id=name-container] path {
-  -webkit-filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.4));
-  filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.4));
   -webkit-transform: translateY(-15px);
   -ms-transform: translateY(-15px);
   transform: translateY(-15px);
