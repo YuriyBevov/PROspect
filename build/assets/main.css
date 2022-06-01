@@ -354,7 +354,7 @@ template {
   --container-offset: 15px;
   --container-width: calc(var(--content-width) + (var(--container-offset) * 2));
   --container-fluid-width: calc(var(--content-fluid-width) + (var(--container-offset) * 2));
-  --white--color: #ffffff;
+  --white-color: #ffffff;
   --light-color: #EDF0F5;
   --accent-color: #d52027;
   --dark-color: #141024;
@@ -478,7 +478,7 @@ ul {
   background-color: transparent;
 }
 
-.flex-centered-content, .main-btn {
+.flex-centered-content, .hero__preview, .main-btn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -558,7 +558,6 @@ ul {
   margin: 0 auto;
   padding: 0 var(--container-offset);
   max-width: var(--container-fluid-width);
-  outline: 1px solid black;
 }
 
 .visually-hidden {
@@ -627,29 +626,35 @@ ul {
   top: 0;
   left: 0;
   width: 100vw;
+  z-index: 99;
 }
 
 /* Секции */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 1;
+  background-color: var(--main-bg-color);
+  z-index: 1000;
+}
+
 .hero {
+  /*position: fixed;
+  top: 0;
+  left: 0;*/
   height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 .hero__preview {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
   width: 100%;
   padding: 20px;
   overflow: hidden;
@@ -677,6 +682,14 @@ ul {
   -webkit-transform: translateY(-15px);
   -ms-transform: translateY(-15px);
   transform: translateY(-15px);
+}
+
+.features {
+  /*position: relative;
+  margin-top: calc(100vh + 1px);
+  height: 100vh;
+  background-color: var(--main-bg-color);
+  z-index: 1;*/
 }
 
 /* Модальные окна */

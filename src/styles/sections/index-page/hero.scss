@@ -1,12 +1,25 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 1;
+  background-color: var(--main-bg-color);
+  z-index: 1000;
+}
+
 .hero {
+  /*position: fixed;
+  top: 0;
+  left: 0;*/
+  //width: 100vw;
   height: 100vh;
   display: flex;
 
   &__preview {
-    display: flex;
+    @extend .flex-centered-content;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
 
     width: 100%;
     padding: 20px;

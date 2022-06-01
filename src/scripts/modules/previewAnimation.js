@@ -1,60 +1,67 @@
+import Parallax from 'parallax-js'
+
 import {gsap} from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
-import Parallax from 'parallax-js'
+const overlay = document.querySelector('.overlay');
 
-setTimeout(() => {
-  let scenes = document.querySelectorAll('g[data-id="parallax-container"]');
+document.addEventListener('DOMContentLoaded', () => {
 
-  if(scenes) {
-    scenes.forEach(scene => {
-      new Parallax(scene);
-    })
-  }
-}, 2400);
+  setTimeout(() => {
+    function homeIconAnimation(el,index) {
+      gsap.to(el, {
+        duration: 1.5,
+        delay: 0.1 * (index + 1),
+        y: 0,
+        opacity: 1,
+        ease: 'ease-in'
+      });
+    };
 
-const logo = document.querySelector('#logo');
-if(logo) {
-const houses = logo.querySelectorAll('g[data-id="house"');
-const windows = logo.querySelectorAll('path[data-id="house-window"]')
-const title = logo.querySelector('g[data-id="name-container"]');
+    function fadeInAnimation(el,index) {
+      gsap.to(el, {
+        duration: 1.5,
+        delay: 0.3 * (index + 1),
+        opacity: 1,
+        ease: 'ease-in'
+      });
+    };
 
-houses.forEach((el,i) => {
-  homeIconAnimation(el,i);
-})
+    gsap.to(overlay, {
+      duration: .5,
+      delay: 0,
+      opacity: 0,
+      ease: 'ease-out',
+      zIndex: '-1'
+    });
 
-windows.forEach((el,i) => {
-  fadeInAnimation(el,i)
-})
+    const logo = document.querySelector('#logo');
 
-function homeIconAnimation(el,index, isBigHouse) {
-  gsap.to(el, {
-    duration: 1.5,
-    delay: 0.1 * (index + 1),
-    y: 0,
-    opacity: 1,
-    ease: 'ease-in'
-  })
-}
+    if(logo) {
+      const houses = logo.querySelectorAll('g[data-id="house"');
+      const windows = logo.querySelectorAll('path[data-id="house-window"]');
+      const title = logo.querySelector('g[data-id="name-container"]');
 
-function fadeInAnimation(el,index) {
-  gsap.to(el, {
-    duration: 1.5,
-    delay: 0.3 * (index + 1),
-    opacity: 1,
-    ease: 'ease-in'
-  })
-}
+      houses.forEach((el,i) => {
+        homeIconAnimation(el,i);
+      });
 
-fadeInAnimation(title, 3)
+      windows.forEach((el,i) => {
+        fadeInAnimation(el,i);
+      });
 
-let prospect = document.querySelector('#prospect');
+      fadeInAnimation(title, 3);
+    }
 
-/*gsap.to(prospect, {
-  duration: 0.3,
-  delay: 0.5,
-  opacity: 1,
-  ease: 'ease-in'
-}) */
-}
+    setTimeout(() => {
+      let scenes = document.querySelectorAll('g[data-id="parallax-container"]');
+
+      if(scenes) {
+        scenes.forEach(scene => {
+          new Parallax(scene);
+        })
+      }
+    }, 2400);
+  }, 500);
+});
