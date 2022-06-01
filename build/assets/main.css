@@ -400,6 +400,7 @@ body {
   font-family: var(--font-family, sans-serif);
   font-weight: 400;
   background-color: var(--main-bg-color);
+  overflow-x: hidden !important;
 }
 body.body-locked {
   overflow: hidden;
@@ -438,7 +439,7 @@ ul {
     padding-top: 60px;
   }
 }
-@media (max-width: 1024px) {
+@media (max-width: 1140px) {
   .section-padding {
     padding-top: 20px;
   }
@@ -642,25 +643,39 @@ ul {
 }
 
 .hero {
-  /*position: fixed;
-  top: 0;
-  left: 0;*/
   height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
+.hero .background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+.hero .background svg {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  max-height: 100vh;
+}
 .hero__preview {
+  position: relative;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
   width: 100%;
   padding: 20px;
+  padding-left: 300px;
   overflow: hidden;
+  z-index: 2;
 }
 .hero__preview svg {
-  width: 85vw;
+  width: calc(85vw - 300px);
   height: 80vh;
   min-width: 300px;
   min-height: 250px;
@@ -683,6 +698,14 @@ ul {
   -ms-transform: translateY(-15px);
   transform: translateY(-15px);
 }
+@media (max-width: 1140px) {
+  .hero__preview {
+    padding-left: 0;
+  }
+  .hero__preview svg {
+    width: 85vw;
+  }
+}
 
 .features {
   /*position: relative;
@@ -690,6 +713,56 @@ ul {
   height: 100vh;
   background-color: var(--main-bg-color);
   z-index: 1;*/
+}
+
+.lded > .content, .lded > .content > .inner {
+  height: 100%;
+}
+
+.lded > .content > .inner > .viewer {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+}
+
+.lded > .content > .inner > .panel {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  opacity: 0.3;
+}
+
+.lded > .content > .inner > .panel:hover {
+  opacity: 1;
+}
+
+.lded > .content > .inner > .ctrl {
+  position: absolute;
+  bottom: 13px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.lded > .content > .inner > .ctrl:hover {
+  z-index: 10;
+}
+
+#editor > .inner > .title {
+  position: absolute;
+  bottom: 195px;
+  left: 0;
+  right: 0;
+  z-index: 11;
+}
+
+#editor > .inner > .title > a:first-child {
+  margin-left: 0 !important;
+}
+
+#editor .lded .viewer {
+  border-radius: 0;
 }
 
 /* Модальные окна */
