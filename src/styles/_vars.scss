@@ -11,13 +11,16 @@
     --container-fluid-width: calc(var(--content-fluid-width) + (var(--container-offset) * 2));
 
     // colors
+    --white-color: #EDF0F5;
 
-    --white-color: #ffffff;
-    --light-color: #EDF0F5;
+    --primary-color: #488a99;
+    --warning-color: #dbae58;
+    --light-color: #b4b4b4;
+    --dark-color: #4d585B;
     --accent-color: #d52027;
-    --dark-color: #141024;
 
-    --main-bg-color: var(--light-color);
+
+    --main-bg-color: var(--white-color);
 
     // scrollbar
     --main-scrollbar-width: 6px;

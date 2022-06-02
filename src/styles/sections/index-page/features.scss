@@ -4,44 +4,5 @@
   height: 100vh;
   background-color: var(--main-bg-color);
   z-index: 1;*/
+  height: 100vh;
 }
-
-
-.lded > .content, .lded > .content > .inner { height: 100%; }
-.lded > .content > .inner > .viewer { width: 100%; height: 100%; max-width: 100%; }
-.lded > .content > .inner > .panel {
-  position: absolute;
-  bottom: 50px;
-  left: 0;
-  right: 0;
-  opacity: 0.3;
-}
-
-.lded > .content > .inner > .panel:hover { opacity: 1; }
-
-.lded > .content > .inner > .ctrl {
-  position: absolute;
-  bottom: 13px;
-  left: 0;
-  right: 0;
-  margin: auto;
-}
-
-.lded > .content > .inner > .ctrl:hover {
-  z-index: 10;
-}
-
-#editor > .inner > .title {
-  position: absolute;
-  bottom: 195px;
-  left: 0;
-  right: 0;
-  z-index: 11;
-}
-
-#editor > .inner > .title > a:first-child {
-  margin-left: 0!important;
-}
-
-#editor .lded .viewer { border-radius: 0 }
-

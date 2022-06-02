@@ -10555,29 +10555,31 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_scrollBtns_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/scrollBtns.js */ "./src/scripts/modules/scrollBtns.js");
 /* harmony import */ var _modules_previewAnimation_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/previewAnimation.js */ "./src/scripts/modules/previewAnimation.js");
-/* harmony import */ var seamless_scroll_polyfill__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! seamless-scroll-polyfill */ "./node_modules/seamless-scroll-polyfill/lib/scrollIntoView.js");
 
  //import './modules/heroParallax.js';
 
+/*import { scrollIntoView } from "seamless-scroll-polyfill";
 
-var body = document.querySelector('body');
-var hero = document.querySelector('#hero');
-document.addEventListener('DOMContentLoaded', function () {
-  if (window.scrollY === 0) {
-    body.style.overflow = 'hidden'; //слушатель на кнопку
+const body = document.querySelector('body');
+const hero = document.querySelector('#hero');
+
+document.addEventListener('DOMContentLoaded', () => {
+  if(window.scrollY === 0) {
+    body.style.overflow = 'hidden';
+    //слушатель на кнопку
   } else {
-    console.log('not', window.scrollY);
-    (0,seamless_scroll_polyfill__WEBPACK_IMPORTED_MODULE_2__.scrollIntoView)(hero, {
-      behavior: "smooth",
-      block: "start"
-    });
+    console.log('not', window.scrollY)
+
+    scrollIntoView(hero, { behavior: "smooth", block: "start"});
     body.style.overflow = 'hidden';
   }
-});
-var scrollBtn = document.querySelector('.anchor-link');
-scrollBtn.addEventListener('click', function () {
+})
+
+const scrollBtn = document.querySelector('.anchor-link');
+
+scrollBtn.addEventListener('click', () => {
   body.style.overflow = 'auto';
-});
+})*/
 })();
 
 /******/ })()

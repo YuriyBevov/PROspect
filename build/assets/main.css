@@ -354,11 +354,13 @@ template {
   --container-offset: 15px;
   --container-width: calc(var(--content-width) + (var(--container-offset) * 2));
   --container-fluid-width: calc(var(--content-fluid-width) + (var(--container-offset) * 2));
-  --white-color: #ffffff;
-  --light-color: #EDF0F5;
+  --white-color: #EDF0F5;
+  --primary-color: #488a99;
+  --warning-color: #dbae58;
+  --light-color: #b4b4b4;
+  --dark-color: #4d585B;
   --accent-color: #d52027;
-  --dark-color: #141024;
-  --main-bg-color: var(--light-color);
+  --main-bg-color: var(--white-color);
   --main-scrollbar-width: 6px;
   --main-scrollbar-color: var(--light-color);
   --main-scrollbar-thumb-color: var(--accent-color);
@@ -707,62 +709,107 @@ ul {
   }
 }
 
+.main-nav {
+  position: absolute;
+  top: 0;
+  left: 5vw;
+  width: 5px;
+  height: 100vh;
+  background-color: var(--primary-color);
+}
+.main-nav ul {
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding: 10vh 0;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+}
+.main-nav li {
+  position: relative;
+}
+.main-nav .circle {
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--warning-color);
+}
+.main-nav .circle::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  content: "";
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  z-index: 10;
+}
+.main-nav .circle svg {
+  position: absolute;
+  top: -175%;
+  left: -25px;
+  width: 150px;
+  height: 50px;
+  min-width: 50px;
+  min-height: 50px;
+  max-height: 50px;
+  stroke: var(--primary-color);
+  -webkit-transition: stroke 0.3s linear;
+  -o-transition: stroke 0.3s linear;
+  transition: stroke 0.3s linear;
+}
+.main-nav .circle a {
+  width: 150px;
+  position: absolute;
+  top: -55px;
+  left: 100px;
+  font-size: 20px;
+  padding: 10px 0.5px;
+  color: var(--dark-color);
+  -webkit-transition: color 0.3s var(--primary-color);
+  -o-transition: color 0.3s var(--primary-color);
+  transition: color 0.3s var(--primary-color);
+  z-index: 10;
+}
+.main-nav .circle a:hover, .main-nav .circle a:focus {
+  color: var(--primary-color);
+}
+.main-nav .circle a:hover ~ svg,
+.main-nav .circle a:focus ~ svg {
+  stroke: var(--warning-color);
+}
+.main-nav .arrow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--accent-color);
+  content: "";
+  width: 30px;
+  height: 2px;
+}
+
 .features {
   /*position: relative;
   margin-top: calc(100vh + 1px);
   height: 100vh;
   background-color: var(--main-bg-color);
   z-index: 1;*/
-}
-
-.lded > .content, .lded > .content > .inner {
-  height: 100%;
-}
-
-.lded > .content > .inner > .viewer {
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-}
-
-.lded > .content > .inner > .panel {
-  position: absolute;
-  bottom: 50px;
-  left: 0;
-  right: 0;
-  opacity: 0.3;
-}
-
-.lded > .content > .inner > .panel:hover {
-  opacity: 1;
-}
-
-.lded > .content > .inner > .ctrl {
-  position: absolute;
-  bottom: 13px;
-  left: 0;
-  right: 0;
-  margin: auto;
-}
-
-.lded > .content > .inner > .ctrl:hover {
-  z-index: 10;
-}
-
-#editor > .inner > .title {
-  position: absolute;
-  bottom: 195px;
-  left: 0;
-  right: 0;
-  z-index: 11;
-}
-
-#editor > .inner > .title > a:first-child {
-  margin-left: 0 !important;
-}
-
-#editor .lded .viewer {
-  border-radius: 0;
+  height: 100vh;
 }
 
 /* Модальные окна */

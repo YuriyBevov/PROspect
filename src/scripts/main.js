@@ -1,7 +1,7 @@
 import './modules/scrollBtns.js';
 import './modules/previewAnimation.js';
 //import './modules/heroParallax.js';
-import { scrollIntoView } from "seamless-scroll-polyfill";
+/*import { scrollIntoView } from "seamless-scroll-polyfill";
 
 const body = document.querySelector('body');
 const hero = document.querySelector('#hero');
@@ -22,4 +22,4 @@ const scrollBtn = document.querySelector('.anchor-link');
 
 scrollBtn.addEventListener('click', () => {
   body.style.overflow = 'auto';
-})
+})*/
