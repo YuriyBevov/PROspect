@@ -17,20 +17,27 @@
       animation: border-animation 1s 0.3s ease-in-out forwards;
     }
 
+    &.closing::after {
+      animation: border-back-animation 1.3s 0.3s ease-in-out forwards;
+    }
+
     &.opened {
       display: flex;
-    }
-
-    &.closing {
 
       &::after {
-        animation: back-border-animation 1s 0.3s ease-in-out forwards;
+
+        opacity: 1 !important;
+        width: 100%;
       }
     }
+
   }
 
   &__item {
     flex-grow: 1;
+    //gsap
+    opacity: 0;
+    transform: translateY(-250px);
   }
 
   &__link {
@@ -42,17 +49,15 @@
     color: var(--primary-color);
   }
 
-  @keyframes back-border-animation {
+  @keyframes border-back-animation {
     0% {
       opacity: 1;
       width: 100%;
-      transform: translateX(0);
     }
 
     100% {
       opacity: 1;
-      width: 100%;
-      transform: translateX(-100vw);
+      width: 0;
     }
   }
 

@@ -20,8 +20,7 @@
     background-color: var(--primary-color);
   }
 
-  &:hover,
-  &:focus {
+  &:hover {
     &:not(.burger.opened) {
       .burger__line--middle {
         width: 25px;
@@ -45,13 +44,45 @@
     }
   }
 
+  &.closing {
+    .burger__line {
+      &--middle {
+        animation: midline-back 2.5s ease-in forwards;
+      }
+
+      &--top {
+        animation: topline-back 2s ease-in forwards;
+      }
+
+      &--bottom {
+        animation: bottomline-back 2s ease-in forwards;
+      }
+    }
+  }
+
   @keyframes midline {
     0% {
       transform: translateX(0);
     }
 
     100% {
-      transform: translateX(-110%);
+      transform: translateX(-40px);
+    }
+  }
+
+  @keyframes midline-back {
+    0% {
+      width: 0;
+      transform: translateX(-40px);
+    }
+
+    75% {
+      width: 0;
+    }
+
+    100% {
+      width: 30px;
+      transform: translateX(0);
     }
   }
 
@@ -72,6 +103,26 @@
     }
   }
 
+  @keyframes topline-back {
+    0% {
+      width: 0;
+      opacity: 0;
+      transform: translateY(0) rotate(0);
+    }
+
+    25% {
+      width: 0;
+      opacity: 0;
+      transform: translateY(0) rotate(0);
+    }
+
+    100% {
+      width: 30px;
+      transform: translateY(0) rotate(0);
+      opacity: 1;
+    }
+  }
+
   @keyframes bottomline {
     0% {
       opacity: 1;
@@ -80,17 +131,32 @@
     15% {
       opacity: 0;
       width: 0;
-    }
-
-    30% {
-      opacity: 0;
-      width: 0;
       transform: translateY(-10px) rotate(0);
     }
 
     100% {
       width: 30px;
       transform: translateY(-10px) rotate(-45deg);
+    }
+  }
+
+  @keyframes bottomline-back {
+    0% {
+      width: 0;
+      opacity: 0;
+      transform: translateY(0) rotate(0);
+    }
+
+    25% {
+      width: 0;
+      opacity: 0;
+      transform: translateY(0) rotate(0);
+    }
+
+    100% {
+      width: 30px;
+      transform: translateY(0) rotate(0);
+      opacity: 1;
     }
   }
 }

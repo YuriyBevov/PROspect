@@ -10555,10 +10555,16 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_scrollBtns_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/scrollBtns.js */ "./src/scripts/modules/scrollBtns.js");
 /* harmony import */ var _modules_previewAnimation_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/previewAnimation.js */ "./src/scripts/modules/previewAnimation.js");
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+/* harmony import */ var gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! gsap/ScrollTrigger */ "./node_modules/gsap/ScrollTrigger.js");
 
 
+
+
+gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_3__["default"]);
 var burger = document.querySelector('.js-menu-opener');
 var nav = document.querySelector('.nav__list');
+var navItems = document.querySelectorAll('.nav__item');
 
 var onClickOpenNav = function onClickOpenNav(evt) {
   evt.preventDefault();
@@ -10566,10 +10572,33 @@ var onClickOpenNav = function onClickOpenNav(evt) {
   if (!burger.classList.contains('opened')) {
     burger.classList.add('opened');
     nav.classList.add('opened');
+    navItems.forEach(function (item, i) {
+      gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(item, {
+        duration: 0.7,
+        delay: 0.15 * (i + 1),
+        opacity: 1,
+        y: 0,
+        ease: 'ease-in'
+      });
+    });
   } else {
-    //nav.classList.add('closing');
-    burger.classList.remove('opened');
-    nav.classList.remove('opened');
+    burger.classList.add('closing');
+    nav.classList.add('closing');
+    navItems.forEach(function (item, i) {
+      gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(item, {
+        duration: 0.7,
+        delay: 0.15 * (i + 1),
+        opacity: 0,
+        y: '-150px',
+        ease: 'ease-in'
+      });
+    });
+    setTimeout(function () {
+      burger.classList.remove('closing');
+      nav.classList.remove('closing');
+      burger.classList.remove('opened');
+      nav.classList.remove('opened');
+    }, 1700);
   }
 };
 
