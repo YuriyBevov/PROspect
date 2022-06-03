@@ -1,25 +1,21 @@
 import './modules/scrollBtns.js';
 import './modules/previewAnimation.js';
-//import './modules/heroParallax.js';
-/*import { scrollIntoView } from "seamless-scroll-polyfill";
 
-const body = document.querySelector('body');
-const hero = document.querySelector('#hero');
+const burger = document.querySelector('.js-menu-opener');
 
-document.addEventListener('DOMContentLoaded', () => {
-  if(window.scrollY === 0) {
-    body.style.overflow = 'hidden';
-    //слушатель на кнопку
+const nav = document.querySelector('.nav__list');
+
+const onClickOpenNav = (evt) => {
+  evt.preventDefault();
+
+  if(!burger.classList.contains('opened')) {
+    burger.classList.add('opened');
+    nav.classList.add('opened');
   } else {
-    console.log('not', window.scrollY)
-
-    scrollIntoView(hero, { behavior: "smooth", block: "start"});
-    body.style.overflow = 'hidden';
+    //nav.classList.add('closing');
+    burger.classList.remove('opened');
+    nav.classList.remove('opened');
   }
-})
+}
 
-const scrollBtn = document.querySelector('.anchor-link');
-
-scrollBtn.addEventListener('click', () => {
-  body.style.overflow = 'auto';
-})*/
+burger.addEventListener('click', onClickOpenNav);

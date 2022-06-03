@@ -1,0 +1,24 @@
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 99;
+  padding: 60px 0;
+  padding-bottom: 20px;
+  background-color: var(--main-bg-color);
+
+  #logo {
+    width: 150px;
+    height: 100px;
+  }
+
+  &__navbar {
+    display: flex;
+    align-items: center;
+
+    .nav {
+      flex-grow: 1;
+    }
+  }
+}
