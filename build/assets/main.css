@@ -646,6 +646,7 @@ ul {
 
 .hero {
   height: 100vh;
+  min-height: 600px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -683,6 +684,11 @@ ul {
   min-height: 250px;
   max-height: 700px;
 }
+@media (max-width: 768px) {
+  .hero__preview svg {
+    max-height: 400px;
+  }
+}
 .hero__preview svg g[data-id=house] {
   opacity: 0;
   -webkit-transform: translateY(150px);
@@ -702,7 +708,7 @@ ul {
 }
 @media (max-width: 1140px) {
   .hero__preview {
-    padding-left: 0;
+    padding-left: 20px;
   }
   .hero__preview svg {
     width: 85vw;
@@ -716,6 +722,15 @@ ul {
   width: 5px;
   height: 100vh;
   background-color: var(--primary-color);
+}
+@media (max-width: 1140px) {
+  .main-nav {
+    top: initial;
+    bottom: 30px;
+    left: 30px;
+    width: calc(100% - 60px);
+    height: 5px;
+  }
 }
 .main-nav ul {
   height: 100%;
@@ -731,6 +746,15 @@ ul {
   -ms-flex-pack: distribute;
   justify-content: space-around;
 }
+@media (max-width: 1140px) {
+  .main-nav ul {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    padding: 0;
+  }
+}
 .main-nav li {
   position: relative;
 }
@@ -744,6 +768,14 @@ ul {
   height: 20px;
   border-radius: 50%;
   background-color: var(--warning-color);
+}
+@media (max-width: 1140px) {
+  .main-nav .circle {
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
 }
 .main-nav .circle::before {
   position: absolute;
@@ -773,6 +805,11 @@ ul {
   -o-transition: stroke 0.3s linear;
   transition: stroke 0.3s linear;
 }
+@media (max-width: 1140px) {
+  .main-nav .circle svg {
+    display: none;
+  }
+}
 .main-nav .circle a {
   width: 150px;
   position: absolute;
@@ -788,6 +825,11 @@ ul {
 }
 .main-nav .circle a:hover, .main-nav .circle a:focus {
   color: var(--primary-color);
+}
+@media (max-width: 1140px) {
+  .main-nav .circle a {
+    display: none;
+  }
 }
 .main-nav .circle a:hover ~ svg,
 .main-nav .circle a:focus ~ svg {
