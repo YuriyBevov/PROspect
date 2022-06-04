@@ -888,17 +888,104 @@ ul {
 .hero {
   height: 100vh;
   min-height: 400px;
+  max-height: 1080px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding-top: 120px;
+  padding-top: 100px;
+  padding-bottom: 20px;
 }
 .hero__container {
-  margin-bottom: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: auto;
+}
+.hero .scroll-btn {
+  opacity: 0;
+  -webkit-transform: translateY(-50px);
+  -ms-transform: translateY(-50px);
+  transform: translateY(-50px);
+  /*svg {
+
+    path:nth-child(1) {
+      //animation: color1 3.5s ease-in infinite;
+
+    }
+
+    path:nth-child(2) {
+
+    }
+
+    path:nth-child(3) {
+
+    }
+  }
+
+
+  @keyframes color3 {
+    0% {
+      fill: var(--primary-color);
+    }
+
+    40% {
+      fill: var(--warning-color);
+    }
+
+    80% {
+      fill: var(--dark-color);
+    }
+
+    100% {
+      fill: var(--primary-color);
+    }
+  }
+
+  @keyframes color2 {
+    0% {
+      fill: var(--warning-color);
+    }
+
+    40% {
+      fill: var(--dark-color);
+    }
+
+    80% {
+      fill: var(--primary-color);
+    }
+
+    100% {
+      fill: var(--warning-color);
+    }
+  }
+
+  @keyframes color1 {
+    0% {
+      fill: var(--dark-color);
+    }
+
+    40% {
+      fill: var(--primary-color);
+    }
+
+    80% {
+      fill: var(--warning-color);
+    }
+
+    100% {
+      fill: var(--dark-color);
+    }
+  }*/
 }
 .hero__preview {
   height: 100%;
-  min-height: 400px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -910,18 +997,14 @@ ul {
   width: 100%;
   overflow: hidden;
   z-index: 2;
+  margin-bottom: 10vh;
 }
 .hero__preview svg {
   width: calc(85vw - 300px);
-  height: 80vh;
+  height: 75vh;
   min-width: 300px;
   min-height: 250px;
-  max-height: 700px;
-}
-@media (max-width: 768px) {
-  .hero__preview svg {
-    max-height: 400px;
-  }
+  max-height: 50vh;
 }
 .hero__preview svg g[data-id=house] {
   opacity: 0;

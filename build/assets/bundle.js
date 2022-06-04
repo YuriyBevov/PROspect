@@ -1,6 +1,179 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/scripts/modules/navbar.js":
+/*!***************************************!*\
+  !*** ./src/scripts/modules/navbar.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+/* harmony import */ var gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gsap/ScrollTrigger */ "./node_modules/gsap/ScrollTrigger.js");
+
+
+gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__["default"]);
+var burger = document.querySelector('.js-menu-opener');
+var topline = burger.querySelector('.burger__line--top');
+var midline = burger.querySelector('.burger__line--middle');
+var bottomline = burger.querySelector('.burger__line--bottom');
+var nav = document.querySelector('.nav__list');
+var navItems = nav.querySelectorAll('.nav__item');
+var navUnderline = document.querySelector('.nav__underline');
+
+var onClickOpenNav = function onClickOpenNav(evt) {
+  evt.preventDefault();
+  burger.removeEventListener('click', onClickOpenNav);
+
+  if (!burger.classList.contains('opened')) {
+    burger.classList.add('opened');
+    nav.classList.add('opened'); //линия
+
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(navUnderline, {
+      duration: 0.7,
+      delay: 0.3,
+      x: 0,
+      ease: 'ease-in'
+    }); //ссылки
+
+    navItems.forEach(function (item, i) {
+      gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(item, {
+        duration: 0.4,
+        delay: 0.15 * (i + 1),
+        opacity: 1,
+        y: 0,
+        ease: 'ease-in'
+      });
+    }); //burger
+    //midline
+
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(midline, {
+      duration: .7,
+      delay: 0.1,
+      x: '-40px',
+      ease: 'ease-in-out'
+    }); //topline
+
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.from(topline, {
+      duration: 0,
+      opacity: 0,
+      width: 0,
+      y: '10px',
+      rotate: 0,
+      ease: 'ease-in-out'
+    });
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(topline, {
+      duration: .7,
+      opacity: 1,
+      width: '30px',
+      y: '10px',
+      rotate: '45deg',
+      ease: 'ease-in-out'
+    }); //bottomLine
+
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.from(bottomline, {
+      duration: 0,
+      opacity: 0,
+      width: 0,
+      y: '-10px',
+      rotate: 0,
+      ease: 'ease-in-out'
+    });
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(bottomline, {
+      duration: .7,
+      opacity: 1,
+      width: '30px',
+      y: '-10px',
+      rotate: '-45deg',
+      ease: 'ease-in-out'
+    });
+    setTimeout(function () {
+      burger.addEventListener('click', onClickOpenNav);
+    }, 1200);
+  } else {
+    //линия
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(navUnderline, {
+      duration: 0.7,
+      delay: 0,
+      x: '100%',
+      ease: 'ease-in'
+    }); //ссылки
+
+    navItems.forEach(function (item, i) {
+      gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(item, {
+        duration: 0.4,
+        delay: 0.15 * (i + 1),
+        opacity: 0,
+        scale: 0,
+        y: 0,
+        ease: 'ease-in'
+      });
+    }); //burger
+    //midline
+
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(midline, {
+      duration: .7,
+      delay: 0.6,
+      x: '0',
+      ease: 'ease-in-out'
+    }); //topline
+
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.from(topline, {
+      duration: 0,
+      opacity: 0,
+      width: 0,
+      y: '0',
+      rotate: 0,
+      ease: 'ease-in-out'
+    });
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(topline, {
+      duration: .7,
+      opacity: 1,
+      width: '30px',
+      y: '0',
+      rotate: '0',
+      ease: 'ease-in-out'
+    }); //bottomline
+
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.from(bottomline, {
+      duration: 0,
+      opacity: 0,
+      width: 0,
+      y: '0',
+      rotate: 0,
+      ease: 'ease-in-out'
+    });
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(bottomline, {
+      duration: .7,
+      opacity: 1,
+      width: '30px',
+      y: '0',
+      rotate: '0',
+      ease: 'ease-in-out'
+    }); // refresh
+
+    setTimeout(function () {
+      navItems.forEach(function (item) {
+        gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(item, {
+          duration: 0.1,
+          delay: 0,
+          scale: 1,
+          y: '-250px',
+          ease: 'ease-in'
+        });
+      });
+      burger.classList.remove('opened');
+      nav.classList.remove('opened');
+      burger.addEventListener('click', onClickOpenNav);
+    }, 1200);
+  }
+};
+
+burger.addEventListener('click', onClickOpenNav);
+
+/***/ }),
+
 /***/ "./src/scripts/modules/previewAnimation.js":
 /*!*************************************************!*\
   !*** ./src/scripts/modules/previewAnimation.js ***!
@@ -89,11 +262,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var seamless_scroll_polyfill__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! seamless-scroll-polyfill */ "./node_modules/seamless-scroll-polyfill/lib/scrollIntoView.js");
 
 var scrollBtns = document.querySelectorAll('.anchor-link');
+console.log(scrollBtns);
 
 var onClickScrollToSection = function onClickScrollToSection(evt) {
   evt.preventDefault();
-  var anchor = evt.target.getAttribute('data-scroll-to');
+  var anchor = evt.currentTarget.getAttribute('data-scroll-to');
+  console.log(anchor);
   var target = document.querySelector('#' + anchor);
+  console.log(target);
   (0,seamless_scroll_polyfill__WEBPACK_IMPORTED_MODULE_0__.scrollIntoView)(target, {
     behavior: "smooth",
     block: "start"
@@ -10555,171 +10731,68 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_scrollBtns_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/scrollBtns.js */ "./src/scripts/modules/scrollBtns.js");
 /* harmony import */ var _modules_previewAnimation_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/previewAnimation.js */ "./src/scripts/modules/previewAnimation.js");
-/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
-/* harmony import */ var gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! gsap/ScrollTrigger */ "./node_modules/gsap/ScrollTrigger.js");
+/* harmony import */ var _modules_navbar_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/navbar.js */ "./src/scripts/modules/navbar.js");
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+/* harmony import */ var gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! gsap/ScrollTrigger */ "./node_modules/gsap/ScrollTrigger.js");
 
 
 
 
-gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_3__["default"]);
-var burger = document.querySelector('.js-menu-opener');
-var topline = burger.querySelector('.burger__line--top');
-var midline = burger.querySelector('.burger__line--middle');
-var bottomline = burger.querySelector('.burger__line--bottom');
-var nav = document.querySelector('.nav__list');
-var navItems = nav.querySelectorAll('.nav__item');
-var navUnderline = document.querySelector('.nav__underline');
-var debounce = false;
 
-var onClickOpenNav = function onClickOpenNav(evt) {
-  evt.preventDefault();
-  burger.removeEventListener('click', onClickOpenNav);
 
-  if (!burger.classList.contains('opened')) {
-    burger.classList.add('opened');
-    nav.classList.add('opened'); //линия
+gsap__WEBPACK_IMPORTED_MODULE_3__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_4__["default"]);
+var scrollBtn = document.querySelector('.scroll-btn');
+gsap__WEBPACK_IMPORTED_MODULE_3__.gsap.to(scrollBtn, {
+  duration: 1.5,
+  delay: 2,
+  opacity: 1,
+  y: 0,
+  ease: 'ease-in'
+});
+/*import {gsap} from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import { Timeline } from 'gsap/gsap-core';
+gsap.registerPlugin(ScrollTrigger);
 
-    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(navUnderline, {
-      duration: 0.7,
-      delay: 0.3,
-      x: 0,
-      ease: 'ease-in'
-    }); //ссылки
+let scrollBtnPaths = document.querySelectorAll('.scroll-btn svg path');
 
-    navItems.forEach(function (item, i) {
-      gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(item, {
-        duration: 0.4,
-        delay: 0.15 * (i + 1),
-        opacity: 1,
-        y: 0,
-        ease: 'ease-in'
-      });
-    }); //burger
-    //midline
+console.log(scrollBtnPaths);
+let tl = gsap.timeline({onComplete:function() {
+  setTimeout(() => {
+    this.restart();
+  }, 300);
+}});
 
-    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(midline, {
-      duration: .7,
-      delay: 0.1,
-      x: '-40px',
-      ease: 'ease-in-out'
-    }); //topline
+let scrollBtn = document.querySelector('.scroll-btn');
 
-    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.from(topline, {
-      duration: 0,
-      opacity: 0,
-      width: 0,
-      y: '10px',
-      rotate: 0,
-      ease: 'ease-in-out'
-    });
-    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(topline, {
-      duration: .7,
-      opacity: 1,
-      width: '30px',
-      y: '10px',
-      rotate: '45deg',
-      ease: 'ease-in-out'
-    }); //bottomLine
+tl.from(scrollBtn, {
+  duration: 0.3,
+  y: 0,
+  ease: 'linear'
+})
 
-    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.from(bottomline, {
-      duration: 0,
-      opacity: 0,
-      width: 0,
-      y: '-10px',
-      rotate: 0,
-      ease: 'ease-in-out'
-    });
-    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(bottomline, {
-      duration: .7,
-      opacity: 1,
-      width: '30px',
-      y: '-10px',
-      rotate: '-45deg',
-      ease: 'ease-in-out'
-    });
-    setTimeout(function () {
-      burger.addEventListener('click', onClickOpenNav);
-    }, 1200);
-  } else {
-    //линия
-    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(navUnderline, {
-      duration: 0.7,
-      delay: 0,
-      x: '100%',
-      ease: 'ease-in'
-    }); //ссылки
+tl.to(scrollBtn, {
+  duration: 0.3,
 
-    navItems.forEach(function (item, i) {
-      gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(item, {
-        duration: 0.4,
-        delay: 0.15 * (i + 1),
-        opacity: 0,
-        scale: 0,
-        y: 0,
-        ease: 'ease-in'
-      });
-    }); //burger
-    //midline
+  y: '5px',
+  ease: 'linear'
+})
 
-    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(midline, {
-      duration: .7,
-      delay: 0.6,
-      x: '0',
-      ease: 'ease-in-out'
-    }); //topline
+scrollBtnPaths.forEach((el,i) => {
+  tl.to(el, {
+    duration: 0.1,
 
-    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.from(topline, {
-      duration: 0,
-      opacity: 0,
-      width: 0,
-      y: '0',
-      rotate: 0,
-      ease: 'ease-in-out'
-    });
-    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(topline, {
-      duration: .7,
-      opacity: 1,
-      width: '30px',
-      y: '0',
-      rotate: '0',
-      ease: 'ease-in-out'
-    }); //bottomline
+    opacity: 0,
+    ease: 'linear'
+  })
 
-    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.from(bottomline, {
-      duration: 0,
-      opacity: 0,
-      width: 0,
-      y: '0',
-      rotate: 0,
-      ease: 'ease-in-out'
-    });
-    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(bottomline, {
-      duration: .7,
-      opacity: 1,
-      width: '30px',
-      y: '0',
-      rotate: '0',
-      ease: 'ease-in-out'
-    }); // refresh
-
-    setTimeout(function () {
-      navItems.forEach(function (item) {
-        gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(item, {
-          duration: 0.1,
-          delay: 0,
-          scale: 1,
-          y: '-250px',
-          ease: 'ease-in'
-        });
-      });
-      burger.classList.remove('opened');
-      nav.classList.remove('opened');
-      burger.addEventListener('click', onClickOpenNav);
-    }, 1200);
-  }
-};
-
-burger.addEventListener('click', onClickOpenNav);
+  tl.to(el, {
+    duration: 0.1,
+    delay: 0.1,
+    opacity: 1,
+    ease: 'linear'
+  })
+})*/
 })();
 
 /******/ })()

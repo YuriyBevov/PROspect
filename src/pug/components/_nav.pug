@@ -1,8 +1,8 @@
 -
   const navList = [
-    { link: '#portfolio', title: 'Портфолио' }, { link: '#features', title: 'Услуги' },
-    { link: '#advertising ', title: 'Наружная реклама' }, { link: '#feedback', title: 'Обратная связь' },
-    { link: '#map', title: 'Как нас найти' },
+    { link: 'portfolio', title: 'Портфолио' }, { link: 'features', title: 'Услуги' },
+    { link: 'advertising ', title: 'Наружная реклама' }, { link: 'feedback', title: 'Обратная связь' },
+    { link: 'map', title: 'Как нас найти' },
   ]
 
 nav.nav
@@ -10,4 +10,4 @@ nav.nav
   ul.nav__list
     each item in navList
       li.nav__item
-        a(href=item.link).nav__link= item.title
+        a(href='#'+item.link data-scroll-to=item.link).anchor-link.nav__link= item.title

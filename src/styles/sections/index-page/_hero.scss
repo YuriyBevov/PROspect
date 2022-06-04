@@ -12,16 +12,97 @@
 .hero {
   height: 100vh;
   min-height: 400px;
+  max-height: 1080px; // ??
   display: flex;
-  padding-top: 120px;
+  padding-top: 100px;
+  padding-bottom: 20px;
 
   &__container {
-    margin-bottom: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+  }
+
+  .scroll-btn {
+    opacity: 0;
+    transform: translateY(-50px);
+
+    /*svg {
+
+      path:nth-child(1) {
+        //animation: color1 3.5s ease-in infinite;
+
+      }
+
+      path:nth-child(2) {
+
+      }
+
+      path:nth-child(3) {
+
+      }
+    }
+
+
+    @keyframes color3 {
+      0% {
+        fill: var(--primary-color);
+      }
+
+      40% {
+        fill: var(--warning-color);
+      }
+
+      80% {
+        fill: var(--dark-color);
+      }
+
+      100% {
+        fill: var(--primary-color);
+      }
+    }
+
+    @keyframes color2 {
+      0% {
+        fill: var(--warning-color);
+      }
+
+      40% {
+        fill: var(--dark-color);
+      }
+
+      80% {
+        fill: var(--primary-color);
+      }
+
+      100% {
+        fill: var(--warning-color);
+      }
+    }
+
+    @keyframes color1 {
+      0% {
+        fill: var(--dark-color);
+      }
+
+      40% {
+        fill: var(--primary-color);
+      }
+
+      80% {
+        fill: var(--warning-color);
+      }
+
+      100% {
+        fill: var(--dark-color);
+      }
+    }*/
   }
 
   &__preview {
     height: 100%;
-    min-height: 400px;
+    //min-height: 400px;
     display: flex;
     position: relative;
     @extend .flex-centered-content;
@@ -30,16 +111,17 @@
     width: 100%;
     overflow: hidden;
     z-index: 2;
+    margin-bottom: 10vh;
 
     svg {
       width: calc(85vw - 300px);
-      height: 80vh;
+      height: 75vh;
       min-width: 300px;
       min-height: 250px;
-      max-height: 700px;
+      max-height: 50vh;
 
       @include m-b-tablet-down {
-        max-height: 400px;
+        //max-height: 400px;
       }
 
       g[data-id="house"] {
