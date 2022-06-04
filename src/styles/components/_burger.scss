@@ -12,6 +12,7 @@
   border: 1px solid var(--primary-color);
 
   color: var(--primary-color);
+  background-color: var(--main-bg-color);
 
   &__line {
     width: 30px;
@@ -28,7 +29,7 @@
     }
   }
 
-  &.opened {
+  /*&.opened {
     .burger__line {
       &--middle {
         animation: midline 0.5s ease-in forwards;
@@ -158,5 +159,5 @@
       transform: translateY(0) rotate(0);
       opacity: 1;
     }
-  }
+  }*/
 }

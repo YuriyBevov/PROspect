@@ -10563,42 +10563,153 @@ __webpack_require__.r(__webpack_exports__);
 
 gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_3__["default"]);
 var burger = document.querySelector('.js-menu-opener');
+var topline = burger.querySelector('.burger__line--top');
+var midline = burger.querySelector('.burger__line--middle');
+var bottomline = burger.querySelector('.burger__line--bottom');
 var nav = document.querySelector('.nav__list');
-var navItems = document.querySelectorAll('.nav__item');
+var navItems = nav.querySelectorAll('.nav__item');
+var navUnderline = document.querySelector('.nav__underline');
 
 var onClickOpenNav = function onClickOpenNav(evt) {
   evt.preventDefault();
 
   if (!burger.classList.contains('opened')) {
     burger.classList.add('opened');
-    nav.classList.add('opened');
+    nav.classList.add('opened'); //линия
+
+    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(navUnderline, {
+      duration: 0.7,
+      delay: 0.3,
+      x: 0,
+      ease: 'ease-in'
+    }); //ссылки
+
     navItems.forEach(function (item, i) {
       gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(item, {
-        duration: 0.7,
+        duration: 0.4,
         delay: 0.15 * (i + 1),
         opacity: 1,
         y: 0,
         ease: 'ease-in'
       });
+    }); //burger
+    //midline
+
+    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(midline, {
+      duration: .7,
+      delay: 0.1,
+      x: '-40px',
+      ease: 'ease-in-out'
+    }); //topline
+
+    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.from(topline, {
+      duration: 0,
+      opacity: 0,
+      width: 0,
+      y: '10px',
+      rotate: 0,
+      ease: 'ease-in-out'
+    });
+    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(topline, {
+      duration: .7,
+      opacity: 1,
+      width: '30px',
+      y: '10px',
+      rotate: '45deg',
+      ease: 'ease-in-out'
+    }); //bottomLine
+
+    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.from(bottomline, {
+      duration: 0,
+      opacity: 0,
+      width: 0,
+      y: '-10px',
+      rotate: 0,
+      ease: 'ease-in-out'
+    });
+    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(bottomline, {
+      duration: .7,
+      opacity: 1,
+      width: '30px',
+      y: '-10px',
+      rotate: '-45deg',
+      ease: 'ease-in-out'
     });
   } else {
-    burger.classList.add('closing');
-    nav.classList.add('closing');
+    //линия
+    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(navUnderline, {
+      duration: 0.7,
+      delay: 0,
+      x: '100%',
+      ease: 'ease-in'
+    }); //ссылки
+
     navItems.forEach(function (item, i) {
       gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(item, {
-        duration: 0.7,
+        duration: 0.4,
         delay: 0.15 * (i + 1),
         opacity: 0,
-        y: '-150px',
+        scale: 0,
+        y: 0,
         ease: 'ease-in'
       });
+    }); //burger
+    //midline
+
+    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(midline, {
+      duration: .7,
+      delay: 0.6,
+      x: '0',
+      ease: 'ease-in-out'
+    }); //topline
+
+    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.from(topline, {
+      duration: 0,
+      opacity: 0,
+      width: 0,
+      y: '0',
+      rotate: 0,
+      ease: 'ease-in-out'
     });
+    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(topline, {
+      duration: .7,
+      opacity: 1,
+      width: '30px',
+      y: '0',
+      rotate: '0',
+      ease: 'ease-in-out'
+    }); //bottomline
+
+    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.from(bottomline, {
+      duration: 0,
+      opacity: 0,
+      width: 0,
+      y: '0',
+      rotate: 0,
+      ease: 'ease-in-out'
+    });
+    gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(bottomline, {
+      duration: .7,
+      opacity: 1,
+      width: '30px',
+      y: '0',
+      rotate: '0',
+      ease: 'ease-in-out'
+    }); // refresh
+
     setTimeout(function () {
-      burger.classList.remove('closing');
-      nav.classList.remove('closing');
+      navItems.forEach(function (item) {
+        gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(item, {
+          duration: 0.1,
+          delay: 0,
+          scale: 1,
+          y: '-250px',
+          ease: 'ease-in'
+        });
+      });
       burger.classList.remove('opened');
       nav.classList.remove('opened');
-    }, 1700);
+    }, 1200);
   }
 };
 
