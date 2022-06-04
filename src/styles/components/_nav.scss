@@ -41,5 +41,12 @@
     height: 40px;
 
     color: var(--primary-color);
+    transition: color var(--transition), transform var(--transition);
+
+    &:hover,
+    &:focus {
+      color: var(--dark-color);
+      transform: translateY(-5px);
+    }
   }
 }

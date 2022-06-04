@@ -361,6 +361,7 @@ template {
   --dark-color: #4d585B;
   --accent-color: #d52027;
   --main-bg-color: var(--white-color);
+  --transition: 0.2s ease;
   --main-scrollbar-width: 6px;
   --main-scrollbar-color: var(--light-color);
   --main-scrollbar-thumb-color: var(--accent-color);
@@ -696,6 +697,17 @@ ul {
   font-size: 18px;
   height: 40px;
   color: var(--primary-color);
+  -webkit-transition: color var(--transition), -webkit-transform var(--transition);
+  transition: color var(--transition), -webkit-transform var(--transition);
+  -o-transition: color var(--transition), transform var(--transition);
+  transition: color var(--transition), transform var(--transition);
+  transition: color var(--transition), transform var(--transition), -webkit-transform var(--transition);
+}
+.nav__link:hover, .nav__link:focus {
+  color: var(--dark-color);
+  -webkit-transform: translateY(-5px);
+  -ms-transform: translateY(-5px);
+  transform: translateY(-5px);
 }
 
 .burger {
