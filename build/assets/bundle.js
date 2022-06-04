@@ -10569,9 +10569,11 @@ var bottomline = burger.querySelector('.burger__line--bottom');
 var nav = document.querySelector('.nav__list');
 var navItems = nav.querySelectorAll('.nav__item');
 var navUnderline = document.querySelector('.nav__underline');
+var debounce = false;
 
 var onClickOpenNav = function onClickOpenNav(evt) {
   evt.preventDefault();
+  burger.removeEventListener('click', onClickOpenNav);
 
   if (!burger.classList.contains('opened')) {
     burger.classList.add('opened');
@@ -10635,6 +10637,9 @@ var onClickOpenNav = function onClickOpenNav(evt) {
       rotate: '-45deg',
       ease: 'ease-in-out'
     });
+    setTimeout(function () {
+      burger.addEventListener('click', onClickOpenNav);
+    }, 1200);
   } else {
     //линия
     gsap__WEBPACK_IMPORTED_MODULE_2__.gsap.to(navUnderline, {
@@ -10709,6 +10714,7 @@ var onClickOpenNav = function onClickOpenNav(evt) {
       });
       burger.classList.remove('opened');
       nav.classList.remove('opened');
+      burger.addEventListener('click', onClickOpenNav);
     }, 1200);
   }
 };

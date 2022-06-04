@@ -13,8 +13,12 @@ const nav = document.querySelector('.nav__list');
 const navItems = nav.querySelectorAll('.nav__item');
 const navUnderline = document.querySelector('.nav__underline');
 
+let debounce = false;
+
 const onClickOpenNav = (evt) => {
   evt.preventDefault();
+
+  burger.removeEventListener('click', onClickOpenNav);
 
   if(!burger.classList.contains('opened')) {
     burger.classList.add('opened');
@@ -82,6 +86,11 @@ const onClickOpenNav = (evt) => {
       rotate: '-45deg',
       ease: 'ease-in-out'
     })
+
+    setTimeout(() => {
+      burger.addEventListener('click', onClickOpenNav);
+    }, 1200);
+
   } else {
     //линия
     gsap.to(navUnderline, {
@@ -159,6 +168,8 @@ const onClickOpenNav = (evt) => {
       });
       burger.classList.remove('opened');
       nav.classList.remove('opened');
+
+      burger.addEventListener('click', onClickOpenNav);
     }, 1200);
   }
 }

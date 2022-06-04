@@ -894,7 +894,7 @@ ul {
   padding-top: 120px;
 }
 .hero__container {
-  margin: auto;
+  margin-bottom: auto;
 }
 .hero__preview {
   height: 100%;
