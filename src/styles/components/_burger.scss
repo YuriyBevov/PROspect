@@ -9,41 +9,22 @@
   padding: 0.5rem 1rem;
 
   border-radius: 30px;
-  border: 1px solid var(--primary-color);
+  border: 1px solid transparent; //var(--primary-color);
 
   color: var(--primary-color);
   background-color: var(--main-bg-color);
+
+  z-index: 99;
 
   &__line {
     width: 30px;
     height: 2px;
     transition: width 0.3s ease-in;
     background-color: var(--primary-color);
-  }
 
-  &__line {
-    &--middle-left,
-    &--middle-right {
-      position: absolute;
-      top: 50%;
-      left: 16px;
-      transform: translateY(-50%);
-    }
-
-    &--middle-right {
-      display: none;
-
-      @include m-b-tablet-down {
-        display: block;
-      }
-    }
-  }
-
-  &:hover {
-    &:not(.burger.opened) {
-      .burger__line--top,
-      .burger__line--bottom {
-        //width: 25px;
+    @include m-b-tablet-lg-down {
+      &--middle {
+        display: none;
       }
     }
   }

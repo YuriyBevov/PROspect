@@ -16,8 +16,8 @@ __webpack_require__.r(__webpack_exports__);
 gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var burger = document.querySelector('.js-menu-opener');
 var topline = burger.querySelector('.burger__line--top');
-var midlineL = burger.querySelector('.burger__line--middle-left');
-var midlineR = burger.querySelector('.burger__line--middle-right');
+var midline = burger.querySelector('.burger__line--middle'); //const midlineR = burger.querySelector('.burger__line--middle-right');
+
 var bottomline = burger.querySelector('.burger__line--bottom');
 var nav = document.querySelector('.nav');
 var navList = document.querySelector('.nav__list');
@@ -51,18 +51,19 @@ var onClickOpenNav = function onClickOpenNav(evt) {
     }); //burger
     //midlines
 
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(midlineL, {
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(midline, {
       duration: .7,
       delay: 0.1,
       x: '-40px',
       ease: 'ease-in-out'
     });
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(midlineR, {
+    /*gsap.to(midlineR, {
       duration: .7,
       delay: 0.1,
       x: '40px',
       ease: 'ease-in-out'
-    }); //topline
+    }) */
+    //topline
 
     gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.from(topline, {
       duration: 0,
@@ -121,18 +122,19 @@ var onClickOpenNav = function onClickOpenNav(evt) {
     }); //burger
     //midlines
 
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(midlineL, {
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(midline, {
       duration: .7,
       delay: 0.6,
       x: '0',
       ease: 'ease-in-out'
     });
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(midlineR, {
+    /*gsap.to(midlineR, {
       duration: .7,
       delay: 0.6,
       x: '0',
       ease: 'ease-in-out'
-    }); //topline
+    })*/
+    //topline
 
     gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.from(topline, {
       duration: 0,
@@ -10763,7 +10765,67 @@ gsap__WEBPACK_IMPORTED_MODULE_3__.gsap.to(scrollBtn, {
   delay: 2,
   opacity: 1,
   ease: 'ease-in'
-});
+}); // show header-logo
+
+/*const headerLogo = document.querySelector('.main-header__small-logo');
+
+if(window.scrollY > 600) {
+
+  if(window.innerWidth > 959) {
+    console.log('laptop')
+  }
+
+  gsap.to(headerLogo, {
+    duration: 0.7,
+    delay: 0.2,
+    opacity: 1,
+    zIndex: '99',
+    ease: 'ease-in'
+  })
+} else {
+
+  if(window.innerWidth < 959) {
+    console.log('!!laptop')
+  }
+
+  gsap.to(headerLogo, {
+    duration: 0.7,
+    delay: 0.2,
+    opacity: 0,
+    zIndex: '-1',
+    ease: 'ease-in'
+  })
+}
+
+window.addEventListener('scroll', () => {
+  if(window.scrollY > 600) {
+
+    if(window.innerWidth > 959) {
+      console.log('laptop')
+    }
+
+    gsap.to(headerLogo, {
+      duration: 0.7,
+      delay: 0.2,
+      opacity: 1,
+      zIndex: '99',
+      ease: 'ease-in'
+    })
+  } else {
+
+    if(window.innerWidth < 959) {
+      console.log('!!laptop')
+    }
+
+    gsap.to(headerLogo, {
+      duration: 0.7,
+      delay: 0.2,
+      opacity: 0,
+      zIndex: '-1',
+      ease: 'ease-in'
+    })
+  }
+});*/
 })();
 
 /******/ })()

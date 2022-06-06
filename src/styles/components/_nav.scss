@@ -1,7 +1,7 @@
 .nav {
   position: relative;
 
-  @include m-b-tablet-down {
+  @include m-b-tablet-lg-down {
     display: none;
 
     height: 100vh;
@@ -28,7 +28,7 @@
     //for gsap
     transform: translateX(100%);
 
-    @include m-b-tablet-down {
+    @include m-b-tablet-lg-down {
       display: none;
     }
   }
@@ -40,7 +40,7 @@
     margin-top: -38px;
     z-index: -1;
 
-    @include m-b-tablet-down {
+    @include m-b-tablet-lg-down {
       margin-top: 0;
 
       flex-direction: column;
@@ -59,7 +59,7 @@
     opacity: 0;
     transform: translateY(-250px);
 
-    @include m-b-tablet-down {
+    @include m-b-tablet-lg-down {
       flex-grow: initial;
     }
   }
@@ -79,14 +79,8 @@
       transform: translateY(-5px);
     }
 
-    @include m-b-tablet-lg-down {
+    @include m-b-laptop-down {
       font-size: 16px;
     }
-  }
-
-  &__logo {
-    width: 150px;
-    height: 100px;
-    outline: 1px solid red;
   }
 }

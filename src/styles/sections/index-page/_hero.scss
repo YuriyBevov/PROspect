@@ -13,15 +13,16 @@
   position: fixed;
   width: 100vw;
   height: 100vh; // calc(100vh - 100px);
-  min-height: 400px;
+  min-height: 860px;
   max-height: 1080px; // ??
   display: flex;
   padding-top: 100px;
   padding-bottom: 20px;
 
 
-  @include m-b-tablet-down {
+  @include m-b-tablet-lg-down {
     //height: calc(100vh - 80px);
+    min-height: 684px;
     padding-top: 80px;
   }
 

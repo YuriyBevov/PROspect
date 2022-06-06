@@ -4,8 +4,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const burger = document.querySelector('.js-menu-opener');
 const topline = burger.querySelector('.burger__line--top');
-const midlineL = burger.querySelector('.burger__line--middle-left');
-const midlineR = burger.querySelector('.burger__line--middle-right');
+const midline = burger.querySelector('.burger__line--middle');
+//const midlineR = burger.querySelector('.burger__line--middle-right');
 const bottomline = burger.querySelector('.burger__line--bottom');
 
 const nav = document.querySelector('.nav');
@@ -45,18 +45,18 @@ const onClickOpenNav = (evt) => {
     //burger
 
     //midlines
-    gsap.to(midlineL, {
+    gsap.to(midline, {
       duration: .7,
       delay: 0.1,
       x: '-40px',
       ease: 'ease-in-out'
     })
-    gsap.to(midlineR, {
+    /*gsap.to(midlineR, {
       duration: .7,
       delay: 0.1,
       x: '40px',
       ease: 'ease-in-out'
-    })
+    }) */
     //topline
     gsap.from(topline, {
       duration: 0,
@@ -97,6 +97,7 @@ const onClickOpenNav = (evt) => {
     }, 1200);
 
   } else {
+
     //линия
     gsap.to(navUnderline, {
       duration: 0.7,
@@ -119,18 +120,18 @@ const onClickOpenNav = (evt) => {
 
     //burger
     //midlines
-    gsap.to(midlineL, {
+    gsap.to(midline, {
       duration: .7,
       delay: 0.6,
       x: '0',
       ease: 'ease-in-out'
     })
-    gsap.to(midlineR, {
+    /*gsap.to(midlineR, {
       duration: .7,
       delay: 0.6,
       x: '0',
       ease: 'ease-in-out'
-    })
+    })*/
     //topline
     gsap.from(topline, {
       duration: 0,
