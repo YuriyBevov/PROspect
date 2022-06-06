@@ -21,143 +21,30 @@
     background-color: var(--primary-color);
   }
 
+  &__line {
+    &--middle-left,
+    &--middle-right {
+      position: absolute;
+      top: 50%;
+      left: 16px;
+      transform: translateY(-50%);
+    }
+
+    &--middle-right {
+      display: none;
+
+      @include m-b-tablet-down {
+        display: block;
+      }
+    }
+  }
+
   &:hover {
     &:not(.burger.opened) {
-      .burger__line--middle {
-        width: 25px;
+      .burger__line--top,
+      .burger__line--bottom {
+        //width: 25px;
       }
     }
   }
-
-  /*&.opened {
-    .burger__line {
-      &--middle {
-        animation: midline 0.5s ease-in forwards;
-      }
-
-      &--top {
-        animation: topline 0.5s ease-in forwards;
-      }
-
-      &--bottom {
-        animation: bottomline 0.5s ease-in forwards;
-      }
-    }
-  }
-
-  &.closing {
-    .burger__line {
-      &--middle {
-        animation: midline-back 2.5s ease-in forwards;
-      }
-
-      &--top {
-        animation: topline-back 2s ease-in forwards;
-      }
-
-      &--bottom {
-        animation: bottomline-back 2s ease-in forwards;
-      }
-    }
-  }
-
-  @keyframes midline {
-    0% {
-      transform: translateX(0);
-    }
-
-    100% {
-      transform: translateX(-40px);
-    }
-  }
-
-  @keyframes midline-back {
-    0% {
-      width: 0;
-      transform: translateX(-40px);
-    }
-
-    75% {
-      width: 0;
-    }
-
-    100% {
-      width: 30px;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes topline {
-    0% {
-      opacity: 1;
-    }
-
-    15% {
-      opacity: 0;
-      width: 0;
-      transform: translateY(10px) rotate(0);
-    }
-
-    100% {
-      width: 30px;
-      transform: translateY(10px) rotate(45deg);
-    }
-  }
-
-  @keyframes topline-back {
-    0% {
-      width: 0;
-      opacity: 0;
-      transform: translateY(0) rotate(0);
-    }
-
-    25% {
-      width: 0;
-      opacity: 0;
-      transform: translateY(0) rotate(0);
-    }
-
-    100% {
-      width: 30px;
-      transform: translateY(0) rotate(0);
-      opacity: 1;
-    }
-  }
-
-  @keyframes bottomline {
-    0% {
-      opacity: 1;
-    }
-
-    15% {
-      opacity: 0;
-      width: 0;
-      transform: translateY(-10px) rotate(0);
-    }
-
-    100% {
-      width: 30px;
-      transform: translateY(-10px) rotate(-45deg);
-    }
-  }
-
-  @keyframes bottomline-back {
-    0% {
-      width: 0;
-      opacity: 0;
-      transform: translateY(0) rotate(0);
-    }
-
-    25% {
-      width: 0;
-      opacity: 0;
-      transform: translateY(0) rotate(0);
-    }
-
-    100% {
-      width: 30px;
-      transform: translateY(0) rotate(0);
-      opacity: 1;
-    }
-  }*/
 }

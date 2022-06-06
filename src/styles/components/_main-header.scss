@@ -21,5 +21,10 @@
     .nav {
       flex-grow: 1;
     }
+
+    @include m-b-tablet-down {
+      padding-top: 20px;
+      justify-content: center;
+    }
   }
 }

@@ -4,10 +4,12 @@ gsap.registerPlugin(ScrollTrigger);
 
 const burger = document.querySelector('.js-menu-opener');
 const topline = burger.querySelector('.burger__line--top');
-const midline = burger.querySelector('.burger__line--middle');
+const midlineL = burger.querySelector('.burger__line--middle-left');
+const midlineR = burger.querySelector('.burger__line--middle-right');
 const bottomline = burger.querySelector('.burger__line--bottom');
 
-const nav = document.querySelector('.nav__list');
+const nav = document.querySelector('.nav');
+const navList = document.querySelector('.nav__list');
 const navItems = nav.querySelectorAll('.nav__item');
 const navUnderline = document.querySelector('.nav__underline');
 
@@ -18,7 +20,8 @@ const onClickOpenNav = (evt) => {
 
   if(!burger.classList.contains('opened')) {
     burger.classList.add('opened');
-    nav.classList.add('opened');
+    nav.classList.add('mobile-opened');
+    navList.classList.add('opened');
 
     //линия
     gsap.to(navUnderline, {
@@ -41,11 +44,17 @@ const onClickOpenNav = (evt) => {
 
     //burger
 
-    //midline
-    gsap.to(midline, {
+    //midlines
+    gsap.to(midlineL, {
       duration: .7,
       delay: 0.1,
       x: '-40px',
+      ease: 'ease-in-out'
+    })
+    gsap.to(midlineR, {
+      duration: .7,
+      delay: 0.1,
+      x: '40px',
       ease: 'ease-in-out'
     })
     //topline
@@ -109,8 +118,14 @@ const onClickOpenNav = (evt) => {
     });
 
     //burger
-    //midline
-    gsap.to(midline, {
+    //midlines
+    gsap.to(midlineL, {
+      duration: .7,
+      delay: 0.6,
+      x: '0',
+      ease: 'ease-in-out'
+    })
+    gsap.to(midlineR, {
       duration: .7,
       delay: 0.6,
       x: '0',
@@ -163,7 +178,8 @@ const onClickOpenNav = (evt) => {
         });
       });
       burger.classList.remove('opened');
-      nav.classList.remove('opened');
+      navList.classList.remove('opened');
+      nav.classList.remove('mobile-opened');
 
       burger.addEventListener('click', onClickOpenNav);
     }, 1200);

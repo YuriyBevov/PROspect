@@ -16,9 +16,11 @@ __webpack_require__.r(__webpack_exports__);
 gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var burger = document.querySelector('.js-menu-opener');
 var topline = burger.querySelector('.burger__line--top');
-var midline = burger.querySelector('.burger__line--middle');
+var midlineL = burger.querySelector('.burger__line--middle-left');
+var midlineR = burger.querySelector('.burger__line--middle-right');
 var bottomline = burger.querySelector('.burger__line--bottom');
-var nav = document.querySelector('.nav__list');
+var nav = document.querySelector('.nav');
+var navList = document.querySelector('.nav__list');
 var navItems = nav.querySelectorAll('.nav__item');
 var navUnderline = document.querySelector('.nav__underline');
 
@@ -28,7 +30,8 @@ var onClickOpenNav = function onClickOpenNav(evt) {
 
   if (!burger.classList.contains('opened')) {
     burger.classList.add('opened');
-    nav.classList.add('opened'); //линия
+    nav.classList.add('mobile-opened');
+    navList.classList.add('opened'); //линия
 
     gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(navUnderline, {
       duration: 0.7,
@@ -46,12 +49,18 @@ var onClickOpenNav = function onClickOpenNav(evt) {
         ease: 'ease-in'
       });
     }); //burger
-    //midline
+    //midlines
 
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(midline, {
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(midlineL, {
       duration: .7,
       delay: 0.1,
       x: '-40px',
+      ease: 'ease-in-out'
+    });
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(midlineR, {
+      duration: .7,
+      delay: 0.1,
+      x: '40px',
       ease: 'ease-in-out'
     }); //topline
 
@@ -110,9 +119,15 @@ var onClickOpenNav = function onClickOpenNav(evt) {
         ease: 'ease-in'
       });
     }); //burger
-    //midline
+    //midlines
 
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(midline, {
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(midlineL, {
+      duration: .7,
+      delay: 0.6,
+      x: '0',
+      ease: 'ease-in-out'
+    });
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(midlineR, {
       duration: .7,
       delay: 0.6,
       x: '0',
@@ -164,7 +179,8 @@ var onClickOpenNav = function onClickOpenNav(evt) {
         });
       });
       burger.classList.remove('opened');
-      nav.classList.remove('opened');
+      navList.classList.remove('opened');
+      nav.classList.remove('mobile-opened');
       burger.addEventListener('click', onClickOpenNav);
     }, 1200);
   }
@@ -10746,53 +10762,8 @@ gsap__WEBPACK_IMPORTED_MODULE_3__.gsap.to(scrollBtn, {
   duration: 1.5,
   delay: 2,
   opacity: 1,
-  y: 0,
   ease: 'ease-in'
 });
-/*import {gsap} from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
-import { Timeline } from 'gsap/gsap-core';
-gsap.registerPlugin(ScrollTrigger);
-
-let scrollBtnPaths = document.querySelectorAll('.scroll-btn svg path');
-
-console.log(scrollBtnPaths);
-let tl = gsap.timeline({onComplete:function() {
-  setTimeout(() => {
-    this.restart();
-  }, 300);
-}});
-
-let scrollBtn = document.querySelector('.scroll-btn');
-
-tl.from(scrollBtn, {
-  duration: 0.3,
-  y: 0,
-  ease: 'linear'
-})
-
-tl.to(scrollBtn, {
-  duration: 0.3,
-
-  y: '5px',
-  ease: 'linear'
-})
-
-scrollBtnPaths.forEach((el,i) => {
-  tl.to(el, {
-    duration: 0.1,
-
-    opacity: 0,
-    ease: 'linear'
-  })
-
-  tl.to(el, {
-    duration: 0.1,
-    delay: 0.1,
-    opacity: 1,
-    ease: 'linear'
-  })
-})*/
 })();
 
 /******/ })()

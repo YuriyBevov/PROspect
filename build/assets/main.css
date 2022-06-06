@@ -482,7 +482,7 @@ ul {
   background-color: transparent;
 }
 
-.flex-centered-content, .hero__preview, .nav__link, .main-btn {
+.flex-centered-content, .hero__preview, .hero .scroll-btn, .nav__link, .main-btn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -653,9 +653,32 @@ ul {
   -ms-flex-positive: 1;
   flex-grow: 1;
 }
+@media (max-width: 768px) {
+  .main-header__navbar {
+    padding-top: 20px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+}
 
 .nav {
   position: relative;
+}
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+    height: 100vh;
+    width: 100%;
+    max-height: 100vh;
+    position: absolute;
+    top: 0;
+    background-color: var(--main-bg-color);
+    padding-top: 70px;
+  }
+  .nav.mobile-opened {
+    display: block;
+  }
 }
 .nav__underline {
   position: absolute;
@@ -669,6 +692,11 @@ ul {
   -ms-transform: translateX(100%);
   transform: translateX(100%);
 }
+@media (max-width: 768px) {
+  .nav__underline {
+    display: none;
+  }
+}
 .nav__list {
   position: relative;
   display: -webkit-box;
@@ -679,6 +707,19 @@ ul {
   align-items: center;
   margin-top: -38px;
   z-index: -1;
+}
+@media (max-width: 768px) {
+  .nav__list {
+    margin-top: 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    height: 100%;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
 }
 .nav__list.opened {
   z-index: 1;
@@ -691,6 +732,13 @@ ul {
   -webkit-transform: translateY(-250px);
   -ms-transform: translateY(-250px);
   transform: translateY(-250px);
+}
+@media (max-width: 768px) {
+  .nav__item {
+    -webkit-box-flex: initial;
+    -ms-flex-positive: initial;
+    flex-grow: initial;
+  }
 }
 .nav__link {
   padding: 8px;
@@ -708,6 +756,16 @@ ul {
   -webkit-transform: translateY(-5px);
   -ms-transform: translateY(-5px);
   transform: translateY(-5px);
+}
+@media (max-width: 960px) {
+  .nav__link {
+    font-size: 16px;
+  }
+}
+.nav__logo {
+  width: 150px;
+  height: 100px;
+  outline: 1px solid red;
 }
 
 .burger {
@@ -729,137 +787,6 @@ ul {
   border: 1px solid var(--primary-color);
   color: var(--primary-color);
   background-color: var(--main-bg-color);
-  /*&.opened {
-    .burger__line {
-      &--middle {
-        animation: midline 0.5s ease-in forwards;
-      }
-
-      &--top {
-        animation: topline 0.5s ease-in forwards;
-      }
-
-      &--bottom {
-        animation: bottomline 0.5s ease-in forwards;
-      }
-    }
-  }
-
-  &.closing {
-    .burger__line {
-      &--middle {
-        animation: midline-back 2.5s ease-in forwards;
-      }
-
-      &--top {
-        animation: topline-back 2s ease-in forwards;
-      }
-
-      &--bottom {
-        animation: bottomline-back 2s ease-in forwards;
-      }
-    }
-  }
-
-  @keyframes midline {
-    0% {
-      transform: translateX(0);
-    }
-
-    100% {
-      transform: translateX(-40px);
-    }
-  }
-
-  @keyframes midline-back {
-    0% {
-      width: 0;
-      transform: translateX(-40px);
-    }
-
-    75% {
-      width: 0;
-    }
-
-    100% {
-      width: 30px;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes topline {
-    0% {
-      opacity: 1;
-    }
-
-    15% {
-      opacity: 0;
-      width: 0;
-      transform: translateY(10px) rotate(0);
-    }
-
-    100% {
-      width: 30px;
-      transform: translateY(10px) rotate(45deg);
-    }
-  }
-
-  @keyframes topline-back {
-    0% {
-      width: 0;
-      opacity: 0;
-      transform: translateY(0) rotate(0);
-    }
-
-    25% {
-      width: 0;
-      opacity: 0;
-      transform: translateY(0) rotate(0);
-    }
-
-    100% {
-      width: 30px;
-      transform: translateY(0) rotate(0);
-      opacity: 1;
-    }
-  }
-
-  @keyframes bottomline {
-    0% {
-      opacity: 1;
-    }
-
-    15% {
-      opacity: 0;
-      width: 0;
-      transform: translateY(-10px) rotate(0);
-    }
-
-    100% {
-      width: 30px;
-      transform: translateY(-10px) rotate(-45deg);
-    }
-  }
-
-  @keyframes bottomline-back {
-    0% {
-      width: 0;
-      opacity: 0;
-      transform: translateY(0) rotate(0);
-    }
-
-    25% {
-      width: 0;
-      opacity: 0;
-      transform: translateY(0) rotate(0);
-    }
-
-    100% {
-      width: 30px;
-      transform: translateY(0) rotate(0);
-      opacity: 1;
-    }
-  }*/
 }
 .burger__line {
   width: 30px;
@@ -869,10 +796,22 @@ ul {
   transition: width 0.3s ease-in;
   background-color: var(--primary-color);
 }
-.burger:hover:not(.burger.opened) .burger__line--middle {
-  width: 25px;
+.burger__line--middle-left, .burger__line--middle-right {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
-
+.burger__line--middle-right {
+  display: none;
+}
+@media (max-width: 768px) {
+  .burger__line--middle-right {
+    display: block;
+  }
+}
 /* Секции */
 .overlay {
   position: fixed;
@@ -886,6 +825,8 @@ ul {
 }
 
 .hero {
+  position: fixed;
+  width: 100vw;
   height: 100vh;
   min-height: 400px;
   max-height: 1080px;
@@ -894,6 +835,11 @@ ul {
   display: flex;
   padding-top: 100px;
   padding-bottom: 20px;
+}
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 80px;
+  }
 }
 .hero__container {
   display: -webkit-box;
@@ -909,10 +855,9 @@ ul {
   margin: auto;
 }
 .hero .scroll-btn {
+  padding: 15px;
   opacity: 0;
-  -webkit-transform: translateY(-50px);
-  -ms-transform: translateY(-50px);
-  transform: translateY(-50px);
+  overflow: hidden;
   /*svg {
 
     path:nth-child(1) {
@@ -984,6 +929,40 @@ ul {
     }
   }*/
 }
+.hero .scroll-btn svg {
+  -webkit-animation: moving 1.5s linear infinite;
+  animation: moving 1.5s linear infinite;
+}
+@-webkit-keyframes moving {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-15px);
+    transform: translateY(-15px);
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(15px);
+    transform: translateY(15px);
+  }
+}
+@keyframes moving {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-15px);
+    transform: translateY(-15px);
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(15px);
+    transform: translateY(15px);
+  }
+}
 .hero__preview {
   height: 100%;
   display: -webkit-box;
@@ -1035,7 +1014,11 @@ ul {
   height: 100vh;
   background-color: var(--main-bg-color);
   z-index: 1;*/
+  position: relative;
   height: 100vh;
+  margin-top: 100vh;
+  background-color: var(--main-bg-color);
+  z-index: 1;
 }
 
 /* Модальные окна */

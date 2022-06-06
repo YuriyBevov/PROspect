@@ -4,5 +4,9 @@
   height: 100vh;
   background-color: var(--main-bg-color);
   z-index: 1;*/
-  height: 100vh;
+  position: relative;
+  height: 100vh; //temp
+  margin-top: 100vh;
+  background-color: var(--main-bg-color);
+  z-index: 1;
 }

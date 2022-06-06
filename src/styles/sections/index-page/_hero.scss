@@ -10,12 +10,20 @@
 }
 
 .hero {
-  height: 100vh;
+  position: fixed;
+  width: 100vw;
+  height: 100vh; // calc(100vh - 100px);
   min-height: 400px;
   max-height: 1080px; // ??
   display: flex;
   padding-top: 100px;
   padding-bottom: 20px;
+
+
+  @include m-b-tablet-down {
+    //height: calc(100vh - 80px);
+    padding-top: 80px;
+  }
 
   &__container {
     display: flex;
@@ -25,8 +33,31 @@
   }
 
   .scroll-btn {
+    @extend .flex-centered-content;
+    padding: 15px;
+    // for gsap
     opacity: 0;
-    transform: translateY(-50px);
+    overflow: hidden;
+
+    svg {
+      animation: moving 1.5s linear infinite;
+    }
+
+    @keyframes moving {
+      0% {
+        opacity: 0;
+        transform: translateY(-15px);
+      }
+
+      75% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+    }
 
     /*svg {
 
