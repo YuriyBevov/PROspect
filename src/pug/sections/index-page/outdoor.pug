@@ -1,7 +1,6 @@
 -
   const accordion = [
     {
-      id="1",
       title: 'Внешняя подсветка',
 
       body: {
@@ -14,7 +13,6 @@
       }
     },
     {
-      id="2",
       title: 'Внутренняя подсветка',
 
       body: {
@@ -27,7 +25,6 @@
       }
     },
     {
-      id="3",
       title: 'Контражур',
 
       body: {
@@ -40,7 +37,6 @@
       }
     },
     {
-      id="4",
       title: 'Контурный короб',
 
       body: {
@@ -53,7 +49,6 @@
       }
     },
     {
-      id="5",
       title: 'Прямоугольный короб',
 
       body: {
@@ -66,7 +61,6 @@
       }
     },
     {
-      id="6",
       class: 'active',
       title: 'Металлические буквы',
 
@@ -87,7 +81,7 @@ section.section.outdoor
 
     .outdoor__accordion.accordion
       each field in accordion
-        .accordion__field(class= field.class ? field.class : null data-id= field.id)
+        .accordion__field(class= field.class ? field.class : null)
           .accordion__header
             span= field.title
           .accordion__body

@@ -20,14 +20,14 @@ var onClickOpenAccordionField = function onClickOpenAccordionField(evt) {
     if (target === field && !field.classList.contains('moved')) {
       fields.forEach(function (field, j) {
         if (j > i) {
-          field.classList.add('moved');
+          !field.classList.contains('moved') ? field.classList.add('moved') : null;
           field.style.left = 'calc(100% - ' + 70 * (fields.length - j) + 'px)';
         }
       });
     } else if (fields[i] === target && field.classList.contains('moved')) {
       fields.forEach(function (field, j) {
         if (j < i + 1) {
-          field.classList.remove('moved');
+          field.classList.contains('moved') ? field.classList.remove('moved') : null;
           field.style.left = 70 * j + 'px';
         }
       });
