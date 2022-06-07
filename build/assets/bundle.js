@@ -18,6 +18,7 @@ var onClickOpenAccordionField = function onClickOpenAccordionField(evt) {
   var target = evt.currentTarget.parentNode;
   fields.forEach(function (field, i) {
     if (target === field && !field.classList.contains('moved')) {
+      target.querySelector('.accordion__body').style.width = 'calc(100% - ' + 69 * (fields.length - i) + 'px)';
       fields.forEach(function (field, j) {
         if (j > i) {
           !field.classList.contains('moved') ? field.classList.add('moved') : null;

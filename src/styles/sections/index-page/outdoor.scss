@@ -16,6 +16,12 @@
     left: 0;
     //width: 100%;
     background-color: var(--main-bg-color);
+
+    &:not(:last-child) {
+      .accordion__header {
+        border-right: 0;
+      }
+    }
   }
 
   &__header {
@@ -29,10 +35,6 @@
 
     background-color: var(--white-color);
     z-index: 3;
-
-    &:not(:last-of-type) {
-      border-right: 0;
-    }
 
     cursor: pointer;
 

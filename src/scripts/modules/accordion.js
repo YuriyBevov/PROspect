@@ -14,11 +14,12 @@ const onClickOpenAccordionField = (evt) => {
   fields.forEach((field,i) => {
     if(target === field && !field.classList.contains('moved')) {
 
+      target.querySelector('.accordion__body').style.width = 'calc(100% - ' + 69 * (fields.length - i) + 'px)';
       fields.forEach((field,j) => {
         if(j > i) {
           !field.classList.contains('moved') ?
           field.classList.add('moved') : null;
-          field.style.left = 'calc(100% - ' + 70 * (fields.length - j) + 'px)'
+          field.style.left = 'calc(100% - ' + 70 * (fields.length - j) + 'px)';
         }
       })
 
