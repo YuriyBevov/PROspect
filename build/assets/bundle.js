@@ -1,6 +1,46 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/scripts/modules/accordion.js":
+/*!******************************************!*\
+  !*** ./src/scripts/modules/accordion.js ***!
+  \******************************************/
+/***/ (() => {
+
+var accordion = document.querySelector('.accordion');
+var headers = accordion.querySelectorAll('.accordion__header');
+var fields = accordion.querySelectorAll('.accordion__field');
+fields.forEach(function (field, i) {
+  field.style.left = 70 * i + 'px';
+});
+
+var onClickOpenAccordionField = function onClickOpenAccordionField(evt) {
+  var target = evt.currentTarget.parentNode;
+  fields.forEach(function (field, i) {
+    if (target === field && !field.classList.contains('moved')) {
+      fields.forEach(function (field, j) {
+        if (j > i) {
+          field.classList.add('moved');
+          field.style.left = 'calc(100% - ' + 70 * (fields.length - j) + 'px)';
+        }
+      });
+    } else if (fields[i] === target && field.classList.contains('moved')) {
+      fields.forEach(function (field, j) {
+        if (j < i + 1) {
+          field.classList.remove('moved');
+          field.style.left = 70 * j + 'px';
+        }
+      });
+    }
+  });
+};
+
+headers.forEach(function (header) {
+  header.addEventListener('click', onClickOpenAccordionField);
+});
+
+/***/ }),
+
 /***/ "./src/scripts/modules/navbar.js":
 /*!***************************************!*\
   !*** ./src/scripts/modules/navbar.js ***!
@@ -10750,17 +10790,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_scrollBtns_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/scrollBtns.js */ "./src/scripts/modules/scrollBtns.js");
 /* harmony import */ var _modules_previewAnimation_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/previewAnimation.js */ "./src/scripts/modules/previewAnimation.js");
 /* harmony import */ var _modules_navbar_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/navbar.js */ "./src/scripts/modules/navbar.js");
-/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
-/* harmony import */ var gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! gsap/ScrollTrigger */ "./node_modules/gsap/ScrollTrigger.js");
+/* harmony import */ var _modules_accordion_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/accordion.js */ "./src/scripts/modules/accordion.js");
+/* harmony import */ var _modules_accordion_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_modules_accordion_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+/* harmony import */ var gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! gsap/ScrollTrigger */ "./node_modules/gsap/ScrollTrigger.js");
 
 
 
 
 
 
-gsap__WEBPACK_IMPORTED_MODULE_3__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_4__["default"]);
+
+gsap__WEBPACK_IMPORTED_MODULE_4__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_5__["default"]);
 var scrollBtn = document.querySelector('.scroll-btn');
-gsap__WEBPACK_IMPORTED_MODULE_3__.gsap.to(scrollBtn, {
+gsap__WEBPACK_IMPORTED_MODULE_4__.gsap.to(scrollBtn, {
   duration: 1.5,
   delay: 2,
   opacity: 1,

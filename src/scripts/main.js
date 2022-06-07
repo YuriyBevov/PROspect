@@ -1,6 +1,7 @@
 import './modules/scrollBtns.js';
 import './modules/previewAnimation.js';
 import './modules/navbar.js';
+import './modules/accordion.js';
 
 import {gsap} from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
