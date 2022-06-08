@@ -5,7 +5,11 @@
 /*!******************************************!*\
   !*** ./src/scripts/modules/accordion.js ***!
   \******************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
 
 var accordion = document.querySelector('.accordion');
 var headers = accordion.querySelectorAll('.accordion__header');
@@ -18,18 +22,48 @@ var onClickOpenAccordionField = function onClickOpenAccordionField(evt) {
   var target = evt.currentTarget.parentNode;
   fields.forEach(function (field, i) {
     if (target === field && !field.classList.contains('moved')) {
-      target.querySelector('.accordion__body').style.width = 'calc(100% - ' + 69 * (fields.length - i) + 'px)';
+      if (!target.classList.contains('active')) {
+        fields.forEach(function (field) {
+          field.classList.contains('active') ? field.classList.remove('active') : null;
+        });
+        target.classList.add('active');
+      }
+
       fields.forEach(function (field, j) {
+        //показ
         if (j > i) {
-          !field.classList.contains('moved') ? field.classList.add('moved') : null;
-          field.style.left = 'calc(100% - ' + 70 * (fields.length - j) + 'px)';
+          if (!field.classList.contains('moved')) {
+            gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(field, {
+              duration: 0.5,
+              delay: 0.2,
+              left: 'calc(100% - ' + 70 * (fields.length - j) + 'px)',
+              ease: 'ease-in'
+            });
+            !field.classList.contains('moved') ? field.classList.add('moved') : null;
+          }
         }
       });
     } else if (fields[i] === target && field.classList.contains('moved')) {
+      if (!target.classList.contains('active')) {
+        fields.forEach(function (field) {
+          field.classList.contains('active') ? field.classList.remove('active') : null;
+        });
+        target.classList.add('active');
+      } // скрытие
+
+
       fields.forEach(function (field, j) {
         if (j < i + 1) {
-          field.classList.contains('moved') ? field.classList.remove('moved') : null;
-          field.style.left = 70 * j + 'px';
+          //field.style.left = 70 * j + 'px';
+          if (field.classList.contains('moved')) {
+            gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(field, {
+              duration: 0.5,
+              delay: 0.2,
+              left: 70 * j + 'px',
+              ease: 'ease-in'
+            });
+            field.classList.contains('moved') ? field.classList.remove('moved') : null;
+          }
         }
       });
     }
@@ -10792,7 +10826,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_previewAnimation_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/previewAnimation.js */ "./src/scripts/modules/previewAnimation.js");
 /* harmony import */ var _modules_navbar_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/navbar.js */ "./src/scripts/modules/navbar.js");
 /* harmony import */ var _modules_accordion_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/accordion.js */ "./src/scripts/modules/accordion.js");
-/* harmony import */ var _modules_accordion_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_modules_accordion_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
 /* harmony import */ var gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! gsap/ScrollTrigger */ "./node_modules/gsap/ScrollTrigger.js");
 

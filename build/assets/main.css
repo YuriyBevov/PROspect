@@ -1049,10 +1049,15 @@ ul {
   z-index: 1;
 }
 
+.outdoor__container {
+  max-width: 1680px;
+}
+
 .accordion {
   position: relative;
   overflow: hidden;
-  min-height: 800px;
+  height: 600px;
+  border: 1px solid var(--primary-color);
 }
 .accordion__field {
   display: -webkit-box;
@@ -1061,10 +1066,17 @@ ul {
   position: absolute;
   top: 0;
   left: 0;
+  width: calc(100% - 349px);
   background-color: var(--main-bg-color);
 }
 .accordion__field:not(:last-child) .accordion__header {
-  border-right: 0;
+  border-right: 1px solid var(--white-color);
+}
+.accordion__field.active .accordion__header {
+  background-color: var(--dark-color);
+}
+.accordion__field.active .accordion__header span {
+  color: var(--warning-color);
 }
 .accordion__header {
   position: relative;
@@ -1073,15 +1085,16 @@ ul {
   max-width: 70px;
   height: 600px;
   padding: 20px;
-  border: 1px solid var(--primary-color);
-  background-color: var(--white-color);
+  background-color: var(--primary-color);
   z-index: 3;
   cursor: pointer;
+  -webkit-transition: background-color 0.5s ease-in;
+  -o-transition: background-color 0.5s ease-in;
+  transition: background-color 0.5s ease-in;
 }
 .accordion__header span {
   font-weight: 500;
-  font-size: 20px;
-  color: var(--primary-color);
+  font-size: 24px;
   text-align: center;
   white-space: nowrap;
   position: absolute;
@@ -1090,6 +1103,10 @@ ul {
   -webkit-transform: translate(-50%, -50%) rotate(-90deg);
   -ms-transform: translate(-50%, -50%) rotate(-90deg);
   transform: translate(-50%, -50%) rotate(-90deg);
+  color: var(--white-color);
+  -webkit-transition: color 0.5s ease-in;
+  -o-transition: color 0.5s ease-in;
+  transition: color 0.5s ease-in;
 }
 .accordion__body {
   display: -webkit-box;
@@ -1098,119 +1115,29 @@ ul {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border: 1px solid var(--primary-color);
-  border-left: 0;
   padding: 30px;
 }
 .accordion__body img {
   margin-right: 30px;
 }
-
-/*.accordion {
-  display: flex;
-  height: calc(100vh - 100px);
-  max-height: 600px;
-
-  &__field {
-    min-width: 70px;
-    margin-right: 3px;
-    overflow: hidden;
+.accordion__body-content {
+  width: 50%;
+}
+@media (max-width: 1440px) {
+  .accordion__body {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
   }
-
-  &__header {
-    position: relative;
-    width: 70px;
-    height: 600px;
-    padding: 20px;
-    border-radius: 20px;
-    background-color: var(--primary-color);
-    z-index: 3;
-
-    cursor: pointer;
-
-    span {
-      font-weight: 500;
-      font-size: 20px;
-      color: var(--white-color);
-      text-align: center;
-
-      white-space: nowrap;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%,-50%) rotate(-90deg);
-    }
+  .accordion__body img {
+    margin-right: 0;
+    margin-bottom: 20px;
   }
-
-  &__body {
-    flex-grow: initial;
-    width: 0;
+  .accordion__body-content {
+    width: 100%;
   }
+}
 
-
-  &__field.active {
-    display: flex;
-
-    .accordion__header {
-      background-color: var(--warning-color);
-
-      span {
-        color: var(--primary-color);
-      }
-    }
-
-    .accordion__body {
-      position: relative;
-      display: flex;
-      align-items: center;
-      width: calc(100% - 70px);
-      border: 1px solid var(--warning-color);
-      border-radius: 0 20px 20px 0;
-      //margin-left: -30px;
-
-      animation: showField 0.5s ease-in forwards;
-
-      @keyframes showField {
-        0% {
-          width: 0;
-        }
-
-        100% {
-          width: calc(100vh - 70px);
-        }
-      }
-      &::before {
-        position: absolute;
-        top: -1px;
-        left: -30px;
-        width: 30px;
-        height: calc(100% + 2px);
-        content: '';
-        background-color: var(--warning-color);
-      }
-
-      img {
-        margin-right: 10px;
-        margin-left: 60px;
-      }
-
-      &-content {
-        padding: 20px;
-        h3 {
-          font-weight: 600;
-          font-size: 20px;
-          color: var(--primary-color);
-        }
-
-        p {
-          font-weight: 400;
-          font-size: 14px;
-          margin-bottom: 20px;
-          color: var(--dark-color);
-        }
-      }
-    }
-  }
-}*/
 /* Модальные окна */
 /*# sourceMappingURL=main.css.map */
