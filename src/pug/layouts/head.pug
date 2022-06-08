@@ -7,4 +7,5 @@ mixin head(title, desc, keywords)
     meta(name="keywords" content=`${keywords}`)
     title!= title
     link(rel="stylesheet" href="./assets/main.css")
+    script(defer src="https://api-maps.yandex.ru/2.1/?apikey=56c6be8d-b5f9-45d5-8ffa-7fdb884fcf53&lang=ru_RU" type="text/javascript")
     script(defer src="./assets/bundle.js")

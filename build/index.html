@@ -8,6 +8,7 @@
     <meta name="keywords" content=""/>
     <title></title>
     <link rel="stylesheet" href="./assets/main.css"/>
+    <script defer="defer" src="https://api-maps.yandex.ru/2.1/?apikey=56c6be8d-b5f9-45d5-8ffa-7fdb884fcf53&amp;lang=ru_RU" type="text/javascript"></script>
     <script defer="defer" src="./assets/bundle.js"></script>
   </head>
   <body>
@@ -223,10 +224,10 @@
           <h2 class="main-title">форма</h2>
         </div>
       </section>
-      <section class="section outdoor">
-        <div class="container">
-          <h2 class="main-title">Карта</h2>
-        </div>
+      <section class="map">
+        <!--.container-->
+        <h2 class="visually-hidden">Как нас найти</h2>
+        <div id="yandex_map"></div>
       </section>
     </main>
     <footer>

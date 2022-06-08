@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
       fadeInAnimation(title, 3);
     }
 
-    setTimeout(() => {
+    /*setTimeout(() => {
       let scenes = document.querySelectorAll('g[data-id="parallax-container"]');
 
       if(scenes) {
@@ -62,6 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
           new Parallax(scene);
         })
       }
-    }, 2400);
+    }, 2400);*/
   }, 500);
 });

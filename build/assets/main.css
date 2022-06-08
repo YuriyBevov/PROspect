@@ -462,7 +462,6 @@ ul {
   position: relative;
   background-color: var(--main-bg-color);
   z-index: 1;
-  outline: 1px solid red;
 }
 
 .main-title {
@@ -516,14 +515,14 @@ ul {
   object-fit: contain;
 }
 
-.button-default {
+.button-default, #yandex_map .zoom-btns .zoom-btn {
   border: 0;
   margin: 0;
   padding: 0;
   background-color: transparent;
 }
 
-.flex-centered-content, .hero__preview, .hero .scroll-btn, .nav__link, .main-btn {
+.flex-centered-content, #yandex_map .zoom-btns .zoom-btn, .hero__preview, .hero .scroll-btn, .nav__link, .main-btn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1137,6 +1136,54 @@ ul {
   .accordion__body-content {
     width: 100%;
   }
+}
+
+#yandex_map {
+  width: 100%;
+  max-width: 2400px;
+  height: 500px;
+  margin: 0 auto;
+}
+@media (max-width: 960px) {
+  #yandex_map {
+    height: 400px;
+  }
+}
+@media (max-width: 534px) {
+  #yandex_map {
+    height: 300px;
+  }
+}
+#yandex_map .zoom-btns {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: absolute;
+  top: -440px;
+  left: -75px;
+}
+@media (max-width: 960px) {
+  #yandex_map .zoom-btns {
+    top: -340px;
+  }
+}
+@media (max-width: 534px) {
+  #yandex_map .zoom-btns {
+    top: -240px;
+  }
+}
+#yandex_map .zoom-btns .zoom-btn {
+  width: 40px;
+  height: 40px;
+  margin: 0 5px;
+  background-color: var(--primary-color);
+  cursor: pointer;
+}
+#yandex_map .zoom-btns .zoom-btn svg {
+  fill: var(--white-color);
 }
 
 /* Модальные окна */

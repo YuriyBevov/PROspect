@@ -1,0 +1,47 @@
+#yandex_map {
+  width: 100%;
+  max-width: 2400px;
+  height: 500px;
+  margin: 0 auto;
+
+  @include m-b-tablet-lg-down {
+    height: 400px;
+  }
+
+  @include m-b-mobile-lg-down {
+    height: 300px;
+  }
+
+  .zoom-btns {
+    display: flex;
+    align-items: center;
+
+    position: absolute;
+    top: -440px;
+    left: -75px;
+
+    @include m-b-tablet-lg-down {
+      top: -340px;
+    }
+
+    @include m-b-mobile-lg-down {
+      top: -240px;
+    }
+
+    .zoom-btn {
+      @extend .button-default;
+      @extend .flex-centered-content;
+
+      width: 40px;
+      height: 40px;
+      margin: 0 5px;
+      background-color: var(--primary-color);
+
+      cursor: pointer;
+
+      svg {
+        fill: var(--white-color);
+      }
+    }
+  }
+}
