@@ -50,6 +50,7 @@
   },
   "dependencies": {
     "gsap": "^3.10.4",
+    "imask": "^6.4.2",
     "parallax-js": "^3.1.0",
     "seamless-scroll-polyfill": "^2.1.8",
     "vue": "^2.6.14"

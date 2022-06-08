@@ -3,6 +3,8 @@ import './modules/previewAnimation.js';
 import './modules/navbar.js';
 import './modules/accordion.js';
 import './modules/yandexMap.js';
+import './modules/iMask.js';
+import './modules/form.js';
 import './modules/scrollBtnAnimation.js';
 
 

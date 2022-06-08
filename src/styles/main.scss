@@ -5,18 +5,22 @@
 @import "fonts";
 @import "global";
 @import "extends";
+@import "keyframes";
 
 /* Компоненты */
 //@import "./components/modal";
 @import "./components/main-header";
 @import "./components/nav";
 @import "./components/burger";
+@import "./components/form";
 
 /* Секции */
 @import "./sections/index-page/hero";
 @import "./sections/index-page/features";
 @import "./sections/index-page/outdoor";
 @import "./sections/index-page/map";
+
+
 
 /* Модальные окна */
 

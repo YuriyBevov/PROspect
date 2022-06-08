@@ -78,6 +78,8 @@ const onClickOpenAccordionField = (evt) => {
 
 }
 
-headers.forEach(header => {
-  header.addEventListener('click', onClickOpenAccordionField);
-})
+if(headers) {
+  headers.forEach(header => {
+    header.addEventListener('click', onClickOpenAccordionField);
+  });
+}
