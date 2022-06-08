@@ -1,8 +1,14 @@
+.map {
+  position: relative;
+  z-index: 3;
+}
+
 #yandex_map {
   width: 100%;
   max-width: 2400px;
   height: 500px;
   margin: 0 auto;
+
 
   @include m-b-tablet-lg-down {
     height: 400px;

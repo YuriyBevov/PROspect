@@ -1,0 +1,40 @@
+.main-footer {
+  background: linear-gradient(103.9deg, #488A99 33.78%, #919C79 53.6%, #DBAE58 75.76%);
+  padding-top: 30px;
+  position: relative;
+  z-index: 3;
+
+  &__content {
+    @extend .flex-wrap;
+    align-items: flex-end;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+  }
+
+  &__logo {
+    margin-right: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    span {
+      font-style: 14px;
+      color: var(--white-color);
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3px;
+
+    a {
+      font-weight: 500;
+      font-size: 18px;
+      color: var(--dark-color);
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

@@ -532,7 +532,7 @@ input:-webkit-autofill:active {
   }
 }
 
-.flex-wrap, .form__data, .form {
+.flex-wrap, .feedback .form__data, .feedback .form, .main-footer__content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -567,14 +567,14 @@ input:-webkit-autofill:active {
   object-fit: contain;
 }
 
-.button-default, #yandex_map .zoom-btns .zoom-btn, .form__btn {
+.button-default, #yandex_map .zoom-btns .zoom-btn, .feedback .form__btn {
   border: 0;
   padding: 0;
   background-color: transparent;
   cursor: pointer;
 }
 
-.flex-centered-content, #yandex_map .zoom-btns .zoom-btn, .hero__preview, .hero .scroll-btn, .nav__link, .main-btn {
+.flex-centered-content, #yandex_map .zoom-btns .zoom-btn, .hero__preview, .hero .scroll-btn, .developer a, .nav__link, .main-btn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -586,7 +586,7 @@ input:-webkit-autofill:active {
   justify-content: center;
 }
 
-.flex-wrap, .form__data, .form {
+.flex-wrap, .feedback .form__data, .feedback .form, .main-footer__content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -796,6 +796,53 @@ input:-webkit-autofill:active {
   }
 }
 
+.main-footer {
+  background: -o-linear-gradient(346.1deg, #488A99 33.78%, #919C79 53.6%, #DBAE58 75.76%);
+  background: linear-gradient(103.9deg, #488A99 33.78%, #919C79 53.6%, #DBAE58 75.76%);
+  padding-top: 30px;
+  position: relative;
+  z-index: 3;
+}
+.main-footer__content {
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+}
+.main-footer__logo {
+  margin-right: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+.main-footer__logo span {
+  font-style: 14px;
+  color: var(--white-color);
+}
+.main-footer__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-bottom: 3px;
+}
+.main-footer__info a {
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--dark-color);
+}
+.main-footer__info a:not(:last-child) {
+  margin-bottom: 10px;
+}
+
 .nav {
   position: relative;
 }
@@ -932,6 +979,11 @@ input:-webkit-autofill:active {
   }
 }
 
+.invalid-animation, .feedback .form__accept input[type=checkbox].js-invalid-control + label.checkbox-label::before, .feedback .form__data input.js-invalid-control {
+  -webkit-animation: shake 0.5s 0.1s linear;
+  animation: shake 0.5s 0.1s linear;
+}
+
 .feedback {
   background: -o-linear-gradient(346.1deg, #488A99 33.78%, #919C79 53.6%, #DBAE58 75.76%);
   background: linear-gradient(103.9deg, #488A99 33.78%, #919C79 53.6%, #DBAE58 75.76%);
@@ -972,20 +1024,14 @@ input:-webkit-autofill:active {
     font-size: 22px;
   }
 }
-
-.invalid-animation, .form__accept input[type=checkbox].js-invalid-control + label.checkbox-label::before, .form__data input.js-invalid-control {
-  -webkit-animation: shake 0.5s 0.1s linear;
-  animation: shake 0.5s 0.1s linear;
-}
-
-.form {
+.feedback .form {
   width: 100%;
   -webkit-box-align: end;
   -ms-flex-align: end;
   align-items: flex-end;
 }
 @media (max-width: 960px) {
-  .form {
+  .feedback .form {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
@@ -995,27 +1041,27 @@ input:-webkit-autofill:active {
     align-items: flex-start;
   }
 }
-.form__content {
+.feedback .form__content {
   width: 100%;
   margin-bottom: 30px;
 }
 @media (max-width: 768px) {
-  .form__content {
+  .feedback .form__content {
     margin-bottom: 20px;
   }
 }
-.form__data {
+.feedback .form__data {
   margin-bottom: 16px;
 }
 @media (max-width: 960px) {
-  .form__data {
+  .feedback .form__data {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
   }
 }
-.form__data input {
+.feedback .form__data input {
   font-size: 14px;
   border: none;
   border-radius: 0;
@@ -1030,35 +1076,35 @@ input:-webkit-autofill:active {
   -o-transition: border-color var(--main-transition);
   transition: border-color var(--main-transition);
 }
-.form__data input::-webkit-input-placeholder {
+.feedback .form__data input::-webkit-input-placeholder {
   font-size: 14px;
   color: var(--white-color);
   background-color: transparent;
   -webkit-transition: color var(--main-transition);
   transition: color var(--main-transition);
 }
-.form__data input::-moz-placeholder {
+.feedback .form__data input::-moz-placeholder {
   font-size: 14px;
   color: var(--white-color);
   background-color: transparent;
   -moz-transition: color var(--main-transition);
   transition: color var(--main-transition);
 }
-.form__data input:-ms-input-placeholder {
+.feedback .form__data input:-ms-input-placeholder {
   font-size: 14px;
   color: var(--white-color);
   background-color: transparent;
   -ms-transition: color var(--main-transition);
   transition: color var(--main-transition);
 }
-.form__data input::-ms-input-placeholder {
+.feedback .form__data input::-ms-input-placeholder {
   font-size: 14px;
   color: var(--white-color);
   background-color: transparent;
   -ms-transition: color var(--main-transition);
   transition: color var(--main-transition);
 }
-.form__data input::placeholder {
+.feedback .form__data input::placeholder {
   font-size: 14px;
   color: var(--white-color);
   background-color: transparent;
@@ -1066,43 +1112,43 @@ input:-webkit-autofill:active {
   -o-transition: color var(--main-transition);
   transition: color var(--main-transition);
 }
-.form__data input.js-invalid-control::-webkit-input-placeholder {
+.feedback .form__data input.js-invalid-control::-webkit-input-placeholder {
   color: var(--accent-color);
 }
-.form__data input.js-invalid-control::-moz-placeholder {
+.feedback .form__data input.js-invalid-control::-moz-placeholder {
   color: var(--accent-color);
 }
-.form__data input.js-invalid-control:-ms-input-placeholder {
+.feedback .form__data input.js-invalid-control:-ms-input-placeholder {
   color: var(--accent-color);
 }
-.form__data input.js-invalid-control::-ms-input-placeholder {
+.feedback .form__data input.js-invalid-control::-ms-input-placeholder {
   color: var(--accent-color);
 }
-.form__data input.js-invalid-control::placeholder {
+.feedback .form__data input.js-invalid-control::placeholder {
   color: var(--accent-color);
 }
 @media (max-width: 960px) {
-  .form__data input {
+  .feedback .form__data input {
     margin-bottom: 15px;
     max-width: 400px;
   }
 }
 @media (max-width: 600px) {
-  .form__data input {
+  .feedback .form__data input {
     max-width: 100%;
   }
 }
-.form__accept input[type=checkbox] {
+.feedback .form__accept input[type=checkbox] {
   display: none;
 }
-.form__accept label.checkbox-label {
+.feedback .form__accept label.checkbox-label {
   position: relative;
   cursor: pointer;
   padding-left: 24px;
   font-size: 14px;
   color: var(--white-color);
 }
-.form__accept label.checkbox-label::before {
+.feedback .form__accept label.checkbox-label::before {
   position: absolute;
   top: 0;
   left: 0;
@@ -1116,16 +1162,16 @@ input:-webkit-autofill:active {
   -o-transition: border-color var(--main-transition);
   transition: border-color var(--main-transition);
 }
-.form__accept input[type=checkbox]:checked + label.checkbox-label::before {
+.feedback .form__accept input[type=checkbox]:checked + label.checkbox-label::before {
   background-image: url("../assets/img/checkbox-icon.svg");
   background-size: 10px;
   background-repeat: no-repeat;
   background-position: center;
 }
-.form__accept input[type=checkbox].js-invalid-control + label.checkbox-label::before {
+.feedback .form__accept input[type=checkbox].js-invalid-control + label.checkbox-label::before {
   border-color: var(--accent-color);
 }
-.form__btn {
+.feedback .form__btn {
   padding: 15px;
   min-width: 169px;
   border: 1px solid var(--white-color);
@@ -1133,10 +1179,33 @@ input:-webkit-autofill:active {
   color: var(--white-color);
 }
 @media (max-width: 600px) {
-  .form__btn {
+  .feedback .form__btn {
     min-height: 55px;
     max-width: 100%;
   }
+}
+
+.developer {
+  position: relative;
+  padding: 30px 0;
+  background-color: var(--white-color);
+}
+.developer::before, .developer::after {
+  position: absolute;
+  top: 0;
+  width: 45vw;
+  height: 2px;
+  content: "";
+  background-color: var(--primary-color);
+}
+.developer::before {
+  left: 0;
+}
+.developer::after {
+  right: 0;
+}
+.developer a {
+  width: 100%;
 }
 
 /* Секции */
@@ -1432,6 +1501,11 @@ input:-webkit-autofill:active {
   .accordion__body-content {
     width: 100%;
   }
+}
+
+.map {
+  position: relative;
+  z-index: 3;
 }
 
 #yandex_map {
