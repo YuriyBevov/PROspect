@@ -753,6 +753,50 @@ input:-webkit-autofill:active {
     transform: translateX(0);
   }
 }
+@-webkit-keyframes showAccordionBody {
+  0% {
+    height: 0;
+    padding: 0;
+    opacity: 0;
+  }
+  30% {
+    height: 100%;
+    padding: 20px;
+    opacity: 0;
+  }
+  40% {
+    height: 100%;
+    padding: 20px;
+    opacity: 0;
+  }
+  100% {
+    height: 100%;
+    padding: 20px;
+    opacity: 1;
+  }
+}
+@keyframes showAccordionBody {
+  0% {
+    height: 0;
+    padding: 0;
+    opacity: 0;
+  }
+  30% {
+    height: 100%;
+    padding: 20px;
+    opacity: 0;
+  }
+  40% {
+    height: 100%;
+    padding: 20px;
+    opacity: 0;
+  }
+  100% {
+    height: 100%;
+    padding: 20px;
+    opacity: 1;
+  }
+}
 /* Компоненты */
 .main-header {
   position: fixed;
@@ -1276,49 +1320,10 @@ input:-webkit-autofill:active {
     -webkit-animation: showAccordionBody 0.7s ease-in forwards;
     animation: showAccordionBody 0.7s ease-in forwards;
   }
-  @-webkit-keyframes showAccordionBody {
-    0% {
-      height: 0;
-      padding: 0;
-      opacity: 0;
-    }
-    30% {
-      height: 100%;
-      padding: 20px;
-      opacity: 0;
-    }
-    40% {
-      height: 100%;
-      padding: 20px;
-      opacity: 0;
-    }
-    100% {
-      height: 100%;
-      padding: 20px;
-      opacity: 1;
-    }
-  }
-  @keyframes showAccordionBody {
-    0% {
-      height: 0;
-      padding: 0;
-      opacity: 0;
-    }
-    30% {
-      height: 100%;
-      padding: 20px;
-      opacity: 0;
-    }
-    40% {
-      height: 100%;
-      padding: 20px;
-      opacity: 0;
-    }
-    100% {
-      height: 100%;
-      padding: 20px;
-      opacity: 1;
-    }
+  .accordion__field.active .accordion__header::after {
+    -webkit-transform: translateY(-50%) rotate(180deg);
+    -ms-transform: translateY(-50%) rotate(180deg);
+    transform: translateY(-50%) rotate(180deg);
   }
 }
 .accordion__header {
@@ -1344,6 +1349,37 @@ input:-webkit-autofill:active {
     -ms-flex-pack: center;
     justify-content: center;
     padding: 10px;
+    padding-right: 40px;
+  }
+  .accordion__header::after {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    -webkit-transform: translateY(-50%) rotate(0);
+    -ms-transform: translateY(-50%) rotate(0);
+    transform: translateY(-50%) rotate(0);
+    -webkit-transform-origin: center;
+    -ms-transform-origin: center;
+    transform-origin: center;
+    content: "";
+    width: 20px;
+    height: 20px;
+    background-image: url("../assets/img/arrow-icon.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    -webkit-transition: -webkit-transform 0.4s linear;
+    transition: -webkit-transform 0.4s linear;
+    -o-transition: transform 0.4s linear;
+    transition: transform 0.4s linear;
+    transition: transform 0.4s linear, -webkit-transform 0.4s linear;
+  }
+}
+@media (max-width: 768px) {
+  .accordion__header {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
   }
 }
 .accordion__header span {
@@ -1371,6 +1407,16 @@ input:-webkit-autofill:active {
     -ms-transform: none;
     transform: none;
     font-size: 22px;
+  }
+}
+@media (max-width: 768px) {
+  .accordion__header span {
+    font-size: 20px;
+  }
+}
+@media (max-width: 534px) {
+  .accordion__header span {
+    font-size: 16px;
   }
 }
 .accordion__body {
