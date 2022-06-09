@@ -1,0 +1,35 @@
+.feedback {
+  background-color: var(--dark-color);
+
+  p {
+    font-weight: 400;
+    font-size: 42px;
+    width: 90%;
+    max-width: 800px;
+    margin: 0;
+    margin-bottom: 50px;
+    color: var(--white-color);
+
+    @include m-b-desktop-down {
+      font-size: 36px;
+    }
+
+    @include m-b-laptop-down {
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+
+    @include m-b-tablet-lg-down {
+      font-size: 26px;
+    }
+
+    @include m-b-tablet-down {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    @include m-b-mobile-lg-down {
+      font-size: 22px;
+    }
+  }
+}

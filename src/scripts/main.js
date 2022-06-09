@@ -6,6 +6,7 @@ import './modules/yandexMap.js';
 import './modules/iMask.js';
 import './modules/form.js';
 import './modules/scrollBtnAnimation.js';
+import './modules/portfolioAnimation.js';
 
 
 // show header-logo

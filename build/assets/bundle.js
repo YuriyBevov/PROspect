@@ -495,6 +495,77 @@ burger.addEventListener('click', onClickOpenNav);
 
 /***/ }),
 
+/***/ "./src/scripts/modules/portfolioAnimation.js":
+/*!***************************************************!*\
+  !*** ./src/scripts/modules/portfolioAnimation.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+/* harmony import */ var gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gsap/ScrollTrigger */ "./node_modules/gsap/ScrollTrigger.js");
+
+
+gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__["default"]);
+var section = document.querySelector('.portfolio');
+
+if (section) {
+  var title = section.querySelector('.portfolio__title');
+  var titleTriggerOn = section.querySelector('.portfolio__item:nth-of-type(2)');
+  var items = section.querySelectorAll('.portfolio__item'); //const more = section.querySelector('.portfolio__more');
+  //const moreTriggerOn = section.querySelector('.portfolio__item:nth-of-type(4)');
+
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(title, {
+    scrollTrigger: titleTriggerOn,
+    // start the animation when ".box" enters the viewport (once)
+    duration: 1,
+    opacity: 1
+  });
+  /* gsap.to(more, {
+    scrollTrigger: moreTriggerOn, // start the animation when ".box" enters the viewport (once)
+    duration: 2,
+    delay: .3,
+    opacity: 1,
+    x: '100vh',
+    rotate: '360deg'
+  }); */
+
+  items.forEach(function (item, i) {
+    var img = item.querySelector('img');
+    var title = item.querySelector('.portfolio__description h3');
+    var pars = document.querySelectorAll('.portfolio__description p');
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(img, {
+      scrollTrigger: item,
+      // start the animation when ".box" enters the viewport (once)
+      duration: 1,
+      delay: 0.15 * (i + 1),
+      opacity: 1,
+      scale: 1,
+      y: 0
+    });
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(title, {
+      scrollTrigger: img,
+      // start the animation when ".box" enters the viewport (once)
+      duration: 1,
+      opacity: 1,
+      y: 0
+    });
+    pars.forEach(function (par, i) {
+      gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(par, {
+        scrollTrigger: par,
+        // start the animation when ".box" enters the viewport (once)
+        duration: 1,
+        delay: 0.2,
+        opacity: 1,
+        x: 0
+      });
+    });
+  });
+}
+
+/***/ }),
+
 /***/ "./src/scripts/modules/previewAnimation.js":
 /*!*************************************************!*\
   !*** ./src/scripts/modules/previewAnimation.js ***!
@@ -16592,6 +16663,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_iMask_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/iMask.js */ "./src/scripts/modules/iMask.js");
 /* harmony import */ var _modules_form_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/form.js */ "./src/scripts/modules/form.js");
 /* harmony import */ var _modules_scrollBtnAnimation_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/scrollBtnAnimation.js */ "./src/scripts/modules/scrollBtnAnimation.js");
+/* harmony import */ var _modules_portfolioAnimation_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/portfolioAnimation.js */ "./src/scripts/modules/portfolioAnimation.js");
+
 
 
 
