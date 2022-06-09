@@ -44,9 +44,19 @@
       background-color: var(--primary-color);
 
       cursor: pointer;
+      transition: background-color var(--transition);
 
       svg {
         fill: var(--white-color);
+      }
+
+      &:hover {
+        opacity: 0.8;
+        background-color: var(--warning-color);
+      }
+
+      &:active {
+        background-color: var(--primary-color);
       }
     }
   }

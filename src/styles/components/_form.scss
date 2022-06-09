@@ -3,9 +3,10 @@
 }
 
 .feedback {
-  background: linear-gradient(103.9deg, #488A99 33.78%, #919C79 53.6%, #DBAE58 75.76%);
+  //background: linear-gradient(103.9deg, #488A99 33.78%, #919C79 53.6%, #DBAE58 75.76%);
   //position: sticky;
   //top: 104px; //header-height
+  background-color: var(--dark-color);
 
   p {
     font-weight: 400;
