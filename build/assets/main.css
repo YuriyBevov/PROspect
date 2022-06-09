@@ -806,6 +806,18 @@ input:-webkit-autofill:active {
   z-index: 99;
   background-color: var(--main-bg-color);
 }
+.main-header::after {
+  position: absolute;
+  top: calc(100% - 2px);
+  left: 0;
+  width: 100%;
+  height: 35px;
+  content: "";
+  background-image: url("../assets/img/header-mask.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+}
 .main-header #logo {
   width: 150px;
   height: 100px;
@@ -825,6 +837,7 @@ input:-webkit-autofill:active {
   -ms-flex-align: center;
   align-items: center;
   padding: 10px 0;
+  padding-bottom: 5px;
   overflow-x: hidden;
 }
 .main-header__navbar .nav {
@@ -893,12 +906,13 @@ input:-webkit-autofill:active {
   .nav {
     display: none;
     height: 100vh;
-    width: calc(100% - var(--container-offset) * 2);
+    width: 100vw;
     max-height: 100vh;
     position: absolute;
     top: 0;
     background-color: var(--main-bg-color);
     padding-top: 70px;
+    margin-left: -15px;
   }
   .nav.mobile-opened {
     display: block;
@@ -1678,10 +1692,19 @@ input:-webkit-autofill:active {
 
 .portfolio {
   position: relative;
-  height: 100vh;
-  margin-top: 100vh;
-  background-color: var(--main-bg-color);
-  z-index: 1;
+  margin-top: calc(100vh + 200px);
+}
+.portfolio::after {
+  position: absolute;
+  top: -200px;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  content: "";
+  background-image: url("../assets/img/portfolio-head-mask.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
 }
 
 .outdoor__container {

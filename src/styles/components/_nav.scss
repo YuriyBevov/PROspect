@@ -5,12 +5,13 @@
     display: none;
 
     height: 100vh;
-    width: calc(100% - var(--container-offset)*2);
+    width: 100vw;
     max-height: 100vh;
     position: absolute;
     top: 0;
     background-color: var(--main-bg-color);
     padding-top: 70px;
+    margin-left: -15px;
 
     &.mobile-opened {
       display: block;
