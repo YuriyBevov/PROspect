@@ -513,56 +513,60 @@ var section = document.querySelector('.portfolio');
 if (section) {
   var title = section.querySelector('.portfolio__title');
   var titleTriggerOn = section.querySelector('.portfolio__item:nth-of-type(2)');
-  var items = section.querySelectorAll('.portfolio__item'); //const more = section.querySelector('.portfolio__more');
-  //const moreTriggerOn = section.querySelector('.portfolio__item:nth-of-type(4)');
-
+  var items = section.querySelectorAll('.portfolio__item');
   gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(title, {
     scrollTrigger: titleTriggerOn,
     // start the animation when ".box" enters the viewport (once)
     duration: 1,
     opacity: 1
   });
-  /* gsap.to(more, {
-    scrollTrigger: moreTriggerOn, // start the animation when ".box" enters the viewport (once)
-    duration: 2,
-    delay: .3,
-    opacity: 1,
-    x: '100vh',
-    rotate: '360deg'
-  }); */
-
   items.forEach(function (item, i) {
-    var img = item.querySelector('img');
-    var title = item.querySelector('.portfolio__description h3');
-    var pars = document.querySelectorAll('.portfolio__description p');
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(img, {
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(item, {
       scrollTrigger: item,
-      // start the animation when ".box" enters the viewport (once)
-      duration: 1,
-      delay: 0.15 * (i + 1),
-      opacity: 1,
+      duration: 0.8,
+      delay: 0.3,
       scale: 1,
-      y: 0
-    });
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(title, {
-      scrollTrigger: img,
-      // start the animation when ".box" enters the viewport (once)
-      duration: 1,
-      opacity: 1,
-      y: 0
-    });
-    pars.forEach(function (par, i) {
-      gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(par, {
-        scrollTrigger: par,
-        // start the animation when ".box" enters the viewport (once)
-        duration: 1,
-        delay: 0.2,
-        opacity: 1,
-        x: 0
-      });
+      y: 0,
+      opacity: 1
     });
   });
+  var portfolioLinkTrigger = document.querySelector('.outdoor');
+  var portfolioLink = document.querySelector('.portfolio__link');
+  var overlay = portfolioLink.querySelector('.portfolio-link-overlay');
+  var arrowGroup = portfolioLink.querySelector('.arrow-group');
+  var text = portfolioLink.querySelector('.text');
+  var question = portfolioLink.querySelector('.question-mark');
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(overlay, {
+    scrollTrigger: portfolioLinkTrigger,
+    duration: 0.8,
+    ease: 'ease-in',
+    width: '100%'
+  });
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(arrowGroup, {
+    scrollTrigger: portfolioLinkTrigger,
+    delay: 1,
+    opacity: 1
+  });
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(text, {
+    scrollTrigger: portfolioLinkTrigger,
+    delay: 1,
+    opacity: 1
+  });
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(question, {
+    scrollTrigger: portfolioLinkTrigger,
+    delay: 1,
+    opacity: 1
+  });
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(overlay, {
+    scrollTrigger: portfolioLinkTrigger,
+    duration: 0.8,
+    delay: 1,
+    ease: 'ease-in',
+    x: '120%'
+  });
 }
+
+;
 
 /***/ }),
 
@@ -690,97 +694,6 @@ var onClickScrollToSection = function onClickScrollToSection(evt) {
 scrollBtns.forEach(function (btn) {
   btn.addEventListener('click', onClickScrollToSection);
 });
-
-/***/ }),
-
-/***/ "./src/scripts/modules/yandexMap.js":
-/*!******************************************!*\
-  !*** ./src/scripts/modules/yandexMap.js ***!
-  \******************************************/
-/***/ (() => {
-
-if (ymaps) {
-  console.log(ymaps);
-  ymaps.ready(init);
-
-  function init() {
-    // Создание карты.
-    var myMap = new ymaps.Map("yandex_map", {
-      center: [59.827409222455735, 30.416959880950902],
-      zoom: 13,
-      controls: [],
-      behaviors: ['drag']
-    }); // Метка
-
-    myPlacemark = new ymaps.Placemark(myMap.getCenter(), {}, {
-      // Опции.
-      // Необходимо указать данный тип макета.
-      iconLayout: 'default#image',
-      // Своё изображение иконки метки.
-      iconImageHref: 'assets/img/map-placeholder.png',
-      // Размеры метки.
-      iconImageSize: [50, 50],
-      // Смещение левого верхнего угла иконки относительно
-      // её "ножки" (точки привязки).
-      iconImageOffset: [-25, -25]
-    });
-    myMap.geoObjects.add(myPlacemark); // ZOOM-CONTROL
-
-    var ZoomLayout = ymaps.templateLayoutFactory.createClass( //Шаблон html кнопок зума
-    "<div class='zoom-btns'>" + "<button id='zoom-in' class='zoom-btn zoom-btn-in'>" + "<svg width='14' height='14'>" + "<use xlink:href='./assets/svg-sprite.svg#icon-zoom-in'>" + "</svg>" + "</button>" + "<button id='zoom-out' class='zoom-btn zoom-btn-out'>" + "<svg width='14' height='2'>" + "<use xlink:href='./assets/svg-sprite.svg#icon-zoom-out'>" + "</svg>" + "</button>" + "</div>", {
-      // Переопределяем методы макета, чтобы выполнять дополнительные действия
-      // при построении и очистке макета.
-      build: function build() {
-        // Вызываем родительский метод build.
-        ZoomLayout.superclass.build.call(this); // Привязываем функции-обработчики к контексту и сохраняем ссылки
-        // на них, чтобы потом отписаться от событий.
-
-        this.zoomInCallback = ymaps.util.bind(this.zoomIn, this);
-        this.zoomOutCallback = ymaps.util.bind(this.zoomOut, this); // Начинаем слушать клики на кнопках макета.
-
-        var zoomInBtn = document.getElementById('zoom-in');
-        var zoomOutBtn = document.getElementById('zoom-out');
-        zoomInBtn.addEventListener('click', this.zoomInCallback);
-        zoomOutBtn.addEventListener('click', this.zoomOutCallback);
-      },
-      clear: function clear() {
-        // Снимаем обработчики кликов.
-        zoomInBtn.removeEventListener('click', this.zoomInCallback);
-        zoomOutBtn.removeEventListener('click', this.zoomOutCallback); // Вызываем родительский метод clear.
-
-        ZoomLayout.superclass.clear.call(this);
-      },
-      zoomIn: function zoomIn() {
-        myMap.balloon.close();
-        var map = this.getData().control.getMap();
-        map.setZoom(map.getZoom() + 1, {
-          checkZoomRange: true
-        });
-      },
-      zoomOut: function zoomOut() {
-        myMap.balloon.close();
-        var map = this.getData().control.getMap();
-        map.setZoom(map.getZoom() - 1, {
-          checkZoomRange: true
-        });
-      }
-    });
-    zoomControl = new ymaps.control.ZoomControl({
-      options: {
-        layout: ZoomLayout,
-        position: {
-          right: '30px',
-          bottom: '50px'
-        }
-      }
-    });
-    myMap.controls.add(zoomControl);
-  }
-
-  ;
-}
-
-;
 
 /***/ }),
 
@@ -16663,16 +16576,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_previewAnimation_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/previewAnimation.js */ "./src/scripts/modules/previewAnimation.js");
 /* harmony import */ var _modules_navbar_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/navbar.js */ "./src/scripts/modules/navbar.js");
 /* harmony import */ var _modules_accordion_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/accordion.js */ "./src/scripts/modules/accordion.js");
-/* harmony import */ var _modules_yandexMap_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/yandexMap.js */ "./src/scripts/modules/yandexMap.js");
-/* harmony import */ var _modules_yandexMap_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_modules_yandexMap_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _modules_iMask_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/iMask.js */ "./src/scripts/modules/iMask.js");
-/* harmony import */ var _modules_form_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/form.js */ "./src/scripts/modules/form.js");
-/* harmony import */ var _modules_scrollBtnAnimation_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/scrollBtnAnimation.js */ "./src/scripts/modules/scrollBtnAnimation.js");
-/* harmony import */ var _modules_portfolioAnimation_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/portfolioAnimation.js */ "./src/scripts/modules/portfolioAnimation.js");
+/* harmony import */ var _modules_iMask_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/iMask.js */ "./src/scripts/modules/iMask.js");
+/* harmony import */ var _modules_form_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/form.js */ "./src/scripts/modules/form.js");
+/* harmony import */ var _modules_scrollBtnAnimation_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/scrollBtnAnimation.js */ "./src/scripts/modules/scrollBtnAnimation.js");
+/* harmony import */ var _modules_portfolioAnimation_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/portfolioAnimation.js */ "./src/scripts/modules/portfolioAnimation.js");
 
 
 
-
+ //import './modules/yandexMap.js';
 
 
 

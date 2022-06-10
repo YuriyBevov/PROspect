@@ -8,7 +8,7 @@
     <meta name="keywords" content=""/>
     <title></title>
     <link rel="stylesheet" href="./assets/main.css"/>
-    <script defer="defer" src="https://api-maps.yandex.ru/2.1/?apikey=56c6be8d-b5f9-45d5-8ffa-7fdb884fcf53&amp;lang=ru_RU" type="text/javascript"></script>
+    <!--script(src="https://api-maps.yandex.ru/2.1/?apikey=56c6be8d-b5f9-45d5-8ffa-7fdb884fcf53&lang=ru_RU" type="text/javascript")-->
     <script defer="defer" src="./assets/bundle.js"></script>
   </head>
   <body>
@@ -143,47 +143,41 @@
       <section class="section portfolio">
         <div class="container-fluid">
           <div class="portfolio__wrapper">
-            <h2 class="main-title portfolio__title">Портфолио</h2>
-            <!--ul.portfolio__list
-            each item in portfolioList
-              li.portfolio__item
-                .portfolio__img-box
-                  img(src=`./assets/img/${item.img}@1x.jpg` alt= item.title width="800" height="600")
-            
-                .portfolio__description
-                  h3= item.title
-                  each desc in item.description
-                    p= desc
-            
-            -->
-            <ul class="portfolio2__list">
-              <li class="portfolio2__item">
-                <div class="portfolio2__img-box"><img src="./assets/img/portfolio_img-1@1x.jpg" alt="&quot;Ароматный мир&quot;" width="800" height="600"></div>
-              </li>
-              <li class="portfolio2__item">
-                <div class="portfolio2__img-box"><img src="./assets/img/portfolio_img-2@1x.jpg" alt="&quot;Ароматный мир&quot;" width="800" height="600"></div>
-              </li>
-              <li class="portfolio2__item">
-                <div class="portfolio2__img-box"><img src="./assets/img/portfolio_img-3@1x.jpg" alt="&quot;Ароматный мир&quot;" width="800" height="600"></div>
-              </li>
-              <li class="portfolio2__item">
-                <div class="portfolio2__img-box"><img src="./assets/img/portfolio_img-4@1x.jpg" alt="&quot;Ароматный мир&quot;" width="800" height="600"></div>
-              </li>
-              <li class="portfolio2__item">
-                <p>тут будет блок с переходом в портфолио</p>
-              </li>
-            </ul>
+            <div class="portfolio__sticky-container">
+              <h2 class="main-title portfolio__title">Портфолио</h2>
+            </div>
+            <div class="portfolio__gallery">
+              <picture class="portfolio__item">
+                <source><img src="./assets/img/portfolio_img-1@1x.jpg" alt="&quot;Ароматный мир&quot;" width="800" height="600">
+              </picture>
+              <picture class="portfolio__item">
+                <source><img src="./assets/img/portfolio_img-2@1x.jpg" alt="&quot;Ароматный мир&quot;" width="800" height="600">
+              </picture>
+              <picture class="portfolio__item">
+                <source><img src="./assets/img/portfolio_img-3@1x.jpg" alt="&quot;Ароматный мир&quot;" width="800" height="600">
+              </picture>
+              <picture class="portfolio__item">
+                <source><img src="./assets/img/portfolio_img-4@1x.jpg" alt="&quot;Ароматный мир&quot;" width="800" height="600">
+              </picture>
+              <picture class="portfolio__item">
+                <source><img src="./assets/img/portfolio_img-3@1x.jpg" alt="&quot;Ароматный мир&quot;" width="800" height="600">
+              </picture>
+              <picture class="portfolio__item">
+                <source><img src="./assets/img/portfolio_img-4@1x.jpg" alt="&quot;Ароматный мир&quot;" width="800" height="600">
+              </picture><a class="portfolio__link" href="portfolio.html"><span class="portfolio-link-overlay" aria-hidden="true"></span>
+                <svg class="arrow-group" width="65" height="45">
+                  <use xlink:href="./assets/svg-sprite.svg#icon-arrow-group"></use>
+                </svg><span class="text">Хотите увидеть <br/> больше работ</span>
+                <svg class="question-mark" width="61" height="132">
+                  <use xlink:href="./assets/svg-sprite.svg#icon-question"></use>
+                </svg></a>
+            </div>
           </div>
-          <!--.portfolio__footer
-          .portfolio__more
-            a(href="portfolio.html") Хотите  еще работ ?
-              span стрелка
-          -->
         </div>
       </section>
-      <section class="section outdoor">
+      <section class="section features">
         <div class="container">
-          <h2 class="main-title">Услуги</h2>
+          <h2 class="main-title features__title">Услуги</h2>
         </div>
       </section>
       <section class="section outdoor" id="outdoor">
