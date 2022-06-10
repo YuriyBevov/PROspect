@@ -12,16 +12,15 @@
 .hero {
   position: fixed;
   width: 100vw;
-  height: 100vh; // calc(100vh - 100px);
+  height: 100vh;
   min-height: 860px;
-  max-height: 1080px; // ??
+  max-height: 1080px;
   display: flex;
   padding-top: 100px;
   padding-bottom: 20px;
 
 
   @include m-b-tablet-lg-down {
-    //height: calc(100vh - 80px);
     min-height: 684px;
     padding-top: 80px;
   }
@@ -41,100 +40,13 @@
     overflow: hidden;
 
     svg {
+      transform: rotate(90deg);
       animation: moving 1.5s linear infinite;
     }
-
-    @keyframes moving {
-      0% {
-        opacity: 0;
-        transform: translateY(-15px);
-      }
-
-      75% {
-        opacity: 1;
-      }
-
-      100% {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-    }
-
-    /*svg {
-
-      path:nth-child(1) {
-        //animation: color1 3.5s ease-in infinite;
-
-      }
-
-      path:nth-child(2) {
-
-      }
-
-      path:nth-child(3) {
-
-      }
-    }
-
-
-    @keyframes color3 {
-      0% {
-        fill: var(--primary-color);
-      }
-
-      40% {
-        fill: var(--warning-color);
-      }
-
-      80% {
-        fill: var(--dark-color);
-      }
-
-      100% {
-        fill: var(--primary-color);
-      }
-    }
-
-    @keyframes color2 {
-      0% {
-        fill: var(--warning-color);
-      }
-
-      40% {
-        fill: var(--dark-color);
-      }
-
-      80% {
-        fill: var(--primary-color);
-      }
-
-      100% {
-        fill: var(--warning-color);
-      }
-    }
-
-    @keyframes color1 {
-      0% {
-        fill: var(--dark-color);
-      }
-
-      40% {
-        fill: var(--primary-color);
-      }
-
-      80% {
-        fill: var(--warning-color);
-      }
-
-      100% {
-        fill: var(--dark-color);
-      }
-    }*/
   }
 
   &__preview {
     height: 100%;
-    //min-height: 400px;
     display: flex;
     position: relative;
     @extend .flex-centered-content;
@@ -151,10 +63,6 @@
       min-width: 300px;
       min-height: 250px;
       max-height: 50vh;
-
-      @include m-b-tablet-down {
-        //max-height: 400px;
-      }
 
       g[data-id="house"] {
         opacity: 0;

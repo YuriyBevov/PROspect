@@ -2,12 +2,12 @@ import './modules/scrollBtns.js';
 import './modules/previewAnimation.js';
 import './modules/navbar.js';
 import './modules/accordion.js';
-//import './modules/yandexMap.js';
 import './modules/iMask.js';
 import './modules/form.js';
 import './modules/scrollBtnAnimation.js';
 import './modules/portfolioAnimation.js';
 
+import './modules/yandexMap.js';
 
 // show header-logo
 /*const headerLogo = document.querySelector('.main-header__small-logo');

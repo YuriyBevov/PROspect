@@ -27,14 +27,12 @@ if(section) {
     });
   });
 
-
   const portfolioLinkTrigger = document.querySelector('.outdoor');
   const portfolioLink = document.querySelector('.portfolio__link');
   const overlay = portfolioLink.querySelector('.portfolio-link-overlay');
   const arrowGroup = portfolioLink.querySelector('.arrow-group');
   const text = portfolioLink.querySelector('.text');
   const question = portfolioLink.querySelector('.question-mark');
-
 
   gsap.to(overlay, {
     scrollTrigger: portfolioLinkTrigger,
@@ -45,25 +43,27 @@ if(section) {
 
   gsap.to(arrowGroup, {
     scrollTrigger: portfolioLinkTrigger,
-    delay: 1,
+    delay: 0.9,
     opacity: 1
   });
+
   gsap.to(text, {
     scrollTrigger: portfolioLinkTrigger,
-    delay: 1,
+    delay: 0.9,
     opacity: 1
   });
+
   gsap.to(question, {
     scrollTrigger: portfolioLinkTrigger,
-    delay: 1,
+    delay: 0.9,
     opacity: 1
   });
 
   gsap.to(overlay, {
     scrollTrigger: portfolioLinkTrigger,
-    duration: 0.8,
+    duration: 0.6,
     delay: 1,
-    ease: 'ease-in',
+    ease: 'ease-out',
     x: '120%',
   });
 };
