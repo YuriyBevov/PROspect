@@ -34,18 +34,18 @@
       font-size: 14px;
       border: none;
       border-radius: 0;
-      border-bottom: 1px solid var(--white-color);
+      border-bottom: 1px solid var(--dark-color);
       padding: 10px;
       margin-right: 20px;
       width: 100%;
       max-width: 270px;
-      color: var(--white-color);
+      color: var(--dark-color);
       background-color: transparent;
       transition: border-color var(--main-transition);
 
       &::placeholder {
         font-size: 14px;
-        color: var(--white-color);
+        color: var(--dark-color);
         background-color: transparent;
         transition: color var(--main-transition);
       }
@@ -80,7 +80,7 @@
       cursor: pointer;
       padding-left: 24px;
       font-size: 14px;
-      color: var(--white-color);
+      color: var(--dark-color);
 
       &::before {
           position: absolute;
@@ -92,7 +92,7 @@
           width: 16px;
           height: 16px;
 
-          border: 1px solid var(--white-color);
+          border: 1px solid var(--dark-color);
           border-radius: 0;
           background-color: transparent;
 
@@ -118,9 +118,9 @@
 
     padding: 15px;
     min-width: 169px;
-    border: 1px solid var(--white-color);
+    border: 1px solid var(--dark-color);
     background-color: transparent;
-    color: var(--white-color);
+    color: var(--dark-color);
 
     @include m-b-down(600px) {
       min-height: 55px;

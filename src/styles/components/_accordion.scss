@@ -171,6 +171,13 @@
     }
   }
 
+  &__title {
+    font-weight: 400;
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: var(--warning-color);
+  }
+
   &__body {
     display: flex;
     align-items: center;
@@ -180,13 +187,17 @@
     overflow: auto;
 
     img {
-      flex-basis: 65%;
+      flex-basis: 45%;
       margin-right: 30px;
+      max-width: 100%;
+      object-fit: cover;
     }
 
     &-content {
-      flex-basis: 35%;
+      flex-basis: 65%;
     }
+
+
 
     @include m-b-desktop-down {
       flex-direction: column;

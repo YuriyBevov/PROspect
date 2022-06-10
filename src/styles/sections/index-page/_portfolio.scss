@@ -59,11 +59,19 @@ $sticky-container-size: 500px;
   }
 
   &__item {
+    overflow: hidden;
+
     img {
       display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
+
+      transition: transform 0.5s ease-in;
+      &:hover,
+      &:focus {
+        transform: scale(1.02);
+      }
     }
 
     &:nth-of-type(1) {
@@ -128,6 +136,7 @@ $sticky-container-size: 500px;
     overflow: hidden;
 
     @include m-b-desktop-down {
+      grid-column: 1/5;
       padding: 10px;
       padding-right: 100px;
     }
