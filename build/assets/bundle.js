@@ -513,22 +513,42 @@ var section = document.querySelector('.portfolio');
 if (section) {
   var title = section.querySelector('.portfolio__title');
   var titleTriggerOn = section.querySelector('.portfolio__item:nth-of-type(2)');
-  var items = section.querySelectorAll('.portfolio__item');
+  var items = section.querySelectorAll('.portfolio__item-overlay');
   gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(title, {
     scrollTrigger: titleTriggerOn,
-    // start the animation when ".box" enters the viewport (once)
     duration: 1,
     opacity: 1
   });
   items.forEach(function (item, i) {
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(item, {
-      scrollTrigger: item,
-      duration: 0.8,
-      delay: 0.3,
-      scale: 1,
-      y: 0,
-      opacity: 1
-    });
+    if (i % 2 === 0 && i !== 2) {
+      gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(item, {
+        scrollTrigger: item,
+        duration: 0.8,
+        delay: 0.2,
+        x: '110%'
+      });
+    } else if (i % 3 === 0 && i !== 3 || i === 2) {
+      gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(item, {
+        scrollTrigger: item,
+        duration: 1.2,
+        delay: 0.3,
+        x: '-110%'
+      });
+    } else if (i === 3) {
+      gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(item, {
+        scrollTrigger: item,
+        duration: 1.2,
+        delay: 0.4,
+        y: '-110%'
+      });
+    } else {
+      gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(item, {
+        scrollTrigger: item,
+        duration: 1.2,
+        delay: 0.5,
+        y: '110%'
+      });
+    }
   });
   var portfolioLinkTrigger = document.querySelector('.outdoor');
   var portfolioLink = document.querySelector('.portfolio__link');

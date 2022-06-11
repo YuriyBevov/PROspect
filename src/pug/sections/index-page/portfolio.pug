@@ -58,9 +58,11 @@ section.section.portfolio
 
       .portfolio__gallery
         each item in portfolioList
-          picture.portfolio__item
-            source()
-            img(src=`./assets/img/${item.img}@1x.jpg` alt= item.title width="800" height="600")
+          .portfolio__item
+            .portfolio__item-overlay(aria-hidden="true")
+            picture
+              source()
+              img(src=`./assets/img/${item.img}@1x.jpg` alt= item.title width="800" height="600")
 
         a(href="portfolio.html").portfolio__link
           span.portfolio-link-overlay(aria-hidden="true")

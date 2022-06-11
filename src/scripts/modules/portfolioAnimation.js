@@ -7,24 +7,44 @@ const section = document.querySelector('.portfolio');
 if(section) {
   const title = section.querySelector('.portfolio__title');
   const titleTriggerOn = section.querySelector('.portfolio__item:nth-of-type(2)');
-  const items = section.querySelectorAll('.portfolio__item');
-
+  const items = section.querySelectorAll('.portfolio__item-overlay');
 
   gsap.to(title, {
-    scrollTrigger: titleTriggerOn, // start the animation when ".box" enters the viewport (once)
+    scrollTrigger: titleTriggerOn,
     duration: 1,
     opacity: 1,
   });
 
   items.forEach((item,i) => {
-    gsap.to(item, {
-      scrollTrigger: item,
-      duration: 0.8,
-      delay: 0.3,
-      scale: 1,
-      y: 0,
-      opacity: 1
-    });
+    if(i % 2 === 0 && i !==2) {
+      gsap.to(item, {
+        scrollTrigger: item,
+        duration: 0.8,
+        delay: 0.2,
+        x: '110%',
+      });
+    } else if(i%3 === 0 && i !== 3 || i === 2) {
+      gsap.to(item, {
+        scrollTrigger: item,
+        duration: 1.2,
+        delay: 0.3,
+        x: '-110%',
+      });
+    } else if(i === 3) {
+      gsap.to(item, {
+        scrollTrigger: item,
+        duration: 1.2,
+        delay: 0.4,
+        y: '-110%',
+      });
+    } else {
+      gsap.to(item, {
+        scrollTrigger: item,
+        duration: 1.2,
+        delay: 0.5,
+        y: '110%',
+      });
+    }
   });
 
   const portfolioLinkTrigger = document.querySelector('.outdoor');
