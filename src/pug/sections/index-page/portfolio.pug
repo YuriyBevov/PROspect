@@ -61,8 +61,13 @@ section.section.portfolio
           .portfolio__item
             .portfolio__item-overlay(aria-hidden="true")
             picture
-              source()
-              img(src=`./assets/img/${item.img}@1x.jpg` alt= item.title width="800" height="600")
+              source(media="(max-width: 534px)" srcset=`./assets/img/${item.img}-mobile@1x.webp 1x, ./assets/img/${item.img}-mobile@2x.webp 2x` type="image/webp" width="400" height="300")
+              source(media="(max-width: 959px)" srcset=`./assets/img/${item.img}-tablet@1x.webp 1x, ./assets/img/${item.img}-tablet@2x.webp 2x` type="image/webp" width="600" height="450")
+              source(type="image/webp" srcset=`./assets/img/${item.img}@2x.webp 1x, ./assets/img/${item.img}@2x.webp 2x` width="800" height="600")
+
+              source(media="(max-width: 534px)" srcset=`./assets/img/${item.img}-mobile@1x.jpg 1x, ./assets/img/${item.img}-mobile@2x.jpg 2x` type="image/jpg" width="400" height="300")
+              source(media="(max-width: 959px)" srcset=`./assets/img/${item.img}-tablet@1x.jpg 1x, ./assets/img/${item.img}-tablet@2x.jpg 2x` type="image/jpg" width="600" height="450")
+              img(src=`./assets/img/${item.img}@1x.jpg` srcset=`./assets/img/${item.img}@2x.jpg 2x` alt= item.title width="800" height="600")
 
         a(href="portfolio.html").portfolio__link
           span.portfolio-link-overlay(aria-hidden="true")

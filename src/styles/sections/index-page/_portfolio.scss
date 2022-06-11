@@ -116,12 +116,21 @@ $sticky-container-size: 500px;
       display: block;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      max-height: 600px;
+      object-fit: contain;
 
       transition: transform 0.5s ease-in;
       &:hover,
       &:focus {
         transform: scale(1.02);
+      }
+
+      @include m-b-tablet-lg-down {
+        max-height: 450px;
+      }
+
+      @include m-b-mobile-lg-down {
+        max-height: 300px;
       }
     }
 
