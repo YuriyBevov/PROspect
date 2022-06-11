@@ -55,11 +55,11 @@
     width: 100%;
     overflow: hidden;
     z-index: 2;
-    margin-bottom: 10vh;
+    margin-bottom: 80px;
 
     svg {
       width: calc(85vw - 300px);
-      height: 75vh;
+      height: fit-content;
       min-width: 300px;
       min-height: 250px;
       max-height: 50vh;

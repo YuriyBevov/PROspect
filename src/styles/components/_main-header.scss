@@ -28,10 +28,10 @@
   &__small-logo {
     position: relative;
     margin-right: 30px;
-    z-index: 99;
 
-    /* opacity: 0;
-    z-index: -1; */
+    //gsap
+    opacity: 0;
+    z-index: -1;
   }
 
   &__navbar {

@@ -878,9 +878,8 @@ input:-webkit-autofill:active {
 .main-header__small-logo {
   position: relative;
   margin-right: 30px;
-  z-index: 99;
-  /* opacity: 0;
-  z-index: -1; */
+  opacity: 0;
+  z-index: -1;
 }
 .main-header__navbar {
   display: -webkit-box;
@@ -1256,7 +1255,7 @@ input:-webkit-autofill:active {
 }
 
 .accordion-height, .accordion__body, .accordion__header, .accordion {
-  height: 700px;
+  height: 600px;
 }
 @media (max-width: 1440px) {
   .accordion-height, .accordion__body, .accordion__header, .accordion {
@@ -1450,6 +1449,7 @@ input:-webkit-autofill:active {
 .accordion__title {
   font-weight: 400;
   font-size: 28px;
+  margin: 0;
   margin-bottom: 15px;
   color: var(--warning-color);
 }
@@ -1460,22 +1460,34 @@ input:-webkit-autofill:active {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  padding: 30px;
+  padding: 20px;
   overflow: auto;
 }
 .accordion__body img {
-  -ms-flex-preferred-size: 45%;
-  flex-basis: 45%;
-  margin-right: 30px;
-  max-width: 100%;
-  -o-object-fit: cover;
-  object-fit: cover;
+  width: 50%;
+  height: 100%;
+  max-height: 600px;
+  -o-object-fit: contain;
+  object-fit: contain;
+  margin-right: 20px;
+}
+@media (max-width: 1140px) {
+  .accordion__body img {
+    width: 100%;
+    max-height: 450px;
+    -o-object-fit: cover;
+    object-fit: cover;
+  }
 }
 .accordion__body-content {
-  -ms-flex-preferred-size: 65%;
-  flex-basis: 65%;
+  width: 50%;
 }
-@media (max-width: 1440px) {
+@media (max-width: 1140px) {
+  .accordion__body-content {
+    width: 100%;
+  }
+}
+@media (max-width: 1140px) {
   .accordion__body {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -1584,11 +1596,13 @@ input:-webkit-autofill:active {
   width: 100%;
   overflow: hidden;
   z-index: 2;
-  margin-bottom: 10vh;
+  margin-bottom: 80px;
 }
 .hero__preview svg {
   width: calc(85vw - 300px);
-  height: 75vh;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   min-width: 300px;
   min-height: 250px;
   max-height: 50vh;

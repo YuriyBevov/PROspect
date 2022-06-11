@@ -304,6 +304,62 @@ phoneFields.forEach(function (field) {
 
 /***/ }),
 
+/***/ "./src/scripts/modules/miniLogoAnimation.js":
+/*!**************************************************!*\
+  !*** ./src/scripts/modules/miniLogoAnimation.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+
+var headerLogo = document.querySelector('.main-header__small-logo');
+
+function showLogo() {
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(headerLogo, {
+    duration: 0.7,
+    delay: 0.2,
+    opacity: 1,
+    zIndex: '99',
+    y: 0,
+    ease: 'ease-in'
+  });
+}
+
+function hideLogo() {
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(headerLogo, {
+    duration: 0.7,
+    delay: 0.2,
+    opacity: 0,
+    zIndex: '-1',
+    ease: 'ease-in'
+  });
+  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(headerLogo, {
+    duration: 0,
+    delay: 0.9,
+    y: '-200'
+  });
+}
+
+if (headerLogo) {
+  if (window.scrollY > 600) {
+    showLogo();
+  } else {
+    hideLogo();
+  }
+
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 600) {
+      showLogo();
+    } else {
+      hideLogo();
+    }
+  });
+}
+
+/***/ }),
+
 /***/ "./src/scripts/modules/navbar.js":
 /*!***************************************!*\
   !*** ./src/scripts/modules/navbar.js ***!
@@ -16270,16 +16326,17 @@ var __webpack_exports__ = {};
   !*** ./src/scripts/main.js ***!
   \*****************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modules_scrollBtns_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/scrollBtns.js */ "./src/scripts/modules/scrollBtns.js");
-/* harmony import */ var _modules_previewAnimation_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/previewAnimation.js */ "./src/scripts/modules/previewAnimation.js");
-/* harmony import */ var _modules_navbar_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/navbar.js */ "./src/scripts/modules/navbar.js");
-/* harmony import */ var _modules_accordion_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/accordion.js */ "./src/scripts/modules/accordion.js");
-/* harmony import */ var _modules_iMask_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/iMask.js */ "./src/scripts/modules/iMask.js");
-/* harmony import */ var _modules_form_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/form.js */ "./src/scripts/modules/form.js");
-/* harmony import */ var _modules_scrollBtnAnimation_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/scrollBtnAnimation.js */ "./src/scripts/modules/scrollBtnAnimation.js");
-/* harmony import */ var _modules_portfolioAnimation_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/portfolioAnimation.js */ "./src/scripts/modules/portfolioAnimation.js");
-/* harmony import */ var _modules_yandexMap_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/yandexMap.js */ "./src/scripts/modules/yandexMap.js");
-/* harmony import */ var _modules_yandexMap_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_modules_yandexMap_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _modules_miniLogoAnimation_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/miniLogoAnimation.js */ "./src/scripts/modules/miniLogoAnimation.js");
+/* harmony import */ var _modules_scrollBtns_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/scrollBtns.js */ "./src/scripts/modules/scrollBtns.js");
+/* harmony import */ var _modules_previewAnimation_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/previewAnimation.js */ "./src/scripts/modules/previewAnimation.js");
+/* harmony import */ var _modules_navbar_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/navbar.js */ "./src/scripts/modules/navbar.js");
+/* harmony import */ var _modules_accordion_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/accordion.js */ "./src/scripts/modules/accordion.js");
+/* harmony import */ var _modules_iMask_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/iMask.js */ "./src/scripts/modules/iMask.js");
+/* harmony import */ var _modules_form_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/form.js */ "./src/scripts/modules/form.js");
+/* harmony import */ var _modules_scrollBtnAnimation_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/scrollBtnAnimation.js */ "./src/scripts/modules/scrollBtnAnimation.js");
+/* harmony import */ var _modules_portfolioAnimation_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/portfolioAnimation.js */ "./src/scripts/modules/portfolioAnimation.js");
+/* harmony import */ var _modules_yandexMap_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/yandexMap.js */ "./src/scripts/modules/yandexMap.js");
+/* harmony import */ var _modules_yandexMap_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_modules_yandexMap_js__WEBPACK_IMPORTED_MODULE_9__);
 
 
 
@@ -16288,67 +16345,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // show header-logo
 
-/*const headerLogo = document.querySelector('.main-header__small-logo');
 
-if(window.scrollY > 600) {
-
-  if(window.innerWidth > 959) {
-    console.log('laptop')
-  }
-
-  gsap.to(headerLogo, {
-    duration: 0.7,
-    delay: 0.2,
-    opacity: 1,
-    zIndex: '99',
-    ease: 'ease-in'
-  })
-} else {
-
-  if(window.innerWidth < 959) {
-    console.log('!!laptop')
-  }
-
-  gsap.to(headerLogo, {
-    duration: 0.7,
-    delay: 0.2,
-    opacity: 0,
-    zIndex: '-1',
-    ease: 'ease-in'
-  })
-}
-
-window.addEventListener('scroll', () => {
-  if(window.scrollY > 600) {
-
-    if(window.innerWidth > 959) {
-      console.log('laptop')
-    }
-
-    gsap.to(headerLogo, {
-      duration: 0.7,
-      delay: 0.2,
-      opacity: 1,
-      zIndex: '99',
-      ease: 'ease-in'
-    })
-  } else {
-
-    if(window.innerWidth < 959) {
-      console.log('!!laptop')
-    }
-
-    gsap.to(headerLogo, {
-      duration: 0.7,
-      delay: 0.2,
-      opacity: 0,
-      zIndex: '-1',
-      ease: 'ease-in'
-    })
-  }
-});*/
 })();
 
 /******/ })()
