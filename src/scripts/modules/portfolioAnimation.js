@@ -47,7 +47,7 @@ if(section) {
     }
   });
 
-  const portfolioLinkTrigger = document.querySelector('.outdoor');
+  const portfolioLinkTrigger = section.querySelector('.portfolio__item:nth-child(6)');
   const portfolioLink = document.querySelector('.portfolio__link');
   const overlay = portfolioLink.querySelector('.portfolio-link-overlay');
   const arrowGroup = portfolioLink.querySelector('.arrow-group');

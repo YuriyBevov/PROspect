@@ -626,7 +626,7 @@ if (section) {
       });
     }
   });
-  var portfolioLinkTrigger = document.querySelector('.outdoor');
+  var portfolioLinkTrigger = section.querySelector('.portfolio__item:nth-child(6)');
   var portfolioLink = document.querySelector('.portfolio__link');
   var overlay = portfolioLink.querySelector('.portfolio-link-overlay');
   var arrowGroup = portfolioLink.querySelector('.arrow-group');

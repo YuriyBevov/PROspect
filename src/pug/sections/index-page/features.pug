@@ -1,3 +1,33 @@
+-
+  const featuresList = [
+    {title: 'Наружная реклама', img: 'features_1'}, {title: 'Широкоформатная печать', img: 'features_1'},
+    {title: 'Интерьерная печать', img: 'features_1'}, {title: 'Рекламные конструкции', img: 'features_1'},
+    {title: 'Торговое оборудование', img: 'features_1'}, {title: 'Световые панели', img: 'features_1'},
+    {title: 'Плоттерная резка', img: 'features_1'}, {title: 'Фрезеровка', img: 'features_1'},
+    {title: 'Согласование рекламы', img: 'features_1'}
+  ]
+
 section.section.features#features
   .container
     h2.main-title.features__title Услуги
+
+    ul.features__list
+      each item in featuresList
+        li.features__item
+          a(href="#" aria-label=`${item.title}`).features__item-link
+            picture
+              source(srcset=`./assets/img/${item.img}@2x.webp 1x, ./assets/img/${item.img}@2x.webp 2x` type="image/webp")
+              img(src=`./assets/img/${item.img}@1x.jpg` srcset=`./assets/img/${item.img}@2x.jpg 2x` alt= item.title width="600" height="400")
+
+            h3.features__item-title= item.title
+
+
+      li.features__item.features__item--offer
+        a(href="#")
+          span.text Оставить <br/> заявку
+          svg(width="65" height="45").arrow-group
+            use(xlink:href="./assets/svg-sprite.svg#icon-arrows-hero")
+
+
+
+
