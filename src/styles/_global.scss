@@ -80,7 +80,20 @@ ul {
 
 .main-title {
   font-weight: 600;
-  font-size: 36px;
+  font-size: 64px;
+
+  @include m-b-desktop-down {
+    font-size: 54px;
+  }
+
+  @include m-b-laptop-down {
+    font-size: 48px;
+  }
+
+  @include m-b-tablet-down {
+    font-size: 36px;
+    text-align: center;
+  }
 
   color: var(--primary-color);
 }

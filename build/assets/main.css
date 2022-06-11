@@ -491,8 +491,24 @@ ul {
 
 .main-title {
   font-weight: 600;
-  font-size: 36px;
+  font-size: 64px;
   color: var(--primary-color);
+}
+@media (max-width: 1440px) {
+  .main-title {
+    font-size: 54px;
+  }
+}
+@media (max-width: 1140px) {
+  .main-title {
+    font-size: 48px;
+  }
+}
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 36px;
+    text-align: center;
+  }
 }
 
 fieldset {
@@ -1463,6 +1479,21 @@ input:-webkit-autofill:active {
   padding: 20px;
   overflow: auto;
 }
+@media (max-width: 1140px) {
+  .accordion__body {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  .accordion__body img {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+  .accordion__body-content {
+    width: 100%;
+  }
+}
 .accordion__body img {
   width: 50%;
   height: 100%;
@@ -1477,27 +1508,13 @@ input:-webkit-autofill:active {
     max-height: 450px;
     -o-object-fit: cover;
     object-fit: cover;
+    margin-right: 0;
   }
 }
 .accordion__body-content {
   width: 50%;
 }
 @media (max-width: 1140px) {
-  .accordion__body-content {
-    width: 100%;
-  }
-}
-@media (max-width: 1140px) {
-  .accordion__body {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-  }
-  .accordion__body img {
-    margin-right: 0;
-    margin-bottom: 20px;
-  }
   .accordion__body-content {
     width: 100%;
   }
@@ -1730,7 +1747,8 @@ input:-webkit-autofill:active {
   grid-template-columns: repeat(8, 1fr);
   -ms-grid-rows: auto;
   grid-template-rows: auto;
-  grid-gap: 40px;
+  grid-column-gap: 40px;
+  grid-row-gap: 40px;
 }
 @media (max-width: 960px) {
   .portfolio__gallery {
@@ -1739,7 +1757,8 @@ input:-webkit-autofill:active {
 }
 @media (max-width: 768px) {
   .portfolio__gallery {
-    grid-gap: 20px;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
   }
 }
 .portfolio__item {
@@ -1959,6 +1978,11 @@ input:-webkit-autofill:active {
 
 .features__title {
   text-align: right;
+}
+@media (max-width: 768px) {
+  .features__title {
+    text-align: center;
+  }
 }
 
 .outdoor {

@@ -25,7 +25,7 @@ function limitStr( str, n ) {
 }
 
 // запрет скролла у body
-bodyLocker = (bool) => {
+function bodyLocker(bool) {
   let body = document.querySelector('body');
   let paddingOffset = window.innerWidth - document.body.offsetWidth + 'px';
 
@@ -73,4 +73,8 @@ function getBoundingClientRect(elem, side) {
   }
 }
 
-export  { limitStr, addClass, removeClass, checkClass, toggleClass, bodyLocker, getBoundingClientRect }
+function windowInnerWidth() {
+  return window.innerWidth;
+}
+
+export  { windowInnerWidth, limitStr, addClass, removeClass, checkClass, toggleClass, bodyLocker, getBoundingClientRect }

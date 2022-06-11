@@ -87,14 +87,16 @@ $sticky-container-size: 500px;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: auto;
-    grid-gap: 40px;
+    grid-column-gap: 40px;
+    grid-row-gap: 40px;
 
     @include m-b-tablet-lg-down {
       padding-left: 0;
     }
 
     @include m-b-tablet-down {
-      grid-gap: 20px;
+      grid-column-gap: 20px;
+      grid-row-gap: 20px;
     }
   }
 

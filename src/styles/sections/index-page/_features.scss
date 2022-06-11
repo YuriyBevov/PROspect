@@ -1,5 +1,9 @@
 .features {
   &__title {
     text-align: right;
+
+    @include m-b-tablet-down {
+      text-align: center;
+    }
   }
 }
