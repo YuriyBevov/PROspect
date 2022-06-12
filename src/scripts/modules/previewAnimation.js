@@ -1,8 +1,6 @@
-import Parallax from 'parallax-js'
+//import Parallax from 'parallax-js'
 
 import {gsap} from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
-gsap.registerPlugin(ScrollTrigger);
 
 const overlay = document.querySelector('.overlay');
 
@@ -53,15 +51,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
       fadeInAnimation(title, 3);
     }
-
-    /*setTimeout(() => {
-      let scenes = document.querySelectorAll('g[data-id="parallax-container"]');
-
-      if(scenes) {
-        scenes.forEach(scene => {
-          new Parallax(scene);
-        })
-      }
-    }, 2400);*/
   }, 500);
 });

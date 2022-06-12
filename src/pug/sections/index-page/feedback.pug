@@ -1,16 +1,12 @@
+include ../../mixins/_form
+
 section.section.feedback#feedback
   .container
     h2.visually-hidden Форма обратной связи
     p Заполните форму <br/> и&nbsp;мы&nbsp;обязательно Вам перезвоним&nbsp;!
 
-    form(action="mail.php" method="POST").form
-      .form__content
-        fieldset.form__data
-          input(type="text" placeholder="Как к вам обращаться" id="user_name" name="user_name")
-          input(type="tel" placeholder="Номер телефона" id="user_phone" name="user_phone")
-
-        fieldset.form__accept
-          input(type="checkbox" id="confirm_rules")
-          label(for="confirm_rules").checkbox-label  Согласен на обработку персональных данных
-
-      button(type="submit").form__btn Отправить
+    +form({
+      user_field_id: 'feedback-user-id',
+      phone_field_id: 'feedback-phone-id',
+      rules_field_id: 'feedback-accept-rules'
+    })

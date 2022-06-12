@@ -1,0 +1,12 @@
+mixin form(opt)
+  form(action="mail.php" method="POST").form
+    .form__content
+      fieldset.form__data
+        input(type="text" placeholder="Как к вам обращаться" id= opt.user_field_id name="user_name")
+        input(type="tel" placeholder="Номер телефона" id= opt.phone_field_id name="user_phone")
+
+      fieldset.form__accept
+        input(type="checkbox" id= opt.rules_field_id )
+        label(for= opt.rules_field_id).checkbox-label  Согласен на обработку персональных данных
+
+    button(type="submit").form__btn Отправить

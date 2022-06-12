@@ -1,0 +1,91 @@
+.main-modal {
+  position: relative;
+
+  background-image: url('../assets/img/logo-small.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0 100vh;
+
+
+  &.is-active {
+    animation: bcg 1s linear forwards;
+  }
+
+  @keyframes bcg {
+    0% {
+      background-position: 0 100vh;
+    }
+
+    100% {
+      background-position: 0 20px;
+    }
+  }
+
+  &__close {
+    @extend .button-default;
+    @extend .flex-centered-content;
+    top: 30px;
+    right: 30px;
+
+    @include m-b-tablet-down {
+      top: 15px;
+      right: 15px;
+    }
+
+    svg {
+      fill: var(--white-color);
+
+      @include m-b-tablet-down {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+
+  .modal__content {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(78, 68, 100, 0.5);
+
+    @include m-b-tablet-down {
+      padding: 15px;
+    }
+  }
+
+  &__title {
+    font-size: 32px;
+    font-weight: 500;
+    margin: 0;
+    margin-top: auto;
+    margin-bottom: 20px;
+    color: var(--white-color);
+
+    @include m-b-tablet-lg-down {
+      font-size: 28px;
+    }
+
+    @include m-b-tablet-down {
+      font-size: 24px;
+    }
+
+    @include m-b-mobile-lg-down {
+      font-size: 20px;
+    }
+  }
+
+  form {
+    input,
+    input::placeholder,
+    button,
+    .form__accept label.checkbox-label {
+      color: var(--white-color);
+    }
+
+    .form__accept label.checkbox-label::before,
+    input,
+    button {
+      border-color: var(--white-color);
+    }
+  }
+}

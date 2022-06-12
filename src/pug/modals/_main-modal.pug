@@ -1,0 +1,19 @@
+include ../mixins/_form
+
+<div class="modal-overlay">
+  <div class="modal main-modal" id="main-modal">
+      button(type="button" class="modal__close main-modal__close")
+        svg(width="48" height="48")
+          use(xlink:href="./assets/svg-sprite.svg#icon-close")
+
+      <div class="modal__content">
+          h4.main-modal__title Оставьте заявку <br/> и&nbsp;мы&nbsp;обязательно Вам перезвоним&nbsp;!
+
+          +form({
+            user_field_id: 'modal-user-id',
+            phone_field_id: 'modal-phone-id',
+            rules_field_id: 'modal-accept-rules'
+          })
+      </div>
+  </div>
+</div>

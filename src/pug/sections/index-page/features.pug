@@ -14,7 +14,7 @@ section.section.features#features
     ul.features__list
       each item in featuresList
         li.features__item
-          a(href="#" aria-label=`${item.title}`).features__item-link
+          a(href="#" aria-label=`${item.title}` data-modal-anchor="main-modal").features__item-link
             picture
               source(srcset=`./assets/img/${item.img}@2x.webp 1x, ./assets/img/${item.img}@2x.webp 2x` type="image/webp")
               img(src=`./assets/img/${item.img}@1x.jpg` srcset=`./assets/img/${item.img}@2x.jpg 2x` alt= item.title width="600" height="400")
@@ -23,7 +23,7 @@ section.section.features#features
 
 
       li.features__item.features__item--offer
-        a(href="#")
+        a(href="#" data-modal-anchor="main-modal")
           span.text Оставить <br/> заявку
           svg(width="65" height="45").arrow-group
             use(xlink:href="./assets/svg-sprite.svg#icon-arrows-hero")
