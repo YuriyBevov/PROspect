@@ -314,7 +314,8 @@ phoneFields.forEach(function (field) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
 
-var headerLogo = document.querySelector('.main-header__small-logo');
+var header = document.querySelector('.main-header');
+var headerLogo = header.querySelector('.main-header__small-logo');
 
 function showLogo() {
   gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(headerLogo, {
@@ -325,11 +326,12 @@ function showLogo() {
     y: 0,
     ease: 'ease-in'
   });
+  header.classList.add('active');
 }
 
 function hideLogo() {
   gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(headerLogo, {
-    duration: 0.7,
+    duration: 0.5,
     delay: 0.2,
     opacity: 0,
     zIndex: '-1',
@@ -337,9 +339,10 @@ function hideLogo() {
   });
   gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(headerLogo, {
     duration: 0,
-    delay: 0.9,
+    delay: 0.7,
     y: '-200'
   });
+  header.classList.remove('active');
 }
 
 if (headerLogo) {
@@ -754,7 +757,7 @@ var windowInitialScrollY = window.scrollY;
 
 var onScrollHandler = function onScrollHandler(evt) {
   console.log(window.scrollY);
-  hero.style.transform = "translateY(".concat(window.scrollY, ")");
+  hero.style.transform = "translateY(-".concat(window.scrollY / 7, "px)");
 };
 
 window.addEventListener('scroll', onScrollHandler);

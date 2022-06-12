@@ -1,6 +1,7 @@
 import {gsap} from 'gsap';
 
-const headerLogo = document.querySelector('.main-header__small-logo');
+const header = document.querySelector('.main-header');
+const headerLogo = header.querySelector('.main-header__small-logo');
 
 function showLogo() {
   gsap.to(headerLogo, {
@@ -11,11 +12,13 @@ function showLogo() {
     y: 0,
     ease: 'ease-in'
   })
+
+  header.classList.add('active');
 }
 
 function hideLogo() {
   gsap.to(headerLogo, {
-    duration: 0.7,
+    duration: 0.5,
     delay: 0.2,
     opacity: 0,
     zIndex: '-1',
@@ -24,9 +27,11 @@ function hideLogo() {
 
   gsap.to(headerLogo, {
     duration: 0,
-    delay: 0.9,
+    delay: 0.7,
     y: '-200'
   })
+
+  header.classList.remove('active');
 }
 
 if(headerLogo) {
