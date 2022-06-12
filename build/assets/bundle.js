@@ -636,29 +636,29 @@ if (section) {
   var text = portfolioLink.querySelector('.text');
   var question = portfolioLink.querySelector('.question-mark');
   gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(overlay, {
-    scrollTrigger: portfolioLinkTrigger,
+    scrollTrigger: portfolioLink,
     duration: 0.8,
     delay: 0.3,
     ease: 'ease-in',
     width: '100%'
   });
   gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(arrowGroup, {
-    scrollTrigger: portfolioLinkTrigger,
+    scrollTrigger: portfolioLink,
     delay: 0.9,
     opacity: 1
   });
   gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(text, {
-    scrollTrigger: portfolioLinkTrigger,
+    scrollTrigger: portfolioLink,
     delay: 0.9,
     opacity: 1
   });
   gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(question, {
-    scrollTrigger: portfolioLinkTrigger,
+    scrollTrigger: portfolioLink,
     delay: 0.9,
     opacity: 1
   });
   gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(overlay, {
-    scrollTrigger: portfolioLinkTrigger,
+    scrollTrigger: portfolioLink,
     duration: 0.6,
     delay: 1,
     ease: 'ease-out',

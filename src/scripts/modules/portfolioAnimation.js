@@ -55,7 +55,7 @@ if(section) {
   const question = portfolioLink.querySelector('.question-mark');
 
   gsap.to(overlay, {
-    scrollTrigger: portfolioLinkTrigger,
+    scrollTrigger: portfolioLink,
     duration: 0.8,
     delay: 0.3,
     ease: 'ease-in',
@@ -63,25 +63,25 @@ if(section) {
   });
 
   gsap.to(arrowGroup, {
-    scrollTrigger: portfolioLinkTrigger,
+    scrollTrigger: portfolioLink,
     delay: 0.9,
     opacity: 1
   });
 
   gsap.to(text, {
-    scrollTrigger: portfolioLinkTrigger,
+    scrollTrigger: portfolioLink,
     delay: 0.9,
     opacity: 1
   });
 
   gsap.to(question, {
-    scrollTrigger: portfolioLinkTrigger,
+    scrollTrigger: portfolioLink,
     delay: 0.9,
     opacity: 1
   });
 
   gsap.to(overlay, {
-    scrollTrigger: portfolioLinkTrigger,
+    scrollTrigger: portfolioLink,
     duration: 0.6,
     delay: 1,
     ease: 'ease-out',
