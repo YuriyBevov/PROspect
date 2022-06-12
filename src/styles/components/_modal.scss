@@ -24,10 +24,13 @@
 
 .modal {
     position: relative;
+    display: flex;
+    flex-direction: column;
 
     width: 90vw;
     max-width: 600px;
     height: fit-content;
+    min-height: 200px;
     max-height: 90vh;
     background-color: #ffffff;
 
@@ -38,6 +41,7 @@
     }
 
     &__content {
+        margin-top: auto;
         overflow: hidden;
         overflow-y: auto;
         height: 100%;
@@ -67,5 +71,26 @@
       100% {
         opacity: 1;
       }
+  }
+
+  &__close {
+    @extend .button-default;
+    @extend .flex-centered-content;
+    top: 30px;
+    right: 30px;
+
+    @include m-b-tablet-down {
+      top: 15px;
+      right: 15px;
+    }
+
+    svg {
+      fill: var(--white-color);
+
+      @include m-b-tablet-down {
+        width: 32px;
+        height: 32px;
+      }
+    }
   }
 }

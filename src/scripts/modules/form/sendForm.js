@@ -1,20 +1,24 @@
 import { Modal } from "../../utils/Modal";
+const loader = document.querySelector('.loader-overlay');
 
 export function sendForm(form) {
   const thanksModal = document.getElementById('thanks-modal');
   const errorModal = document.getElementById('error-modal');
 
   function success() {
-    //form.reset();
+    form.reset();
     let modals = document.querySelectorAll('.modal');
 
     modals.forEach(modal => {
       new Modal(modal).refresh();
-    })
+    });
+
+    loader.classList.add('hidden');
     new Modal(thanksModal).show();
   }
 
   function error() {
+    loader.classList.add('hidden');
     new Modal(errorModal).show();
   }
 
@@ -26,6 +30,7 @@ export function sendForm(form) {
   // helper function for sending an AJAX request
 
   function ajax(method, url, data, success, error) {
+    console.log(method, url, data, success, error);
     var xhr = new XMLHttpRequest();
     xhr.open(method, url);
     xhr.setRequestHeader("Accept", "application/json");

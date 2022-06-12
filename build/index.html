@@ -381,10 +381,10 @@
           <div class="main-footer__info"><a href="tel:+77777777">+7 (777) 777-77-77</a><a href="mailto:pro-rek@info.ru">pro-rek@info.ru</a></div>
         </div>
       </div>
-      <div class="developer"><a href="https://www.littleweb.ru" rel="noopener noreferrer nofollow" aria-label="Сайт разработан - LittleWeb.ru"><img src="./assets/img/delevoper-icon.svg" width="220" height="50" alt="LittleWeb.ru"></a></div>
+      <div class="developer"><a href="https://www.littleweb.ru" rel="noopener noreferrer nofollow" aria-label="Сайт разработан - LittleWeb.ru"><img src="./assets/img/delevoper-icon.svg" width="227" height="49" alt="LittleWeb.ru"></a></div>
     </footer><div class="modal-overlay">
 <div class="modal main-modal" id="main-modal">
-    <button class="modal__close main-modal__close" type="button">
+    <button class="modal__close" type="button">
       <svg width="48" height="48">
         <use xlink:href="./assets/svg-sprite.svg#icon-close"></use>
       </svg>
@@ -405,6 +405,35 @@
         </form></div>
 </div>
 </div>
-    <!--script(src="./js/bundle.js")-->
+    <div class="modal-overlay">
+      <div class="modal state-modal" id="error-modal">
+        <button class="modal__close" type="button">
+          <svg width="24" height="24">
+            <use xlink:href="./assets/svg-sprite.svg#icon-close"></use>
+          </svg>
+        </button>
+        <div class="modal__content"><span>К&nbsp;сожалению, что-то пошло&nbsp;не&nbsp;так... Попробуйте&nbsp;снова&nbsp;!</span></div>
+      </div>
+    </div>
+    <div class="modal-overlay">
+      <div class="modal state-modal" id="thanks-modal">
+        <button class="modal__close" type="button">
+          <svg width="24" height="24">
+            <use xlink:href="./assets/svg-sprite.svg#icon-close"></use>
+          </svg>
+        </button>
+        <div class="modal__content"><span>Спасибо&nbsp;! Мы&nbsp;свяжемся с&nbsp;Вами в&nbsp;ближайшее&nbsp;время&nbsp;!</span></div>
+      </div>
+    </div>
+    <div class="loader-overlay hidden">
+      <div class="loader">
+        <svg class="left-step" width="36" height="36">
+          <use xlink:href="./assets/svg-sprite.svg#icon-close"></use>
+        </svg>
+        <svg class="right-step" width="36" height="36">
+          <use xlink:href="./assets/svg-sprite.svg#icon-close"></use>
+        </svg>
+      </div>
+    </div>
   </body>
 </html>

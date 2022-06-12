@@ -168,6 +168,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sendForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sendForm */ "./src/scripts/modules/form/sendForm.js");
 
 
+var loader = document.querySelector('.loader-overlay');
 function formValidation(form) {
   var invalidControls = [];
   var controls = form.querySelectorAll('input');
@@ -196,7 +197,10 @@ function formValidation(form) {
 
   if (!invalidControls.length) {
     console.log('SEND FORM');
-    (0,_sendForm__WEBPACK_IMPORTED_MODULE_1__.sendForm)(form);
+    loader.classList.remove('hidden');
+    setTimeout(function () {
+      (0,_sendForm__WEBPACK_IMPORTED_MODULE_1__.sendForm)(form);
+    }, 1000);
   } else {
     invalidControls.forEach(function (control) {
       (0,_setControlState__WEBPACK_IMPORTED_MODULE_0__.setControlState)(control, 'invalid');
@@ -219,20 +223,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _utils_Modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/Modal */ "./src/scripts/utils/Modal.js");
 
+var loader = document.querySelector('.loader-overlay');
 function sendForm(form) {
   var thanksModal = document.getElementById('thanks-modal');
   var errorModal = document.getElementById('error-modal');
 
   function success() {
-    //form.reset();
+    form.reset();
     var modals = document.querySelectorAll('.modal');
     modals.forEach(function (modal) {
       new _utils_Modal__WEBPACK_IMPORTED_MODULE_0__.Modal(modal).refresh();
     });
+    loader.classList.add('hidden');
     new _utils_Modal__WEBPACK_IMPORTED_MODULE_0__.Modal(thanksModal).show();
   }
 
   function error() {
+    loader.classList.add('hidden');
     new _utils_Modal__WEBPACK_IMPORTED_MODULE_0__.Modal(errorModal).show();
   } // handle the form submission event
 
@@ -241,6 +248,7 @@ function sendForm(form) {
   ajax(form.method, form.action, data, success, error); // helper function for sending an AJAX request
 
   function ajax(method, url, data, success, error) {
+    console.log(method, url, data, success, error);
     var xhr = new XMLHttpRequest();
     xhr.open(method, url);
     xhr.setRequestHeader("Accept", "application/json");
@@ -577,10 +585,11 @@ if (burger) {
     burger.removeEventListener('click', onClickOpenNav);
 
     if (!burger.classList.contains('opened')) {
-      openMenu();
+      openMenu(); //if( windowInnerWidth() < 959 ) { не работает при ресайзе
+
       navLinks.forEach(function (link) {
         return link.addEventListener('click', onClickCloseMenu);
-      });
+      }); //}
     } else {
       closeMenu();
     }
@@ -757,10 +766,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 var hero = document.querySelector('.hero');
 var windowInitialScrollY = window.scrollY;
-hero.style.transform = "translateY(-".concat(window.scrollY / 7, "px)");
+hero.style.transform = "translateY(-".concat(window.scrollY / 4, "px)");
 
 var onScrollHandler = function onScrollHandler() {
-  hero.style.transform = "translateY(-".concat(window.scrollY / 7, "px)");
+  hero.style.transform = "translateY(-".concat(window.scrollY / 4, "px)");
 };
 
 window.addEventListener('scroll', onScrollHandler);
@@ -1008,6 +1017,11 @@ var Modal = /*#__PURE__*/function () {
 
       _this.openers.forEach(function (opener) {
         opener.addEventListener('click', _this.openModal);
+      }); //если в модалке есть форма, при закрытии обнуляю поля
+
+
+      _this.modal.querySelectorAll('form').forEach(function (f) {
+        return f.reset();
       });
     });
 
@@ -1030,6 +1044,18 @@ var Modal = /*#__PURE__*/function () {
     _defineProperty(this, "openModal", function (evt) {
       evt.preventDefault();
 
+      _this.overlay.classList.add('is-opened');
+
+      _this.modal.classList.add('is-active');
+
+      _this.addListeners();
+
+      _this.focusTrap();
+
+      _this.bodyLocker(true);
+    });
+
+    _defineProperty(this, "show", function () {
       _this.overlay.classList.add('is-opened');
 
       _this.modal.classList.add('is-active');

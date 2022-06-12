@@ -1,0 +1,58 @@
+.state-modal {
+  background-color: var(--main-bg-color);
+
+  &.is-active {
+    animation: fadeIn 1s linear forwards;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .modal__close {
+    top: 15px;
+    right: 15px;
+
+    svg {
+      fill: var(--dark-color);
+
+      @include m-b-tablet-down {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  .modal__content {
+    padding: 30px;
+
+    span {
+      display: inline-block;
+      margin: 0;
+      font-size: 28px;
+      padding-right: 40px;
+
+      @include m-b-tablet-lg-down {
+        font-size: 26px;
+      }
+
+      @include m-b-tablet-down {
+        font-size: 22px;
+      }
+
+      @include m-b-mobile-lg-down {
+        font-size: 18px;
+      }
+    }
+
+    @include m-b-tablet-down {
+      padding: 15px;
+    }
+  }
+}

@@ -100,10 +100,10 @@ if(burger) {
           ease: 'ease-in'
         });
       });
+
       burger.classList.remove('opened');
       navList.classList.remove('opened');
       nav.classList.remove('mobile-opened');
-
       burger.addEventListener('click', onClickOpenNav);
     }, 1200);
   }
@@ -196,7 +196,9 @@ if(burger) {
 
     if(!burger.classList.contains('opened')) {
       openMenu();
-      navLinks.forEach(link => link.addEventListener('click', onClickCloseMenu));
+      //if( windowInnerWidth() < 959 ) { не работает при ресайзе
+        navLinks.forEach(link => link.addEventListener('click', onClickCloseMenu));
+      //}
     } else {
       closeMenu();
     }

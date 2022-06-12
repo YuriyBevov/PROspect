@@ -21,27 +21,6 @@
     }
   }
 
-  &__close {
-    @extend .button-default;
-    @extend .flex-centered-content;
-    top: 30px;
-    right: 30px;
-
-    @include m-b-tablet-down {
-      top: 15px;
-      right: 15px;
-    }
-
-    svg {
-      fill: var(--white-color);
-
-      @include m-b-tablet-down {
-        width: 32px;
-        height: 32px;
-      }
-    }
-  }
-
   .modal__content {
     padding: 30px;
     display: flex;

@@ -16,6 +16,7 @@
 @import "./components/form";
 @import "./components/accordion";
 @import "./components/developer";
+@import "./components/loader";
 
 /* Секции */
 @import "./sections/index-page/hero";
@@ -28,4 +29,5 @@
 /* Модальные окна */
 @import "./components/modal";
 @import "./components/main-modal";
+@import "./components/state-modal";
 

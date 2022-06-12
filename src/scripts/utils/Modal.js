@@ -89,7 +89,10 @@ export class Modal {
       this.openers.forEach(opener => {
           opener.addEventListener('click', this.openModal);
       })
-}
+
+      //если в модалке есть форма, при закрытии обнуляю поля
+      this.modal.querySelectorAll('form').forEach(f=>f.reset());
+  }
 
   closeByOverlayClick = (evt) => {
       if(evt.target === this.overlay) {
@@ -114,6 +117,14 @@ export class Modal {
       this.addListeners();
       this.focusTrap();
       this.bodyLocker(true);
+  }
+
+  show = () => {
+    this.overlay.classList.add('is-opened');
+    this.modal.classList.add('is-active');
+    this.addListeners();
+    this.focusTrap();
+    this.bodyLocker(true);
   }
 
   init() {
