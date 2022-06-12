@@ -360,6 +360,7 @@ template {
   --light-color: #b4b4b4;
   --dark-color: #4d585B;
   --accent-color: #d52027;
+  --dev-color: #251B40;
   --main-bg-color: var(--white-color);
   --transition: 0.3s ease;
   --main-scrollbar-width: 6px;
@@ -932,7 +933,6 @@ input:-webkit-autofill:active {
   -ms-flex-align: end;
   align-items: flex-end;
   margin-bottom: 30px;
-  padding-bottom: 30px;
 }
 .main-footer__logo {
   margin-right: auto;
@@ -945,7 +945,7 @@ input:-webkit-autofill:active {
   flex-direction: column;
 }
 .main-footer__logo span {
-  font-style: 14px;
+  font-size: 14px;
   color: var(--white-color);
 }
 .main-footer__info {
@@ -1522,26 +1522,30 @@ input:-webkit-autofill:active {
 
 .developer {
   position: relative;
-  padding: 30px 0;
-  background-color: var(--dark-color);
-}
-.developer::before, .developer::after {
-  position: absolute;
-  top: 0;
-  width: 45vw;
-  height: 2px;
-  content: "";
-  background-color: var(--white-color);
-}
-.developer::before {
-  left: 0;
-}
-.developer::after {
-  right: 0;
+  padding: 10px 0;
+  border-top: 1px solid var(--white-color);
+  background-color: var(--dev-color);
+  /*&::before,
+  &::after {
+    position: absolute;
+    top: 0;
+    width: 45vw;
+    height: 2px;
+
+    content: '';
+    background-color: var(--white-color);
+  }
+  &::before {
+    left: 0;
+  }
+
+  &::after {
+    right: 0
+  }*/
 }
 .developer a {
   width: 100px;
-  height: 100px;
+  height: 50px;
   margin: 0 auto;
 }
 

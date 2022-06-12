@@ -2,7 +2,7 @@ import { scrollBy } from "seamless-scroll-polyfill";
 const scrollBtns = document.querySelectorAll('.anchor-link');
 
 function getCoords(elem) {
-  return elem.getBoundingClientRect().top - 125;
+  return elem.getBoundingClientRect().top - 55;
 }
 
 const onClickScrollToSection = (evt) => {

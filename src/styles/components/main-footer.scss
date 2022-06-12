@@ -9,7 +9,6 @@
     @extend .flex-wrap;
     align-items: flex-end;
     margin-bottom: 30px;
-    padding-bottom: 30px;
   }
 
   &__logo {
@@ -19,7 +18,7 @@
     flex-direction: column;
 
     span {
-      font-style: 14px;
+      font-size: 14px;
       color: var(--white-color);
     }
   }

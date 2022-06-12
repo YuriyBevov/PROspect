@@ -635,6 +635,7 @@ if (section) {
   gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(overlay, {
     scrollTrigger: portfolioLinkTrigger,
     duration: 0.8,
+    delay: 0.3,
     ease: 'ease-in',
     width: '100%'
   });
@@ -742,6 +743,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /***/ }),
 
+/***/ "./src/scripts/modules/previewParallax.js":
+/*!************************************************!*\
+  !*** ./src/scripts/modules/previewParallax.js ***!
+  \************************************************/
+/***/ (() => {
+
+var hero = document.querySelector('.hero');
+var windowInitialScrollY = window.scrollY;
+
+var onScrollHandler = function onScrollHandler(evt) {
+  console.log(window.scrollY);
+  hero.style.transform = "translateY(".concat(window.scrollY, ")");
+};
+
+window.addEventListener('scroll', onScrollHandler);
+
+/***/ }),
+
 /***/ "./src/scripts/modules/scrollBtnAnimation.js":
 /*!***************************************************!*\
   !*** ./src/scripts/modules/scrollBtnAnimation.js ***!
@@ -778,7 +797,7 @@ __webpack_require__.r(__webpack_exports__);
 var scrollBtns = document.querySelectorAll('.anchor-link');
 
 function getCoords(elem) {
-  return elem.getBoundingClientRect().top - 125;
+  return elem.getBoundingClientRect().top - 55;
 }
 
 var onClickScrollToSection = function onClickScrollToSection(evt) {
@@ -16450,14 +16469,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_miniLogoAnimation_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/miniLogoAnimation.js */ "./src/scripts/modules/miniLogoAnimation.js");
 /* harmony import */ var _modules_scrollBtns_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/scrollBtns.js */ "./src/scripts/modules/scrollBtns.js");
 /* harmony import */ var _modules_previewAnimation_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/previewAnimation.js */ "./src/scripts/modules/previewAnimation.js");
-/* harmony import */ var _modules_navbar_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/navbar.js */ "./src/scripts/modules/navbar.js");
-/* harmony import */ var _modules_accordion_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/accordion.js */ "./src/scripts/modules/accordion.js");
-/* harmony import */ var _modules_iMask_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/iMask.js */ "./src/scripts/modules/iMask.js");
-/* harmony import */ var _modules_form_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/form.js */ "./src/scripts/modules/form.js");
-/* harmony import */ var _modules_scrollBtnAnimation_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/scrollBtnAnimation.js */ "./src/scripts/modules/scrollBtnAnimation.js");
-/* harmony import */ var _modules_portfolioAnimation_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/portfolioAnimation.js */ "./src/scripts/modules/portfolioAnimation.js");
-/* harmony import */ var _modules_yandexMap_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/yandexMap.js */ "./src/scripts/modules/yandexMap.js");
-/* harmony import */ var _modules_yandexMap_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_modules_yandexMap_js__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _modules_previewParallax_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/previewParallax.js */ "./src/scripts/modules/previewParallax.js");
+/* harmony import */ var _modules_previewParallax_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_modules_previewParallax_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _modules_navbar_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/navbar.js */ "./src/scripts/modules/navbar.js");
+/* harmony import */ var _modules_accordion_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/accordion.js */ "./src/scripts/modules/accordion.js");
+/* harmony import */ var _modules_iMask_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/iMask.js */ "./src/scripts/modules/iMask.js");
+/* harmony import */ var _modules_form_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/form.js */ "./src/scripts/modules/form.js");
+/* harmony import */ var _modules_scrollBtnAnimation_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/scrollBtnAnimation.js */ "./src/scripts/modules/scrollBtnAnimation.js");
+/* harmony import */ var _modules_portfolioAnimation_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/portfolioAnimation.js */ "./src/scripts/modules/portfolioAnimation.js");
+/* harmony import */ var _modules_yandexMap_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/yandexMap.js */ "./src/scripts/modules/yandexMap.js");
+/* harmony import */ var _modules_yandexMap_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_modules_yandexMap_js__WEBPACK_IMPORTED_MODULE_10__);
+
 
 
 

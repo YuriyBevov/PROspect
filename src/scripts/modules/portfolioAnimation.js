@@ -57,6 +57,7 @@ if(section) {
   gsap.to(overlay, {
     scrollTrigger: portfolioLinkTrigger,
     duration: 0.8,
+    delay: 0.3,
     ease: 'ease-in',
     width: '100%',
   });
