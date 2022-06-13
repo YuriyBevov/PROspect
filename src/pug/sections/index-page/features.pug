@@ -9,11 +9,11 @@
 
 section.section.features#features
   .container
-    h2.main-title.features__title Услуги
+    h2.main-title.features__title(aria-label="Наши услуги") <span aria-hidden="true">Н</span>
 
     ul.features__list
       each item in featuresList
-        li.features__item
+        li.features__item(data-lag="0.2")
           a(href="#" aria-label=`${item.title}` data-modal-anchor="main-modal").features__item-link
             picture
               source(srcset=`./assets/img/${item.img}@2x.webp 1x, ./assets/img/${item.img}@2x.webp 2x` type="image/webp")
@@ -27,7 +27,3 @@ section.section.features#features
           span.text Оставить <br/> заявку
           svg(width="65" height="45").arrow-group
             use(xlink:href="./assets/svg-sprite.svg#icon-arrows-hero")
-
-
-
-

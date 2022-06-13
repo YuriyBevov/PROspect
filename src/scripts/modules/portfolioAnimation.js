@@ -1,5 +1,5 @@
 import {gsap} from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
+import {ScrollTrigger} from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const section = document.querySelector('.portfolio');
@@ -7,7 +7,8 @@ const section = document.querySelector('.portfolio');
 if(section) {
   const title = section.querySelector('.portfolio__title');
   const titleTriggerOn = section.querySelector('.portfolio__item:nth-of-type(2)');
-  const items = section.querySelectorAll('.portfolio__item-overlay');
+  //const items = section.querySelectorAll('.portfolio__item-overlay');
+  const items = section.querySelectorAll('.portfolio__item');
 
   gsap.to(title, {
     scrollTrigger: titleTriggerOn,
@@ -15,39 +16,53 @@ if(section) {
     opacity: 1,
   });
 
+  function scrollTriggerOpt(el) {
+    return {
+      trigger: el,
+      start: "top bottom", // when the top of the trigger hits the top of the viewport
+      end: "+=1000",
+      //markers: true,
+    }
+  }
+
   items.forEach((item,i) => {
-    if(i % 2 === 0 && i !==2) {
+
+    gsap.to(item, {
+      scrollTrigger: scrollTriggerOpt(item),
+      duration: 0.8,
+      delay: 0.15 * (i+1),
+      y: '0',
+      opacity: 1,
+      ease: 'linear'
+    });
+
+    /*if(i !== 1 && i !== 2 && i !== 5 ) {
+      //влево
       gsap.to(item, {
-        scrollTrigger: item,
+        scrollTrigger: scrollTriggerOpt(item),
         duration: 0.8,
         delay: 0.2,
-        x: '110%',
-      });
-    } else if(i%3 === 0 && i !== 3 || i === 2) {
-      gsap.to(item, {
-        scrollTrigger: item,
-        duration: 1.2,
-        delay: 0.3,
-        x: '-110%',
-      });
-    } else if(i === 3) {
-      gsap.to(item, {
-        scrollTrigger: item,
-        duration: 1.2,
-        delay: 0.4,
-        y: '-110%',
+        x: '102%',
+        ease: 'linear'
       });
     } else {
+      //прозрачность
       gsap.to(item, {
-        scrollTrigger: item,
+        scrollTrigger: scrollTriggerOpt(item),
         duration: 1.2,
         delay: 0.5,
-        y: '110%',
+        opacity: 0,
+        ease: 'linear'
       });
-    }
+
+      gsap.to(item, {
+        scrollTrigger: scrollTriggerOpt(item),
+        delay: 1.5,
+        display: 'none'
+      });
+    }*/
   });
 
-  const portfolioLinkTrigger = section.querySelector('.portfolio__item:nth-child(6)');
   const portfolioLink = document.querySelector('.portfolio__link');
   const overlay = portfolioLink.querySelector('.portfolio-link-overlay');
   const arrowGroup = portfolioLink.querySelector('.arrow-group');
@@ -55,36 +70,36 @@ if(section) {
   const question = portfolioLink.querySelector('.question-mark');
 
   gsap.to(overlay, {
-    scrollTrigger: portfolioLink,
+    scrollTrigger: scrollTriggerOpt(portfolioLink),
     duration: 0.8,
     delay: 0.3,
-    ease: 'ease-in',
+    ease: 'linear',
     width: '100%',
   });
 
   gsap.to(arrowGroup, {
-    scrollTrigger: portfolioLink,
+    scrollTrigger: scrollTriggerOpt(portfolioLink),
     delay: 0.9,
     opacity: 1
   });
 
   gsap.to(text, {
-    scrollTrigger: portfolioLink,
+    scrollTrigger: scrollTriggerOpt(portfolioLink),
     delay: 0.9,
     opacity: 1
   });
 
   gsap.to(question, {
-    scrollTrigger: portfolioLink,
+    scrollTrigger: scrollTriggerOpt(portfolioLink),
     delay: 0.9,
     opacity: 1
   });
 
   gsap.to(overlay, {
-    scrollTrigger: portfolioLink,
+    scrollTrigger: scrollTriggerOpt(portfolioLink),
     duration: 0.6,
     delay: 1,
-    ease: 'ease-out',
+    ease: 'linear',
     x: '120%',
   });
 };

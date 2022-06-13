@@ -8,6 +8,7 @@ import './modules/iMask.js';
 import './modules/form.js';
 import './modules/scrollBtnAnimation.js';
 import './modules/portfolioAnimation.js';
+import './modules/featuresAnimation.js';
 import './modules/modal.js';
 
 import './modules/yandexMap.js';

@@ -59,7 +59,7 @@ section.section.portfolio#portfolio
       .portfolio__gallery
         each item in portfolioList
           .portfolio__item
-            .portfolio__item-overlay(aria-hidden="true")
+            //.portfolio__item-overlay(aria-hidden="true")
             picture
               source(media="(max-width: 534px)" srcset=`./assets/img/${item.img}-mobile@1x.webp 1x, ./assets/img/${item.img}-mobile@2x.webp 2x` type="image/webp" width="400" height="300")
               source(media="(max-width: 959px)" srcset=`./assets/img/${item.img}-tablet@1x.webp 1x, ./assets/img/${item.img}-tablet@2x.webp 2x` type="image/webp" width="600" height="450")

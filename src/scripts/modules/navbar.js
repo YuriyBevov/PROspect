@@ -196,9 +196,8 @@ if(burger) {
 
     if(!burger.classList.contains('opened')) {
       openMenu();
-      //if( windowInnerWidth() < 959 ) { не работает при ресайзе
-        navLinks.forEach(link => link.addEventListener('click', onClickCloseMenu));
-      //}
+
+      navLinks.forEach(link => link.addEventListener('click', onClickCloseMenu));
     } else {
       closeMenu();
     }
