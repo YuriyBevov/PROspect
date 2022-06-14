@@ -1,11 +1,14 @@
 import {gsap} from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
-gsap.registerPlugin(ScrollTrigger);
+import {MotionPathPlugin} from 'gsap/MotionPathPlugin';
+gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
 const text = document.querySelector('.feedback__text');
 const form = document.querySelector('.feedback form');
 form.style.opacity = 0;
 form.style.transform = 'translateY(150px)';
+const plane = document.querySelector('#plane');
+plane.style.opacity = 0;
 
 let feedbackTl = gsap.timeline({
   scrollTrigger: {
@@ -25,4 +28,21 @@ feedbackTl.from(text, {
     opacity: 1,
     y: 0,
     ease: "ease-in"
+  });
+
+  gsap.to("#plane", {
+    scrollTrigger: {
+      trigger: text,
+      start: "top bottom",
+    },
+
+    duration: 2,
+    delay: 0.5,
+    opacity: 1,
+    ease: "power1.inOut",
+    motionPath:{
+      path: "#path",
+      align: "#path",
+      alignOrigin: [0.5, 0.5]
+    }
   });

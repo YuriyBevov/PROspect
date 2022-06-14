@@ -10,6 +10,8 @@
     margin: 0;
     margin-bottom: 50px;
     color: var(--dark-color);
+    position: relative;
+    z-index: 3;
 
     @include m-b-desktop-down {
       font-size: 36px;
@@ -31,6 +33,52 @@
 
     @include m-b-mobile-lg-down {
       font-size: 22px;
+    }
+  }
+
+  position: relative;
+  overflow: hidden;
+
+  svg {
+    position: absolute;
+    width: 100%;
+    min-width: 768px;
+    height: 100%;
+    min-height: 400px;
+    z-index: 0;
+
+    @include m-b-mobile-lg-down {
+      opacity: 0;
+    }
+
+    top: 0;
+    left: 15%;
+
+    #path {
+      opacity: 0;
+    }
+
+    #plane {
+      width: 500px;
+      height: 400px;
+      transform: scale(2.2);
+      fill: var(--primary-color);
+    }
+
+    @include m-b-tablet-down {
+      top: 0;
+      left: initial;
+      right: -30vw;
+    }
+  }
+
+  form {
+    @include m-b-tablet-down {
+      max-width: 50vw;
+    }
+
+    @include m-b-mobile-lg-down {
+      max-width: 100%;
     }
   }
 }

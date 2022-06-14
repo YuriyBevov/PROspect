@@ -163,7 +163,7 @@ $sticky-container-size: 500px;
     top: 0;
     left: -50px;
 
-    grid-column: 2/5;
+    grid-column: 1/5;
     grid-row: 13/14;
 
     width: 100%;
@@ -174,6 +174,7 @@ $sticky-container-size: 500px;
     padding: 20px;
     padding-right: 100px;
     overflow: hidden;
+    margin-left: 5vw;
 
     @include m-b-desktop-down {
       grid-column: 1/5;

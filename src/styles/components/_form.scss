@@ -3,6 +3,8 @@
 }
 
 .form {
+  position: relative;
+  z-index: 3;
   width: 100%;
 
   @extend .flex-wrap;

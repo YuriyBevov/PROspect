@@ -1187,6 +1187,8 @@ select:-webkit-autofill:focus {
 }
 
 .form {
+  position: relative;
+  z-index: 3;
   width: 100%;
   -webkit-box-align: end;
   -ms-flex-align: end;
@@ -2078,9 +2080,9 @@ select:-webkit-autofill:focus {
   position: absolute;
   top: 0;
   left: -50px;
-  -ms-grid-column: 2;
-  -ms-grid-column-span: 3;
-  grid-column: 2/5;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 4;
+  grid-column: 1/5;
   -ms-grid-row: 13;
   -ms-grid-row-span: 1;
   grid-row: 13/14;
@@ -2101,6 +2103,7 @@ select:-webkit-autofill:focus {
   padding: 20px;
   padding-right: 100px;
   overflow: hidden;
+  margin-left: 5vw;
 }
 @media (max-width: 1440px) {
   .portfolio__link {
@@ -2372,6 +2375,8 @@ select:-webkit-autofill:focus {
 .feedback {
   padding-top: 50px;
   background-color: var(--main-bg-color);
+  position: relative;
+  overflow: hidden;
 }
 .feedback__text {
   font-weight: 400;
@@ -2381,6 +2386,8 @@ select:-webkit-autofill:focus {
   margin: 0;
   margin-bottom: 50px;
   color: var(--dark-color);
+  position: relative;
+  z-index: 3;
 }
 @media (max-width: 1440px) {
   .feedback__text {
@@ -2407,6 +2414,49 @@ select:-webkit-autofill:focus {
 @media (max-width: 534px) {
   .feedback__text {
     font-size: 22px;
+  }
+}
+.feedback svg {
+  position: absolute;
+  width: 100%;
+  min-width: 768px;
+  height: 100%;
+  min-height: 400px;
+  z-index: 0;
+  top: 0;
+  left: 15%;
+}
+@media (max-width: 534px) {
+  .feedback svg {
+    opacity: 0;
+  }
+}
+.feedback svg #path {
+  opacity: 0;
+}
+.feedback svg #plane {
+  width: 500px;
+  height: 400px;
+  -webkit-transform: scale(2.2);
+  -ms-transform: scale(2.2);
+  transform: scale(2.2);
+  fill: var(--primary-color);
+}
+@media (max-width: 768px) {
+  .feedback svg {
+    top: 0;
+    left: initial;
+    right: -30vw;
+  }
+}
+@media (max-width: 768px) {
+  .feedback form {
+    max-width: 50vw;
+  }
+}
+@media (max-width: 534px) {
+  .feedback form {
+    max-width: 100%;
   }
 }
 
