@@ -2373,24 +2373,31 @@ select:-webkit-autofill:focus {
 .map {
   position: relative;
   z-index: 3;
+  width: 100%;
+  max-width: 2400px;
+  height: 500px;
   background-color: var(--dark-color);
+  background-image: url("../assets/img/map-static@1x.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+@media (max-width: 960px) {
+  .map {
+    height: 400px;
+  }
+}
+@media (max-width: 534px) {
+  .map {
+    height: 300px;
+  }
 }
 
 #yandex_map {
   width: 100%;
   max-width: 2400px;
-  height: 500px;
+  height: 100%;
   margin: 0 auto;
-}
-@media (max-width: 960px) {
-  #yandex_map {
-    height: 400px;
-  }
-}
-@media (max-width: 534px) {
-  #yandex_map {
-    height: 300px;
-  }
 }
 #yandex_map .zoom-btns {
   display: -webkit-box;
