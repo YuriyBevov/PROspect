@@ -31,28 +31,87 @@
 
   .modal__content {
     padding: 30px;
-
-    span {
-      display: inline-block;
-      margin: 0;
-      font-size: 28px;
-      padding-right: 40px;
-
-      @include m-b-tablet-lg-down {
-        font-size: 26px;
-      }
-
-      @include m-b-tablet-down {
-        font-size: 22px;
-      }
-
-      @include m-b-mobile-lg-down {
-        font-size: 18px;
-      }
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     @include m-b-tablet-down {
       padding: 15px;
+    }
+
+    svg {
+      fill: var(--primary-color);
+      margin-bottom: 25px;
+    }
+
+    span {
+      font-weight: 500;
+      font-size: 36px;
+
+      color: #488A99;
+    }
+
+    p {
+      font-weight: 500;
+      font-size: 20px;
+      text-align: center;
+
+      color: var(--dark-color);
+
+      @include m-b-tablet-down {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+.error-modal {
+  .modal__footer {
+    @extend .flex-centered-content;
+    flex-grow: 1;
+    padding: 30px;
+
+    @include m-b-tablet-down {
+      flex-direction: column;
+      padding: 15px;
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      margin: 0 20px;
+      color: var(--primary-color);
+
+      @include m-b-tablet-down {
+        margin: 0;
+        &:not(:last-child) {
+          margin-bottom: 10px;
+        }
+      }
+
+      svg {
+        fill: var(--primary-color);
+        margin-right: 10px;
+        transition: opacity var(--transition);
+      }
+
+      span {
+        font-weight: 500;
+        font-size: 18px;
+        color: var(--primary-color);
+        transition: opacity var(--transition);
+      }
+
+      &:hover,
+      &:focus {
+        svg {
+          opacity: 0.7;
+        }
+
+        span {
+          opacity: 0.7;
+        }
+      }
     }
   }
 }

@@ -158,7 +158,6 @@
             </div>
             <div class="portfolio__gallery">
               <div class="portfolio__item">
-                <!--.portfolio__item-overlay(aria-hidden="true")-->
                 <picture>
                   <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-1-mobile@1x.webp 1x, ./assets/img/portfolio_img-1-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
                   <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-1-tablet@1x.webp 1x, ./assets/img/portfolio_img-1-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
@@ -168,7 +167,6 @@
                 </picture>
               </div>
               <div class="portfolio__item">
-                <!--.portfolio__item-overlay(aria-hidden="true")-->
                 <picture>
                   <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.webp 1x, ./assets/img/portfolio_img-2-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
                   <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.webp 1x, ./assets/img/portfolio_img-2-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
@@ -178,7 +176,6 @@
                 </picture>
               </div>
               <div class="portfolio__item">
-                <!--.portfolio__item-overlay(aria-hidden="true")-->
                 <picture>
                   <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-3-mobile@1x.webp 1x, ./assets/img/portfolio_img-3-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
                   <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-3-tablet@1x.webp 1x, ./assets/img/portfolio_img-3-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
@@ -188,7 +185,6 @@
                 </picture>
               </div>
               <div class="portfolio__item">
-                <!--.portfolio__item-overlay(aria-hidden="true")-->
                 <picture>
                   <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-4-mobile@1x.webp 1x, ./assets/img/portfolio_img-4-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
                   <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-4-tablet@1x.webp 1x, ./assets/img/portfolio_img-4-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
@@ -198,7 +194,6 @@
                 </picture>
               </div>
               <div class="portfolio__item">
-                <!--.portfolio__item-overlay(aria-hidden="true")-->
                 <picture>
                   <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-3-mobile@1x.webp 1x, ./assets/img/portfolio_img-3-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
                   <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-3-tablet@1x.webp 1x, ./assets/img/portfolio_img-3-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
@@ -208,7 +203,6 @@
                 </picture>
               </div>
               <div class="portfolio__item">
-                <!--.portfolio__item-overlay(aria-hidden="true")-->
                 <picture>
                   <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-4-mobile@1x.webp 1x, ./assets/img/portfolio_img-4-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
                   <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-4-tablet@1x.webp 1x, ./assets/img/portfolio_img-4-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
@@ -356,7 +350,7 @@
         <div class="container">
           <h2 class="visually-hidden">Форма обратной связи</h2>
           <p class="feedback__text">Заполните форму <br/> и&nbsp;мы&nbsp;обязательно Вам перезвоним&nbsp;!</p>
-                <form class="form" action="mail.php" method="POST">
+                <form class="form" action="">
                   <div class="form__content">
                     <fieldset class="form__data">
                       <input type="text" placeholder="Как к вам обращаться" id="feedback-user-id" name="user_name">
@@ -380,10 +374,10 @@
       <div class="container">
         <div class="main-footer__container">
           <div class="main-footer__logo"><a href="index.html" aria-label="Обновить"><img src="./assets/img/logo-footer.svg" alt="Проспект" width="85" height="44"></a><span>ООО "Проспект", 2022</span></div>
-          <div class="main-footer__info"><a href="tel:+78126426449">
+          <div class="main-footer__info"><a href="tel:+78126426449" aria-label="Позвонить">
               <svg width="24" height="24">
                 <use xlink:href="./assets/svg-sprite.svg#icon-phone"></use>
-              </svg><span>+7 (812) 642-64-49</span></a><a href="mailto:pro-rek@info.ru">
+              </svg><span>+7 (812) 642-64-49</span></a><a href="mailto:pro-rek@info.ru" aria-label="Отправить письмо на почту">
               <svg width="24" height="24">
                 <use xlink:href="./assets/svg-sprite.svg#icon-mail"></use>
               </svg><span>pro-rek@info.ru</span></a></div>
@@ -398,7 +392,7 @@
       </svg>
     </button><div class="modal__content">
     <h4 class="main-modal__title">Оставьте заявку <br/> и&nbsp;мы&nbsp;обязательно Вам перезвоним&nbsp;!</h4>
-        <form class="form" action="mail.php" method="POST">
+        <form class="form" action="">
           <div class="form__content">
             <fieldset class="form__data">
               <input type="text" placeholder="Как к вам обращаться" id="modal-user-id" name="user_name">
@@ -414,23 +408,37 @@
 </div>
 </div>
     <div class="modal-overlay">
-      <div class="modal state-modal" id="error-modal">
+      <div class="modal state-modal error-modal" id="error-modal">
         <button class="modal__close" type="button">
           <svg width="24" height="24">
             <use xlink:href="./assets/svg-sprite.svg#icon-close"></use>
           </svg>
         </button>
-        <div class="modal__content"><span>К&nbsp;сожалению, что-то пошло&nbsp;не&nbsp;так... Попробуйте&nbsp;снова&nbsp;!</span></div>
+        <div class="modal__content"><span>Упс...</span>
+          <p>Что-то пошло не&nbsp;так. <br/> Попробуйте снова, или свяжитесь с&nbsp;нами удобным для Вас способом.</p>
+        </div>
+        <div class="modal__footer"><a href="tel:+78126426449" aria-label="Позвонить">
+            <svg width="24" height="24">
+              <use xlink:href="./assets/svg-sprite.svg#icon-phone"></use>
+            </svg><span>+7 (812) 642-64-49</span></a><a href="mailto:pro-rek@info.ru" aria-label="Отправить письмо на почту">
+            <svg width="24" height="24">
+              <use xlink:href="./assets/svg-sprite.svg#icon-mail"></use>
+            </svg><span>pro-rek@info.ru</span></a></div>
       </div>
     </div>
     <div class="modal-overlay">
-      <div class="modal state-modal" id="thanks-modal">
+      <div class="modal state-modal thanks-modal" id="thanks-modal">
         <button class="modal__close" type="button">
           <svg width="24" height="24">
             <use xlink:href="./assets/svg-sprite.svg#icon-close"></use>
           </svg>
         </button>
-        <div class="modal__content"><span>Спасибо&nbsp;! Мы&nbsp;свяжемся с&nbsp;Вами в&nbsp;ближайшее&nbsp;время&nbsp;!</span></div>
+        <div class="modal__content">
+          <svg width="100" height="100">
+            <use xlink:href="./assets/svg-sprite.svg#icon-thumb-up"></use>
+          </svg><span>Спасибо&nbsp;!</span>
+          <p>Ваша заявка успешно отправлена. <br/> Совсем скоро мы&nbsp;с&nbsp;Вами свяжемся&nbsp;!</p>
+        </div>
       </div>
     </div>
     <div class="loader-overlay hidden">

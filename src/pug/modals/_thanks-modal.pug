@@ -1,7 +1,10 @@
 .modal-overlay
-  .modal#thanks-modal.state-modal
+  .modal#thanks-modal.state-modal.thanks-modal
     button(type="button" class="modal__close")
       svg(width="24" height="24")
         use(xlink:href="./assets/svg-sprite.svg#icon-close")
     .modal__content
-      span Спасибо&nbsp;! Мы&nbsp;свяжемся с&nbsp;Вами в&nbsp;ближайшее&nbsp;время&nbsp;!
+      svg(width="100" height="100")
+        use(xlink:href="./assets/svg-sprite.svg#icon-thumb-up")
+      span Спасибо&nbsp;!
+      p Ваша заявка успешно отправлена. <br/> Совсем скоро мы&nbsp;с&nbsp;Вами свяжемся&nbsp;!
