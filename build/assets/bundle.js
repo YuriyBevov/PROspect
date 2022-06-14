@@ -329,6 +329,64 @@ function setControlState(control, validState) {
 
 /***/ }),
 
+/***/ "./src/scripts/modules/heroIconsAnimation.js":
+/*!***************************************************!*\
+  !*** ./src/scripts/modules/heroIconsAnimation.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "heroIconsAnimation": () => (/* binding */ heroIconsAnimation)
+/* harmony export */ });
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+
+var icons = document.querySelectorAll('.hero__icons a');
+function heroIconsAnimation() {
+  if (icons) {
+    icons.forEach(function (icon, i) {
+      gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(icon, {
+        duration: .7,
+        delay: .5 * ((i + 1) / 3),
+        y: '0',
+        opacity: 1,
+        ease: 'power1',
+        borderColor: 'var(--primary-color)'
+      });
+    });
+    var phone = icons[1].querySelector('svg');
+    var tl = gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.timeline({
+      repeat: -1,
+      repeatDelay: 3
+    });
+    tl.to(phone, {
+      duration: 0.03,
+      x: -3,
+      ease: 'power2'
+    }).to(phone, {
+      duration: 0.03,
+      x: 3,
+      ease: 'power2'
+    }).to(phone, {
+      duration: 0.03,
+      x: -3,
+      ease: 'power2'
+    }).to(phone, {
+      duration: 0.03,
+      x: 3,
+      ease: 'power2'
+    }).to(phone, {
+      duration: 0.03,
+      x: 0,
+      ease: 'power2'
+    });
+  }
+}
+;
+
+/***/ }),
+
 /***/ "./src/scripts/modules/iMask.js":
 /*!**************************************!*\
   !*** ./src/scripts/modules/iMask.js ***!
@@ -726,14 +784,16 @@ if (section) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+/* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+/* harmony import */ var _heroIconsAnimation_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./heroIconsAnimation.js */ "./src/scripts/modules/heroIconsAnimation.js");
 //import Parallax from 'parallax-js'
+
 
 var overlay = document.querySelector('.overlay');
 document.addEventListener('DOMContentLoaded', function () {
   setTimeout(function () {
-    function homeIconAnimation(el, index) {
-      gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(el, {
+    function houseIconAnimation(el, index) {
+      gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(el, {
         duration: 1.5,
         delay: 0.1 * (index + 1),
         y: 0,
@@ -745,7 +805,7 @@ document.addEventListener('DOMContentLoaded', function () {
     ;
 
     function fadeInAnimation(el, index) {
-      gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(el, {
+      gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(el, {
         duration: 1.5,
         delay: 0.3 * (index + 1),
         opacity: 1,
@@ -754,7 +814,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     ;
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to(overlay, {
+    gsap__WEBPACK_IMPORTED_MODULE_1__.gsap.to(overlay, {
       duration: .5,
       delay: 0,
       opacity: 0,
@@ -768,7 +828,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var windows = logo.querySelectorAll('path[data-id="house-window"]');
       var title = logo.querySelector('g[data-id="name-container"]');
       houses.forEach(function (el, i) {
-        homeIconAnimation(el, i);
+        houseIconAnimation(el, i);
       });
       windows.forEach(function (el, i) {
         fadeInAnimation(el, i);
@@ -776,6 +836,9 @@ document.addEventListener('DOMContentLoaded', function () {
       fadeInAnimation(title, 3);
     }
   }, 500);
+  setTimeout(function () {
+    (0,_heroIconsAnimation_js__WEBPACK_IMPORTED_MODULE_0__.heroIconsAnimation)();
+  }, 2300);
 });
 
 /***/ }),
@@ -16336,6 +16399,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_yandexMap_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./modules/yandexMap.js */ "./src/scripts/modules/yandexMap.js");
 /* harmony import */ var _modules_yandexMap_js__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_modules_yandexMap_js__WEBPACK_IMPORTED_MODULE_13__);
 
+ //import './modules/heroIconsAnimation.js';
 
 
 

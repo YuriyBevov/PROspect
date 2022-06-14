@@ -29,6 +29,7 @@
     flex-direction: column;
     align-items: center;
     margin: auto;
+    position: relative;
   }
 
   .scroll-btn {
@@ -41,6 +42,50 @@
     svg {
       transform: rotate(90deg);
       animation: moving 1.5s linear infinite;
+    }
+  }
+
+  &__icons {
+    position: absolute;
+    left: 5px;
+    top: 25%;
+    transform: translateY(-50%);
+    z-index: 101;
+
+    @include m-b-tablet-down {
+      display: none;
+    }
+
+    a {
+      @extend .flex-centered-content;
+      width: 50px;
+      height: 50px;
+      margin-bottom: 8px;
+      border-radius: 50%;
+      border: 1px solid var(--dark-color);
+      transition: border-color var(--transition);
+      //gsap
+      opacity: 0;
+      transform: translateY(70px);
+
+      svg {
+        fill: var(--primary-color);
+
+        transition: fill var(--transition);
+      }
+
+      &:hover,
+      &:focus {
+        border-color: var(--dark-color) !important;
+        svg {
+          fill: var(--dark-color);
+        }
+      }
+
+      @include m-b-tablet-lg-down {
+        width: 40px;
+        height: 40px;
+      }
     }
   }
 

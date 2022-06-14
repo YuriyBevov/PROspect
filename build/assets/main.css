@@ -361,6 +361,7 @@ template {
   --dark-color: #4d585B;
   --accent-color: #d52027;
   --dev-color: #251B40;
+  --clear-white: #ffffff;
   --main-bg-color: var(--white-color);
   --transition: 0.3s ease;
   --main-scrollbar-width: 6px;
@@ -601,7 +602,7 @@ select:-webkit-autofill:focus {
   cursor: pointer;
 }
 
-.flex-centered-content, .modal__close, #yandex_map .zoom-btns .zoom-btn, .hero__preview, .hero .scroll-btn, .loader-overlay, .loader, .developer-link, .nav__link, .main-footer__info, .main-footer__logo, .main-btn {
+.flex-centered-content, .modal__close, #yandex_map .zoom-btns .zoom-btn, .hero__preview, .hero__icons a, .hero .scroll-btn, .loader-overlay, .loader, .developer-link, .nav__link, .main-footer__info, .main-footer__logo, .main-btn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1765,6 +1766,7 @@ select:-webkit-autofill:focus {
   -ms-flex-align: center;
   align-items: center;
   margin: auto;
+  position: relative;
 }
 .hero .scroll-btn {
   padding: 15px;
@@ -1777,6 +1779,52 @@ select:-webkit-autofill:focus {
   transform: rotate(90deg);
   -webkit-animation: moving 1.5s linear infinite;
   animation: moving 1.5s linear infinite;
+}
+.hero__icons {
+  position: absolute;
+  left: 5px;
+  top: 25%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  z-index: 101;
+}
+@media (max-width: 768px) {
+  .hero__icons {
+    display: none;
+  }
+}
+.hero__icons a {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 8px;
+  border-radius: 50%;
+  border: 1px solid var(--dark-color);
+  -webkit-transition: border-color var(--transition);
+  -o-transition: border-color var(--transition);
+  transition: border-color var(--transition);
+  opacity: 0;
+  -webkit-transform: translateY(70px);
+  -ms-transform: translateY(70px);
+  transform: translateY(70px);
+}
+.hero__icons a svg {
+  fill: var(--primary-color);
+  -webkit-transition: fill var(--transition);
+  -o-transition: fill var(--transition);
+  transition: fill var(--transition);
+}
+.hero__icons a:hover, .hero__icons a:focus {
+  border-color: var(--dark-color) !important;
+}
+.hero__icons a:hover svg, .hero__icons a:focus svg {
+  fill: var(--dark-color);
+}
+@media (max-width: 960px) {
+  .hero__icons a {
+    width: 40px;
+    height: 40px;
+  }
 }
 .hero__preview {
   height: 100%;

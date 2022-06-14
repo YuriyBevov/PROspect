@@ -1,13 +1,14 @@
 //import Parallax from 'parallax-js'
 
 import {gsap} from 'gsap';
+import { heroIconsAnimation } from './heroIconsAnimation.js'
 
 const overlay = document.querySelector('.overlay');
 
 document.addEventListener('DOMContentLoaded', () => {
 
   setTimeout(() => {
-    function homeIconAnimation(el,index) {
+    function houseIconAnimation(el,index) {
       gsap.to(el, {
         duration: 1.5,
         delay: 0.1 * (index + 1),
@@ -42,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const title = logo.querySelector('g[data-id="name-container"]');
 
       houses.forEach((el,i) => {
-        homeIconAnimation(el,i);
+        houseIconAnimation(el,i);
       });
 
       windows.forEach((el,i) => {
@@ -52,4 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
       fadeInAnimation(title, 3);
     }
   }, 500);
+
+  setTimeout(() => {
+    heroIconsAnimation();
+  }, 2300);
 });
