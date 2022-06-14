@@ -5,22 +5,13 @@ gsap.registerPlugin(ScrollTrigger);
 const section = document.querySelector('.portfolio');
 
 if(section) {
-  const title = section.querySelector('.portfolio__title');
-  const titleTriggerOn = section.querySelector('.portfolio__item:nth-of-type(2)');
   const items = section.querySelectorAll('.portfolio__item');
-
-  gsap.from(title, {
-    scrollTrigger: titleTriggerOn,
-    duration: 1,
-    opacity: 0,
-  });
 
   function scrollTriggerOpt(el) {
     return {
       trigger: el,
       start: "top bottom",
       end: "+=1000",
-      //markers: true,
     }
   }
 

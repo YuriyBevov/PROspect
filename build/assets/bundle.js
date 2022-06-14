@@ -101,14 +101,19 @@ if (window.innerWidth < 1440 && window.innerWidth > 959) {
 }
 
 window.addEventListener('resize', function () {
-  if (window.innerWidth < 1440 && window.innerWidth > 959) {
-    OFFSET_WIDTH = 70;
+  var width = window.innerWidth;
+
+  if (width < 960) {
+    console.log('3', width);
+    OFFSET_WIDTH = null;
     recalculatePos(fields);
-  } else if (window.innerWidth > 1440) {
+  } else if (width > 1440) {
+    console.log('2', width);
     OFFSET_WIDTH = 100;
     recalculatePos(fields);
   } else {
-    OFFSET_WIDTH = null;
+    console.log('1', width);
+    OFFSET_WIDTH = 70;
     recalculatePos(fields);
   }
 });
@@ -699,21 +704,13 @@ gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPAC
 var section = document.querySelector('.portfolio');
 
 if (section) {
-  var title = section.querySelector('.portfolio__title');
-  var titleTriggerOn = section.querySelector('.portfolio__item:nth-of-type(2)');
   var items = section.querySelectorAll('.portfolio__item');
-  gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.from(title, {
-    scrollTrigger: titleTriggerOn,
-    duration: 1,
-    opacity: 0
-  });
 
   function scrollTriggerOpt(el) {
     return {
       trigger: el,
       start: "top bottom",
-      end: "+=1000" //markers: true,
-
+      end: "+=1000"
     };
   }
 
@@ -18717,7 +18714,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_yandexMap_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./modules/yandexMap.js */ "./src/scripts/modules/yandexMap.js");
 /* harmony import */ var _modules_yandexMap_js__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_modules_yandexMap_js__WEBPACK_IMPORTED_MODULE_13__);
 
- //import './modules/heroIconsAnimation.js';
 
 
 
@@ -18726,7 +18722,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- //import './modules/featuresAnimation.js';
 
 
 

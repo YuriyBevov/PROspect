@@ -20,7 +20,7 @@
   padding-bottom: 20px;
 
   @include m-b-tablet-lg-down {
-    min-height: 684px;
+    min-height: 434px;
     padding-top: 80px;
   }
 
@@ -62,6 +62,7 @@
       border-radius: 50%;
       border: 1px solid var(--dark-color);
       transition: border-color var(--transition);
+
       //gsap
       opacity: 0;
       transform: translateY(70px) scale(1.2);
@@ -97,13 +98,13 @@
     width: 100%;
     overflow: hidden;
     z-index: 2;
-    margin-bottom: 80px;
+    margin-bottom: 50px;
 
     svg {
       width: calc(85vw - 300px);
       height: fit-content;
-      min-width: 300px;
-      min-height: 250px;
+      min-width: 290px;
+      min-height: 200px;
       max-height: 50vh;
 
       g[data-id="house"] {

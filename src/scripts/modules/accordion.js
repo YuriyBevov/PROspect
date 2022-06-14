@@ -89,8 +89,6 @@ function calculatePos(fields, target) {
         }
       }
     })
-
-
   }
 }
 
@@ -103,18 +101,27 @@ if(window.innerWidth < 1440 && window.innerWidth > 959) {
 }
 
 window.addEventListener('resize', () => {
-  if(window.innerWidth < 1440 && window.innerWidth > 959) {
-    OFFSET_WIDTH = 70;
-    recalculatePos(fields);
-  } else if(window.innerWidth > 1440) {
-    OFFSET_WIDTH = 100;
-    recalculatePos(fields);
-  } else {
+
+  let width = window.innerWidth;
+
+  if (width < 960) {
+    console.log('3', width);
     OFFSET_WIDTH = null;
     recalculatePos(fields);
   }
-})
 
+  else if(width > 1440) {
+    console.log('2', width);
+    OFFSET_WIDTH = 100;
+    recalculatePos(fields);
+  }
+
+  else {
+    console.log('1', width);
+    OFFSET_WIDTH = 70;
+    recalculatePos(fields);
+  }
+})
 
 fields.forEach((field,i) => {
   field.style.left = OFFSET_WIDTH * i + 'px';

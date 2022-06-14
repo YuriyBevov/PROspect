@@ -1756,7 +1756,7 @@ select:-webkit-autofill:focus {
 }
 @media (max-width: 960px) {
   .hero {
-    min-height: 684px;
+    min-height: 434px;
     padding-top: 80px;
   }
 }
@@ -1844,15 +1844,15 @@ select:-webkit-autofill:focus {
   width: 100%;
   overflow: hidden;
   z-index: 2;
-  margin-bottom: 80px;
+  margin-bottom: 50px;
 }
 .hero__preview svg {
   width: calc(85vw - 300px);
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  min-width: 300px;
-  min-height: 250px;
+  min-width: 290px;
+  min-height: 200px;
   max-height: 50vh;
 }
 .hero__preview svg g[data-id=house] {
@@ -1947,7 +1947,6 @@ select:-webkit-autofill:focus {
     -ms-transform: none;
     transform: none;
     text-align: center;
-    opacity: 1;
     font-size: 48px;
   }
 }
@@ -2466,6 +2465,7 @@ select:-webkit-autofill:focus {
   width: 100%;
   max-width: 2400px;
   height: 500px;
+  margin: 0 auto;
   background-color: var(--dark-color);
   background-image: url("../assets/img/map-static@1x.png");
   background-size: cover;
@@ -2749,7 +2749,7 @@ select:-webkit-autofill:focus {
 }
 @-webkit-keyframes fadeIn {
   0% {
-    opacity: 0;
+    opacity: 0.4;
   }
   100% {
     opacity: 1;
@@ -2757,7 +2757,7 @@ select:-webkit-autofill:focus {
 }
 @keyframes fadeIn {
   0% {
-    opacity: 0;
+    opacity: 0.4;
   }
   100% {
     opacity: 1;
