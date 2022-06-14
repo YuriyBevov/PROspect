@@ -7,60 +7,32 @@ const section = document.querySelector('.portfolio');
 if(section) {
   const title = section.querySelector('.portfolio__title');
   const titleTriggerOn = section.querySelector('.portfolio__item:nth-of-type(2)');
-  //const items = section.querySelectorAll('.portfolio__item-overlay');
   const items = section.querySelectorAll('.portfolio__item');
 
-  gsap.to(title, {
+  gsap.from(title, {
     scrollTrigger: titleTriggerOn,
     duration: 1,
-    opacity: 1,
+    opacity: 0,
   });
 
   function scrollTriggerOpt(el) {
     return {
       trigger: el,
-      start: "top bottom", // when the top of the trigger hits the top of the viewport
+      start: "top bottom",
       end: "+=1000",
       //markers: true,
     }
   }
 
   items.forEach((item,i) => {
-
-    gsap.to(item, {
+    gsap.from(item, {
       scrollTrigger: scrollTriggerOpt(item),
       duration: 0.8,
       delay: 0.15 * (i+1),
-      y: '0',
-      opacity: 1,
+      y: '150px',
+      opacity: 0,
       ease: 'linear'
     });
-
-    /*if(i !== 1 && i !== 2 && i !== 5 ) {
-      //влево
-      gsap.to(item, {
-        scrollTrigger: scrollTriggerOpt(item),
-        duration: 0.8,
-        delay: 0.2,
-        x: '102%',
-        ease: 'linear'
-      });
-    } else {
-      //прозрачность
-      gsap.to(item, {
-        scrollTrigger: scrollTriggerOpt(item),
-        duration: 1.2,
-        delay: 0.5,
-        opacity: 0,
-        ease: 'linear'
-      });
-
-      gsap.to(item, {
-        scrollTrigger: scrollTriggerOpt(item),
-        delay: 1.5,
-        display: 'none'
-      });
-    }*/
   });
 
   const portfolioLink = document.querySelector('.portfolio__link');
@@ -69,36 +41,34 @@ if(section) {
   const text = portfolioLink.querySelector('.text');
   const question = portfolioLink.querySelector('.question-mark');
 
-  gsap.to(overlay, {
+  let opacityItems = [arrowGroup,text,question];
+  opacityItems.forEach(item => item.style.opacity = 0);
+
+  let tl = gsap.timeline({
     scrollTrigger: scrollTriggerOpt(portfolioLink),
+  });
+
+  tl.to(overlay, {
     duration: 0.8,
     delay: 0.3,
     ease: 'linear',
     width: '100%',
-  });
-
-  gsap.to(arrowGroup, {
-    scrollTrigger: scrollTriggerOpt(portfolioLink),
-    delay: 0.9,
+  })
+  .to(arrowGroup, {
+    duration: 0,
     opacity: 1
-  });
-
-  gsap.to(text, {
-    scrollTrigger: scrollTriggerOpt(portfolioLink),
-    delay: 0.9,
+  })
+  .to(text, {
+    duration: 0,
     opacity: 1
-  });
-
-  gsap.to(question, {
-    scrollTrigger: scrollTriggerOpt(portfolioLink),
-    delay: 0.9,
+  })
+  .to(question, {
+    duration: 0,
     opacity: 1
-  });
-
-  gsap.to(overlay, {
-    scrollTrigger: scrollTriggerOpt(portfolioLink),
-    duration: 0.6,
-    delay: 1,
+  })
+  .to(overlay, {
+    duration: 0.7,
+    delay: 0.15,
     ease: 'linear',
     x: '120%',
   });

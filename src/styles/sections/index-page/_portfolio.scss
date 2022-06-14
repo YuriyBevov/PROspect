@@ -55,9 +55,6 @@ $sticky-container-size: 500px;
     transform: translate(-50%, -50%) rotate(-90deg);
     white-space: nowrap;
 
-    //gsap
-    opacity: 0;
-
     @include m-b-laptop-down {
       font-size: 54px;
     }
@@ -103,9 +100,6 @@ $sticky-container-size: 500px;
   &__item {
     overflow: hidden;
     position: relative;
-
-    transform: translateY(150px);
-    opacity: 0;
 
     /*&-overlay {
       position: absolute;
@@ -231,7 +225,6 @@ $sticky-container-size: 500px;
       margin-top: 10px;
       color: var(--warning-color);
       @extend .arrow-group-transition;
-      opacity: 0;
 
       @include m-b-desktop-down {
         font-size: 28px;
@@ -250,7 +243,7 @@ $sticky-container-size: 500px;
       width: 80px;
       height: 100%;
       fill: var(--warning-color);
-      opacity: 0;
+
       @extend .arrow-group-transition;
 
       @include m-b-laptop-down {
@@ -262,7 +255,7 @@ $sticky-container-size: 500px;
       fill: var(--dark-color);
       animation: portfolio-arrows 1.5s ease-in-out infinite;
       @extend .arrow-group-transition;
-      opacity: 0;
+
       transform: rotate(-90deg);
     }
 

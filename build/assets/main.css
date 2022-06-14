@@ -1562,6 +1562,10 @@ select:-webkit-autofill:focus {
   object-fit: contain;
 }
 
+.gsap-split {
+  margin: 30px 0;
+}
+
 .loader {
   width: 100px;
   height: 100px;
@@ -1832,7 +1836,6 @@ select:-webkit-autofill:focus {
   -ms-transform: translate(-50%, -50%) rotate(-90deg);
   transform: translate(-50%, -50%) rotate(-90deg);
   white-space: nowrap;
-  opacity: 0;
 }
 @media (max-width: 1140px) {
   .portfolio__title {
@@ -1885,10 +1888,6 @@ select:-webkit-autofill:focus {
 .portfolio__item {
   overflow: hidden;
   position: relative;
-  -webkit-transform: translateY(150px);
-  -ms-transform: translateY(150px);
-  transform: translateY(150px);
-  opacity: 0;
   /*&-overlay {
     position: absolute;
     top: 0;
@@ -2053,7 +2052,6 @@ select:-webkit-autofill:focus {
   font-size: 36px;
   margin-top: 10px;
   color: var(--warning-color);
-  opacity: 0;
 }
 @media (max-width: 1440px) {
   .portfolio__link .text {
@@ -2075,7 +2073,6 @@ select:-webkit-autofill:focus {
   width: 80px;
   height: 100%;
   fill: var(--warning-color);
-  opacity: 0;
 }
 @media (max-width: 1140px) {
   .portfolio__link .question-mark {
@@ -2086,7 +2083,6 @@ select:-webkit-autofill:focus {
   fill: var(--dark-color);
   -webkit-animation: portfolio-arrows 1.5s ease-in-out infinite;
   animation: portfolio-arrows 1.5s ease-in-out infinite;
-  opacity: 0;
   -webkit-transform: rotate(-90deg);
   -ms-transform: rotate(-90deg);
   transform: rotate(-90deg);
@@ -2284,39 +2280,39 @@ select:-webkit-autofill:focus {
 .feedback {
   background-color: var(--main-bg-color);
 }
-.feedback p {
+.feedback__text {
   font-weight: 400;
   font-size: 42px;
-  width: 90%;
+  width: 100%;
   max-width: 800px;
   margin: 0;
   margin-bottom: 50px;
   color: var(--dark-color);
 }
 @media (max-width: 1440px) {
-  .feedback p {
+  .feedback__text {
     font-size: 36px;
   }
 }
 @media (max-width: 1140px) {
-  .feedback p {
+  .feedback__text {
     font-size: 28px;
     margin-bottom: 30px;
   }
 }
 @media (max-width: 960px) {
-  .feedback p {
+  .feedback__text {
     font-size: 26px;
   }
 }
 @media (max-width: 768px) {
-  .feedback p {
+  .feedback__text {
     font-size: 24px;
     margin-bottom: 20px;
   }
 }
 @media (max-width: 534px) {
-  .feedback p {
+  .feedback__text {
     font-size: 22px;
   }
 }
@@ -2324,7 +2320,7 @@ select:-webkit-autofill:focus {
 .map {
   position: relative;
   z-index: 3;
-  background-color: var(--main-bg-color);
+  background-color: var(--dark-color);
 }
 
 #yandex_map {

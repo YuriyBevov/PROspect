@@ -7,7 +7,7 @@ import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import {TextPlugin} from 'gsap/TextPlugin';
 gsap.registerPlugin(ScrollTrigger, /*ScrollSmoother,*/ TextPlugin);
 
-let featuresTitle = document.querySelector('.features__title span');
+/*let featuresTitle = document.querySelector('.features__title span');
 
 featuresTitle.style.opacity = 0;
 
@@ -23,9 +23,9 @@ gsap.to(featuresTitle, {
   opacity: 1,
   text: {value: "Наши услуги", speed: 1},
   ease: "ease-in"
-});
+});*/
 
-const text = document.querySelector('.outdoor h2 > span');
+/*const text = document.querySelector('.outdoor h2 > span');
 console.log(text);
 
 gsap.to(text, {
@@ -40,4 +40,6 @@ gsap.to(text, {
   opacity: 1,
   text: {value: "Наружная реклама", speed: 1},
   ease: "ease-in"
-});
+});*/
+
+
