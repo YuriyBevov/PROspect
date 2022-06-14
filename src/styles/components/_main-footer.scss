@@ -1,0 +1,87 @@
+.main-footer {
+  padding: 20px 0;
+  background: linear-gradient(180deg, rgba(77, 88, 91, 0) -127.5%, #4D585B 100%);
+
+  &__container {
+    display: flex;
+    align-items: center;
+
+    @include m-b-tablet-down {
+      flex-direction: column;
+    }
+  }
+
+  &__logo {
+    @extend .flex-centered-content;
+    flex-direction: column;
+
+    @include m-b-tablet-down {
+      margin-bottom: 30px;
+    }
+
+    a {
+      margin-bottom: 5px;
+    }
+
+    span {
+      font-size: 14px;
+      color: var(--white-color);
+    }
+  }
+
+  &__info {
+    @extend .flex-centered-content;
+    flex-grow: 1;
+    padding: 0 30px;
+
+    a {
+      display: flex;
+      align-items: center;
+      margin: 0 20px;
+      color: var(--white-color);
+
+      @include m-b-tablet-lg-down {
+        margin: 0;
+        &:not(:last-child) {
+          margin-bottom: 10px;
+        }
+      }
+
+      svg {
+        fill: var(--white-color);
+        margin-right: 10px;
+        transition: fill var(--transition);
+      }
+
+      span {
+        font-weight: 500;
+        font-size: 18px;
+        color: var(--white-color);
+        transition: color var(--transition);
+      }
+
+      &:hover,
+      &:focus {
+        svg {
+          fill: var(--warning-color);
+        }
+
+        span {
+          color: var(--warning-color);
+        }
+      }
+    }
+
+    @include m-b-tablet-lg-down {
+      flex-direction: column;
+    }
+
+    @include m-b-tablet-down {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__developer {
+
+  }
+}

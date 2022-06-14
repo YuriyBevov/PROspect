@@ -11,8 +11,6 @@ const options = {
   opacity: 0,
   scale: 0,
   y: 50,
-  rotationX: 0,
-  //transformOrigin: "0% 50% -50",
   ease: "back",
   stagger: 0.05
 };
@@ -26,8 +24,6 @@ texts.forEach(text => {
   }),
     mySplitText = new SplitText(text, { type: "words,chars" }),
     chars = mySplitText.chars;
-
-  //gsap.set(text, { perspective: 400 });
 
   tl.from(chars, options);
 });
