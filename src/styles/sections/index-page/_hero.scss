@@ -35,8 +35,6 @@
   .scroll-btn {
     @extend .flex-centered-content;
     padding: 15px;
-    // for gsap
-    opacity: 0;
     overflow: hidden;
 
     svg {
@@ -66,7 +64,7 @@
       transition: border-color var(--transition);
       //gsap
       opacity: 0;
-      transform: translateY(70px);
+      transform: translateY(70px) scale(1.2);
 
       svg {
         fill: var(--primary-color);
