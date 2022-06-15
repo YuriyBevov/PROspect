@@ -10,6 +10,7 @@
 /* Компоненты */
 //@import "./components/modal";
 @import "./components/main-header";
+@import "./components/inner-header";
 @import "./components/main-footer";
 @import "./components/nav";
 @import "./components/burger";
@@ -18,6 +19,8 @@
 @import "./components/developer";
 @import "./components/gsap";
 @import "./components/loader";
+@import "./components/portfolio-sort";
+@import "./components/videojs";
 
 /* Секции */
 @import "./sections/index-page/hero";
@@ -26,6 +29,8 @@
 @import "./sections/index-page/outdoor";
 @import "./sections/index-page/feedback";
 @import "./sections/index-page/map";
+
+@import "./sections/portfolio-page/gallery";
 
 /* Модальные окна */
 @import "./components/modal";

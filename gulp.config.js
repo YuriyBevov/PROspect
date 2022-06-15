@@ -50,6 +50,12 @@ const PATHS = {
     dest: `${BUILD_PATH}assets/img/`
   },
 
+  video: {
+    src: `${SOURCE_PATH}assets/video/**/*.mp4`,
+    watchSrc: `${SOURCE_PATH}assets/video/**/*.mp4`,
+    dest: `${BUILD_PATH}assets/video/`
+  },
+
   svg: {
     src: `${SOURCE_PATH}assets/img/**/*.svg`,
     watchSrc: `${SOURCE_PATH}assets/img/**/*.svg`,

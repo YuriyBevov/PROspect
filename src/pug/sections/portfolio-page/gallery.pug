@@ -1,0 +1,94 @@
+-
+  const galleryItems = [
+    {
+      type: 'image',
+      name: 'portfolio_img-1',
+    },
+    {
+      type: 'video',
+      name: 'ML01',
+    },
+    {
+      type: 'image',
+      name: 'portfolio_img-3',
+    },
+    {
+      type: 'video',
+      name: 'ML01',
+    },
+    {
+      type: 'image',
+      name: 'portfolio_img-2',
+    },
+    {
+      type: 'image',
+      name: 'portfolio_img-4',
+    },
+    {
+      type: 'image',
+      name: 'portfolio_img-2',
+    },
+    {
+      type: 'video',
+      name: 'ML01',
+    },
+    {
+      type: 'video',
+      name: 'ML01',
+    },
+    {
+      type: 'image',
+      name: 'portfolio_img-2',
+    },
+    {
+      type: 'image',
+      name: 'portfolio_img-4',
+    },
+    {
+      type: 'image',
+      name: 'portfolio_img-2',
+    },
+    {
+      type: 'video',
+      name: 'ML01',
+    },
+    {
+      type: 'video',
+      name: 'ML01',
+    },
+    {
+      type: 'image',
+      name: 'portfolio_img-2',
+    },
+    {
+      type: 'image',
+      name: 'portfolio_img-4',
+    },
+    {
+      type: 'image',
+      name: 'portfolio_img-2',
+    },
+    {
+      type: 'video',
+      name: 'ML01',
+    },
+
+  ]
+
+section.gallery
+  .container-fluid
+    h1.main-title Галерея наших работ
+
+    .gallery__content
+      include ../../components/_portfolio-sort
+      ul.gallery__list
+        each item in galleryItems
+          li.gallery__item(data-type= item.type)
+            if item.type === 'image'
+              img(src=`./assets/img/${item.name}@1x.jpg` srcset=`./assets/img/${item.name}@2x.jpg` alt="Фото" width="600" height="400")
+            if item.type === 'video'
+              video.video-js(controls width="600" height="400")
+                source(src=`./assets/video/${item.name}.mp4` type="video/mp4")
+
+    .gallery__more
+      p more

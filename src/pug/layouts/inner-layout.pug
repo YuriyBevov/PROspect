@@ -1,0 +1,23 @@
+include ./head
+
+doctype html
+
+block variables
+  -
+    const title = ""
+    const desc = ""
+    const keywords = ""
+
+html(lang="ru")
+  +head(title, desc, keywords)
+
+  body
+    include ./inner-header
+
+    main
+      block content
+
+    include ./main-footer
+
+    block modals
+    include ../components/_loader

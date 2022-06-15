@@ -5,6 +5,7 @@ gsap.registerPlugin(ScrollTrigger);
 const section = document.querySelector('.portfolio');
 
 if(section) {
+  console.log('start')
   const items = section.querySelectorAll('.portfolio__item');
 
   function scrollTriggerOpt(el) {
@@ -16,6 +17,7 @@ if(section) {
   }
 
   items.forEach((item,i) => {
+    console.log('item', item)
     gsap.from(item, {
       scrollTrigger: scrollTriggerOpt(item),
       duration: 0.8,

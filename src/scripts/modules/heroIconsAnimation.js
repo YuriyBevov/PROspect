@@ -3,7 +3,7 @@ import {gsap} from 'gsap';
 const icons = document.querySelectorAll('.hero__icons a');
 
 export function heroIconsAnimation() {
-  if(icons) {
+  if(icons.length) {
     icons.forEach((icon,i) => {
       gsap.to(icon, {
         duration: .7,
@@ -44,6 +44,5 @@ export function heroIconsAnimation() {
       x: 0,
       ease: 'power2'
     })
-
   }
 };

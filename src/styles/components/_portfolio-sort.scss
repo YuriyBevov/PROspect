@@ -1,0 +1,17 @@
+.portfolio-sort {
+  margin-bottom: 20px;
+  margin-left: auto;
+  button {
+    @extend .button-default;
+    width: fit-content;
+    height: 40px;
+    padding: 10px;
+    color: var(--dark-color);
+    transition: color var(--transition);
+
+    &:hover,
+    &:focus {
+      color: var(--primary-color);
+    }
+  }
+}

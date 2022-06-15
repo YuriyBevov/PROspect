@@ -27,13 +27,15 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     };
 
-    gsap.to(overlay, {
-      duration: .5,
-      delay: 0,
-      opacity: 0,
-      ease: 'ease-out',
-      zIndex: '-1'
-    });
+    if(overlay) {
+      gsap.to(overlay, {
+        duration: .5,
+        delay: 0,
+        opacity: 0,
+        ease: 'ease-out',
+        zIndex: '-1'
+      });
+    }
 
     const logo = document.querySelector('#logo');
 
