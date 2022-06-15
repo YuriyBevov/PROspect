@@ -15,6 +15,7 @@ import './modules/feedbackFormAnimation.js';
 import './modules/splitText.js';
 import './modules/video.js';
 import './modules/portfolioPage.js';
+//import './modules/portfolioSort.js';
 
 import './modules/modal.js';
 import './modules/yandexMap.js';

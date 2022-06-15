@@ -2812,6 +2812,16 @@ select:-webkit-autofill:focus {
   font-size: 20px;
   color: var(--dark-color);
 }
+@media (max-width: 768px) {
+  .inner-header__navbar .back-btn span {
+    font-size: 16px;
+  }
+}
+@media (max-width: 534px) {
+  .inner-header__navbar .back-btn span {
+    display: none;
+  }
+}
 
 .main-footer {
   padding: 20px 0;
@@ -3594,12 +3604,20 @@ select:-webkit-autofill:focus {
   margin-bottom: 20px;
   margin-left: auto;
 }
+@media (max-width: 768px) {
+  .portfolio-sort {
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+}
 .portfolio-sort button {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   height: 40px;
   padding: 10px;
+  font-size: 20px;
+  font-weight: 500;
   color: var(--dark-color);
   -webkit-transition: color var(--transition);
   -o-transition: color var(--transition);
@@ -3607,6 +3625,12 @@ select:-webkit-autofill:focus {
 }
 .portfolio-sort button:hover, .portfolio-sort button:focus {
   color: var(--primary-color);
+}
+@media (max-width: 440px) {
+  .portfolio-sort button {
+    padding: 10px 3px;
+    font-size: 16px;
+  }
 }
 
 .vjs-big-play-button {
@@ -3658,7 +3682,7 @@ select:-webkit-autofill:focus {
   position: fixed;
   width: 100vw;
   height: 100vh;
-  min-height: 860px;
+  min-height: 624px;
   max-height: 1080px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4443,6 +4467,9 @@ select:-webkit-autofill:focus {
   background-color: var(--primary-color);
 }
 
+.portfolio-page {
+  padding-top: 90px;
+}
 .portfolio-page .gallery__content {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4466,8 +4493,20 @@ select:-webkit-autofill:focus {
   grid-template-columns: repeat(3, 1fr);
   -ms-grid-rows: auto;
   grid-template-rows: auto;
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+}
+@media (max-width: 768px) {
+  .portfolio-page .gallery__list {
+    -ms-grid-columns: (1fr)[2];
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 534px) {
+  .portfolio-page .gallery__list {
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+  }
 }
 .portfolio-page .gallery__item {
   position: relative;

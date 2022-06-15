@@ -13,11 +13,13 @@ html(lang="ru")
 
   body
     include ./inner-header
+    #smooth-wrapper
+      #smooth-content
 
-    main
-      block content
+        main
+          block content
 
-    include ./main-footer
+        include ./main-footer
 
-    block modals
-    include ../components/_loader
+        block modals
+        include ../components/_loader
