@@ -6654,23 +6654,38 @@ gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPAC
 var portfolioPage = document.querySelector('.portfolio-page');
 
 if (portfolioPage) {
-  var scroller = gsap_ScrollSmoother__WEBPACK_IMPORTED_MODULE_2__.ScrollSmoother.create({
-    smooth: 1,
-    // how long (in seconds) it takes to "catch up" to the native scroll position
-    effects: true,
-    // looks for data-speed and data-lag attributes on elements
-    smoothTouch: 0.1 // much shorter smoothing time on touch devices (default is NO smoothing on touch devices)
-
-  });
+  var scroller;
+  var isScrollerInited = false;
   var galleryItems = document.querySelectorAll('.portfolio-page .gallery__item');
 
-  if (galleryItems) {
-    galleryItems.forEach(function (item, i) {
-      scroller.effects(item, {
-        lag: i % 2 === 0 ? 0.4 : i % 3 === 0 ? 0.5 : i % 3 === 0 ? 0.3 : 0.7,
-        speed: 1
-      });
+  function initScroller() {
+    isScrollerInited = true;
+    scroller = gsap_ScrollSmoother__WEBPACK_IMPORTED_MODULE_2__.ScrollSmoother.create({
+      smooth: 1,
+      // how long (in seconds) it takes to "catch up" to the native scroll position
+      effects: true,
+      // looks for data-speed and data-lag attributes on elements
+      smoothTouch: 0.1 // much shorter smoothing time on touch devices (default is NO smoothing on touch devices)
+
     });
+
+    if (galleryItems) {
+      galleryItems.forEach(function (item, i) {
+        scroller.effects(item, {
+          lag: i % 2 === 0 ? 0.4 : i % 3 === 0 ? 0.5 : i % 3 === 0 ? 0.3 : 0.7,
+          speed: 1
+        });
+      });
+    }
+  }
+
+  function destroyScroller() {
+    isScrollerInited = false;
+    scroller.kill();
+  }
+
+  if (window.innerWidth > 959) {
+    initScroller();
   }
   /*Сортировка*/
 
@@ -6681,7 +6696,12 @@ if (portfolioPage) {
   var onClickSortItems = function onClickSortItems(evt) {
     var current = evt.currentTarget;
     var sortType = current.getAttribute('data-type');
-    scroller.kill();
+
+    if (isScrollerInited) {
+      console.log('kill');
+      destroyScroller();
+    }
+
     itemList.forEach(function (item) {
       item.getAttribute('data-type') === sortType && sortType !== 'all' ? item.classList.remove('hidden') : item.classList.add('hidden');
 
@@ -6689,20 +6709,25 @@ if (portfolioPage) {
         item.classList.remove('hidden');
       }
     });
-    gsap_ScrollSmoother__WEBPACK_IMPORTED_MODULE_2__.ScrollSmoother.create({
-      smooth: 1,
-      // how long (in seconds) it takes to "catch up" to the native scroll position
-      effects: true,
-      // looks for data-speed and data-lag attributes on elements
-      smoothTouch: 0.1 // much shorter smoothing time on touch devices (default is NO smoothing on touch devices)
 
-    });
+    if (window.innerWidth > 959 && !isScrollerInited) {
+      console.log('init');
+      initScroller();
+    }
   };
 
   sortBtns.forEach(function (btn) {
     btn.addEventListener('click', onClickSortItems);
   });
   /*Сортировка конец*/
+
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 959 && !isScrollerInited) {
+      initScroller();
+    } else if (window.innerWidth < 960 && isScrollerInited) {
+      destroyScroller();
+    }
+  });
 }
 
 /***/ }),
