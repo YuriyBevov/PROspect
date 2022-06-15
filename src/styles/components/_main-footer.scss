@@ -20,13 +20,13 @@
     }
 
     a {
-      margin-bottom: 5px;
+      //margin-bottom: 5px;
     }
 
-    span {
+    /*span {
       font-size: 14px;
       color: var(--white-color);
-    }
+    }*/
   }
 
   &__info {
@@ -38,7 +38,7 @@
       display: flex;
       align-items: center;
       margin: 0 20px;
-      color: var(--white-color);
+      color: var(--clear-white);
 
       @include m-b-tablet-lg-down {
         margin: 0;
@@ -48,7 +48,7 @@
       }
 
       svg {
-        fill: var(--white-color);
+        fill:  var(--clear-white);
         margin-right: 10px;
         transition: fill var(--transition);
       }
@@ -56,7 +56,7 @@
       span {
         font-weight: 500;
         font-size: 18px;
-        color: var(--white-color);
+        color:  var(--clear-white);
         transition: color var(--transition);
       }
 

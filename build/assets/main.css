@@ -977,18 +977,15 @@ select:-webkit-autofill:focus {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
+  /*span {
+    font-size: 14px;
+    color: var(--white-color);
+  }*/
 }
 @media (max-width: 768px) {
   .main-footer__logo {
     margin-bottom: 30px;
   }
-}
-.main-footer__logo a {
-  margin-bottom: 5px;
-}
-.main-footer__logo span {
-  font-size: 14px;
-  color: var(--white-color);
 }
 .main-footer__info {
   -webkit-box-flex: 1;
@@ -1004,7 +1001,7 @@ select:-webkit-autofill:focus {
   -ms-flex-align: center;
   align-items: center;
   margin: 0 20px;
-  color: var(--white-color);
+  color: var(--clear-white);
 }
 @media (max-width: 960px) {
   .main-footer__info a {
@@ -1015,7 +1012,7 @@ select:-webkit-autofill:focus {
   }
 }
 .main-footer__info a svg {
-  fill: var(--white-color);
+  fill: var(--clear-white);
   margin-right: 10px;
   -webkit-transition: fill var(--transition);
   -o-transition: fill var(--transition);
@@ -1024,7 +1021,7 @@ select:-webkit-autofill:focus {
 .main-footer__info a span {
   font-weight: 500;
   font-size: 18px;
-  color: var(--white-color);
+  color: var(--clear-white);
   -webkit-transition: color var(--transition);
   -o-transition: color var(--transition);
   transition: color var(--transition);
