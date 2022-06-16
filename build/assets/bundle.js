@@ -6070,7 +6070,7 @@ if (form) {
   }).to("#mail", {
     duration: 1.3,
     x: '150vw',
-    y: '-100vh',
+    y: '-40vh',
     ease: "power1.out"
   });
 }
