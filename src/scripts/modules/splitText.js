@@ -20,7 +20,9 @@ texts.forEach(text => {
     scrollTrigger: {
       trigger: text,
       start: "top bottom",
-    }
+    },
+    repeat: '-1',
+    repeatDelay: 7
   }),
     mySplitText = new SplitText(text, { type: "words,chars" }),
     chars = mySplitText.chars;

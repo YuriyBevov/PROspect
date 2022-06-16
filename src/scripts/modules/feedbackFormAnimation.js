@@ -64,7 +64,7 @@ if(form) {
     }).to("#mail", {
       duration: 1.3,
       x: '150vw',
-      y: '-300px',
+      y: '-100vh',
       ease: "power1.out",
     });
 }

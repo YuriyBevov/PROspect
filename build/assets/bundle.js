@@ -5962,29 +5962,26 @@ if (accordion) {
 
   var OFFSET_WIDTH = null;
 
-  if (window.innerWidth < 1440 && window.innerWidth > 959) {
+  if (window.innerWidth > 960 && window.innerWidth < 1441) {
     OFFSET_WIDTH = 70;
   } else if (window.innerWidth > 1440) {
     OFFSET_WIDTH = 100;
   }
 
-  window.addEventListener('resize', function () {
-    var width = window.innerWidth;
-
-    if (width < 960) {
-      console.log('3', width);
+  var onWindowResizeHandler = function onWindowResizeHandler() {
+    if (window.innerWidth < 961) {
       OFFSET_WIDTH = null;
       recalculatePos(fields);
-    } else if (width > 1440) {
-      console.log('2', width);
-      OFFSET_WIDTH = 100;
-      recalculatePos(fields);
-    } else {
-      console.log('1', width);
+    } else if (window.innerWidth > 960 && window.innerWidth < 1441) {
       OFFSET_WIDTH = 70;
       recalculatePos(fields);
+    } else if (window.innerWidth > 1440) {
+      OFFSET_WIDTH = 100;
+      recalculatePos(fields);
     }
-  });
+  };
+
+  window.addEventListener('resize', onWindowResizeHandler);
   fields.forEach(function (field, i) {
     field.style.left = OFFSET_WIDTH * i + 'px';
   });
@@ -6073,7 +6070,7 @@ if (form) {
   }).to("#mail", {
     duration: 1.3,
     x: '150vw',
-    y: '-300px',
+    y: '-100vh',
     ease: "power1.out"
   });
 }
@@ -6941,7 +6938,9 @@ texts.forEach(function (text) {
     scrollTrigger: {
       trigger: text,
       start: "top bottom"
-    }
+    },
+    repeat: '-1',
+    repeatDelay: 7
   }),
       mySplitText = new gsap_SplitText__WEBPACK_IMPORTED_MODULE_1__.SplitText(text, {
     type: "words,chars"

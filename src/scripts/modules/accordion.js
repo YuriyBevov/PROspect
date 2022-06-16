@@ -96,34 +96,27 @@ if(accordion) {
 
   let OFFSET_WIDTH = null;
 
-  if(window.innerWidth < 1440 && window.innerWidth > 959) {
+  if(window.innerWidth > 960 && window.innerWidth < 1441) {
     OFFSET_WIDTH = 70;
   } else if(window.innerWidth > 1440) {
     OFFSET_WIDTH = 100;
   }
 
-  window.addEventListener('resize', () => {
-
-    let width = window.innerWidth;
-
-    if (width < 960) {
-      console.log('3', width);
+  const onWindowResizeHandler = () => {
+    if(window.innerWidth < 961) {
       OFFSET_WIDTH = null;
       recalculatePos(fields);
     }
-
-    else if(width > 1440) {
-      console.log('2', width);
+    else if( window.innerWidth > 960 && window.innerWidth < 1441) {
+      OFFSET_WIDTH = 70;
+      recalculatePos(fields);
+    } else if(window.innerWidth > 1440) {
       OFFSET_WIDTH = 100;
       recalculatePos(fields);
     }
+  }
 
-    else {
-      console.log('1', width);
-      OFFSET_WIDTH = 70;
-      recalculatePos(fields);
-    }
-  })
+  window.addEventListener('resize', onWindowResizeHandler);
 
   fields.forEach((field,i) => {
     field.style.left = OFFSET_WIDTH * i + 'px';
