@@ -37,22 +37,40 @@
   }
 
   position: relative;
-  overflow: hidden;
+  //overflow: hidden; //вернуть если без п-са
 
-  svg {
+  .plane-container {  //убрать если без п-са
     position: absolute;
+    top: 0;
+    left: 0;
+
     width: 100%;
     min-width: 768px;
     height: 100%;
     min-height: 400px;
+
+    overflow: hidden;
+
+    #scene {
+      width: 100%;
+      height: 100%;
+      left: 10%;
+    }
+  }
+
+  svg {  //вернуть если без п-са
+    //position: absolute;
+    //top: 0;
+    //left: 15%;
+    //width: 100%;
+    //min-width: 768px;
+    //height: 100%;
+    //min-height: 400px;
     z-index: 0;
 
-    @include m-b-mobile-lg-down {
+    @include m-b-down(576px) {
       opacity: 0;
     }
-
-    top: 0;
-    left: 15%;
 
     #path {
       opacity: 0;
@@ -61,7 +79,7 @@
     #plane {
       width: 500px;
       height: 400px;
-      transform: scale(2.2);
+      transform: scale(2); //2,2
       fill: var(--primary-color);
     }
 

@@ -11,6 +11,8 @@
 
 .hero {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
   min-height: 624px;
@@ -98,7 +100,6 @@
     width: 100%;
     overflow: hidden;
     z-index: 2;
-    margin-bottom: 50px;
 
     svg {
       width: calc(85vw - 300px);

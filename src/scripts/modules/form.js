@@ -2,7 +2,6 @@ import { formValidation } from "./form/formValidation";
 
 const forms = document.querySelectorAll('form');
 
-
 const onClickSendForm = (evt) => {
   evt.preventDefault();
   formValidation(evt.target.closest('form'));

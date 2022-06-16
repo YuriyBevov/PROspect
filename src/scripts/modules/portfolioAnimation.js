@@ -5,7 +5,6 @@ gsap.registerPlugin(ScrollTrigger);
 const section = document.querySelector('.portfolio');
 
 if(section) {
-  console.log('start')
   const items = section.querySelectorAll('.portfolio__item');
 
   function scrollTriggerOpt(el) {

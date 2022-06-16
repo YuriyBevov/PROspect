@@ -1,8 +1,7 @@
 import {gsap} from 'gsap';
 
-const icons = document.querySelectorAll('.hero__icons a');
-
 export function heroIconsAnimation() {
+  const icons = document.querySelectorAll('.hero__icons a');
   if(icons.length) {
     icons.forEach((icon,i) => {
       gsap.to(icon, {

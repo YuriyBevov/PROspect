@@ -35,23 +35,21 @@
 @keyframes showAccordionBody {
   0% {
     height: 0;
-    padding: 20px;
     opacity: 0;
   }
 
   30% {
     height: 100%;
-    padding: 20px;
     opacity: 0;
   }
 
-  40% {height: 100%;
-    padding: 20px;
+  40% {
+    height: 100%;
     opacity: 0;
   }
 
-  100% {height: 100%;
-    padding: 20px;
+  100% {
+    height: 100%;
     opacity: 1;
   }
 }

@@ -1,3 +1,4 @@
+//import './modules/barba.js';
 import './modules/scrollBtns.js';
 import './modules/previewAnimation.js';
 import './modules/previewParallax.js';

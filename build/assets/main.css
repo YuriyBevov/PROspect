@@ -2640,44 +2640,36 @@ select:-webkit-autofill:focus {
 @-webkit-keyframes showAccordionBody {
   0% {
     height: 0;
-    padding: 20px;
     opacity: 0;
   }
   30% {
     height: 100%;
-    padding: 20px;
     opacity: 0;
   }
   40% {
     height: 100%;
-    padding: 20px;
     opacity: 0;
   }
   100% {
     height: 100%;
-    padding: 20px;
     opacity: 1;
   }
 }
 @keyframes showAccordionBody {
   0% {
     height: 0;
-    padding: 20px;
     opacity: 0;
   }
   30% {
     height: 100%;
-    padding: 20px;
     opacity: 0;
   }
   40% {
     height: 100%;
-    padding: 20px;
     opacity: 0;
   }
   100% {
     height: 100%;
-    padding: 20px;
     opacity: 1;
   }
 }
@@ -2824,6 +2816,8 @@ select:-webkit-autofill:focus {
 }
 
 .main-footer {
+  position: relative;
+  z-index: 3;
   padding: 20px 0;
   background: -webkit-gradient(linear, left top, left bottom, color-stop(-127.5%, rgba(77, 88, 91, 0)), to(#4D585B));
   background: -o-linear-gradient(top, rgba(77, 88, 91, 0) -127.5%, #4D585B 100%);
@@ -3426,7 +3420,6 @@ select:-webkit-autofill:focus {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  padding: 20px;
   overflow: auto;
 }
 @media (max-width: 1140px) {
@@ -3444,25 +3437,38 @@ select:-webkit-autofill:focus {
     width: 100%;
   }
 }
-.accordion__body img {
+.accordion__body-img-box {
   width: 50%;
+  height: 100%;
+  max-height: 600px;
+  margin-right: 20px;
+  padding: 20px;
+  background: -o-radial-gradient(50% 50%, 50% 50%, rgba(171, 171, 171, 0) 0%, #B4B4B4 100%);
+  background: radial-gradient(50% 50% at 50% 50%, rgba(171, 171, 171, 0) 0%, #B4B4B4 100%);
+}
+@media (max-width: 1140px) {
+  .accordion__body-img-box {
+    width: 100%;
+    max-height: 450px;
+    margin-right: 0;
+  }
+}
+.accordion__body img {
+  display: block;
+  width: 100%;
   height: 100%;
   max-height: 600px;
   -o-object-fit: contain;
   object-fit: contain;
-  margin-right: 20px;
 }
 @media (max-width: 1140px) {
   .accordion__body img {
-    width: 100%;
-    max-height: 450px;
-    -o-object-fit: cover;
-    object-fit: cover;
-    margin-right: 0;
+    max-height: 400px;
   }
 }
 .accordion__body-content {
   width: 50%;
+  padding: 20px;
 }
 @media (max-width: 1140px) {
   .accordion__body-content {
@@ -3680,6 +3686,8 @@ select:-webkit-autofill:focus {
 
 .hero {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
   min-height: 624px;
@@ -3780,7 +3788,6 @@ select:-webkit-autofill:focus {
   width: 100%;
   overflow: hidden;
   z-index: 2;
-  margin-bottom: 50px;
 }
 .hero__preview svg {
   width: calc(85vw - 300px);
@@ -4311,7 +4318,6 @@ select:-webkit-autofill:focus {
   padding-top: 50px;
   background-color: var(--main-bg-color);
   position: relative;
-  overflow: hidden;
 }
 .feedback__text {
   font-weight: 400;
@@ -4351,17 +4357,25 @@ select:-webkit-autofill:focus {
     font-size: 22px;
   }
 }
-.feedback svg {
+.feedback .plane-container {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   min-width: 768px;
   height: 100%;
   min-height: 400px;
-  z-index: 0;
-  top: 0;
-  left: 15%;
+  overflow: hidden;
 }
-@media (max-width: 534px) {
+.feedback .plane-container #scene {
+  width: 100%;
+  height: 100%;
+  left: 10%;
+}
+.feedback svg {
+  z-index: 0;
+}
+@media (max-width: 576px) {
   .feedback svg {
     opacity: 0;
   }
@@ -4372,9 +4386,9 @@ select:-webkit-autofill:focus {
 .feedback svg #plane {
   width: 500px;
   height: 400px;
-  -webkit-transform: scale(2.2);
-  -ms-transform: scale(2.2);
-  transform: scale(2.2);
+  -webkit-transform: scale(2);
+  -ms-transform: scale(2);
+  transform: scale(2);
   fill: var(--primary-color);
 }
 @media (max-width: 768px) {

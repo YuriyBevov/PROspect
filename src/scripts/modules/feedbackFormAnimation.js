@@ -1,8 +1,8 @@
+import Parallax from 'parallax-js'
 import {gsap} from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import {MotionPathPlugin} from 'gsap/MotionPathPlugin';
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
-
 
 const form = document.querySelector('.feedback form');
 if(form) {
@@ -48,4 +48,9 @@ if(form) {
       alignOrigin: [0.5, 0.5]
     }
   });
+
+  setTimeout(() => {
+    const scene = document.getElementById('scene');
+    let parallaxInstance = new Parallax(scene);
+  }, 750);
 }
