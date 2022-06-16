@@ -4520,7 +4520,9 @@ select:-webkit-autofill:focus {
 .portfolio-page .gallery__item img, .portfolio-page .gallery__item video {
   display: block;
   width: 100%;
+  max-width: 600px;
   height: 100%;
+  max-height: 450px;
 }
 .portfolio-page .gallery__item.hidden {
   display: none;

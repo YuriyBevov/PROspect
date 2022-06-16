@@ -34,60 +34,148 @@
                     <button type="button" data-type="all">Все</button>
                   </div>
                   <ul class="gallery__list">
-                    <li class="gallery__item" data-type="image"><img src="./assets/img/portfolio_img-1@1x.jpg" srcset="./assets/img/portfolio_img-1@2x.jpg" alt="Фото" width="600" height="400">
+                    <li class="gallery__item" data-type="image">
+                      <picture>
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-1-mobile@1x.webp 1x, ./assets/img/portfolio_img-1-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-1-tablet@1x.webp 1x, ./assets/img/portfolio_img-1-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
+                        <source type="image/webp" srcset="./assets/img/portfolio_img-1@2x.webp 1x, ./assets/img/portfolio_img-1@2x.webp 2x" width="800" height="600">
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-1-mobile@1x.jpg 1x, ./assets/img/portfolio_img-1-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-1-tablet@1x.jpg 1x, ./assets/img/portfolio_img-1-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-1@1x.jpg" srcset="./assets/img/portfolio_img-1@2x.jpg 2x" loading="lazy" width="800" height="600">
+                      </picture>
+                      <!--img(src=`./assets/img/${item.name}@1x.jpg` srcset=`./assets/img/${item.name}@2x.jpg` alt="Фото" width="600" height="400")-->
                     </li>
                     <li class="gallery__item" data-type="video">
-                      <video class="video-js" controls width="600" height="400">
+                      <video class="video-js" controls width="600" height="400" loading="lazy">
                         <source src="./assets/video/ML01.mp4" type="video/mp4">
                       </video>
                     </li>
-                    <li class="gallery__item" data-type="image"><img src="./assets/img/portfolio_img-3@1x.jpg" srcset="./assets/img/portfolio_img-3@2x.jpg" alt="Фото" width="600" height="400">
+                    <li class="gallery__item" data-type="image">
+                      <picture>
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-3-mobile@1x.webp 1x, ./assets/img/portfolio_img-3-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-3-tablet@1x.webp 1x, ./assets/img/portfolio_img-3-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
+                        <source type="image/webp" srcset="./assets/img/portfolio_img-3@2x.webp 1x, ./assets/img/portfolio_img-3@2x.webp 2x" width="800" height="600">
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-3-mobile@1x.jpg 1x, ./assets/img/portfolio_img-3-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-3-tablet@1x.jpg 1x, ./assets/img/portfolio_img-3-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-3@1x.jpg" srcset="./assets/img/portfolio_img-3@2x.jpg 2x" loading="lazy" width="800" height="600">
+                      </picture>
+                      <!--img(src=`./assets/img/${item.name}@1x.jpg` srcset=`./assets/img/${item.name}@2x.jpg` alt="Фото" width="600" height="400")-->
                     </li>
                     <li class="gallery__item" data-type="video">
-                      <video class="video-js" controls width="600" height="400">
+                      <video class="video-js" controls width="600" height="400" loading="lazy">
                         <source src="./assets/video/ML01.mp4" type="video/mp4">
                       </video>
                     </li>
-                    <li class="gallery__item" data-type="image"><img src="./assets/img/portfolio_img-2@1x.jpg" srcset="./assets/img/portfolio_img-2@2x.jpg" alt="Фото" width="600" height="400">
+                    <li class="gallery__item" data-type="image">
+                      <picture>
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.webp 1x, ./assets/img/portfolio_img-2-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.webp 1x, ./assets/img/portfolio_img-2-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
+                        <source type="image/webp" srcset="./assets/img/portfolio_img-2@2x.webp 1x, ./assets/img/portfolio_img-2@2x.webp 2x" width="800" height="600">
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.jpg 1x, ./assets/img/portfolio_img-2-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.jpg 1x, ./assets/img/portfolio_img-2-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-2@1x.jpg" srcset="./assets/img/portfolio_img-2@2x.jpg 2x" loading="lazy" width="800" height="600">
+                      </picture>
+                      <!--img(src=`./assets/img/${item.name}@1x.jpg` srcset=`./assets/img/${item.name}@2x.jpg` alt="Фото" width="600" height="400")-->
                     </li>
-                    <li class="gallery__item" data-type="image"><img src="./assets/img/portfolio_img-4@1x.jpg" srcset="./assets/img/portfolio_img-4@2x.jpg" alt="Фото" width="600" height="400">
+                    <li class="gallery__item" data-type="image">
+                      <picture>
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-4-mobile@1x.webp 1x, ./assets/img/portfolio_img-4-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-4-tablet@1x.webp 1x, ./assets/img/portfolio_img-4-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
+                        <source type="image/webp" srcset="./assets/img/portfolio_img-4@2x.webp 1x, ./assets/img/portfolio_img-4@2x.webp 2x" width="800" height="600">
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-4-mobile@1x.jpg 1x, ./assets/img/portfolio_img-4-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-4-tablet@1x.jpg 1x, ./assets/img/portfolio_img-4-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-4@1x.jpg" srcset="./assets/img/portfolio_img-4@2x.jpg 2x" loading="lazy" width="800" height="600">
+                      </picture>
+                      <!--img(src=`./assets/img/${item.name}@1x.jpg` srcset=`./assets/img/${item.name}@2x.jpg` alt="Фото" width="600" height="400")-->
                     </li>
-                    <li class="gallery__item" data-type="image"><img src="./assets/img/portfolio_img-2@1x.jpg" srcset="./assets/img/portfolio_img-2@2x.jpg" alt="Фото" width="600" height="400">
+                    <li class="gallery__item" data-type="image">
+                      <picture>
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.webp 1x, ./assets/img/portfolio_img-2-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.webp 1x, ./assets/img/portfolio_img-2-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
+                        <source type="image/webp" srcset="./assets/img/portfolio_img-2@2x.webp 1x, ./assets/img/portfolio_img-2@2x.webp 2x" width="800" height="600">
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.jpg 1x, ./assets/img/portfolio_img-2-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.jpg 1x, ./assets/img/portfolio_img-2-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-2@1x.jpg" srcset="./assets/img/portfolio_img-2@2x.jpg 2x" loading="lazy" width="800" height="600">
+                      </picture>
+                      <!--img(src=`./assets/img/${item.name}@1x.jpg` srcset=`./assets/img/${item.name}@2x.jpg` alt="Фото" width="600" height="400")-->
                     </li>
                     <li class="gallery__item" data-type="video">
-                      <video class="video-js" controls width="600" height="400">
+                      <video class="video-js" controls width="600" height="400" loading="lazy">
                         <source src="./assets/video/ML01.mp4" type="video/mp4">
                       </video>
                     </li>
                     <li class="gallery__item" data-type="video">
-                      <video class="video-js" controls width="600" height="400">
+                      <video class="video-js" controls width="600" height="400" loading="lazy">
                         <source src="./assets/video/ML01.mp4" type="video/mp4">
                       </video>
                     </li>
-                    <li class="gallery__item" data-type="image"><img src="./assets/img/portfolio_img-2@1x.jpg" srcset="./assets/img/portfolio_img-2@2x.jpg" alt="Фото" width="600" height="400">
+                    <li class="gallery__item" data-type="image">
+                      <picture>
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.webp 1x, ./assets/img/portfolio_img-2-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.webp 1x, ./assets/img/portfolio_img-2-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
+                        <source type="image/webp" srcset="./assets/img/portfolio_img-2@2x.webp 1x, ./assets/img/portfolio_img-2@2x.webp 2x" width="800" height="600">
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.jpg 1x, ./assets/img/portfolio_img-2-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.jpg 1x, ./assets/img/portfolio_img-2-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-2@1x.jpg" srcset="./assets/img/portfolio_img-2@2x.jpg 2x" loading="lazy" width="800" height="600">
+                      </picture>
+                      <!--img(src=`./assets/img/${item.name}@1x.jpg` srcset=`./assets/img/${item.name}@2x.jpg` alt="Фото" width="600" height="400")-->
                     </li>
-                    <li class="gallery__item" data-type="image"><img src="./assets/img/portfolio_img-4@1x.jpg" srcset="./assets/img/portfolio_img-4@2x.jpg" alt="Фото" width="600" height="400">
+                    <li class="gallery__item" data-type="image">
+                      <picture>
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-4-mobile@1x.webp 1x, ./assets/img/portfolio_img-4-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-4-tablet@1x.webp 1x, ./assets/img/portfolio_img-4-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
+                        <source type="image/webp" srcset="./assets/img/portfolio_img-4@2x.webp 1x, ./assets/img/portfolio_img-4@2x.webp 2x" width="800" height="600">
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-4-mobile@1x.jpg 1x, ./assets/img/portfolio_img-4-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-4-tablet@1x.jpg 1x, ./assets/img/portfolio_img-4-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-4@1x.jpg" srcset="./assets/img/portfolio_img-4@2x.jpg 2x" loading="lazy" width="800" height="600">
+                      </picture>
+                      <!--img(src=`./assets/img/${item.name}@1x.jpg` srcset=`./assets/img/${item.name}@2x.jpg` alt="Фото" width="600" height="400")-->
                     </li>
-                    <li class="gallery__item" data-type="image"><img src="./assets/img/portfolio_img-2@1x.jpg" srcset="./assets/img/portfolio_img-2@2x.jpg" alt="Фото" width="600" height="400">
+                    <li class="gallery__item" data-type="image">
+                      <picture>
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.webp 1x, ./assets/img/portfolio_img-2-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.webp 1x, ./assets/img/portfolio_img-2-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
+                        <source type="image/webp" srcset="./assets/img/portfolio_img-2@2x.webp 1x, ./assets/img/portfolio_img-2@2x.webp 2x" width="800" height="600">
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.jpg 1x, ./assets/img/portfolio_img-2-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.jpg 1x, ./assets/img/portfolio_img-2-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-2@1x.jpg" srcset="./assets/img/portfolio_img-2@2x.jpg 2x" loading="lazy" width="800" height="600">
+                      </picture>
+                      <!--img(src=`./assets/img/${item.name}@1x.jpg` srcset=`./assets/img/${item.name}@2x.jpg` alt="Фото" width="600" height="400")-->
                     </li>
                     <li class="gallery__item" data-type="video">
-                      <video class="video-js" controls width="600" height="400">
+                      <video class="video-js" controls width="600" height="400" loading="lazy">
                         <source src="./assets/video/ML01.mp4" type="video/mp4">
                       </video>
                     </li>
                     <li class="gallery__item" data-type="video">
-                      <video class="video-js" controls width="600" height="400">
+                      <video class="video-js" controls width="600" height="400" loading="lazy">
                         <source src="./assets/video/ML01.mp4" type="video/mp4">
                       </video>
                     </li>
-                    <li class="gallery__item" data-type="image"><img src="./assets/img/portfolio_img-2@1x.jpg" srcset="./assets/img/portfolio_img-2@2x.jpg" alt="Фото" width="600" height="400">
+                    <li class="gallery__item" data-type="image">
+                      <picture>
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.webp 1x, ./assets/img/portfolio_img-2-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.webp 1x, ./assets/img/portfolio_img-2-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
+                        <source type="image/webp" srcset="./assets/img/portfolio_img-2@2x.webp 1x, ./assets/img/portfolio_img-2@2x.webp 2x" width="800" height="600">
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.jpg 1x, ./assets/img/portfolio_img-2-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.jpg 1x, ./assets/img/portfolio_img-2-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-2@1x.jpg" srcset="./assets/img/portfolio_img-2@2x.jpg 2x" loading="lazy" width="800" height="600">
+                      </picture>
+                      <!--img(src=`./assets/img/${item.name}@1x.jpg` srcset=`./assets/img/${item.name}@2x.jpg` alt="Фото" width="600" height="400")-->
                     </li>
-                    <li class="gallery__item" data-type="image"><img src="./assets/img/portfolio_img-4@1x.jpg" srcset="./assets/img/portfolio_img-4@2x.jpg" alt="Фото" width="600" height="400">
+                    <li class="gallery__item" data-type="image">
+                      <picture>
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-4-mobile@1x.webp 1x, ./assets/img/portfolio_img-4-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-4-tablet@1x.webp 1x, ./assets/img/portfolio_img-4-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
+                        <source type="image/webp" srcset="./assets/img/portfolio_img-4@2x.webp 1x, ./assets/img/portfolio_img-4@2x.webp 2x" width="800" height="600">
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-4-mobile@1x.jpg 1x, ./assets/img/portfolio_img-4-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-4-tablet@1x.jpg 1x, ./assets/img/portfolio_img-4-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-4@1x.jpg" srcset="./assets/img/portfolio_img-4@2x.jpg 2x" loading="lazy" width="800" height="600">
+                      </picture>
+                      <!--img(src=`./assets/img/${item.name}@1x.jpg` srcset=`./assets/img/${item.name}@2x.jpg` alt="Фото" width="600" height="400")-->
                     </li>
-                    <li class="gallery__item" data-type="image"><img src="./assets/img/portfolio_img-2@1x.jpg" srcset="./assets/img/portfolio_img-2@2x.jpg" alt="Фото" width="600" height="400">
+                    <li class="gallery__item" data-type="image">
+                      <picture>
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.webp 1x, ./assets/img/portfolio_img-2-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.webp 1x, ./assets/img/portfolio_img-2-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
+                        <source type="image/webp" srcset="./assets/img/portfolio_img-2@2x.webp 1x, ./assets/img/portfolio_img-2@2x.webp 2x" width="800" height="600">
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.jpg 1x, ./assets/img/portfolio_img-2-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.jpg 1x, ./assets/img/portfolio_img-2-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-2@1x.jpg" srcset="./assets/img/portfolio_img-2@2x.jpg 2x" loading="lazy" width="800" height="600">
+                      </picture>
+                      <!--img(src=`./assets/img/${item.name}@1x.jpg` srcset=`./assets/img/${item.name}@2x.jpg` alt="Фото" width="600" height="400")-->
                     </li>
                     <li class="gallery__item" data-type="video">
-                      <video class="video-js" controls width="600" height="400">
+                      <video class="video-js" controls width="600" height="400" loading="lazy">
                         <source src="./assets/video/ML01.mp4" type="video/mp4">
                       </video>
                     </li>
