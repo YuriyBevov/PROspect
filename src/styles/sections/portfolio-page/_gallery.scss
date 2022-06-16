@@ -38,6 +38,11 @@
     &__item {
       position: relative;
       overflow: hidden;
+      background-image: url('../assets/img/preload-img.svg');
+      background-color: rgba(0,0,0,0.02);
+      background-size: 100px 100px;
+      background-repeat: no-repeat;
+      background-position: center;
 
       img, video {
         display: block;
