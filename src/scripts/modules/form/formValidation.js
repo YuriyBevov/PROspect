@@ -33,7 +33,7 @@ export function formValidation(form) {
   if(!invalidControls.length) {
     console.log('SEND FORM')
     loader.classList.remove('hidden');
-    setTimeout(() => {
+    setTimeout(() => {// убрать, это для проверки лоадера
       sendForm(form);
     }, 1000);
   } else {

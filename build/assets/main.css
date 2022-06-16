@@ -3833,6 +3833,11 @@ select:-webkit-autofill:focus {
   z-index: 2;
   padding-bottom: 100px;
 }
+@media (max-width: 960px) {
+  .portfolio {
+    padding-bottom: 0;
+  }
+}
 .portfolio__sticky-container {
   position: sticky;
   top: 200px;
@@ -4313,11 +4318,16 @@ select:-webkit-autofill:focus {
 .outdoor h2 span {
   opacity: 0;
 }
+@media (max-width: 960px) {
+  .outdoor {
+    padding-bottom: 0;
+  }
+}
 
 .feedback {
+  position: relative;
   padding-top: 50px;
   background-color: var(--main-bg-color);
-  position: relative;
 }
 .feedback__text {
   font-weight: 400;
@@ -4357,45 +4367,6 @@ select:-webkit-autofill:focus {
     font-size: 22px;
   }
 }
-.feedback .plane-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  min-width: 768px;
-  height: 100%;
-  min-height: 400px;
-  overflow: hidden;
-}
-.feedback .plane-container #scene {
-  width: 100%;
-  height: 100%;
-  left: 10%;
-}
-.feedback svg {
-  /*z-index: 0;
-
-  @include m-b-down(576px) {
-    opacity: 0;
-  }
-
-  #path {
-    opacity: 0;
-  }
-
-  #plane {
-    width: 500px;
-    height: 400px;
-    transform: scale(2); //2,2
-    fill: var(--primary-color);
-  }
-
-  @include m-b-tablet-down {
-    top: 0;
-    left: initial;
-    right: -30vw;
-  }*/
-}
 @media (max-width: 768px) {
   .feedback form {
     max-width: 50vw;
@@ -4413,14 +4384,17 @@ select:-webkit-autofill:focus {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  overflow: hidden;
 }
-.feedback .scene {
+.feedback .plane-animation-scene {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+}
+.feedback .plane-animation-scene.hidden {
+  opacity: 0;
 }
 
 .map {
@@ -4724,6 +4698,7 @@ select:-webkit-autofill:focus {
   margin: 0;
   margin-top: auto;
   margin-bottom: 20px;
+  padding-right: 40px;
   color: var(--white-color);
 }
 @media (max-width: 960px) {

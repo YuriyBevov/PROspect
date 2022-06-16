@@ -7,6 +7,6 @@ if(scrollBtn) {
     duration: 1.5,
     delay: 2,
     opacity: 0,
-    ease: 'ease-in'
+    ease: 'power2'
   });
 }

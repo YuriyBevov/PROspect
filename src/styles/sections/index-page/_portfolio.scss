@@ -10,6 +10,10 @@ $sticky-container-size: 500px;
   z-index: 2;
   padding-bottom: 100px;
 
+  @include m-b-tablet-lg-down {
+    padding-bottom: 0;
+  }
+
   &__sticky-container {
     position: sticky;
     top: 200px;

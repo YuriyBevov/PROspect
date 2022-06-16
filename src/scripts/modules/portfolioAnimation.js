@@ -16,13 +16,13 @@ if(section) {
   }
 
   items.forEach((item,i) => {
-    console.log('item', item)
     gsap.from(item, {
       scrollTrigger: scrollTriggerOpt(item),
       duration: 0.8,
       delay: 0.15 * (i+1),
       y: '150px',
       opacity: 0,
+      scale: 1.1,
       ease: 'linear'
     });
   });

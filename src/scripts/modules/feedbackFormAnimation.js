@@ -1,10 +1,8 @@
-
 import {gsap} from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
-//import {MotionPathPlugin} from 'gsap/MotionPathPlugin';
 import {MorphSVGPlugin} from 'gsap/MorphSVGPlugin';
 
-gsap.registerPlugin(ScrollTrigger, /*MotionPathPlugin,*/ MorphSVGPlugin);
+gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin);
 
 const form = document.querySelector('.feedback form');
 

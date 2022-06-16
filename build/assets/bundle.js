@@ -6015,12 +6015,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gsap/ScrollTrigger */ "./node_modules/gsap/ScrollTrigger.js");
 /* harmony import */ var gsap_MorphSVGPlugin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! gsap/MorphSVGPlugin */ "./node_modules/gsap/MorphSVGPlugin.js");
 
- //import {MotionPathPlugin} from 'gsap/MotionPathPlugin';
 
 
-gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__.ScrollTrigger,
-/*MotionPathPlugin,*/
-gsap_MorphSVGPlugin__WEBPACK_IMPORTED_MODULE_2__.MorphSVGPlugin);
+gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__.ScrollTrigger, gsap_MorphSVGPlugin__WEBPACK_IMPORTED_MODULE_2__.MorphSVGPlugin);
 var form = document.querySelector('.feedback form');
 
 if (form) {
@@ -6153,6 +6150,7 @@ function formValidation(form) {
     console.log('SEND FORM');
     loader.classList.remove('hidden');
     setTimeout(function () {
+      // убрать, это для проверки лоадера
       (0,_sendForm__WEBPACK_IMPORTED_MODULE_1__.sendForm)(form);
     }, 1000);
   } else {
@@ -6612,13 +6610,13 @@ if (section) {
   }
 
   items.forEach(function (item, i) {
-    console.log('item', item);
     gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.from(item, {
       scrollTrigger: scrollTriggerOpt(item),
       duration: 0.8,
       delay: 0.15 * (i + 1),
       y: '150px',
       opacity: 0,
+      scale: 1.1,
       ease: 'linear'
     });
   });
@@ -6869,7 +6867,7 @@ if (scrollBtn) {
     duration: 1.5,
     delay: 2,
     opacity: 0,
-    ease: 'ease-in'
+    ease: 'power2'
   });
 }
 
