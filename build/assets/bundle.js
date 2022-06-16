@@ -6970,6 +6970,7 @@ if (videos) {
       loop: true,
       width: '100%'
     });
+    player.requestFullscreen();
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -6980,8 +6981,21 @@ if (videos) {
       });
     });
     observer.observe(video);
+    var spinner = video.parentNode.querySelector('.vjs-loading-spinner');
+    var loader = document.createElement('div');
+    loader.classList.add('loader');
+
+    for (var i = 0; i < 3; i++) {
+      var item = document.createElement('div');
+      item.classList.add('loader-item');
+      loader.appendChild(item);
+    }
+
+    spinner.appendChild(loader);
   });
 }
+
+;
 
 /***/ }),
 

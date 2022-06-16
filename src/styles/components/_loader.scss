@@ -1,58 +1,4 @@
 .loader {
-  width: 100px;
-  height: 100px;
-  @extend .flex-centered-content;
-
-  svg {
-    fill: var(--accent-color);
-  }
-
-  svg:first-child {
-    opacity: 0;
-    transform: rotate(-45deg) translateY(20px);
-    animation: leftPart 1.5s linear infinite;
-  }
-
-  svg:last-child {
-    opacity: 1;
-    transform: rotate(-45deg) translateY(0);
-    animation: rightPart 1.5s linear infinite;
-  }
-
-  @keyframes leftPart {
-    0% {
-      opacity: 0;
-      transform: rotate(-0deg);
-    }
-
-    50% {
-      opacity: 1;
-      transform: rotate(180deg);
-    }
-
-    100% {
-      opacity: 0;
-      transform: rotate(360deg);
-    }
-  }
-
-  @keyframes rightPart {
-    0% {
-      opacity: 0;
-      transform: rotate(0deg);
-    }
-
-    50% {
-      opacity: 1;
-      transform: rotate(-180deg);
-    }
-
-    100% {
-      opacity: 0;
-      transform: rotate(-360deg);
-    }
-  }
-
   &-overlay {
     @extend .flex-centered-content;
     position: fixed;
@@ -66,6 +12,41 @@
 
     &.hidden {
       display: none;
+    }
+  }
+
+  width: 100%;
+  max-width: 60px;
+  height: 100%;
+  min-height: 60px;
+
+  @extend .flex-centered-content;
+
+  &-item {
+    width: 10px;
+    height: 10px;
+
+    background-color: var(--white-color);
+
+    border-radius: 50%;
+    transform: scale(0);
+
+    &:nth-child(1) {animation: loader 1s 0.3s ease-in infinite;}
+    &:nth-child(2) {animation: loader 1s 0.5s ease-in infinite;}
+    &:nth-child(3) {animation: loader 1s 0.7s ease-in infinite;}
+  }
+
+  @keyframes loader {
+    0% {
+      transform: scale(0);
+    }
+
+    60% {
+      transform: scale(100%);
+    }
+
+    100% {
+      transform: scale(0);
     }
   }
 }

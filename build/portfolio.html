@@ -45,7 +45,8 @@
                       </picture>
                     </li>
                     <li class="gallery__item" data-type="video">
-                      <video class="video-js" controls width="600" height="400" loading="lazy">
+                      <video class="video-js" controls allowfullscreen="true" width="600" height="400">
+                        <!--source(src=`./assets/video/${item.name}.webm` type="video/webm")-->
                         <source src="./assets/video/ML01.mp4" type="video/mp4">
                       </video>
                     </li>
@@ -59,8 +60,9 @@
                       </picture>
                     </li>
                     <li class="gallery__item" data-type="video">
-                      <video class="video-js" controls width="600" height="400" loading="lazy">
-                        <source src="./assets/video/ML01.mp4" type="video/mp4">
+                      <video class="video-js" controls allowfullscreen="true" width="600" height="400">
+                        <!--source(src=`./assets/video/${item.name}.webm` type="video/webm")-->
+                        <source src="./assets/video/ML04.mp4" type="video/mp4">
                       </video>
                     </li>
                     <li class="gallery__item" data-type="image">
@@ -70,85 +72,6 @@
                         <source type="image/webp" srcset="./assets/img/portfolio_img-2@2x.webp 1x, ./assets/img/portfolio_img-2@2x.webp 2x" width="800" height="600">
                         <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.jpg 1x, ./assets/img/portfolio_img-2-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
                         <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.jpg 1x, ./assets/img/portfolio_img-2-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-2@1x.jpg" srcset="./assets/img/portfolio_img-2@2x.jpg 2x" loading="lazy" width="800" height="600">
-                      </picture>
-                    </li>
-                    <li class="gallery__item" data-type="image">
-                      <picture>
-                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.webp 1x, ./assets/img/portfolio_img-2-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
-                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.webp 1x, ./assets/img/portfolio_img-2-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
-                        <source type="image/webp" srcset="./assets/img/portfolio_img-2@2x.webp 1x, ./assets/img/portfolio_img-2@2x.webp 2x" width="800" height="600">
-                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.jpg 1x, ./assets/img/portfolio_img-2-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
-                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.jpg 1x, ./assets/img/portfolio_img-2-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-2@1x.jpg" srcset="./assets/img/portfolio_img-2@2x.jpg 2x" loading="lazy" width="800" height="600">
-                      </picture>
-                    </li>
-                    <li class="gallery__item" data-type="video">
-                      <video class="video-js" controls width="600" height="400" loading="lazy">
-                        <source src="./assets/video/ML01.mp4" type="video/mp4">
-                      </video>
-                    </li>
-                    <li class="gallery__item" data-type="video">
-                      <video class="video-js" controls width="600" height="400" loading="lazy">
-                        <source src="./assets/video/ML01.mp4" type="video/mp4">
-                      </video>
-                    </li>
-                    <li class="gallery__item" data-type="image">
-                      <picture>
-                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.webp 1x, ./assets/img/portfolio_img-2-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
-                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.webp 1x, ./assets/img/portfolio_img-2-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
-                        <source type="image/webp" srcset="./assets/img/portfolio_img-2@2x.webp 1x, ./assets/img/portfolio_img-2@2x.webp 2x" width="800" height="600">
-                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.jpg 1x, ./assets/img/portfolio_img-2-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
-                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.jpg 1x, ./assets/img/portfolio_img-2-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-2@1x.jpg" srcset="./assets/img/portfolio_img-2@2x.jpg 2x" loading="lazy" width="800" height="600">
-                      </picture>
-                    </li>
-                    <li class="gallery__item" data-type="image">
-                      <picture>
-                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.webp 1x, ./assets/img/portfolio_img-2-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
-                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.webp 1x, ./assets/img/portfolio_img-2-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
-                        <source type="image/webp" srcset="./assets/img/portfolio_img-2@2x.webp 1x, ./assets/img/portfolio_img-2@2x.webp 2x" width="800" height="600">
-                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.jpg 1x, ./assets/img/portfolio_img-2-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
-                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.jpg 1x, ./assets/img/portfolio_img-2-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-2@1x.jpg" srcset="./assets/img/portfolio_img-2@2x.jpg 2x" loading="lazy" width="800" height="600">
-                      </picture>
-                    </li>
-                    <li class="gallery__item" data-type="video">
-                      <video class="video-js" controls width="600" height="400" loading="lazy">
-                        <source src="./assets/video/ML01.mp4" type="video/mp4">
-                      </video>
-                    </li>
-                    <li class="gallery__item" data-type="video">
-                      <video class="video-js" controls width="600" height="400" loading="lazy">
-                        <source src="./assets/video/ML01.mp4" type="video/mp4">
-                      </video>
-                    </li>
-                    <li class="gallery__item" data-type="image">
-                      <picture>
-                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.webp 1x, ./assets/img/portfolio_img-2-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
-                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.webp 1x, ./assets/img/portfolio_img-2-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
-                        <source type="image/webp" srcset="./assets/img/portfolio_img-2@2x.webp 1x, ./assets/img/portfolio_img-2@2x.webp 2x" width="800" height="600">
-                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.jpg 1x, ./assets/img/portfolio_img-2-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
-                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.jpg 1x, ./assets/img/portfolio_img-2-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-2@1x.jpg" srcset="./assets/img/portfolio_img-2@2x.jpg 2x" loading="lazy" width="800" height="600">
-                      </picture>
-                    </li>
-                    <li class="gallery__item" data-type="image">
-                      <picture>
-                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.webp 1x, ./assets/img/portfolio_img-2-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
-                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.webp 1x, ./assets/img/portfolio_img-2-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
-                        <source type="image/webp" srcset="./assets/img/portfolio_img-2@2x.webp 1x, ./assets/img/portfolio_img-2@2x.webp 2x" width="800" height="600">
-                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.jpg 1x, ./assets/img/portfolio_img-2-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
-                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.jpg 1x, ./assets/img/portfolio_img-2-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-2@1x.jpg" srcset="./assets/img/portfolio_img-2@2x.jpg 2x" loading="lazy" width="800" height="600">
-                      </picture>
-                    </li>
-                    <li class="gallery__item" data-type="video">
-                      <video class="video-js" controls width="600" height="400" loading="lazy">
-                        <source src="./assets/video/ML01.mp4" type="video/mp4">
-                      </video>
-                    </li>
-                    <li class="gallery__item" data-type="image">
-                      <picture>
-                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-4-mobile@1x.webp 1x, ./assets/img/portfolio_img-4-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
-                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-4-tablet@1x.webp 1x, ./assets/img/portfolio_img-4-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
-                        <source type="image/webp" srcset="./assets/img/portfolio_img-4@2x.webp 1x, ./assets/img/portfolio_img-4@2x.webp 2x" width="800" height="600">
-                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-4-mobile@1x.jpg 1x, ./assets/img/portfolio_img-4-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
-                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-4-tablet@1x.jpg 1x, ./assets/img/portfolio_img-4-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-4@1x.jpg" srcset="./assets/img/portfolio_img-4@2x.jpg 2x" loading="lazy" width="800" height="600">
                       </picture>
                     </li>
                     <li class="gallery__item" data-type="image">
@@ -162,12 +85,96 @@
                     </li>
                     <li class="gallery__item" data-type="image">
                       <picture>
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.webp 1x, ./assets/img/portfolio_img-2-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.webp 1x, ./assets/img/portfolio_img-2-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
+                        <source type="image/webp" srcset="./assets/img/portfolio_img-2@2x.webp 1x, ./assets/img/portfolio_img-2@2x.webp 2x" width="800" height="600">
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.jpg 1x, ./assets/img/portfolio_img-2-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.jpg 1x, ./assets/img/portfolio_img-2-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-2@1x.jpg" srcset="./assets/img/portfolio_img-2@2x.jpg 2x" loading="lazy" width="800" height="600">
+                      </picture>
+                    </li>
+                    <li class="gallery__item" data-type="video">
+                      <video class="video-js" controls allowfullscreen="true" width="600" height="400">
+                        <!--source(src=`./assets/video/${item.name}.webm` type="video/webm")-->
+                        <source src="./assets/video/ML01.mp4" type="video/mp4">
+                      </video>
+                    </li>
+                    <li class="gallery__item" data-type="video">
+                      <video class="video-js" controls allowfullscreen="true" width="600" height="400">
+                        <!--source(src=`./assets/video/${item.name}.webm` type="video/webm")-->
+                        <source src="./assets/video/ML02.mp4" type="video/mp4">
+                      </video>
+                    </li>
+                    <li class="gallery__item" data-type="image">
+                      <picture>
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.webp 1x, ./assets/img/portfolio_img-2-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.webp 1x, ./assets/img/portfolio_img-2-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
+                        <source type="image/webp" srcset="./assets/img/portfolio_img-2@2x.webp 1x, ./assets/img/portfolio_img-2@2x.webp 2x" width="800" height="600">
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.jpg 1x, ./assets/img/portfolio_img-2-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.jpg 1x, ./assets/img/portfolio_img-2-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-2@1x.jpg" srcset="./assets/img/portfolio_img-2@2x.jpg 2x" loading="lazy" width="800" height="600">
+                      </picture>
+                    </li>
+                    <li class="gallery__item" data-type="image">
+                      <picture>
                         <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-4-mobile@1x.webp 1x, ./assets/img/portfolio_img-4-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
                         <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-4-tablet@1x.webp 1x, ./assets/img/portfolio_img-4-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
                         <source type="image/webp" srcset="./assets/img/portfolio_img-4@2x.webp 1x, ./assets/img/portfolio_img-4@2x.webp 2x" width="800" height="600">
                         <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-4-mobile@1x.jpg 1x, ./assets/img/portfolio_img-4-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
                         <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-4-tablet@1x.jpg 1x, ./assets/img/portfolio_img-4-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-4@1x.jpg" srcset="./assets/img/portfolio_img-4@2x.jpg 2x" loading="lazy" width="800" height="600">
                       </picture>
+                    </li>
+                    <li class="gallery__item" data-type="image">
+                      <picture>
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.webp 1x, ./assets/img/portfolio_img-2-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.webp 1x, ./assets/img/portfolio_img-2-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
+                        <source type="image/webp" srcset="./assets/img/portfolio_img-2@2x.webp 1x, ./assets/img/portfolio_img-2@2x.webp 2x" width="800" height="600">
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.jpg 1x, ./assets/img/portfolio_img-2-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.jpg 1x, ./assets/img/portfolio_img-2-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-2@1x.jpg" srcset="./assets/img/portfolio_img-2@2x.jpg 2x" loading="lazy" width="800" height="600">
+                      </picture>
+                    </li>
+                    <li class="gallery__item" data-type="video">
+                      <video class="video-js" controls allowfullscreen="true" width="600" height="400">
+                        <!--source(src=`./assets/video/${item.name}.webm` type="video/webm")-->
+                        <source src="./assets/video/ML03.mp4" type="video/mp4">
+                      </video>
+                    </li>
+                    <li class="gallery__item" data-type="video">
+                      <video class="video-js" controls allowfullscreen="true" width="600" height="400">
+                        <!--source(src=`./assets/video/${item.name}.webm` type="video/webm")-->
+                        <source src="./assets/video/ML01.mp4" type="video/mp4">
+                      </video>
+                    </li>
+                    <li class="gallery__item" data-type="image">
+                      <picture>
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.webp 1x, ./assets/img/portfolio_img-2-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.webp 1x, ./assets/img/portfolio_img-2-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
+                        <source type="image/webp" srcset="./assets/img/portfolio_img-2@2x.webp 1x, ./assets/img/portfolio_img-2@2x.webp 2x" width="800" height="600">
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.jpg 1x, ./assets/img/portfolio_img-2-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.jpg 1x, ./assets/img/portfolio_img-2-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-2@1x.jpg" srcset="./assets/img/portfolio_img-2@2x.jpg 2x" loading="lazy" width="800" height="600">
+                      </picture>
+                    </li>
+                    <li class="gallery__item" data-type="image">
+                      <picture>
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-4-mobile@1x.webp 1x, ./assets/img/portfolio_img-4-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-4-tablet@1x.webp 1x, ./assets/img/portfolio_img-4-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
+                        <source type="image/webp" srcset="./assets/img/portfolio_img-4@2x.webp 1x, ./assets/img/portfolio_img-4@2x.webp 2x" width="800" height="600">
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-4-mobile@1x.jpg 1x, ./assets/img/portfolio_img-4-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-4-tablet@1x.jpg 1x, ./assets/img/portfolio_img-4-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-4@1x.jpg" srcset="./assets/img/portfolio_img-4@2x.jpg 2x" loading="lazy" width="800" height="600">
+                      </picture>
+                    </li>
+                    <li class="gallery__item" data-type="image">
+                      <picture>
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.webp 1x, ./assets/img/portfolio_img-2-mobile@2x.webp 2x" type="image/webp" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.webp 1x, ./assets/img/portfolio_img-2-tablet@2x.webp 2x" type="image/webp" width="600" height="450">
+                        <source type="image/webp" srcset="./assets/img/portfolio_img-2@2x.webp 1x, ./assets/img/portfolio_img-2@2x.webp 2x" width="800" height="600">
+                        <source media="(max-width: 534px)" srcset="./assets/img/portfolio_img-2-mobile@1x.jpg 1x, ./assets/img/portfolio_img-2-mobile@2x.jpg 2x" type="image/jpg" width="400" height="300">
+                        <source media="(max-width: 959px)" srcset="./assets/img/portfolio_img-2-tablet@1x.jpg 1x, ./assets/img/portfolio_img-2-tablet@2x.jpg 2x" type="image/jpg" width="600" height="450"><img src="./assets/img/portfolio_img-2@1x.jpg" srcset="./assets/img/portfolio_img-2@2x.jpg 2x" loading="lazy" width="800" height="600">
+                      </picture>
+                    </li>
+                    <li class="gallery__item" data-type="video">
+                      <video class="video-js" controls allowfullscreen="true" width="600" height="400">
+                        <!--source(src=`./assets/video/${item.name}.webm` type="video/webm")-->
+                        <source src="./assets/video/ML04.mp4" type="video/mp4">
+                      </video>
                     </li>
                   </ul>
                 </div>

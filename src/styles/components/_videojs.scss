@@ -23,6 +23,21 @@
   display: block;
 }
 
+.vjs-loading-spinner {
+  margin: 0;
+  opacity: 1;
+  text-align: center;
+  border: none;
+  border-radius: 0;
+  transform: translate(-50%, -50%);
+
+  &::before,
+  &::after,
+  .vjs-control-text {
+    display: none;
+  }
+}
+
 .gallery__item:hover,
 .gallery__item:focus {
   .vjs-control-bar {
