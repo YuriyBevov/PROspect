@@ -6657,11 +6657,12 @@ if (portfolioPage) {
   var scroller;
   var isScrollerInited = false;
   var galleryItems = document.querySelectorAll('.portfolio-page .gallery__item');
+  var body = document.querySelector('body');
 
   function initScroller() {
     isScrollerInited = true;
     scroller = gsap_ScrollSmoother__WEBPACK_IMPORTED_MODULE_2__.ScrollSmoother.create({
-      smooth: 1,
+      smooth: 1.5,
       // how long (in seconds) it takes to "catch up" to the native scroll position
       effects: true,
       // looks for data-speed and data-lag attributes on elements
@@ -6696,13 +6697,13 @@ if (portfolioPage) {
   var onClickSortItems = function onClickSortItems(evt) {
     var current = evt.currentTarget;
     var sortType = current.getAttribute('data-type');
+    body.style.height = 'auto';
 
     if (isScrollerInited) {
-      console.log('kill');
       destroyScroller();
     }
 
-    itemList.forEach(function (item) {
+    itemList.forEach(function (item, i) {
       item.getAttribute('data-type') === sortType && sortType !== 'all' ? item.classList.remove('hidden') : item.classList.add('hidden');
 
       if (sortType === 'all') {
@@ -6711,7 +6712,6 @@ if (portfolioPage) {
     });
 
     if (window.innerWidth > 959 && !isScrollerInited) {
-      console.log('init');
       initScroller();
     }
   };

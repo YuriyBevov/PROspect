@@ -1,5 +1,9 @@
 .portfolio-page {
   padding-top: 90px; // header-height
+
+  @include m-b-tablet-lg-down {
+    padding-top: 0;
+  }
   .gallery {
 
     &__content {
@@ -42,10 +46,7 @@
       }
 
       &.hidden {
-        position: fixed;
-        z-index: -1;
-        opacity: 0;
-        transform: translateY(200vh);
+        display: none;
       }
     }
   }

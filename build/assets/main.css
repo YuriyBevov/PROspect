@@ -4470,6 +4470,11 @@ select:-webkit-autofill:focus {
 .portfolio-page {
   padding-top: 90px;
 }
+@media (max-width: 960px) {
+  .portfolio-page {
+    padding-top: 0;
+  }
+}
 .portfolio-page .gallery__content {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4518,12 +4523,7 @@ select:-webkit-autofill:focus {
   height: 100%;
 }
 .portfolio-page .gallery__item.hidden {
-  position: fixed;
-  z-index: -1;
-  opacity: 0;
-  -webkit-transform: translateY(200vh);
-  -ms-transform: translateY(200vh);
-  transform: translateY(200vh);
+  display: none;
 }
 
 /* Модальные окна */

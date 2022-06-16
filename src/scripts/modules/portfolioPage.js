@@ -10,11 +10,12 @@ if(portfolioPage) {
   let scroller;
   let isScrollerInited = false;
   const galleryItems = document.querySelectorAll('.portfolio-page .gallery__item');
+  const body = document.querySelector('body');
 
   function initScroller() {
     isScrollerInited = true;
     scroller = ScrollSmoother.create({
-      smooth: 1,               // how long (in seconds) it takes to "catch up" to the native scroll position
+      smooth: 1.5,               // how long (in seconds) it takes to "catch up" to the native scroll position
       effects: true,           // looks for data-speed and data-lag attributes on elements
       smoothTouch: 0.1,        // much shorter smoothing time on touch devices (default is NO smoothing on touch devices)
     });
@@ -42,23 +43,21 @@ if(portfolioPage) {
   const onClickSortItems = (evt) => {
     let current = evt.currentTarget;
     let sortType = current.getAttribute('data-type');
-
+    body.style.height = 'auto';
     if(isScrollerInited) {
-      console.log('kill')
       destroyScroller();
     }
 
-    itemList.forEach(item => {
+    itemList.forEach((item,i) => {
       item.getAttribute('data-type') === sortType && sortType !== 'all' ?
       item.classList.remove('hidden') : item.classList.add('hidden');
 
       if(sortType === 'all') {
-        item.classList.remove('hidden')
+        item.classList.remove('hidden');
       }
     })
 
     if(window.innerWidth > 959 && !isScrollerInited) {
-      console.log('init')
       initScroller();
     }
   }
