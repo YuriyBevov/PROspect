@@ -3629,7 +3629,7 @@ select:-webkit-autofill:focus {
   -o-transition: color var(--transition);
   transition: color var(--transition);
 }
-.portfolio-sort button:hover, .portfolio-sort button:focus {
+.portfolio-sort button:hover, .portfolio-sort button:focus, .portfolio-sort button.active {
   color: var(--primary-color);
 }
 @media (max-width: 440px) {
@@ -4408,6 +4408,22 @@ select:-webkit-autofill:focus {
     max-width: 100%;
   }
 }
+.feedback__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  overflow: hidden;
+}
+.feedback .scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 
 .map {
   position: relative;
@@ -4488,6 +4504,9 @@ select:-webkit-autofill:focus {
   .portfolio-page {
     padding-top: 0;
   }
+}
+.portfolio-page .gallery {
+  padding-bottom: 40px;
 }
 .portfolio-page .gallery__content {
   display: -webkit-box;
@@ -4668,30 +4687,22 @@ select:-webkit-autofill:focus {
 
 .main-modal {
   position: relative;
-  background-image: url("../assets/img/logo-small.svg");
+  /*background-image: url('../assets/img/logo-small.svg');
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: 0 100vh;
-}
-.main-modal.is-active {
-  -webkit-animation: bcg 1s linear forwards;
-  animation: bcg 1s linear forwards;
-}
-@-webkit-keyframes bcg {
-  0% {
-    background-position: 0 100vh;
-  }
-  100% {
-    background-position: 0 20px;
-  }
-}
-@keyframes bcg {
-  0% {
-    background-position: 0 100vh;
-  }
-  100% {
-    background-position: 0 20px;
-  }
+  background-position: 0 100vh; */
+  /*&.is-active {
+    animation: bcg 1s linear forwards;
+  }*/
+  /*@keyframes bcg {
+    0% {
+      background-position: 0 100vh;
+    }
+
+    100% {
+      background-position: 0 20px;
+    }
+  }*/
 }
 .main-modal .modal__content {
   padding: 30px;

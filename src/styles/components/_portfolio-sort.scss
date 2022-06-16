@@ -7,8 +7,6 @@
     margin-bottom: 20px;
   }
 
-
-
   button {
     @extend .button-default;
     width: fit-content;
@@ -20,7 +18,8 @@
     transition: color var(--transition);
 
     &:hover,
-    &:focus {
+    &:focus,
+    &.active {
       color: var(--primary-color);
     }
 

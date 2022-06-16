@@ -42,6 +42,15 @@ if(portfolioPage) {
 
   const onClickSortItems = (evt) => {
     let current = evt.currentTarget;
+
+    sortBtns.forEach(btn => {
+      btn.classList.contains('active') && btn !== current ?
+      btn.classList.remove('active') : null;
+    })
+
+    !current.classList.contains('active') ?
+    current.classList.add('active') : null;
+
     let sortType = current.getAttribute('data-type');
     body.style.height = 'auto';
     if(isScrollerInited) {
