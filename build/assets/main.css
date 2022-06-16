@@ -4373,30 +4373,28 @@ select:-webkit-autofill:focus {
   left: 10%;
 }
 .feedback svg {
-  z-index: 0;
-}
-@media (max-width: 576px) {
-  .feedback svg {
+  /*z-index: 0;
+
+  @include m-b-down(576px) {
     opacity: 0;
   }
-}
-.feedback svg #path {
-  opacity: 0;
-}
-.feedback svg #plane {
-  width: 500px;
-  height: 400px;
-  -webkit-transform: scale(2);
-  -ms-transform: scale(2);
-  transform: scale(2);
-  fill: var(--primary-color);
-}
-@media (max-width: 768px) {
-  .feedback svg {
+
+  #path {
+    opacity: 0;
+  }
+
+  #plane {
+    width: 500px;
+    height: 400px;
+    transform: scale(2); //2,2
+    fill: var(--primary-color);
+  }
+
+  @include m-b-tablet-down {
     top: 0;
     left: initial;
     right: -30vw;
-  }
+  }*/
 }
 @media (max-width: 768px) {
   .feedback form {

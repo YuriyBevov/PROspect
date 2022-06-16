@@ -1,9 +1,10 @@
-import Parallax from 'parallax-js'
+
 import {gsap} from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
-import {MotionPathPlugin} from 'gsap/MotionPathPlugin';
+//import {MotionPathPlugin} from 'gsap/MotionPathPlugin';
 import {MorphSVGPlugin} from 'gsap/MorphSVGPlugin';
-gsap.registerPlugin(ScrollTrigger, MotionPathPlugin, MorphSVGPlugin);
+
+gsap.registerPlugin(ScrollTrigger, /*MotionPathPlugin,*/ MorphSVGPlugin);
 
 const form = document.querySelector('.feedback form');
 
@@ -11,8 +12,6 @@ if(form) {
   form.style.opacity = 0;
   form.style.transform = 'translateY(150px)';
   const text = document.querySelector('.feedback__text');
-  const plane = document.querySelector('#plane');
-  //plane.style.opacity = 0;*/
 
   let tl = gsap.timeline({
     scrollTrigger: {
@@ -34,7 +33,6 @@ if(form) {
       ease: "ease-in"
     });
 
-
     let planeTl1 = gsap.timeline({
       scrollTrigger: {
         trigger: text,
@@ -53,51 +51,22 @@ if(form) {
       ease: 'power1.out'
     }).to("#mail", {
       ease: "power1.in",
-      duration: 1,
+      duration: .5,
       delay: 1,
-      morphSVG: "#plane"
+      morphSVG: {
+        shape: "#plane",
+        type: 'rotational',
+        origin: "26% 14%, 34% -13%"
+      }
     }).to("#mail", {
       duration: 0.6,
-      x: '-30px',
+      delay: 0.2,
+      x: '-40px',
       ease: "power1.out",
     }).to("#mail", {
       duration: 1.3,
       x: '150vw',
-      y: '-80vh',
+      y: '-300px',
       ease: "power1.out",
     });
-
-    /*gsap.to("#mail", {
-      scrollTrigger: {
-        trigger: text,
-        start: "top bottom",
-      },
-
-      ease: "power1.inOut",
-      duration: 3,
-      morphSVG: "#plane"
-
-    });*/
-
-  /*gsap.to("#plane", {
-    scrollTrigger: {
-      trigger: text,
-      start: "top bottom",
-    },
-
-    duration: 2,
-    delay: 0.5,
-    opacity: 1,
-    ease: "power1.inOut",
-    motionPath:{
-      path: "#path",
-      align: "#path",
-      alignOrigin: [0.5, 0.5]
-    }
-  });
-
-  setTimeout(() => {
-    const scene = document.getElementById('scene');
-    let parallaxInstance = new Parallax(scene);
-  }, 750);*/
 }
