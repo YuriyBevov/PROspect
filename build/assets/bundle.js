@@ -6028,13 +6028,16 @@ if (accordion) {
 
   var onClickOpenAccordionField = function onClickOpenAccordionField(evt) {
     var target = evt.currentTarget.parentNode;
-    calculatePos(fields, target);
-    var body = target.querySelector('.accordion__body');
-    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.from(body, {
-      duration: 0.7,
-      opacity: 0,
-      ease: 'linear'
-    });
+
+    if (!target.classList.contains('active')) {
+      calculatePos(fields, target);
+      var body = target.querySelector('.accordion__body');
+      gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.from(body, {
+        duration: 0.7,
+        opacity: 0,
+        ease: 'linear'
+      });
+    }
   };
 
   if (headers) {

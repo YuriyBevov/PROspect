@@ -164,14 +164,16 @@ if(accordion) {
   const onClickOpenAccordionField = (evt) => {
     const target = evt.currentTarget.parentNode;
 
-    calculatePos(fields, target);
+    if(!target.classList.contains('active')) {
+      calculatePos(fields, target);
 
-    const body = target.querySelector('.accordion__body');
-    gsap.from(body, {
-      duration: 0.7,
-      opacity: 0,
-      ease: 'linear'
-    })
+      const body = target.querySelector('.accordion__body');
+      gsap.from(body, {
+        duration: 0.7,
+        opacity: 0,
+        ease: 'linear'
+      });
+    }
   }
 
   if(headers) {
