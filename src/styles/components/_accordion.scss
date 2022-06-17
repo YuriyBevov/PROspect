@@ -72,6 +72,7 @@
       .accordion__header {
         background-color: var(--dark-color);
 
+        border-color: var(--dark-color);
         span {
           color: var(--warning-color);
         }
@@ -137,7 +138,7 @@
     z-index: 3;
 
     cursor: pointer;
-    transition: background-color 0.5s ease-in;
+    transition: background-color 0.5s ease-in, border .5s ease-in;
 
     span {
       font-weight: 500;

@@ -1,5 +1,8 @@
 import {gsap} from 'gsap';
 
+import {ScrollTrigger} from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
+
 const accordion = document.querySelector('.accordion');
 
 if(accordion) {
@@ -118,14 +121,57 @@ if(accordion) {
 
   window.addEventListener('resize', onWindowResizeHandler);
 
+  function setAccordionAnimationDirection(field,i) {
+    let body = field.querySelector('.accordion__body');
+
+    const trigger = {
+      trigger: accordion,
+      start: 'top bottom'
+    };
+
+    if(OFFSET_WIDTH !== null) {
+      gsap.from(field, {
+        scrollTrigger: trigger,
+        duration: 1,
+        delay: 0.15 * (i+1),
+        y: '100vh',
+        ease: 'back'
+      })
+    } else {
+      gsap.from(field, {
+        scrollTrigger: trigger,
+        duration: 1,
+        delay: 0.15 * (i+1),
+        x: '100vw',
+        ease: 'back'
+      })
+    }
+
+    gsap.from(body, {
+      scrollTrigger: trigger,
+      duration: 1,
+      delay: 1.85,
+      opacity: 0,
+      ease: 'ease-in'
+    });
+  };
+
   fields.forEach((field,i) => {
     field.style.left = OFFSET_WIDTH * i + 'px';
+    setAccordionAnimationDirection(field, i);
   })
 
   const onClickOpenAccordionField = (evt) => {
     const target = evt.currentTarget.parentNode;
 
     calculatePos(fields, target);
+
+    const body = target.querySelector('.accordion__body');
+    gsap.from(body, {
+      duration: 0.7,
+      opacity: 0,
+      ease: 'linear'
+    })
   }
 
   if(headers) {

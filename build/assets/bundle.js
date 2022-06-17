@@ -5876,7 +5876,10 @@ exports.ParseError = ParseError;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
+/* harmony import */ var gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gsap/ScrollTrigger */ "./node_modules/gsap/ScrollTrigger.js");
 
+
+gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__.ScrollTrigger);
 var accordion = document.querySelector('.accordion');
 
 if (accordion) {
@@ -5982,13 +5985,56 @@ if (accordion) {
   };
 
   window.addEventListener('resize', onWindowResizeHandler);
+
+  function setAccordionAnimationDirection(field, i) {
+    var body = field.querySelector('.accordion__body');
+    var trigger = {
+      trigger: accordion,
+      start: 'top bottom'
+    };
+
+    if (OFFSET_WIDTH !== null) {
+      gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.from(field, {
+        scrollTrigger: trigger,
+        duration: 1,
+        delay: 0.15 * (i + 1),
+        y: '100vh',
+        ease: 'back'
+      });
+    } else {
+      gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.from(field, {
+        scrollTrigger: trigger,
+        duration: 1,
+        delay: 0.15 * (i + 1),
+        x: '100vw',
+        ease: 'back'
+      });
+    }
+
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.from(body, {
+      scrollTrigger: trigger,
+      duration: 1,
+      delay: 1.85,
+      opacity: 0,
+      ease: 'ease-in'
+    });
+  }
+
+  ;
   fields.forEach(function (field, i) {
     field.style.left = OFFSET_WIDTH * i + 'px';
+    setAccordionAnimationDirection(field, i);
   });
 
   var onClickOpenAccordionField = function onClickOpenAccordionField(evt) {
     var target = evt.currentTarget.parentNode;
     calculatePos(fields, target);
+    var body = target.querySelector('.accordion__body');
+    gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.from(body, {
+      duration: 0.7,
+      opacity: 0,
+      ease: 'linear'
+    });
   };
 
   if (headers) {

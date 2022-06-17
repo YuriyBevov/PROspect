@@ -2640,37 +2640,29 @@ select:-webkit-autofill:focus {
 @-webkit-keyframes showAccordionBody {
   0% {
     height: 0;
-    opacity: 0;
   }
   30% {
     height: 100%;
-    opacity: 0;
   }
   40% {
     height: 100%;
-    opacity: 0;
   }
   100% {
     height: 100%;
-    opacity: 1;
   }
 }
 @keyframes showAccordionBody {
   0% {
     height: 0;
-    opacity: 0;
   }
   30% {
     height: 100%;
-    opacity: 0;
   }
   40% {
     height: 100%;
-    opacity: 0;
   }
   100% {
     height: 100%;
-    opacity: 1;
   }
 }
 @-webkit-keyframes portfolio-arrows {
@@ -3294,6 +3286,7 @@ select:-webkit-autofill:focus {
 }
 .accordion__field.active .accordion__header {
   background-color: var(--dark-color);
+  border-color: var(--dark-color);
 }
 .accordion__field.active .accordion__header span {
   color: var(--warning-color);
@@ -3320,9 +3313,9 @@ select:-webkit-autofill:focus {
   background-color: var(--primary-color);
   z-index: 3;
   cursor: pointer;
-  -webkit-transition: background-color 0.5s ease-in;
-  -o-transition: background-color 0.5s ease-in;
-  transition: background-color 0.5s ease-in;
+  -webkit-transition: background-color 0.5s ease-in, border 0.5s ease-in;
+  -o-transition: background-color 0.5s ease-in, border 0.5s ease-in;
+  transition: background-color 0.5s ease-in, border 0.5s ease-in;
 }
 @media (max-width: 960px) {
   .accordion__header {

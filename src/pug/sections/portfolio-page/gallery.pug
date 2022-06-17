@@ -92,8 +92,8 @@ section.gallery
 
                 source(media="(max-width: 534px)" srcset=`./assets/img/${item.name}-mobile@1x.jpg 1x, ./assets/img/${item.name}-mobile@2x.jpg 2x` type="image/jpg" width="400" height="300")
                 source(media="(max-width: 959px)" srcset=`./assets/img/${item.name}-tablet@1x.jpg 1x, ./assets/img/${item.name}-tablet@2x.jpg 2x` type="image/jpg" width="600" height="450")
-                img(src=`./assets/img/${item.name}@1x.jpg` srcset=`./assets/img/${item.name}@2x.jpg 2x` loading="lazy" alt= item.title width="800" height="600")
+                img(src=`./assets/img/${item.name}@1x.jpg` srcset=`./assets/img/${item.name}@2x.jpg 2x` loading="lazy" alt= item.name width="800" height="600")
             if item.type === 'video'
-              video.video-js(controls allowfullscreen="true" width="600" height="400")
+              video.video-js(controls width="600" height="400")
                 //source(src=`./assets/video/${item.name}.webm` type="video/webm")
                 source(src=`./assets/video/${item.name}.mp4` type="video/mp4")
