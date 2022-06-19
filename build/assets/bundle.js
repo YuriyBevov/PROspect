@@ -6022,8 +6022,8 @@ if (accordion) {
 
   ;
   fields.forEach(function (field, i) {
-    field.style.left = OFFSET_WIDTH * i + 'px';
-    setAccordionAnimationDirection(field, i);
+    field.style.left = OFFSET_WIDTH * i + 'px'; // анимация аккордеона
+    //setAccordionAnimationDirection(field, i);
   });
 
   var onClickOpenAccordionField = function onClickOpenAccordionField(evt) {

@@ -158,7 +158,8 @@ if(accordion) {
 
   fields.forEach((field,i) => {
     field.style.left = OFFSET_WIDTH * i + 'px';
-    setAccordionAnimationDirection(field, i);
+    // анимация аккордеона
+    //setAccordionAnimationDirection(field, i);
   })
 
   const onClickOpenAccordionField = (evt) => {
