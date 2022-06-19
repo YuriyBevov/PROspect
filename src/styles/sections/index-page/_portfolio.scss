@@ -161,9 +161,9 @@ $sticky-container-size: 500px;
   }
 
   &__link {
-    position: absolute;
-    top: 0;
-    left: -50px;
+    position: relative;
+    //top: 0;
+    //left: -50px;
 
     grid-column: 1/5;
     grid-row: 13/14;

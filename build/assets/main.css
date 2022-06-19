@@ -3997,9 +3997,7 @@ select:-webkit-autofill:focus {
   }
 }
 .portfolio__link {
-  position: absolute;
-  top: 0;
-  left: -50px;
+  position: relative;
   -ms-grid-column: 1;
   -ms-grid-column-span: 4;
   grid-column: 1/5;
