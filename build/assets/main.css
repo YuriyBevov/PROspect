@@ -2428,7 +2428,7 @@ select:-webkit-autofill:focus {
   cursor: pointer;
 }
 
-.flex-centered-content, .error-modal .modal__footer, .modal__close, #yandex_map .zoom-btns .zoom-btn, .hero__preview, .hero__icons a, .hero .scroll-btn, .loader, .loader-overlay, .developer-link, .nav__link, .main-footer__info, .main-footer__logo, .main-btn {
+.flex-centered-content, .error-modal .modal__footer, .modal__close, #yandex_map .zoom-btns .zoom-btn, .hero__preview, .hero__icons .hero-link, .hero .scroll-btn, .loader, .loader-overlay, .developer-link, .nav__link, .main-footer__info, .main-footer__logo, .main-btn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2691,6 +2691,22 @@ select:-webkit-autofill:focus {
   100% {
     -webkit-transform: translateX(0) rotate(-90deg);
     transform: translateX(0) rotate(-90deg);
+  }
+}
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 /* Компоненты */
@@ -3644,6 +3660,11 @@ select:-webkit-autofill:focus {
   opacity: 1 !important;
 }
 
+[class*=ymaps-2][class*=-ground-pane] {
+  filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale");
+  -webkit-filter: grayscale(100%);
+}
+
 /* Секции */
 .overlay {
   position: fixed;
@@ -3715,12 +3736,12 @@ select:-webkit-autofill:focus {
     display: none;
   }
 }
-.hero__icons a {
+.hero__icons .hero-link {
+  position: relative;
   width: 50px;
   height: 50px;
   margin-bottom: 8px;
-  border-radius: 50%;
-  border: 1px solid var(--dark-color);
+  border: 2px solid var(--dark-color);
   -webkit-transition: border-color var(--transition);
   -o-transition: border-color var(--transition);
   transition: border-color var(--transition);
@@ -3729,20 +3750,43 @@ select:-webkit-autofill:focus {
   -ms-transform: translateY(70px) scale(1.2);
   transform: translateY(70px) scale(1.2);
 }
-.hero__icons a svg {
+.hero__icons .hero-link svg {
   fill: var(--primary-color);
   -webkit-transition: fill var(--transition);
   -o-transition: fill var(--transition);
   transition: fill var(--transition);
 }
-.hero__icons a:hover, .hero__icons a:focus {
+.hero__icons .hero-link span {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  display: none;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  padding-left: 15px;
+  white-space: nowrap;
+  text-shadow: 0 0 7px var(--main-bg-color);
+  color: var(--dark-color);
+}
+.hero__icons .hero-link:hover {
   border-color: var(--dark-color) !important;
 }
-.hero__icons a:hover svg, .hero__icons a:focus svg {
+.hero__icons .hero-link:hover svg {
   fill: var(--dark-color);
 }
+.hero__icons .hero-link:hover span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-animation: fadeIn var(--transition);
+  animation: fadeIn var(--transition);
+}
 @media (max-width: 960px) {
-  .hero__icons a {
+  .hero__icons .hero-link {
     width: 40px;
     height: 40px;
   }
@@ -4556,7 +4600,7 @@ select:-webkit-autofill:focus {
   height: fit-content;
   min-height: 200px;
   max-height: 90vh;
-  background-color: #ffffff;
+  background-color: var(--main-bg-color);
 }
 .modal__close {
   position: absolute;
@@ -4624,7 +4668,7 @@ select:-webkit-autofill:focus {
   }
 }
 .modal__close svg {
-  fill: var(--white-color);
+  fill: var(--dark-color);
 }
 @media (max-width: 768px) {
   .modal__close svg {
@@ -4635,22 +4679,6 @@ select:-webkit-autofill:focus {
 
 .main-modal {
   position: relative;
-  /*background-image: url('../assets/img/logo-small.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 0 100vh; */
-  /*&.is-active {
-    animation: bcg 1s linear forwards;
-  }*/
-  /*@keyframes bcg {
-    0% {
-      background-position: 0 100vh;
-    }
-
-    100% {
-      background-position: 0 20px;
-    }
-  }*/
 }
 .main-modal .modal__content {
   padding: 30px;
@@ -4661,7 +4689,7 @@ select:-webkit-autofill:focus {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  background-color: rgba(78, 68, 100, 0.5);
+  background-color: var(--main-bg-color);
 }
 @media (max-width: 768px) {
   .main-modal .modal__content {
@@ -4675,7 +4703,7 @@ select:-webkit-autofill:focus {
   margin-top: auto;
   margin-bottom: 20px;
   padding-right: 40px;
-  color: var(--white-color);
+  color: var(--dark-color);
 }
 @media (max-width: 960px) {
   .main-modal__title {
@@ -4693,27 +4721,27 @@ select:-webkit-autofill:focus {
   }
 }
 .main-modal form input::-webkit-input-placeholder {
-  color: var(--white-color);
+  color: var(--dark-color);
 }
 .main-modal form input::-moz-placeholder {
-  color: var(--white-color);
+  color: var(--dark-color);
 }
 .main-modal form input:-ms-input-placeholder {
-  color: var(--white-color);
+  color: var(--dark-color);
 }
 .main-modal form input::-ms-input-placeholder {
-  color: var(--white-color);
+  color: var(--dark-color);
 }
 .main-modal form input,
 .main-modal form input::placeholder,
 .main-modal form button,
 .main-modal form .form__accept label.checkbox-label {
-  color: var(--white-color);
+  color: var(--dark-color);
 }
 .main-modal form .form__accept label.checkbox-label::before,
 .main-modal form input,
 .main-modal form button {
-  border-color: var(--white-color);
+  border-color: var(--dark-color);
 }
 
 .state-modal {
@@ -4722,14 +4750,6 @@ select:-webkit-autofill:focus {
 .state-modal.is-active {
   -webkit-animation: fadeIn 1s linear forwards;
   animation: fadeIn 1s linear forwards;
-}
-@-webkit-keyframes fadeIn {
-  0% {
-    opacity: 0.4;
-  }
-  100% {
-    opacity: 1;
-  }
 }
 @keyframes fadeIn {
   0% {
