@@ -6060,10 +6060,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var gsap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! gsap */ "./node_modules/gsap/index.js");
 /* harmony import */ var gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! gsap/ScrollTrigger */ "./node_modules/gsap/ScrollTrigger.js");
 /* harmony import */ var gsap_MorphSVGPlugin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! gsap/MorphSVGPlugin */ "./node_modules/gsap/MorphSVGPlugin.js");
+/* harmony import */ var gsap_MotionPathPlugin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! gsap/MotionPathPlugin */ "./node_modules/gsap/MotionPathPlugin.js");
+/* harmony import */ var gsap_MotionPathHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! gsap/MotionPathHelper */ "./node_modules/gsap/MotionPathHelper.js");
 
 
 
-gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__.ScrollTrigger, gsap_MorphSVGPlugin__WEBPACK_IMPORTED_MODULE_2__.MorphSVGPlugin);
+
+
+gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(gsap_ScrollTrigger__WEBPACK_IMPORTED_MODULE_1__.ScrollTrigger, gsap_MorphSVGPlugin__WEBPACK_IMPORTED_MODULE_2__.MorphSVGPlugin, gsap_MotionPathPlugin__WEBPACK_IMPORTED_MODULE_3__.MotionPathPlugin, gsap_MotionPathHelper__WEBPACK_IMPORTED_MODULE_4__.MotionPathHelper);
 var form = document.querySelector('.feedback form');
 
 if (form) {
@@ -6086,16 +6090,47 @@ if (form) {
     opacity: 1,
     y: 0,
     ease: "ease-in"
+  }); //--- plane
+
+  var tween = gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to("#plane", {
+    repeat: -1,
+    repeatDelay: 4,
+    motionPath: {
+      path: "#path",
+      align: "#path",
+      alignOrigin: [0.5, 0.5],
+      autoRotate: true
+    },
+    transformOrigin: "50% 50%",
+    duration: 2,
+    scale: 0,
+    ease: "power2.ease"
   });
-  var planeTl1 = gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.timeline({
+  /*const tween2 = gsap.to("#plane2", {
+    repeat: -1,
+    repeatDelay: 4,
+    motionPath: {
+        path: "#path2",
+        align: "#path2",
+        alignOrigin: [0.5, 0.5],
+        autoRotate: true
+    },
+    transformOrigin: "50% 50%",
+    duration: 2,
+    scale: 2.5,
+    ease: "ease-in-out"
+  });*/
+  // MotionPathHelper.create(tween);
+
+  /*let planeTl1 = gsap.timeline({
     scrollTrigger: {
       trigger: text,
-      start: "top bottom"
+      start: "top bottom",
     },
     repeat: '-1',
     repeatDelay: 2.5
   });
-  planeTl1.from("#mail-svg", {
+   planeTl1.from("#mail-svg", {
     duration: 0.7,
     delay: 1.2,
     opacity: 0,
@@ -6115,13 +6150,13 @@ if (form) {
     duration: 0.6,
     delay: 0.2,
     x: '-40px',
-    ease: "power1.out"
+    ease: "power1.out",
   }).to("#mail", {
     duration: 1.3,
     x: '150vw',
     y: '-40vh',
-    ease: "power1.out"
-  });
+    ease: "power1.out",
+  });*/
 }
 
 /***/ }),
@@ -9987,6 +10022,739 @@ var MorphSVGPlugin = {
   defaultMap: "size"
 };
 _getGSAP() && gsap.registerPlugin(MorphSVGPlugin);
+
+
+/***/ }),
+
+/***/ "./node_modules/gsap/MotionPathHelper.js":
+/*!***********************************************!*\
+  !*** ./node_modules/gsap/MotionPathHelper.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "MotionPathHelper": () => (/* binding */ MotionPathHelper),
+/* harmony export */   "default": () => (/* binding */ MotionPathHelper)
+/* harmony export */ });
+/* harmony import */ var _utils_PathEditor_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/PathEditor.js */ "./node_modules/gsap/utils/PathEditor.js");
+/*!
+ * MotionPathHelper 3.10.4
+ * https://greensock.com
+ *
+ * @license Copyright 2008-2022, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
+
+/* eslint-disable */
+
+
+var gsap,
+    _win,
+    _doc,
+    _docEl,
+    _body,
+    MotionPathPlugin,
+    _arrayToRawPath,
+    _rawPathToString,
+    _bonusValidated = 1,
+    //<name>MotionPathHelper</name>
+_selectorExp = /(^[#\.][a-z]|[a-y][a-z])/i,
+    _isString = function _isString(value) {
+  return typeof value === "string";
+},
+    _createElement = function _createElement(type, ns) {
+  var e = _doc.createElementNS ? _doc.createElementNS((ns || "http://www.w3.org/1999/xhtml").replace(/^https/, "http"), type) : _doc.createElement(type); //some servers swap in https for http in the namespace which can break things, making "style" inaccessible.
+
+  return e.style ? e : _doc.createElement(type); //some environments won't allow access to the element's style when created with a namespace in which case we default to the standard createElement() to work around the issue. Also note that when GSAP is embedded directly inside an SVG file, createElement() won't allow access to the style object in Firefox (see https://greensock.com/forums/topic/20215-problem-using-tweenmax-in-standalone-self-containing-svg-file-err-cannot-set-property-csstext-of-undefined/).
+},
+    _getPositionOnPage = function _getPositionOnPage(target) {
+  var bounds = target.getBoundingClientRect(),
+      windowOffsetY = _docEl.clientTop - (_win.pageYOffset || _docEl.scrollTop || _body.scrollTop || 0),
+      windowOffsetX = _docEl.clientLeft - (_win.pageXOffset || _docEl.scrollLeft || _body.scrollLeft || 0);
+  return {
+    left: bounds.left + windowOffsetX,
+    top: bounds.top + windowOffsetY,
+    right: bounds.right + windowOffsetX,
+    bottom: bounds.bottom + windowOffsetY
+  };
+},
+    _getInitialPath = function _getInitialPath(x, y) {
+  var coordinates = [0, 31, 8, 58, 24, 75, 40, 90, 69, 100, 100, 100],
+      i;
+
+  for (i = 0; i < coordinates.length; i += 2) {
+    coordinates[i] += x;
+    coordinates[i + 1] += y;
+  }
+
+  return "M" + x + "," + y + "C" + coordinates.join(",");
+},
+    _getGlobalTime = function _getGlobalTime(animation) {
+  var time = animation.totalTime();
+
+  while (animation) {
+    time = animation.startTime() + time / (animation.timeScale() || 1);
+    animation = animation.parent;
+  }
+
+  return time;
+},
+    _copyElement,
+    _initCopyToClipboard = function _initCopyToClipboard() {
+  _copyElement = _createElement("textarea");
+  _copyElement.style.display = "none";
+
+  _body.appendChild(_copyElement);
+},
+    _parsePath = function _parsePath(path, target, vars) {
+  return _isString(path) && _selectorExp.test(path) ? _doc.querySelector(path) : Array.isArray(path) ? _rawPathToString(_arrayToRawPath([{
+    x: gsap.getProperty(target, "x"),
+    y: gsap.getProperty(target, "y")
+  }].concat(path), vars)) : _isString(path) || path && (path.tagName + "").toLowerCase() === "path" ? path : 0;
+},
+    _addCopyToClipboard = function _addCopyToClipboard(target, getter, onComplete) {
+  target.addEventListener('click', function (e) {
+    if (e.target._gsHelper) {
+      var c = getter(e.target);
+      _copyElement.value = c;
+
+      if (c && _copyElement.select) {
+        console.log(c);
+        _copyElement.style.display = "block";
+
+        _copyElement.select();
+
+        try {
+          _doc.execCommand('copy');
+
+          _copyElement.blur();
+
+          onComplete && onComplete(target);
+        } catch (err) {
+          console.warn("Copy didn't work; this browser doesn't permit that.");
+        }
+
+        _copyElement.style.display = "none";
+      }
+    }
+  });
+},
+    _identityMatrixObject = {
+  matrix: {
+    a: 1,
+    b: 0,
+    c: 0,
+    d: 1,
+    e: 0,
+    f: 0
+  }
+},
+    _getConsolidatedMatrix = function _getConsolidatedMatrix(target) {
+  return (target.transform.baseVal.consolidate() || _identityMatrixObject).matrix;
+},
+    _findMotionPathTween = function _findMotionPathTween(target) {
+  var tweens = gsap.getTweensOf(target),
+      i = 0;
+
+  for (; i < tweens.length; i++) {
+    if (tweens[i].vars.motionPath) {
+      return tweens[i];
+    } else if (tweens[i].timeline) {
+      tweens.push.apply(tweens, tweens[i].timeline.getChildren());
+    }
+  }
+},
+    _initCore = function _initCore(core, required) {
+  var message = "Please gsap.registerPlugin(MotionPathPlugin)";
+  _win = window;
+  gsap = gsap || core || _win.gsap || console.warn(message);
+  _doc = document;
+  _body = _doc.body;
+  _docEl = _doc.documentElement;
+  MotionPathPlugin = gsap && gsap.plugins.motionPath;
+
+  if (!MotionPathPlugin) {
+    required === true && console.warn(message);
+  } else {
+    _initCopyToClipboard();
+
+    _arrayToRawPath = MotionPathPlugin.arrayToRawPath;
+    _rawPathToString = MotionPathPlugin.rawPathToString;
+  }
+};
+
+var MotionPathHelper = /*#__PURE__*/function () {
+  function MotionPathHelper(targetOrTween, vars) {
+    if (vars === void 0) {
+      vars = {};
+    }
+
+    if (!MotionPathPlugin) {
+      _initCore(vars.gsap, 1);
+    }
+
+    var copyButton = _createElement("div"),
+        self = this,
+        offset = {
+      x: 0,
+      y: 0
+    },
+        target,
+        path,
+        isSVG,
+        startX,
+        startY,
+        position,
+        svg,
+        animation,
+        svgNamespace,
+        temp,
+        matrix,
+        refreshPath,
+        animationToScrub;
+
+    if (targetOrTween instanceof gsap.core.Tween) {
+      animation = targetOrTween;
+      target = animation.targets()[0];
+    } else {
+      target = gsap.utils.toArray(targetOrTween)[0];
+      animation = _findMotionPathTween(target);
+    }
+
+    path = _parsePath(vars.path, target, vars);
+    this.offset = offset;
+    position = _getPositionOnPage(target);
+    startX = parseFloat(gsap.getProperty(target, "x", "px"));
+    startY = parseFloat(gsap.getProperty(target, "y", "px"));
+    isSVG = target.getCTM && target.tagName.toLowerCase() !== "svg";
+
+    if (animation && !path) {
+      path = _parsePath(animation.vars.motionPath.path || animation.vars.motionPath, target, animation.vars.motionPath);
+    }
+
+    copyButton.setAttribute("class", "copy-motion-path");
+    copyButton.style.cssText = "border-radius:8px; background-color:rgba(85, 85, 85, 0.7); color:#fff; cursor:pointer; padding:6px 12px; font-family:Signika Negative, Arial, sans-serif; position:fixed; left:50%; transform:translate(-50%, 0); font-size:19px; bottom:10px";
+    copyButton.innerText = "COPY MOTION PATH";
+    copyButton._gsHelper = self;
+
+    (gsap.utils.toArray(vars.container)[0] || _body).appendChild(copyButton);
+
+    _addCopyToClipboard(copyButton, function () {
+      return self.getString();
+    }, function () {
+      return gsap.fromTo(copyButton, {
+        backgroundColor: "white"
+      }, {
+        duration: 0.5,
+        backgroundColor: "rgba(85, 85, 85, 0.6)"
+      });
+    });
+
+    svg = path && path.ownerSVGElement;
+
+    if (!svg) {
+      svgNamespace = isSVG && target.ownerSVGElement && target.ownerSVGElement.getAttribute("xmlns") || "http://www.w3.org/2000/svg";
+
+      if (isSVG) {
+        svg = target.ownerSVGElement;
+        temp = target.getBBox();
+        matrix = _getConsolidatedMatrix(target);
+        startX = matrix.e;
+        startY = matrix.f;
+        offset.x = temp.x;
+        offset.y = temp.y;
+      } else {
+        svg = _createElement("svg", svgNamespace);
+
+        _body.appendChild(svg);
+
+        svg.setAttribute("viewBox", "0 0 100 100");
+        svg.setAttribute("class", "motion-path-helper");
+        svg.style.cssText = "overflow:visible; background-color: transparent; position:absolute; z-index:5000; width:100px; height:100px; top:" + (position.top - startY) + "px; left:" + (position.left - startX) + "px;";
+      }
+
+      temp = _isString(path) && !_selectorExp.test(path) ? path : _getInitialPath(startX, startY);
+      path = _createElement("path", svgNamespace);
+      path.setAttribute("d", temp);
+      path.setAttribute("vector-effect", "non-scaling-stroke");
+      path.style.cssText = "fill:transparent; stroke-width:" + (vars.pathWidth || 3) + "; stroke:" + (vars.pathColor || "#555") + "; opacity:" + (vars.pathOpacity || 0.6);
+      svg.appendChild(path);
+
+      if (offset.x || offset.y) {
+        gsap.set(path, {
+          x: offset.x,
+          y: offset.y
+        });
+      }
+    }
+
+    if (!("selected" in vars)) {
+      vars.selected = true;
+    }
+
+    if (!("anchorSnap" in vars)) {
+      vars.anchorSnap = function (p) {
+        if (p.x * p.x + p.y * p.y < 16) {
+          p.x = p.y = 0;
+        }
+      };
+    }
+
+    animationToScrub = animation && animation.parent.data === "nested" ? animation.parent.parent : animation;
+
+    vars.onPress = function () {
+      animationToScrub.pause(0);
+    };
+
+    refreshPath = function refreshPath() {
+      //let m = _getConsolidatedMatrix(path);
+      //animation.vars.motionPath.offsetX = m.e - offset.x;
+      //animation.vars.motionPath.offsetY = m.f - offset.y;
+      animation.invalidate();
+      animationToScrub.restart();
+    };
+
+    vars.onRelease = vars.onDeleteAnchor = refreshPath;
+    this.editor = _utils_PathEditor_js__WEBPACK_IMPORTED_MODULE_0__["default"].create(path, vars);
+
+    if (vars.center) {
+      gsap.set(target, {
+        transformOrigin: "50% 50%",
+        xPercent: -50,
+        yPercent: -50
+      });
+    }
+
+    if (animation) {
+      if (animation.vars.motionPath.path) {
+        animation.vars.motionPath.path = path;
+      } else {
+        animation.vars.motionPath = {
+          path: path
+        };
+      }
+
+      if (animationToScrub.parent !== gsap.globalTimeline) {
+        gsap.globalTimeline.add(animationToScrub, _getGlobalTime(animationToScrub) - animationToScrub.delay());
+      }
+
+      animationToScrub.repeat(-1).repeatDelay(1);
+    } else {
+      animation = animationToScrub = gsap.to(target, {
+        motionPath: {
+          path: path,
+          start: vars.start || 0,
+          end: "end" in vars ? vars.end : 1,
+          autoRotate: "autoRotate" in vars ? vars.autoRotate : false,
+          align: path,
+          alignOrigin: vars.alignOrigin
+        },
+        duration: vars.duration || 5,
+        ease: vars.ease || "power1.inOut",
+        repeat: -1,
+        repeatDelay: 1,
+        paused: !vars.path
+      });
+    }
+
+    this.animation = animation;
+  }
+
+  var _proto = MotionPathHelper.prototype;
+
+  _proto.getString = function getString() {
+    return this.editor.getString(true, -this.offset.x, -this.offset.y);
+  };
+
+  return MotionPathHelper;
+}();
+MotionPathHelper.register = _initCore;
+
+MotionPathHelper.create = function (target, vars) {
+  return new MotionPathHelper(target, vars);
+};
+
+MotionPathHelper.editPath = function (path, vars) {
+  return _utils_PathEditor_js__WEBPACK_IMPORTED_MODULE_0__["default"].create(path, vars);
+};
+
+MotionPathHelper.version = "3.10.4";
+
+
+/***/ }),
+
+/***/ "./node_modules/gsap/MotionPathPlugin.js":
+/*!***********************************************!*\
+  !*** ./node_modules/gsap/MotionPathPlugin.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "MotionPathPlugin": () => (/* binding */ MotionPathPlugin),
+/* harmony export */   "default": () => (/* binding */ MotionPathPlugin)
+/* harmony export */ });
+/* harmony import */ var _utils_paths_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/paths.js */ "./node_modules/gsap/utils/paths.js");
+/* harmony import */ var _utils_matrix_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/matrix.js */ "./node_modules/gsap/utils/matrix.js");
+/*!
+ * MotionPathPlugin 3.10.4
+ * https://greensock.com
+ *
+ * @license Copyright 2008-2022, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
+
+/* eslint-disable */
+
+
+
+var _xProps = "x,translateX,left,marginLeft,xPercent".split(","),
+    _yProps = "y,translateY,top,marginTop,yPercent".split(","),
+    _DEG2RAD = Math.PI / 180,
+    gsap,
+    PropTween,
+    _getUnit,
+    _toArray,
+    _getGSAP = function _getGSAP() {
+  return gsap || typeof window !== "undefined" && (gsap = window.gsap) && gsap.registerPlugin && gsap;
+},
+    _populateSegmentFromArray = function _populateSegmentFromArray(segment, values, property, mode) {
+  //mode: 0 = x but don't fill y yet, 1 = y, 2 = x and fill y with 0.
+  var l = values.length,
+      si = mode === 2 ? 0 : mode,
+      i = 0,
+      v;
+
+  for (; i < l; i++) {
+    segment[si] = v = parseFloat(values[i][property]);
+    mode === 2 && (segment[si + 1] = 0);
+    si += 2;
+  }
+
+  return segment;
+},
+    _getPropNum = function _getPropNum(target, prop, unit) {
+  return parseFloat(target._gsap.get(target, prop, unit || "px")) || 0;
+},
+    _relativize = function _relativize(segment) {
+  var x = segment[0],
+      y = segment[1],
+      i;
+
+  for (i = 2; i < segment.length; i += 2) {
+    x = segment[i] += x;
+    y = segment[i + 1] += y;
+  }
+},
+    // feed in an array of quadratic bezier points like [{x: 0, y: 0}, ...] and it'll convert it to cubic bezier
+// _quadToCubic = points => {
+// 	let cubic = [],
+// 		l = points.length - 1,
+// 		i = 1,
+// 		a, b, c;
+// 	for (; i < l; i+=2) {
+// 		a = points[i-1];
+// 		b = points[i];
+// 		c = points[i+1];
+// 		cubic.push(a, {x: (2 * b.x + a.x) / 3, y: (2 * b.y + a.y) / 3}, {x: (2 * b.x + c.x) / 3, y: (2 * b.y + c.y) / 3});
+// 	}
+// 	cubic.push(points[l]);
+// 	return cubic;
+// },
+_segmentToRawPath = function _segmentToRawPath(plugin, segment, target, x, y, slicer, vars, unitX, unitY) {
+  if (vars.type === "cubic") {
+    segment = [segment];
+  } else {
+    vars.fromCurrent !== false && segment.unshift(_getPropNum(target, x, unitX), y ? _getPropNum(target, y, unitY) : 0);
+    vars.relative && _relativize(segment);
+    var pointFunc = y ? _utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.pointsToSegment : _utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.flatPointsToSegment;
+    segment = [pointFunc(segment, vars.curviness)];
+  }
+
+  segment = slicer(_align(segment, target, vars));
+
+  _addDimensionalPropTween(plugin, target, x, segment, "x", unitX);
+
+  y && _addDimensionalPropTween(plugin, target, y, segment, "y", unitY);
+  return (0,_utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.cacheRawPathMeasurements)(segment, vars.resolution || (vars.curviness === 0 ? 20 : 12)); //when curviness is 0, it creates control points right on top of the anchors which makes it more sensitive to resolution, thus we change the default accordingly.
+},
+    _emptyFunc = function _emptyFunc(v) {
+  return v;
+},
+    _numExp = /[-+\.]*\d+\.?(?:e-|e\+)?\d*/g,
+    _originToPoint = function _originToPoint(element, origin, parentMatrix) {
+  // origin is an array of normalized values (0-1) in relation to the width/height, so [0.5, 0.5] would be the center. It can also be "auto" in which case it will be the top left unless it's a <path>, when it will start at the beginning of the path itself.
+  var m = (0,_utils_matrix_js__WEBPACK_IMPORTED_MODULE_1__.getGlobalMatrix)(element),
+      x = 0,
+      y = 0,
+      svg;
+
+  if ((element.tagName + "").toLowerCase() === "svg") {
+    svg = element.viewBox.baseVal;
+    svg.width || (svg = {
+      width: +element.getAttribute("width"),
+      height: +element.getAttribute("height")
+    });
+  } else {
+    svg = origin && element.getBBox && element.getBBox();
+  }
+
+  if (origin && origin !== "auto") {
+    x = origin.push ? origin[0] * (svg ? svg.width : element.offsetWidth || 0) : origin.x;
+    y = origin.push ? origin[1] * (svg ? svg.height : element.offsetHeight || 0) : origin.y;
+  }
+
+  return parentMatrix.apply(x || y ? m.apply({
+    x: x,
+    y: y
+  }) : {
+    x: m.e,
+    y: m.f
+  });
+},
+    _getAlignMatrix = function _getAlignMatrix(fromElement, toElement, fromOrigin, toOrigin) {
+  var parentMatrix = (0,_utils_matrix_js__WEBPACK_IMPORTED_MODULE_1__.getGlobalMatrix)(fromElement.parentNode, true, true),
+      m = parentMatrix.clone().multiply((0,_utils_matrix_js__WEBPACK_IMPORTED_MODULE_1__.getGlobalMatrix)(toElement)),
+      fromPoint = _originToPoint(fromElement, fromOrigin, parentMatrix),
+      _originToPoint2 = _originToPoint(toElement, toOrigin, parentMatrix),
+      x = _originToPoint2.x,
+      y = _originToPoint2.y,
+      p;
+
+  m.e = m.f = 0;
+
+  if (toOrigin === "auto" && toElement.getTotalLength && toElement.tagName.toLowerCase() === "path") {
+    p = toElement.getAttribute("d").match(_numExp) || [];
+    p = m.apply({
+      x: +p[0],
+      y: +p[1]
+    });
+    x += p.x;
+    y += p.y;
+  }
+
+  if (p || toElement.getBBox && fromElement.getBBox && toElement.ownerSVGElement === fromElement.ownerSVGElement) {
+    p = m.apply(toElement.getBBox());
+    x -= p.x;
+    y -= p.y;
+  }
+
+  m.e = x - fromPoint.x;
+  m.f = y - fromPoint.y;
+  return m;
+},
+    _align = function _align(rawPath, target, _ref) {
+  var align = _ref.align,
+      matrix = _ref.matrix,
+      offsetX = _ref.offsetX,
+      offsetY = _ref.offsetY,
+      alignOrigin = _ref.alignOrigin;
+
+  var x = rawPath[0][0],
+      y = rawPath[0][1],
+      curX = _getPropNum(target, "x"),
+      curY = _getPropNum(target, "y"),
+      alignTarget,
+      m,
+      p;
+
+  if (!rawPath || !rawPath.length) {
+    return (0,_utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.getRawPath)("M0,0L0,0");
+  }
+
+  if (align) {
+    if (align === "self" || (alignTarget = _toArray(align)[0] || target) === target) {
+      (0,_utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.transformRawPath)(rawPath, 1, 0, 0, 1, curX - x, curY - y);
+    } else {
+      if (alignOrigin && alignOrigin[2] !== false) {
+        gsap.set(target, {
+          transformOrigin: alignOrigin[0] * 100 + "% " + alignOrigin[1] * 100 + "%"
+        });
+      } else {
+        alignOrigin = [_getPropNum(target, "xPercent") / -100, _getPropNum(target, "yPercent") / -100];
+      }
+
+      m = _getAlignMatrix(target, alignTarget, alignOrigin, "auto");
+      p = m.apply({
+        x: x,
+        y: y
+      });
+      (0,_utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.transformRawPath)(rawPath, m.a, m.b, m.c, m.d, curX + m.e - (p.x - m.e), curY + m.f - (p.y - m.f));
+    }
+  }
+
+  if (matrix) {
+    (0,_utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.transformRawPath)(rawPath, matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f);
+  } else if (offsetX || offsetY) {
+    (0,_utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.transformRawPath)(rawPath, 1, 0, 0, 1, offsetX || 0, offsetY || 0);
+  }
+
+  return rawPath;
+},
+    _addDimensionalPropTween = function _addDimensionalPropTween(plugin, target, property, rawPath, pathProperty, forceUnit) {
+  var cache = target._gsap,
+      harness = cache.harness,
+      alias = harness && harness.aliases && harness.aliases[property],
+      prop = alias && alias.indexOf(",") < 0 ? alias : property,
+      pt = plugin._pt = new PropTween(plugin._pt, target, prop, 0, 0, _emptyFunc, 0, cache.set(target, prop, plugin));
+  pt.u = _getUnit(cache.get(target, prop, forceUnit)) || 0;
+  pt.path = rawPath;
+  pt.pp = pathProperty;
+
+  plugin._props.push(prop);
+},
+    _sliceModifier = function _sliceModifier(start, end) {
+  return function (rawPath) {
+    return start || end !== 1 ? (0,_utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.sliceRawPath)(rawPath, start, end) : rawPath;
+  };
+};
+
+var MotionPathPlugin = {
+  version: "3.10.4",
+  name: "motionPath",
+  register: function register(core, Plugin, propTween) {
+    gsap = core;
+    _getUnit = gsap.utils.getUnit;
+    _toArray = gsap.utils.toArray;
+    PropTween = propTween;
+  },
+  init: function init(target, vars) {
+    if (!gsap) {
+      console.warn("Please gsap.registerPlugin(MotionPathPlugin)");
+      return false;
+    }
+
+    if (!(typeof vars === "object" && !vars.style) || !vars.path) {
+      vars = {
+        path: vars
+      };
+    }
+
+    var rawPaths = [],
+        _vars = vars,
+        path = _vars.path,
+        autoRotate = _vars.autoRotate,
+        unitX = _vars.unitX,
+        unitY = _vars.unitY,
+        x = _vars.x,
+        y = _vars.y,
+        firstObj = path[0],
+        slicer = _sliceModifier(vars.start, "end" in vars ? vars.end : 1),
+        rawPath,
+        p;
+
+    this.rawPaths = rawPaths;
+    this.target = target;
+
+    if (this.rotate = autoRotate || autoRotate === 0) {
+      //get the rotational data FIRST so that the setTransform() method is called in the correct order in the render() loop - rotation gets set last.
+      this.rOffset = parseFloat(autoRotate) || 0;
+      this.radians = !!vars.useRadians;
+      this.rProp = vars.rotation || "rotation"; // rotation property
+
+      this.rSet = target._gsap.set(target, this.rProp, this); // rotation setter
+
+      this.ru = _getUnit(target._gsap.get(target, this.rProp)) || 0; // rotation units
+    }
+
+    if (Array.isArray(path) && !("closed" in path) && typeof firstObj !== "number") {
+      for (p in firstObj) {
+        if (!x && ~_xProps.indexOf(p)) {
+          x = p;
+        } else if (!y && ~_yProps.indexOf(p)) {
+          y = p;
+        }
+      }
+
+      if (x && y) {
+        //correlated values
+        rawPaths.push(_segmentToRawPath(this, _populateSegmentFromArray(_populateSegmentFromArray([], path, x, 0), path, y, 1), target, x, y, slicer, vars, unitX || _getUnit(path[0][x]), unitY || _getUnit(path[0][y])));
+      } else {
+        x = y = 0;
+      }
+
+      for (p in firstObj) {
+        p !== x && p !== y && rawPaths.push(_segmentToRawPath(this, _populateSegmentFromArray([], path, p, 2), target, p, 0, slicer, vars, _getUnit(path[0][p])));
+      }
+    } else {
+      rawPath = slicer(_align((0,_utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.getRawPath)(vars.path), target, vars));
+      (0,_utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.cacheRawPathMeasurements)(rawPath, vars.resolution);
+      rawPaths.push(rawPath);
+
+      _addDimensionalPropTween(this, target, vars.x || "x", rawPath, "x", vars.unitX || "px");
+
+      _addDimensionalPropTween(this, target, vars.y || "y", rawPath, "y", vars.unitY || "px");
+    }
+  },
+  render: function render(ratio, data) {
+    var rawPaths = data.rawPaths,
+        i = rawPaths.length,
+        pt = data._pt;
+
+    if (ratio > 1) {
+      ratio = 1;
+    } else if (ratio < 0) {
+      ratio = 0;
+    }
+
+    while (i--) {
+      (0,_utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.getPositionOnPath)(rawPaths[i], ratio, !i && data.rotate, rawPaths[i]);
+    }
+
+    while (pt) {
+      pt.set(pt.t, pt.p, pt.path[pt.pp] + pt.u, pt.d, ratio);
+      pt = pt._next;
+    }
+
+    data.rotate && data.rSet(data.target, data.rProp, rawPaths[0].angle * (data.radians ? _DEG2RAD : 1) + data.rOffset + data.ru, data, ratio);
+  },
+  getLength: function getLength(path) {
+    return (0,_utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.cacheRawPathMeasurements)((0,_utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.getRawPath)(path)).totalLength;
+  },
+  sliceRawPath: _utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.sliceRawPath,
+  getRawPath: _utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.getRawPath,
+  pointsToSegment: _utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.pointsToSegment,
+  stringToRawPath: _utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.stringToRawPath,
+  rawPathToString: _utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.rawPathToString,
+  transformRawPath: _utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.transformRawPath,
+  getGlobalMatrix: _utils_matrix_js__WEBPACK_IMPORTED_MODULE_1__.getGlobalMatrix,
+  getPositionOnPath: _utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.getPositionOnPath,
+  cacheRawPathMeasurements: _utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.cacheRawPathMeasurements,
+  convertToPath: function convertToPath(targets, swap) {
+    return _toArray(targets).map(function (target) {
+      return (0,_utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.convertToPath)(target, swap !== false);
+    });
+  },
+  convertCoordinates: function convertCoordinates(fromElement, toElement, point) {
+    var m = (0,_utils_matrix_js__WEBPACK_IMPORTED_MODULE_1__.getGlobalMatrix)(toElement, true, true).multiply((0,_utils_matrix_js__WEBPACK_IMPORTED_MODULE_1__.getGlobalMatrix)(fromElement));
+    return point ? m.apply(point) : m;
+  },
+  getAlignMatrix: _getAlignMatrix,
+  getRelativePosition: function getRelativePosition(fromElement, toElement, fromOrigin, toOrigin) {
+    var m = _getAlignMatrix(fromElement, toElement, fromOrigin, toOrigin);
+
+    return {
+      x: m.e,
+      y: m.f
+    };
+  },
+  arrayToRawPath: function arrayToRawPath(value, vars) {
+    vars = vars || {};
+
+    var segment = _populateSegmentFromArray(_populateSegmentFromArray([], value, vars.x || "x", 0), value, vars.y || "y", 1);
+
+    vars.relative && _relativize(segment);
+    return [vars.type === "cubic" ? segment : (0,_utils_paths_js__WEBPACK_IMPORTED_MODULE_0__.pointsToSegment)(segment, vars.curviness)];
+  }
+};
+_getGSAP() && gsap.registerPlugin(MotionPathPlugin);
 
 
 /***/ }),
@@ -18951,6 +19719,2268 @@ var gsapWithCSS = _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin
     // to protect from tree shaking
 TweenMaxWithCSS = gsapWithCSS.core.Tween;
 
+
+/***/ }),
+
+/***/ "./node_modules/gsap/utils/PathEditor.js":
+/*!***********************************************!*\
+  !*** ./node_modules/gsap/utils/PathEditor.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PathEditor": () => (/* binding */ PathEditor),
+/* harmony export */   "default": () => (/* binding */ PathEditor)
+/* harmony export */ });
+/* harmony import */ var _paths_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./paths.js */ "./node_modules/gsap/utils/paths.js");
+/* harmony import */ var _matrix_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./matrix.js */ "./node_modules/gsap/utils/matrix.js");
+/*!
+ * PathEditor 3.10.4
+ * https://greensock.com
+ *
+ * Copyright 2008-2022, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
+
+/* eslint-disable */
+
+
+
+var _numbersExp = /(?:(-)?\d*\.?\d*(?:e[\-+]?\d+)?)[0-9]/ig,
+    _doc,
+    _supportsPointer,
+    _win,
+    _body,
+    _selectionColor = "#4e7fff",
+    _minimumMovement = 1,
+    _DEG2RAD = Math.PI / 180,
+    _getTime = Date.now || function () {
+  return new Date().getTime();
+},
+    _lastInteraction = 0,
+    _isPressed = 0,
+    _emptyFunc = function _emptyFunc() {
+  return false;
+},
+    _interacted = function _interacted() {
+  return _lastInteraction = _getTime();
+},
+    _CTRL,
+    _ALT,
+    _SHIFT,
+    _CMD,
+    _recentlyAddedAnchor,
+    _editingAxis = {},
+    //stores the x/y of the most recently-selected anchor point's x and y axis. We tap into this for snapping horizontally and vertically.
+_history = [],
+    _point = {},
+    //reuse to minimize memory and maximize performance (mostly for snapping)
+_temp = [],
+    //reuse this in places like getNormalizedSVG() to conserve memory
+_comma = ",",
+    _selectedPaths = [],
+    _preventDefault = function _preventDefault(event) {
+  if (event.preventDefault) {
+    event.preventDefault();
+
+    if (event.preventManipulation) {
+      event.preventManipulation(); //for some Microsoft browsers
+    }
+  }
+},
+    _createElement = function _createElement(type) {
+  return _doc.createElementNS ? _doc.createElementNS("http://www.w3.org/1999/xhtml", type) : _doc.createElement(type);
+},
+    _createSVG = function _createSVG(type, container, attributes) {
+  var element = _doc.createElementNS("http://www.w3.org/2000/svg", type),
+      reg = /([a-z])([A-Z])/g,
+      p;
+
+  attributes = attributes || {};
+  attributes["class"] = attributes["class"] || "path-editor";
+
+  for (p in attributes) {
+    if (element.style[p] !== undefined) {
+      element.style[p] = attributes[p];
+    } else {
+      element.setAttributeNS(null, p.replace(reg, "$1-$2").toLowerCase(), attributes[p]);
+    }
+  }
+
+  container.appendChild(element);
+  return element;
+},
+    _identityMatrixObject = {
+  matrix: new _matrix_js__WEBPACK_IMPORTED_MODULE_0__.Matrix2D()
+},
+    _getConsolidatedMatrix = function _getConsolidatedMatrix(target) {
+  return (target.transform && target.transform.baseVal.consolidate() || _identityMatrixObject).matrix;
+},
+    _getConcatenatedTransforms = function _getConcatenatedTransforms(target) {
+  var m = _getConsolidatedMatrix(target),
+      owner = target.ownerSVGElement;
+
+  while ((target = target.parentNode) && target.ownerSVGElement === owner) {
+    m.multiply(_getConsolidatedMatrix(target));
+  }
+
+  return "matrix(" + m.a + "," + m.b + "," + m.c + "," + m.d + "," + m.e + "," + m.f + ")";
+},
+    _addHistory = function _addHistory(pathEditor) {
+  var selectedIndexes = [],
+      a = pathEditor._selectedAnchors,
+      i;
+
+  for (i = 0; i < a.length; i++) {
+    selectedIndexes[i] = a[i].i;
+  }
+
+  _history.unshift({
+    path: pathEditor,
+    d: pathEditor.path.getAttribute("d"),
+    transform: pathEditor.path.getAttribute("transform") || "",
+    selectedIndexes: selectedIndexes
+  });
+
+  if (_history.length > 30) {
+    _history.length = 30;
+  }
+},
+    _round = function _round(value) {
+  return ~~(value * 1000 + (value < 0 ? -.5 : .5)) / 1000;
+},
+    _getSquarePathData = function _getSquarePathData(size) {
+  size = _round(size);
+  return ["M-" + size, -size, size, -size, size, size, -size, size + "z"].join(_comma);
+},
+    _getCirclePathData = function _getCirclePathData(size) {
+  var circ = 0.552284749831,
+      rcirc = _round(size * circ);
+
+  size = _round(size);
+  return "M" + size + ",0C" + [size, rcirc, rcirc, size, 0, size, -rcirc, size, -size, rcirc, -size, 0, -size, -rcirc, -rcirc, -size, 0, -size, rcirc, -size, size, -rcirc, size, 0].join(_comma) + "z";
+},
+    _checkDeselect = function _checkDeselect(e) {
+  if (!e.target._gsSelection && !_isPressed && _getTime() - _lastInteraction > 100) {
+    var i = _selectedPaths.length;
+
+    while (--i > -1) {
+      _selectedPaths[i].deselect();
+    }
+
+    _selectedPaths.length = 0;
+  }
+},
+    _tempDiv,
+    _touchEventLookup,
+    _isMultiTouching = 0,
+    _addListener = function _addListener(element, type, func, capture) {
+  if (element.addEventListener) {
+    var touchType = _touchEventLookup[type];
+    capture = capture || {
+      passive: false
+    };
+    element.addEventListener(touchType || type, func, capture);
+
+    if (touchType && type !== touchType && touchType.substr(0, 7) !== "pointer") {
+      //some browsers actually support both, so must we. But pointer events cover all.
+      element.addEventListener(type, func, capture);
+    }
+  } else if (element.attachEvent) {
+    element.attachEvent("on" + type, func);
+  }
+},
+    _removeListener = function _removeListener(element, type, func) {
+  if (element.removeEventListener) {
+    var touchType = _touchEventLookup[type];
+    element.removeEventListener(touchType || type, func);
+
+    if (touchType && type !== touchType && touchType.substr(0, 7) !== "pointer") {
+      element.removeEventListener(type, func);
+    }
+  } else if (element.detachEvent) {
+    element.detachEvent("on" + type, func);
+  }
+},
+    _hasTouchID = function _hasTouchID(list, ID) {
+  var i = list.length;
+
+  while (--i > -1) {
+    if (list[i].identifier === ID) {
+      return true;
+    }
+  }
+
+  return false;
+},
+    _onMultiTouchDocumentEnd = function _onMultiTouchDocumentEnd(e) {
+  _isMultiTouching = e.touches && _dragCount < e.touches.length;
+
+  _removeListener(e.target, "touchend", _onMultiTouchDocumentEnd);
+},
+    _onMultiTouchDocument = function _onMultiTouchDocument(e) {
+  _isMultiTouching = e.touches && _dragCount < e.touches.length;
+
+  _addListener(e.target, "touchend", _onMultiTouchDocumentEnd);
+},
+    _bind = function _bind(func, scope) {
+  return function (e) {
+    return func.call(scope, e);
+  };
+},
+    _callback = function _callback(type, self, param) {
+  var callback = self.vars[type];
+
+  if (callback) {
+    callback.call(self.vars.callbackScope || self, param || self);
+  }
+
+  return self;
+},
+    _copyElement,
+    _resetSelection = function _resetSelection() {
+  _copyElement.style.display = "block";
+
+  _copyElement.select();
+
+  _copyElement.style.display = "none";
+},
+    _coreInitted,
+    _initCore = function _initCore() {
+  _doc = document;
+  _win = window;
+  _body = _doc.body;
+  _tempDiv = _createElement("div");
+  _copyElement = _createElement("textarea");
+  _copyElement.style.display = "none";
+  _body && _body.appendChild(_copyElement);
+
+  _touchEventLookup = function (types) {
+    //we create an object that makes it easy to translate touch event types into their "pointer" counterparts if we're in a browser that uses those instead. Like IE10 uses "MSPointerDown" instead of "touchstart", for example.
+    var standard = types.split(","),
+        converted = (_tempDiv.onpointerdown !== undefined ? "pointerdown,pointermove,pointerup,pointercancel" : _tempDiv.onmspointerdown !== undefined ? "MSPointerDown,MSPointerMove,MSPointerUp,MSPointerCancel" : types).split(","),
+        obj = {},
+        i = 4;
+
+    while (--i > -1) {
+      obj[standard[i]] = converted[i];
+      obj[converted[i]] = standard[i];
+    }
+
+    return obj;
+  }("touchstart,touchmove,touchend,touchcancel");
+
+  SVGElement.prototype.getTransformToElement = SVGElement.prototype.getTransformToElement || function (e) {
+    //adds Chrome support
+    return e.getScreenCTM().inverse().multiply(this.getScreenCTM());
+  };
+
+  _doc.addEventListener("keydown", function (e) {
+    var key = e.keyCode || e.which,
+        keyString = e.key || key,
+        i,
+        state,
+        a,
+        path;
+
+    if (keyString === "Shift" || key === 16) {
+      _SHIFT = true;
+    } else if (keyString === "Control" || key === 17) {
+      _CTRL = true;
+    } else if (keyString === "Meta" || key === 91) {
+      _CMD = true;
+    } else if (keyString === "Alt" || key === 18) {
+      _ALT = true;
+      i = _selectedPaths.length;
+
+      while (--i > -1) {
+        _selectedPaths[i]._onPressAlt();
+      }
+    } else if ((keyString === "z" || key === 90) && (_CTRL || _CMD) && _history.length > 1) {
+      //UNDO
+      _history.shift();
+
+      state = _history[0];
+
+      if (state) {
+        path = state.path;
+        path.path.setAttribute("d", state.d);
+        path.path.setAttribute("transform", state.transform);
+        path.init();
+        a = path._anchors;
+
+        for (i = 0; i < a.length; i++) {
+          if (state.selectedIndexes.indexOf(a[i].i) !== -1) {
+            path._selectedAnchors.push(a[i]);
+          }
+        }
+
+        path._updateAnchors();
+
+        path.update();
+
+        if (path.vars.onUndo) {
+          path.vars.onUndo.call(path);
+        }
+      }
+    } else if (keyString === "Delete" || keyString === "Backspace" || key === 8 || key === 46 || key === 63272 || key === "d" && (_CTRL || _CMD)) {
+      //DELETE
+      i = _selectedPaths.length;
+
+      while (--i > -1) {
+        _selectedPaths[i]._deleteSelectedAnchors();
+      }
+    } else if ((keyString === "a" || key === 65) && (_CMD || _CTRL)) {
+      //SELECT ALL
+      i = _selectedPaths.length;
+
+      while (--i > -1) {
+        _selectedPaths[i].select(true);
+      }
+    }
+  }, true);
+
+  _doc.addEventListener("keyup", function (e) {
+    var key = e.key || e.keyCode || e.which;
+
+    if (key === "Shift" || key === 16) {
+      _SHIFT = false;
+    } else if (key === "Control" || key === 17) {
+      _CTRL = false;
+    } else if (key === "Meta" || key === 91) {
+      _CMD = false;
+    } else if (key === "Alt" || key === 18) {
+      _ALT = false;
+      var i = _selectedPaths.length;
+
+      while (--i > -1) {
+        _selectedPaths[i]._onReleaseAlt();
+      }
+    }
+  }, true);
+
+  _supportsPointer = !!_win.PointerEvent;
+
+  _addListener(_doc, "mouseup", _checkDeselect);
+
+  _addListener(_doc, "touchend", _checkDeselect);
+
+  _addListener(_doc, "touchcancel", _emptyFunc); //some older Android devices intermittently stop dispatching "touchmove" events if we don't listen for "touchcancel" on the document. Very strange indeed.
+
+
+  _addListener(_win, "touchmove", _emptyFunc); //works around Safari bugs that still allow the page to scroll even when we preventDefault() on the touchmove event.
+
+
+  _body && _body.addEventListener("touchstart", _emptyFunc); //works around Safari bug: https://greensock.com/forums/topic/21450-draggable-in-iframe-on-mobile-is-buggy/
+
+  _coreInitted = 1;
+},
+    _onPress = function _onPress(e) {
+  var self = this,
+      ctm = (0,_matrix_js__WEBPACK_IMPORTED_MODULE_0__.getGlobalMatrix)(self.target.parentNode, true),
+      //previously used self.target.parentNode.getScreenCTM().inverse() but there's a major bug in Firefox that prevents it from working properly when there's an ancestor with a transform applied, so we bootstrapped our own solution that seems to work great across all browsers.
+  touchEventTarget,
+      temp;
+  this._matrix = this.target.transform.baseVal.getItem(0).matrix;
+  this._ctm = ctm;
+
+  if (_touchEventLookup[e.type]) {
+    //note: on iOS, BOTH touchmove and mousemove are dispatched, but the mousemove has pageY and pageX of 0 which would mess up the calculations and needlessly hurt performance.
+    touchEventTarget = e.type.indexOf("touch") !== -1 ? e.currentTarget || e.target : _doc; //pointer-based touches (for Microsoft browsers) don't remain locked to the original target like other browsers, so we must use the document instead. The event type would be "MSPointerDown" or "pointerdown".
+
+    _addListener(touchEventTarget, "touchend", self._onRelease);
+
+    _addListener(touchEventTarget, "touchmove", self._onMove);
+
+    _addListener(touchEventTarget, "touchcancel", self._onRelease);
+
+    _addListener(_doc, "touchstart", _onMultiTouchDocument);
+
+    _addListener(_win, "touchforcechange", _preventDefault); //otherwise iOS will scroll when dragging.
+
+  } else {
+    touchEventTarget = null;
+
+    _addListener(_doc, "mousemove", self._onMove); //attach these to the document instead of the box itself so that if the user's mouse moves too quickly (and off of the box), things still work.
+
+  }
+
+  if (!_supportsPointer) {
+    _addListener(_doc, "mouseup", self._onRelease);
+  }
+
+  _preventDefault(e);
+
+  _resetSelection(); // when a PathEditor is in an iframe in an environment like codepen, this helps avoid situations where the DELETE key won't actually work because the parent frame is intercepting the event.
+
+
+  if (e.changedTouches) {
+    //touch events store the data slightly differently
+    e = self.touch = e.changedTouches[0];
+    self.touchID = e.identifier;
+  } else if (e.pointerId) {
+    self.touchID = e.pointerId; //for some Microsoft browsers
+  } else {
+    self.touch = self.touchID = null;
+  }
+
+  self._startPointerY = self.pointerY = e.pageY; //record the starting x and y so that we can calculate the movement from the original in _onMouseMove
+
+  self._startPointerX = self.pointerX = e.pageX;
+  self._startElementX = self._matrix.e;
+  self._startElementY = self._matrix.f;
+
+  if (this._ctm.a === 1 && this._ctm.b === 0 && this._ctm.c === 0 && this._ctm.d === 1) {
+    this._ctm = null;
+  } else {
+    temp = self._startPointerX * this._ctm.a + self._startPointerY * this._ctm.c + this._ctm.e;
+    self._startPointerY = self._startPointerX * this._ctm.b + self._startPointerY * this._ctm.d + this._ctm.f;
+    self._startPointerX = temp;
+  }
+
+  self.isPressed = _isPressed = true;
+  self.touchEventTarget = touchEventTarget;
+
+  if (self.vars.onPress) {
+    self.vars.onPress.call(self.vars.callbackScope || self, self.pointerEvent);
+  }
+},
+    _onMove = function _onMove(e) {
+  var self = this,
+      originalEvent = e,
+      touches,
+      i;
+
+  if (!self._enabled || _isMultiTouching || !self.isPressed || !e) {
+    return;
+  }
+
+  self.pointerEvent = e;
+  touches = e.changedTouches;
+
+  if (touches) {
+    //touch events store the data slightly differently
+    e = touches[0];
+
+    if (e !== self.touch && e.identifier !== self.touchID) {
+      //Usually changedTouches[0] will be what we're looking for, but in case it's not, look through the rest of the array...(and Android browsers don't reuse the event like iOS)
+      i = touches.length;
+
+      while (--i > -1 && (e = touches[i]).identifier !== self.touchID) {}
+
+      if (i < 0) {
+        return;
+      }
+    }
+  } else if (e.pointerId && self.touchID && e.pointerId !== self.touchID) {
+    //for some Microsoft browsers, we must attach the listener to the doc rather than the trigger so that when the finger moves outside the bounds of the trigger, things still work. So if the event we're receiving has a pointerId that doesn't match the touchID, ignore it (for multi-touch)
+    return;
+  }
+
+  _preventDefault(originalEvent);
+
+  self.setPointerPosition(e.pageX, e.pageY);
+
+  if (self.vars.onDrag) {
+    self.vars.onDrag.call(self.vars.callbackScope || self, self.pointerEvent);
+  }
+},
+    _onRelease = function _onRelease(e, force) {
+  var self = this;
+
+  if (!self._enabled || !self.isPressed || e && self.touchID != null && !force && (e.pointerId && e.pointerId !== self.touchID || e.changedTouches && !_hasTouchID(e.changedTouches, self.touchID))) {
+    //for some Microsoft browsers, we must attach the listener to the doc rather than the trigger so that when the finger moves outside the bounds of the trigger, things still work. So if the event we're receiving has a pointerId that doesn't match the touchID, ignore it (for multi-touch)
+    return;
+  }
+
+  _interacted();
+
+  self.isPressed = _isPressed = false; //TODO: if we want to accommodate multi-touch, we'd need to introduce a counter to track how many touches there are and only toggle this when they're all off.
+
+  var originalEvent = e,
+      wasDragging = self.isDragging,
+      touchEventTarget = self.touchEventTarget,
+      touches,
+      i;
+
+  if (touchEventTarget) {
+    _removeListener(touchEventTarget, "touchend", self._onRelease);
+
+    _removeListener(touchEventTarget, "touchmove", self._onMove);
+
+    _removeListener(touchEventTarget, "touchcancel", self._onRelease);
+
+    _removeListener(_doc, "touchstart", _onMultiTouchDocument);
+  } else {
+    _removeListener(_doc, "mousemove", self._onMove);
+  }
+
+  if (!_supportsPointer) {
+    _removeListener(_doc, "mouseup", self._onRelease);
+
+    if (e && e.target) {
+      _removeListener(e.target, "mouseup", self._onRelease);
+    }
+  }
+
+  if (wasDragging) {
+    self.isDragging = false;
+  } else if (self.vars.onClick) {
+    self.vars.onClick.call(self.vars.callbackScope || self, originalEvent);
+  }
+
+  if (e) {
+    touches = e.changedTouches;
+
+    if (touches) {
+      //touch events store the data slightly differently
+      e = touches[0];
+
+      if (e !== self.touch && e.identifier !== self.touchID) {
+        //Usually changedTouches[0] will be what we're looking for, but in case it's not, look through the rest of the array...(and Android browsers don't reuse the event like iOS)
+        i = touches.length;
+
+        while (--i > -1 && (e = touches[i]).identifier !== self.touchID) {}
+
+        if (i < 0) {
+          return;
+        }
+      }
+    }
+
+    self.pointerEvent = originalEvent;
+    self.pointerX = e.pageX;
+    self.pointerY = e.pageY;
+  }
+
+  if (originalEvent && !wasDragging && self.vars.onDragRelease) {
+    self.vars.onDragRelease.call(self, self.pointerEvent);
+  } else {
+    if (originalEvent) {
+      _preventDefault(originalEvent);
+    }
+
+    if (self.vars.onRelease) {
+      self.vars.onRelease.call(self.vars.callbackScope || self, self.pointerEvent);
+    }
+  }
+
+  if (wasDragging && self.vars.onDragEnd) {
+    self.vars.onDragEnd.call(self.vars.callbackScope || self, self.pointerEvent);
+  }
+
+  return true;
+},
+    _createSegmentAnchors = function _createSegmentAnchors(rawPath, j, editor, vars) {
+  var segment = rawPath[j],
+      l = segment.length - (segment.closed ? 6 : 0),
+      a = [],
+      i;
+
+  for (i = 0; i < l; i += 6) {
+    a.push(new Anchor(editor, rawPath, j, i, vars));
+  }
+
+  segment.closed && (a[0].isClosedStart = true);
+  return a;
+},
+    _getLength = function _getLength(segment, i, i2) {
+  //i is the starting index, and it'll return the length to the next x/y pair. So if you're looking for the length to handle1, you'd feed in the index of the handle control point x whereas if you're looking for the length to handle2, i would be the x of the anchor.
+  var x = segment[i2] - segment[i],
+      y = segment[i2 + 1] - segment[i + 1];
+  return Math.sqrt(x * x + y * y);
+};
+
+var DraggableSVG = /*#__PURE__*/function () {
+  function DraggableSVG(target, vars) {
+    this.target = typeof target === "string" ? _doc.querySelectorAll(target)[0] : target;
+    this.vars = vars || {};
+    this._onPress = _bind(_onPress, this);
+    this._onMove = _bind(_onMove, this);
+    this._onRelease = _bind(_onRelease, this);
+    this.target.setAttribute("transform", (this.target.getAttribute("transform") || "") + " translate(0,0)");
+    this._matrix = _getConsolidatedMatrix(this.target);
+    this.x = this._matrix.e;
+    this.y = this._matrix.f;
+    this.snap = vars.snap;
+
+    if (!isNaN(vars.maxX) || !isNaN(vars.minX)) {
+      this._bounds = 1;
+      this.maxX = +vars.maxX;
+      this.minX = +vars.minX;
+    } else {
+      this._bounds = 0;
+    }
+
+    this.enabled(true);
+  }
+
+  var _proto = DraggableSVG.prototype;
+
+  _proto.setPointerPosition = function setPointerPosition(pointerX, pointerY) {
+    var rnd = 1000,
+        xChange,
+        yChange,
+        x,
+        y,
+        temp;
+    this.pointerX = pointerX;
+    this.pointerY = pointerY;
+
+    if (this._ctm) {
+      temp = pointerX * this._ctm.a + pointerY * this._ctm.c + this._ctm.e;
+      pointerY = pointerX * this._ctm.b + pointerY * this._ctm.d + this._ctm.f;
+      pointerX = temp;
+    }
+
+    yChange = pointerY - this._startPointerY;
+    xChange = pointerX - this._startPointerX;
+
+    if (yChange < _minimumMovement && yChange > -_minimumMovement) {
+      yChange = 0;
+    }
+
+    if (xChange < _minimumMovement && xChange > -_minimumMovement) {
+      xChange = 0;
+    }
+
+    x = ((this._startElementX + xChange) * rnd | 0) / rnd;
+    y = ((this._startElementY + yChange) * rnd | 0) / rnd;
+
+    if (this.snap && !_SHIFT) {
+      _point.x = x;
+      _point.y = y;
+      this.snap.call(this, _point);
+      x = _point.x;
+      y = _point.y;
+    }
+
+    if (this.x !== x || this.y !== y) {
+      this._matrix.f = this.y = y;
+      this._matrix.e = this.x = x;
+
+      if (!this.isDragging && this.isPressed) {
+        this.isDragging = true;
+
+        _callback("onDragStart", this, this.pointerEvent);
+      }
+    }
+  };
+
+  _proto.enabled = function enabled(_enabled) {
+    if (!arguments.length) {
+      return this._enabled;
+    }
+
+    var dragging;
+    this._enabled = _enabled;
+
+    if (_enabled) {
+      if (!_supportsPointer) {
+        _addListener(this.target, "mousedown", this._onPress);
+      }
+
+      _addListener(this.target, "touchstart", this._onPress);
+
+      _addListener(this.target, "click", this._onClick, true); //note: used to pass true for capture but it prevented click-to-play-video functionality in Firefox.
+
+    } else {
+      dragging = this.isDragging;
+
+      _removeListener(this.target, "mousedown", this._onPress);
+
+      _removeListener(this.target, "touchstart", this._onPress);
+
+      _removeListener(_win, "touchforcechange", _preventDefault);
+
+      _removeListener(this.target, "click", this._onClick);
+
+      if (this.touchEventTarget) {
+        _removeListener(this.touchEventTarget, "touchcancel", this._onRelease);
+
+        _removeListener(this.touchEventTarget, "touchend", this._onRelease);
+
+        _removeListener(this.touchEventTarget, "touchmove", this._onMove);
+      }
+
+      _removeListener(_doc, "mouseup", this._onRelease);
+
+      _removeListener(_doc, "mousemove", this._onMove);
+
+      this.isDragging = this.isPressed = false;
+
+      if (dragging) {
+        _callback("onDragEnd", this, this.pointerEvent);
+      }
+    }
+
+    return this;
+  };
+
+  _proto.endDrag = function endDrag(e) {
+    this._onRelease(e);
+  };
+
+  return DraggableSVG;
+}();
+
+var Anchor = /*#__PURE__*/function () {
+  function Anchor(editor, rawPath, j, i, vars) {
+    this.editor = editor;
+    this.element = _createSVG("path", editor._selection, {
+      fill: _selectionColor,
+      stroke: _selectionColor,
+      strokeWidth: 2,
+      vectorEffect: "non-scaling-stroke"
+    });
+    this.update(rawPath, j, i);
+    this.element._gsSelection = true;
+    this.vars = vars || {};
+    this._draggable = new DraggableSVG(this.element, {
+      callbackScope: this,
+      onDrag: this.onDrag,
+      snap: this.vars.snap,
+      onPress: this.onPress,
+      onRelease: this.onRelease,
+      onClick: this.onClick,
+      onDragEnd: this.onDragEnd
+    });
+  }
+
+  var _proto2 = Anchor.prototype;
+
+  _proto2.onPress = function onPress() {
+    _callback("onPress", this);
+  };
+
+  _proto2.onClick = function onClick() {
+    _callback("onClick", this);
+  };
+
+  _proto2.onDrag = function onDrag() {
+    var s = this.segment;
+    this.vars.onDrag.call(this.vars.callbackScope || this, this, this._draggable.x - s[this.i], this._draggable.y - s[this.i + 1]);
+  };
+
+  _proto2.onDragEnd = function onDragEnd() {
+    _callback("onDragEnd", this);
+  };
+
+  _proto2.onRelease = function onRelease() {
+    _callback("onRelease", this);
+  };
+
+  _proto2.update = function update(rawPath, j, i) {
+    if (rawPath) {
+      this.rawPath = rawPath;
+    }
+
+    if (arguments.length <= 1) {
+      j = this.j;
+      i = this.i;
+    } else {
+      this.j = j;
+      this.i = i;
+    }
+
+    var prevSmooth = this.smooth,
+        segment = this.rawPath[j],
+        pi = i === 0 && segment.closed ? segment.length - 4 : i - 2;
+    this.segment = segment;
+    this.smooth = i > 0 && i < segment.length - 2 && Math.abs(Math.atan2(segment[i + 1] - segment[pi + 1], segment[i] - segment[pi]) - Math.atan2(segment[i + 3] - segment[i + 1], segment[i + 2] - segment[i])) < 0.09 ? 2 : 0; //0: corner, 1: smooth but not mirrored, 2: smooth and mirrored.
+
+    if (this.smooth !== prevSmooth) {
+      this.element.setAttribute("d", this.smooth ? this.editor._circleHandle : this.editor._squareHandle);
+    }
+
+    this.element.setAttribute("transform", "translate(" + segment[i] + "," + segment[i + 1] + ")");
+  };
+
+  return Anchor;
+}();
+
+var PathEditor = /*#__PURE__*/function () {
+  function PathEditor(target, vars) {
+    vars = vars || {};
+
+    if (!_coreInitted) {
+      _initCore();
+    }
+
+    this.vars = vars;
+    this.path = typeof target === "string" ? _doc.querySelectorAll(target)[0] : target;
+    this._g = _createSVG("g", this.path.ownerSVGElement, {
+      "class": "path-editor-g path-editor"
+    });
+    this._selectionHittest = _createSVG("path", this._g, {
+      stroke: "transparent",
+      strokeWidth: 16,
+      fill: "none",
+      vectorEffect: "non-scaling-stroke"
+    });
+    this._selection = vars._selection || _createSVG("g", this._g, {
+      "class": "path-editor-selection path-editor"
+    });
+    this._selectionPath = _createSVG("path", this._selection, {
+      stroke: _selectionColor,
+      strokeWidth: 2,
+      fill: "none",
+      vectorEffect: "non-scaling-stroke"
+    });
+    this._selectedAnchors = [];
+    this._line1 = _createSVG("polyline", this._selection, {
+      stroke: _selectionColor,
+      strokeWidth: 2,
+      vectorEffect: "non-scaling-stroke"
+    });
+    this._line2 = _createSVG("polyline", this._selection, {
+      stroke: _selectionColor,
+      strokeWidth: 2,
+      vectorEffect: "non-scaling-stroke"
+    });
+    this._line1.style.pointerEvents = this._line2.style.pointerEvents = this._selectionPath.style.pointerEvents = "none";
+    this._enabled = true;
+    var ctm = this.path.parentNode.getScreenCTM().inverse(),
+        size = (ctm.a + ctm.d) / 2 * (vars.handleSize || 5);
+    this._squareHandle = _getSquarePathData(size);
+    this._circleHandle = _getCirclePathData(size * 1.15);
+    this._handle1 = _createSVG("path", this._selection, {
+      d: this._squareHandle,
+      fill: _selectionColor,
+      stroke: "transparent",
+      strokeWidth: 6
+    });
+    this._handle2 = _createSVG("path", this._selection, {
+      d: this._squareHandle,
+      fill: _selectionColor,
+      stroke: "transparent",
+      strokeWidth: 6
+    });
+    this._handle1._draggable = new DraggableSVG(this._handle1, {
+      onDrag: this._onDragHandle1,
+      callbackScope: this,
+      onPress: this._onPressHandle1,
+      onRelease: this._onReleaseHandle,
+      onClick: this._onClickHandle1,
+      snap: vars.handleSnap
+    });
+    this._handle2._draggable = new DraggableSVG(this._handle2, {
+      onDrag: this._onDragHandle2,
+      callbackScope: this,
+      onPress: this._onPressHandle2,
+      onRelease: this._onReleaseHandle,
+      onClick: this._onClickHandle2,
+      snap: vars.handleSnap
+    });
+    this._handle1.style.visibility = this._handle2.style.visibility = "hidden";
+    var selectionItems = [this._handle1, this._handle2, this._line1, this._line2, this._selection, this._selectionPath, this._selectionHittest],
+        i = selectionItems.length;
+
+    while (--i > -1) {
+      selectionItems[i]._gsSelection = true; //just a flag we can check in the _checkDeselect() method to detect clicks on things that are selection-related.
+    }
+
+    if (vars.draggable !== false) {
+      this._draggable = new DraggableSVG(this._selectionHittest, {
+        callbackScope: this,
+        onPress: this.select,
+        onRelease: this._onRelease,
+        onDrag: this._onDragPath,
+        onDragEnd: this._saveState,
+        maxX: this.vars.maxX,
+        minX: this.vars.minX
+      });
+    }
+
+    this.init();
+    this._selection.style.visibility = vars.selected === false ? "hidden" : "visible";
+
+    if (vars.selected !== false) {
+      this.path._gsSelection = true;
+
+      _selectedPaths.push(this);
+    }
+
+    this._saveState();
+
+    if (!_supportsPointer) {
+      _addListener(this._selectionHittest, "mousedown", _bind(this._onClickSelectionPath, this));
+
+      _addListener(this._selectionHittest, "mouseup", _bind(this._onRelease, this));
+    }
+
+    _addListener(this._selectionHittest, "touchstart", _bind(this._onClickSelectionPath, this));
+
+    _addListener(this._selectionHittest, "touchend", _bind(this._onRelease, this));
+  }
+
+  var _proto3 = PathEditor.prototype;
+
+  _proto3._onRelease = function _onRelease(e) {
+    var anchor = this._editingAnchor;
+
+    if (anchor) {
+      _editingAxis.x = anchor.segment[anchor.i];
+      _editingAxis.y = anchor.segment[anchor.i + 1];
+    }
+
+    _removeListener(_win, "touchforcechange", _preventDefault); //otherwise iOS will scroll when dragging.
+
+
+    _callback("onRelease", this, e);
+  };
+
+  _proto3.init = function init() {
+    var pathData = this.path.getAttribute("d"),
+        rawPath = (0,_paths_js__WEBPACK_IMPORTED_MODULE_1__.stringToRawPath)(pathData),
+        transform = this.path.getAttribute("transform") || "translate(0,0)",
+        createAnchors = !this._rawPath || rawPath.totalPoints !== this._rawPath.totalPoints || rawPath.length !== this._rawPath.length,
+        anchorVars = {
+      callbackScope: this,
+      snap: this.vars.anchorSnap,
+      onDrag: this._onDragAnchor,
+      onPress: this._onPressAnchor,
+      onRelease: this._onRelease,
+      onClick: this._onClickAnchor,
+      onDragEnd: this._onDragEndAnchor,
+      maxX: this.vars.maxX,
+      minX: this.vars.minX
+    },
+        l,
+        i;
+
+    if (createAnchors && this._anchors && this._anchors.length) {
+      for (i = 0; i < this._anchors.length; i++) {
+        this._anchors[i].element.parentNode.removeChild(this._anchors[i].element);
+
+        this._anchors[i]._draggable.enabled(false);
+      }
+
+      this._selectedAnchors.length = 0;
+    }
+
+    this._rawPath = rawPath;
+
+    if (createAnchors) {
+      this._anchors = _createSegmentAnchors(rawPath, 0, this, anchorVars);
+      l = rawPath.length;
+
+      if (l > 1) {
+        for (i = 1; i < l; i++) {
+          this._anchors = this._anchors.concat(_createSegmentAnchors(rawPath, i, this, anchorVars));
+        }
+      }
+    } else {
+      i = this._anchors.length;
+
+      while (--i > -1) {
+        this._anchors[i].update(rawPath);
+      }
+    }
+
+    this._selection.appendChild(this._handle1); //for stacking order (handles should always be on top)
+
+
+    this._selection.appendChild(this._handle2); //		this._selectedAnchors.length = 0;
+
+
+    this._selectionPath.setAttribute("d", pathData);
+
+    this._selectionHittest.setAttribute("d", pathData);
+
+    this._g.setAttribute("transform", _getConcatenatedTransforms(this.path.parentNode) || "translate(0,0)");
+
+    this._selection.setAttribute("transform", transform);
+
+    this._selectionHittest.setAttribute("transform", transform);
+
+    this._updateAnchors();
+
+    return this;
+  };
+
+  _proto3._saveState = function _saveState() {
+    _addHistory(this);
+  };
+
+  _proto3._onClickSelectionPath = function _onClickSelectionPath(e) {
+    if (this._selection.style.visibility === "hidden") {
+      this.select();
+    } else if (_ALT || e && e.altKey) {
+      var anchorVars = {
+        callbackScope: this,
+        snap: this.vars.anchorSnap,
+        onDrag: this._onDragAnchor,
+        onPress: this._onPressAnchor,
+        onRelease: this._onRelease,
+        onClick: this._onClickAnchor,
+        onDragEnd: this._onDragEndAnchor,
+        maxX: this.vars.maxX,
+        minX: this.vars.minX
+      },
+          ctm = this._selection.getScreenCTM().inverse(),
+          newIndex,
+          _i,
+          anchor,
+          x,
+          y,
+          closestData;
+
+      if (this._draggable) {
+        this._draggable._onRelease(e); //otherwise, ALT-click/dragging on a path would create a new anchor AND drag the entire path.
+
+      }
+
+      if (ctm) {
+        x = e.clientX * ctm.a + e.clientY * ctm.c + ctm.e;
+        y = e.clientX * ctm.b + e.clientY * ctm.d + ctm.f;
+      } //DEBUG: _createSVG("circle", this._selection, {fill:"red", r:5, cx:x, cy:y});
+
+
+      closestData = (0,_paths_js__WEBPACK_IMPORTED_MODULE_1__.getClosestData)(this._rawPath, x, y);
+      (0,_paths_js__WEBPACK_IMPORTED_MODULE_1__.subdivideSegment)(this._rawPath[closestData.j], closestData.i, closestData.t);
+      newIndex = closestData.i + 6;
+
+      for (_i = 0; _i < this._anchors.length; _i++) {
+        if (this._anchors[_i].i >= newIndex) {
+          this._anchors[_i].i += 6;
+        }
+      }
+
+      anchor = new Anchor(this, this._rawPath, closestData.j, newIndex, anchorVars);
+
+      this._selection.appendChild(this._handle1); //for stacking order (handles should always be on top)
+
+
+      this._selection.appendChild(this._handle2);
+
+      anchor._draggable._onPress(e);
+
+      _recentlyAddedAnchor = anchor;
+
+      this._anchors.push(anchor);
+
+      this._selectedAnchors.length = 0;
+
+      this._selectedAnchors.push(anchor);
+
+      this._updateAnchors();
+
+      this.update();
+
+      this._saveState();
+    }
+
+    _resetSelection();
+
+    _addListener(_win, "touchforcechange", _preventDefault); //otherwise iOS will scroll when dragging.
+
+
+    _callback("onPress", this);
+  };
+
+  _proto3._onClickHandle1 = function _onClickHandle1() {
+    var anchor = this._editingAnchor,
+        i = anchor.i,
+        s = anchor.segment,
+        pi = anchor.isClosedStart ? s.length - 4 : i - 2;
+
+    if (_ALT && Math.abs(s[i] - s[pi]) < 5 && Math.abs(s[i + 1] - s[pi + 1]) < 5) {
+      this._onClickAnchor(anchor);
+    }
+  };
+
+  _proto3._onClickHandle2 = function _onClickHandle2() {
+    var anchor = this._editingAnchor,
+        i = anchor.i,
+        s = anchor.segment;
+
+    if (_ALT && Math.abs(s[i] - s[i + 2]) < 5 && Math.abs(s[i + 1] - s[i + 3]) < 5) {
+      this._onClickAnchor(anchor);
+    }
+  };
+
+  _proto3._onDragEndAnchor = function _onDragEndAnchor(e) {
+    _recentlyAddedAnchor = null;
+
+    this._saveState();
+  };
+
+  _proto3.isSelected = function isSelected() {
+    return this._selectedAnchors.length > 0;
+  };
+
+  _proto3.select = function select(allAnchors) {
+    this._selection.style.visibility = "visible";
+    this._editingAnchor = null;
+    this.path._gsSelection = true;
+
+    if (allAnchors === true) {
+      var _i2 = this._anchors.length;
+
+      while (--_i2 > -1) {
+        this._selectedAnchors[_i2] = this._anchors[_i2];
+      }
+    }
+
+    if (_selectedPaths.indexOf(this) === -1) {
+      _selectedPaths.push(this);
+    }
+
+    this._updateAnchors();
+
+    return this;
+  };
+
+  _proto3.deselect = function deselect() {
+    this._selection.style.visibility = "hidden";
+    this._selectedAnchors.length = 0;
+    this._editingAnchor = null;
+    this.path._gsSelection = false;
+
+    _selectedPaths.splice(_selectedPaths.indexOf(this), 1);
+
+    this._updateAnchors();
+
+    return this;
+  };
+
+  _proto3._onDragPath = function _onDragPath(e) {
+    var transform = this._selectionHittest.getAttribute("transform") || "translate(0,0)";
+
+    this._selection.setAttribute("transform", transform);
+
+    this.path.setAttribute("transform", transform);
+  };
+
+  _proto3._onPressAnchor = function _onPressAnchor(anchor) {
+    if (this._selectedAnchors.indexOf(anchor) === -1) {
+      //if it isn't already selected...
+      if (!_SHIFT) {
+        this._selectedAnchors.length = 0;
+      }
+
+      this._selectedAnchors.push(anchor);
+    } else if (_SHIFT) {
+      this._selectedAnchors.splice(this._selectedAnchors.indexOf(anchor), 1);
+
+      anchor._draggable.endDrag();
+    }
+
+    _editingAxis.x = anchor.segment[anchor.i];
+    _editingAxis.y = anchor.segment[anchor.i + 1];
+
+    this._updateAnchors();
+
+    _callback("onPress", this);
+  };
+
+  _proto3._deleteSelectedAnchors = function _deleteSelectedAnchors() {
+    var anchors = this._selectedAnchors,
+        i = anchors.length,
+        anchor,
+        index,
+        j;
+
+    while (--i > -1) {
+      anchor = anchors[i];
+      anchor.element.parentNode.removeChild(anchor.element);
+
+      anchor._draggable.enabled(false);
+
+      index = anchor.i;
+
+      if (!index) {
+        //first
+        anchor.segment.splice(index, 6);
+      } else if (index < anchor.segment.length - 2) {
+        anchor.segment.splice(index - 2, 6);
+      } else {
+        //last
+        anchor.segment.splice(index - 4, 6);
+      }
+
+      anchors.splice(i, 1);
+
+      this._anchors.splice(this._anchors.indexOf(anchor), 1);
+
+      for (j = 0; j < this._anchors.length; j++) {
+        if (this._anchors[j].i >= index) {
+          this._anchors[j].i -= 6;
+        }
+      }
+    }
+
+    this._updateAnchors();
+
+    this.update();
+
+    this._saveState();
+
+    if (this.vars.onDeleteAnchor) {
+      this.vars.onDeleteAnchor.call(this.vars.callbackScope || this);
+    }
+  };
+
+  _proto3._onClickAnchor = function _onClickAnchor(anchor) {
+    var i = anchor.i,
+        segment = anchor.segment,
+        pi = anchor.isClosedStart ? segment.length - 4 : i - 2,
+        rnd = 1000,
+        isEnd = !i || i >= segment.length - 2,
+        angle1,
+        angle2,
+        length1,
+        length2,
+        sin,
+        cos;
+
+    if (_ALT && _recentlyAddedAnchor !== anchor && this._editingAnchor) {
+      anchor.smooth = !anchor.smooth;
+
+      if (isEnd && !anchor.isClosedStart) {
+        //the very ends can't be "smooth"
+        anchor.smooth = false;
+      }
+
+      anchor.element.setAttribute("d", anchor.smooth ? this._circleHandle : this._squareHandle);
+
+      if (anchor.smooth && (!isEnd || anchor.isClosedStart)) {
+        angle1 = Math.atan2(segment[i + 1] - segment[pi + 1], segment[i] - segment[pi]);
+        angle2 = Math.atan2(segment[i + 3] - segment[i + 1], segment[i + 2] - segment[i]);
+        angle1 = (angle1 + angle2) / 2;
+        length1 = _getLength(segment, pi, i);
+        length2 = _getLength(segment, i, i + 2);
+
+        if (length1 < 0.2) {
+          length1 = _getLength(segment, i, pi - 4) / 4;
+          angle1 = angle2 || Math.atan2(segment[i + 7] - segment[pi - 3], segment[i + 6] - segment[pi - 4]);
+        }
+
+        if (length2 < 0.2) {
+          length2 = _getLength(segment, i, i + 6) / 4;
+          angle2 = angle1 || Math.atan2(segment[i + 7] - segment[pi - 3], segment[i + 6] - segment[pi - 4]);
+        }
+
+        sin = Math.sin(angle1);
+        cos = Math.cos(angle1);
+
+        if (Math.abs(angle2 - angle1) < Math.PI / 2) {
+          sin = -sin;
+          cos = -cos;
+        }
+
+        segment[pi] = ((segment[i] + cos * length1) * rnd | 0) / rnd;
+        segment[pi + 1] = ((segment[i + 1] + sin * length1) * rnd | 0) / rnd;
+        segment[i + 2] = ((segment[i] - cos * length2) * rnd | 0) / rnd;
+        segment[i + 3] = ((segment[i + 1] - sin * length2) * rnd | 0) / rnd;
+
+        this._updateAnchors();
+
+        this.update();
+
+        this._saveState();
+      } else if (!anchor.smooth && (!isEnd || anchor.isClosedStart)) {
+        if (i || anchor.isClosedStart) {
+          segment[pi] = segment[i];
+          segment[pi + 1] = segment[i + 1];
+        }
+
+        if (i < segment.length - 2) {
+          segment[i + 2] = segment[i];
+          segment[i + 3] = segment[i + 1];
+        }
+
+        this._updateAnchors();
+
+        this.update();
+
+        this._saveState();
+      }
+    } else if (!_SHIFT) {
+      this._selectedAnchors.length = 0;
+
+      this._selectedAnchors.push(anchor);
+    }
+
+    _recentlyAddedAnchor = null;
+
+    this._updateAnchors();
+  };
+
+  _proto3._updateAnchors = function _updateAnchors() {
+    var anchor = this._selectedAnchors.length === 1 ? this._selectedAnchors[0] : null,
+        segment = anchor ? anchor.segment : null,
+        i,
+        x,
+        y;
+    this._editingAnchor = anchor;
+
+    for (i = 0; i < this._anchors.length; i++) {
+      this._anchors[i].element.style.fill = this._selectedAnchors.indexOf(this._anchors[i]) !== -1 ? _selectionColor : "white"; //this._anchors[i].element.setAttribute("fill", (this._selectedAnchors.indexOf(this._anchors[i]) !== -1) ? _selectionColor : "white");
+    }
+
+    if (anchor) {
+      this._handle1.setAttribute("d", anchor.smooth ? this._circleHandle : this._squareHandle);
+
+      this._handle2.setAttribute("d", anchor.smooth ? this._circleHandle : this._squareHandle);
+    }
+
+    i = anchor ? anchor.i : 0;
+
+    if (anchor && (i || anchor.isClosedStart)) {
+      x = anchor.isClosedStart ? segment[segment.length - 4] : segment[i - 2];
+      y = anchor.isClosedStart ? segment[segment.length - 3] : segment[i - 1]; //TODO: if they equal the anchor coordinates, just hide it.
+
+      this._handle1.style.visibility = this._line1.style.visibility = !_ALT && x === segment[i] && y === segment[i + 1] ? "hidden" : "visible";
+
+      this._handle1.setAttribute("transform", "translate(" + x + _comma + y + ")");
+
+      this._line1.setAttribute("points", x + _comma + y + _comma + segment[i] + _comma + segment[i + 1]);
+    } else {
+      this._handle1.style.visibility = this._line1.style.visibility = "hidden";
+    }
+
+    if (anchor && i < segment.length - 2) {
+      x = segment[i + 2];
+      y = segment[i + 3];
+      this._handle2.style.visibility = this._line2.style.visibility = !_ALT && x === segment[i] && y === segment[i + 1] ? "hidden" : "visible";
+
+      this._handle2.setAttribute("transform", "translate(" + x + _comma + y + ")");
+
+      this._line2.setAttribute("points", segment[i] + _comma + segment[i + 1] + _comma + x + _comma + y);
+    } else {
+      this._handle2.style.visibility = this._line2.style.visibility = "hidden";
+    }
+  };
+
+  _proto3._onPressAlt = function _onPressAlt() {
+    var anchor = this._editingAnchor;
+
+    if (anchor) {
+      if (anchor.i || anchor.isClosedStart) {
+        this._handle1.style.visibility = this._line1.style.visibility = "visible";
+      }
+
+      if (anchor.i < anchor.segment.length - 2) {
+        this._handle2.style.visibility = this._line2.style.visibility = "visible";
+      }
+    }
+  };
+
+  _proto3._onReleaseAlt = function _onReleaseAlt() {
+    var anchor = this._editingAnchor,
+        s,
+        i,
+        pi;
+
+    if (anchor) {
+      s = anchor.segment;
+      i = anchor.i;
+      pi = anchor.isClosedStart ? s.length - 4 : i - 2;
+
+      if (s[i] === s[pi] && s[i + 1] === s[pi + 1]) {
+        this._handle1.style.visibility = this._line1.style.visibility = "hidden";
+      }
+
+      if (s[i] === s[i + 2] && s[i + 1] === s[i + 3]) {
+        this._handle2.style.visibility = this._line2.style.visibility = "hidden";
+      }
+    }
+  };
+
+  _proto3._onPressHandle1 = function _onPressHandle1() {
+    if (this._editingAnchor.smooth) {
+      this._oppositeHandleLength = _getLength(this._editingAnchor.segment, this._editingAnchor.i, this._editingAnchor.i + 2);
+    }
+
+    _callback("onPress", this);
+  };
+
+  _proto3._onPressHandle2 = function _onPressHandle2() {
+    if (this._editingAnchor.smooth) {
+      this._oppositeHandleLength = _getLength(this._editingAnchor.segment, this._editingAnchor.isClosedStart ? this._editingAnchor.segment.length - 4 : this._editingAnchor.i - 2, this._editingAnchor.i);
+    }
+
+    _callback("onPress", this);
+  };
+
+  _proto3._onReleaseHandle = function _onReleaseHandle(e) {
+    this._onRelease(e);
+
+    this._saveState();
+  };
+
+  _proto3._onDragHandle1 = function _onDragHandle1() {
+    var anchor = this._editingAnchor,
+        s = anchor.segment,
+        i = anchor.i,
+        pi = anchor.isClosedStart ? s.length - 4 : i - 2,
+        rnd = 1000,
+        x = this._handle1._draggable.x,
+        y = this._handle1._draggable.y,
+        angle;
+    s[pi] = x = (x * rnd | 0) / rnd;
+    s[pi + 1] = y = (y * rnd | 0) / rnd;
+
+    if (anchor.smooth) {
+      if (_ALT) {
+        anchor.smooth = false;
+        anchor.element.setAttribute("d", this._squareHandle);
+
+        this._handle1.setAttribute("d", this._squareHandle);
+
+        this._handle2.setAttribute("d", this._squareHandle);
+      } else {
+        angle = Math.atan2(s[i + 1] - y, s[i] - x);
+        x = this._oppositeHandleLength * Math.cos(angle);
+        y = this._oppositeHandleLength * Math.sin(angle);
+        s[i + 2] = ((s[i] + x) * rnd | 0) / rnd;
+        s[i + 3] = ((s[i + 1] + y) * rnd | 0) / rnd;
+      }
+    }
+
+    this.update();
+  };
+
+  _proto3._onDragHandle2 = function _onDragHandle2() {
+    var anchor = this._editingAnchor,
+        s = anchor.segment,
+        i = anchor.i,
+        pi = anchor.isClosedStart ? s.length - 4 : i - 2,
+        rnd = 1000,
+        x = this._handle2._draggable.x,
+        y = this._handle2._draggable.y,
+        angle;
+    s[i + 2] = x = (x * rnd | 0) / rnd;
+    s[i + 3] = y = (y * rnd | 0) / rnd;
+
+    if (anchor.smooth) {
+      if (_ALT) {
+        anchor.smooth = false;
+        anchor.element.setAttribute("d", this._squareHandle);
+
+        this._handle1.setAttribute("d", this._squareHandle);
+
+        this._handle2.setAttribute("d", this._squareHandle);
+      } else {
+        angle = Math.atan2(s[i + 1] - y, s[i] - x);
+        x = this._oppositeHandleLength * Math.cos(angle);
+        y = this._oppositeHandleLength * Math.sin(angle);
+        s[pi] = ((s[i] + x) * rnd | 0) / rnd;
+        s[pi + 1] = ((s[i + 1] + y) * rnd | 0) / rnd;
+      }
+    }
+
+    this.update();
+  };
+
+  _proto3._onDragAnchor = function _onDragAnchor(anchor, changeX, changeY) {
+    var anchors = this._selectedAnchors,
+        l = anchors.length,
+        rnd = 1000,
+        i,
+        j,
+        s,
+        a,
+        pi;
+
+    for (j = 0; j < l; j++) {
+      a = anchors[j];
+      i = a.i;
+      s = a.segment;
+
+      if (i) {
+        s[i - 2] = ((s[i - 2] + changeX) * rnd | 0) / rnd;
+        s[i - 1] = ((s[i - 1] + changeY) * rnd | 0) / rnd;
+      } else if (a.isClosedStart) {
+        pi = s.length - 2;
+        s[pi] = _round(s[pi] + changeX);
+        s[pi + 1] = _round(s[pi + 1] + changeY);
+        s[pi - 2] = _round(s[pi - 2] + changeX);
+        s[pi - 1] = _round(s[pi - 1] + changeY);
+      }
+
+      s[i] = ((s[i] + changeX) * rnd | 0) / rnd;
+      s[i + 1] = ((s[i + 1] + changeY) * rnd | 0) / rnd;
+
+      if (i < s.length - 2) {
+        s[i + 2] = ((s[i + 2] + changeX) * rnd | 0) / rnd;
+        s[i + 3] = ((s[i + 3] + changeY) * rnd | 0) / rnd;
+      }
+
+      if (a !== anchor) {
+        a.element.setAttribute("transform", "translate(" + s[i] + _comma + s[i + 1] + ")");
+      }
+    }
+
+    this.update();
+  };
+
+  _proto3.enabled = function enabled(_enabled2) {
+    if (!arguments.length) {
+      return this._enabled;
+    }
+
+    var i = this._anchors.length;
+
+    while (--i > -1) {
+      this._anchors[i]._draggable.enabled(_enabled2);
+    }
+
+    this._enabled = _enabled2;
+
+    this._handle1._draggable.enabled(_enabled2);
+
+    this._handle2._draggable.enabled(_enabled2);
+
+    if (this._draggable) {
+      this._draggable.enabled(_enabled2);
+    }
+
+    if (!_enabled2) {
+      this.deselect();
+      this.path.ownerSVGElement.removeChild(this._selectionHittest);
+      this.path.ownerSVGElement.removeChild(this._selection);
+    } else if (!this._selection.parentNode) {
+      this.path.ownerSVGElement.appendChild(this._selectionHittest);
+      this.path.ownerSVGElement.appendChild(this._selection);
+      this.init();
+
+      this._saveState();
+    }
+
+    this._updateAnchors();
+
+    return this.update();
+  };
+
+  _proto3.update = function update(readPath) {
+    var d = "",
+        anchor = this._editingAnchor,
+        i,
+        s,
+        x,
+        y,
+        pi;
+
+    if (readPath) {
+      this.init();
+    }
+
+    if (anchor) {
+      i = anchor.i;
+      s = anchor.segment;
+
+      if (i || anchor.isClosedStart) {
+        pi = anchor.isClosedStart ? s.length - 4 : i - 2;
+        x = s[pi];
+        y = s[pi + 1];
+
+        this._handle1.setAttribute("transform", "translate(" + x + _comma + y + ")");
+
+        this._line1.setAttribute("points", x + _comma + y + _comma + s[i] + _comma + s[i + 1]);
+      }
+
+      if (i < s.length - 2) {
+        x = s[i + 2];
+        y = s[i + 3];
+
+        this._handle2.setAttribute("transform", "translate(" + x + _comma + y + ")");
+
+        this._line2.setAttribute("points", s[i] + _comma + s[i + 1] + _comma + x + _comma + y);
+      }
+    }
+
+    if (readPath) {
+      d = this.path.getAttribute("d");
+    } else {
+      for (i = 0; i < this._rawPath.length; i++) {
+        s = this._rawPath[i];
+
+        if (s.length > 7) {
+          d += "M" + s[0] + _comma + s[1] + "C" + s.slice(2).join(_comma);
+        }
+      }
+
+      this.path.setAttribute("d", d);
+
+      this._selectionPath.setAttribute("d", d);
+
+      this._selectionHittest.setAttribute("d", d);
+    }
+
+    if (this.vars.onUpdate && this._enabled) {
+      _callback("onUpdate", this, d);
+    }
+
+    return this;
+  };
+
+  _proto3.getRawPath = function getRawPath(applyTransforms, offsetX, offsetY) {
+    if (applyTransforms) {
+      var m = _getConsolidatedMatrix(this.path);
+
+      return (0,_paths_js__WEBPACK_IMPORTED_MODULE_1__.transformRawPath)((0,_paths_js__WEBPACK_IMPORTED_MODULE_1__.copyRawPath)(this._rawPath), 1, 0, 0, 1, m.e + (offsetX || 0), m.f + (offsetY || 0));
+    }
+
+    return this._rawPath;
+  };
+
+  _proto3.getString = function getString(applyTransforms, offsetX, offsetY) {
+    if (applyTransforms) {
+      var m = _getConsolidatedMatrix(this.path);
+
+      return (0,_paths_js__WEBPACK_IMPORTED_MODULE_1__.rawPathToString)((0,_paths_js__WEBPACK_IMPORTED_MODULE_1__.transformRawPath)((0,_paths_js__WEBPACK_IMPORTED_MODULE_1__.copyRawPath)(this._rawPath), 1, 0, 0, 1, m.e + (offsetX || 0), m.f + (offsetY || 0)));
+    }
+
+    return this.path.getAttribute("d");
+  };
+
+  _proto3.getNormalizedSVG = function getNormalizedSVG(height, originY, shorten, onEaseError) {
+    var s = this._rawPath[0],
+        tx = s[0] * -1,
+        ty = originY === 0 ? 0 : -(originY || s[1]),
+        l = s.length,
+        sx = 1 / (s[l - 2] + tx),
+        sy = -height || s[l - 1] + ty,
+        rnd = 1000,
+        points,
+        i,
+        x1,
+        y1,
+        x2,
+        y2;
+    _temp.length = 0;
+
+    if (sy) {
+      //typically y ends at 1 (so that the end values are reached)
+      sy = 1 / sy;
+    } else {
+      //in case the ease returns to its beginning value, scale everything proportionally
+      sy = -sx;
+    }
+
+    sx *= rnd;
+    sy *= rnd;
+
+    for (i = 0; i < l; i += 2) {
+      _temp[i] = ((s[i] + tx) * sx | 0) / rnd;
+      _temp[i + 1] = ((s[i + 1] + ty) * sy | 0) / rnd;
+    }
+
+    if (onEaseError) {
+      points = [];
+      l = _temp.length;
+
+      for (i = 2; i < l; i += 6) {
+        x1 = _temp[i - 2];
+        y1 = _temp[i - 1];
+        x2 = _temp[i + 4];
+        y2 = _temp[i + 5];
+        points.push(x1, y1, x2, y2);
+        (0,_paths_js__WEBPACK_IMPORTED_MODULE_1__.bezierToPoints)(x1, y1, _temp[i], _temp[i + 1], _temp[i + 2], _temp[i + 3], x2, y2, 0.001, points, points.length - 2);
+      }
+
+      x1 = points[0];
+      l = points.length;
+
+      for (i = 2; i < l; i += 2) {
+        x2 = points[i];
+
+        if (x2 < x1 || x2 > 1 || x2 < 0) {
+          onEaseError();
+          break;
+        }
+
+        x1 = x2;
+      }
+    }
+
+    if (shorten && l === 8 && _temp[0] === 0 && _temp[1] === 0 && _temp[l - 2] === 1 && _temp[l - 1] === 1) {
+      return _temp.slice(2, 6).join(",");
+    }
+
+    _temp[2] = "C" + _temp[2];
+    return "M" + _temp.join(",");
+  };
+
+  return PathEditor;
+}();
+PathEditor.simplifyPoints = _paths_js__WEBPACK_IMPORTED_MODULE_1__.simplifyPoints;
+PathEditor.pointsToSegment = _paths_js__WEBPACK_IMPORTED_MODULE_1__.pointsToSegment;
+
+PathEditor.simplifySVG = function (data, vars) {
+  //takes a <path> element or data string and simplifies it according to whatever tolerance you set (default:1, the bigger the number the more variance there can be). vars: {tolerance:1, cornerThreshold:degrees, curved:true}
+  var element, points, i, x1, x2, y1, y2, bezier, precision, tolerance, l, cornerThreshold;
+  vars = vars || {};
+  tolerance = vars.tolerance || 1;
+  precision = vars.precision || 1 / tolerance;
+  cornerThreshold = (vars.cornerThreshold === undefined ? 18 : +vars.cornerThreshold) * _DEG2RAD;
+
+  if (typeof data !== "string") {
+    //element
+    element = data;
+    data = element.getAttribute("d");
+  }
+
+  if (data.charAt(0) === "#" || data.charAt(0) === ".") {
+    //selector text
+    element = _doc.querySelector(data);
+
+    if (element) {
+      data = element.getAttribute("d");
+    }
+  }
+
+  points = vars.curved === false && !/[achqstvz]/ig.test(data) ? data.match(_numbersExp) : (0,_paths_js__WEBPACK_IMPORTED_MODULE_1__.stringToRawPath)(data)[0];
+
+  if (vars.curved !== false) {
+    bezier = points;
+    points = [];
+    l = bezier.length;
+
+    for (i = 2; i < l; i += 6) {
+      x1 = +bezier[i - 2];
+      y1 = +bezier[i - 1];
+      x2 = +bezier[i + 4];
+      y2 = +bezier[i + 5];
+      points.push(_round(x1), _round(y1), _round(x2), _round(y2));
+      (0,_paths_js__WEBPACK_IMPORTED_MODULE_1__.bezierToPoints)(x1, y1, +bezier[i], +bezier[i + 1], +bezier[i + 2], +bezier[i + 3], x2, y2, 1 / (precision * 200000), points, points.length - 2);
+    }
+
+    points = (0,_paths_js__WEBPACK_IMPORTED_MODULE_1__.pointsToSegment)((0,_paths_js__WEBPACK_IMPORTED_MODULE_1__.simplifyPoints)(points, tolerance), vars.curviness, cornerThreshold);
+    points[2] = "C" + points[2];
+  } else {
+    points = (0,_paths_js__WEBPACK_IMPORTED_MODULE_1__.simplifyPoints)(points, tolerance);
+  }
+
+  data = "M" + points.join(",");
+
+  if (element) {
+    element.setAttribute("d", data);
+  }
+
+  return data;
+};
+
+PathEditor.create = function (target, vars) {
+  return new PathEditor(target, vars);
+};
+
+PathEditor.editingAxis = _editingAxis;
+
+PathEditor.getSnapFunction = function (vars) {
+  //{gridSize, radius, x, y, width, height}
+  var r = vars.radius || 2,
+      big = 1e20,
+      minX = vars.x || vars.x === 0 ? vars.x : vars.width ? 0 : -big,
+      minY = vars.y || vars.y === 0 ? vars.y : vars.height ? 0 : -big,
+      maxX = minX + (vars.width || big * big),
+      maxY = minY + (vars.height || big * big),
+      containX = vars.containX !== false,
+      containY = vars.containY !== false,
+      axis = vars.axis,
+      grid = vars.gridSize;
+  r *= r;
+  return function (p) {
+    var x = p.x,
+        y = p.y,
+        gridX,
+        gridY,
+        dx,
+        dy;
+
+    if (containX && x < minX || (dx = x - minX) * dx < r) {
+      x = minX;
+    } else if (containX && x > maxX || (dx = maxX - x) * dx < r) {
+      x = maxX;
+    }
+
+    if (containY && y < minY || (dy = y - minY) * dy < r) {
+      y = minY;
+    } else if (containY && y > maxY || (dy = maxY - y) * dy < r) {
+      y = maxY;
+    }
+
+    if (axis) {
+      dx = x - axis.x;
+      dy = y - axis.y;
+
+      if (dx * dx < r) {
+        x = axis.x;
+      }
+
+      if (dy * dy < r) {
+        y = axis.y;
+      }
+    }
+
+    if (grid) {
+      gridX = minX + Math.round((x - minX) / grid) * grid; //closest grid slot on x-axis
+
+      dx = gridX - x;
+      gridY = minY + Math.round((y - minY) / grid) * grid; //closest grid slot on y-axis
+
+      dy = gridY - y;
+
+      if (dx * dx + dy * dy < r) {
+        x = gridX;
+        y = gridY;
+      }
+    }
+
+    p.x = x;
+    p.y = y;
+  };
+};
+
+PathEditor.version = "3.10.4";
+
+
+/***/ }),
+
+/***/ "./node_modules/gsap/utils/matrix.js":
+/*!*******************************************!*\
+  !*** ./node_modules/gsap/utils/matrix.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Matrix2D": () => (/* binding */ Matrix2D),
+/* harmony export */   "_getCTM": () => (/* binding */ _getCTM),
+/* harmony export */   "_getDocScrollLeft": () => (/* binding */ _getDocScrollLeft),
+/* harmony export */   "_getDocScrollTop": () => (/* binding */ _getDocScrollTop),
+/* harmony export */   "_isFixed": () => (/* binding */ _isFixed),
+/* harmony export */   "_setDoc": () => (/* binding */ _setDoc),
+/* harmony export */   "getGlobalMatrix": () => (/* binding */ getGlobalMatrix)
+/* harmony export */ });
+/*!
+ * matrix 3.10.4
+ * https://greensock.com
+ *
+ * Copyright 2008-2022, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
+
+/* eslint-disable */
+var _doc,
+    _win,
+    _docElement,
+    _body,
+    _divContainer,
+    _svgContainer,
+    _identityMatrix,
+    _gEl,
+    _transformProp = "transform",
+    _transformOriginProp = _transformProp + "Origin",
+    _hasOffsetBug,
+    _setDoc = function _setDoc(element) {
+  var doc = element.ownerDocument || element;
+
+  if (!(_transformProp in element.style) && "msTransform" in element.style) {
+    //to improve compatibility with old Microsoft browsers
+    _transformProp = "msTransform";
+    _transformOriginProp = _transformProp + "Origin";
+  }
+
+  while (doc.parentNode && (doc = doc.parentNode)) {}
+
+  _win = window;
+  _identityMatrix = new Matrix2D();
+
+  if (doc) {
+    _doc = doc;
+    _docElement = doc.documentElement;
+    _body = doc.body;
+    _gEl = _doc.createElementNS("http://www.w3.org/2000/svg", "g"); // prevent any existing CSS from transforming it
+
+    _gEl.style.transform = "none"; // now test for the offset reporting bug. Use feature detection instead of browser sniffing to make things more bulletproof and future-proof. Hopefully Safari will fix their bug soon but it's 2020 and it's still not fixed.
+
+    var d1 = doc.createElement("div"),
+        d2 = doc.createElement("div");
+
+    _body.appendChild(d1);
+
+    d1.appendChild(d2);
+    d1.style.position = "static";
+    d1.style[_transformProp] = "translate3d(0,0,1px)";
+    _hasOffsetBug = d2.offsetParent !== d1;
+
+    _body.removeChild(d1);
+  }
+
+  return doc;
+},
+    _forceNonZeroScale = function _forceNonZeroScale(e) {
+  // walks up the element's ancestors and finds any that had their scale set to 0 via GSAP, and changes them to 0.0001 to ensure that measurements work. Firefox has a bug that causes it to incorrectly report getBoundingClientRect() when scale is 0.
+  var a, cache;
+
+  while (e && e !== _body) {
+    cache = e._gsap;
+    cache && cache.uncache && cache.get(e, "x"); // force re-parsing of transforms if necessary
+
+    if (cache && !cache.scaleX && !cache.scaleY && cache.renderTransform) {
+      cache.scaleX = cache.scaleY = 1e-4;
+      cache.renderTransform(1, cache);
+      a ? a.push(cache) : a = [cache];
+    }
+
+    e = e.parentNode;
+  }
+
+  return a;
+},
+    // possible future addition: pass an element to _forceDisplay() and it'll walk up all its ancestors and make sure anything with display: none is set to display: block, and if there's no parentNode, it'll add it to the body. It returns an Array that you can then feed to _revertDisplay() to have it revert all the changes it made.
+// _forceDisplay = e => {
+// 	let a = [],
+// 		parent;
+// 	while (e && e !== _body) {
+// 		parent = e.parentNode;
+// 		(_win.getComputedStyle(e).display === "none" || !parent) && a.push(e, e.style.display, parent) && (e.style.display = "block");
+// 		parent || _body.appendChild(e);
+// 		e = parent;
+// 	}
+// 	return a;
+// },
+// _revertDisplay = a => {
+// 	for (let i = 0; i < a.length; i+=3) {
+// 		a[i+1] ? (a[i].style.display = a[i+1]) : a[i].style.removeProperty("display");
+// 		a[i+2] || a[i].parentNode.removeChild(a[i]);
+// 	}
+// },
+_svgTemps = [],
+    //we create 3 elements for SVG, and 3 for other DOM elements and cache them for performance reasons. They get nested in _divContainer and _svgContainer so that just one element is added to the DOM on each successive attempt. Again, performance is key.
+_divTemps = [],
+    _getDocScrollTop = function _getDocScrollTop() {
+  return _win.pageYOffset || _doc.scrollTop || _docElement.scrollTop || _body.scrollTop || 0;
+},
+    _getDocScrollLeft = function _getDocScrollLeft() {
+  return _win.pageXOffset || _doc.scrollLeft || _docElement.scrollLeft || _body.scrollLeft || 0;
+},
+    _svgOwner = function _svgOwner(element) {
+  return element.ownerSVGElement || ((element.tagName + "").toLowerCase() === "svg" ? element : null);
+},
+    _isFixed = function _isFixed(element) {
+  if (_win.getComputedStyle(element).position === "fixed") {
+    return true;
+  }
+
+  element = element.parentNode;
+
+  if (element && element.nodeType === 1) {
+    // avoid document fragments which will throw an error.
+    return _isFixed(element);
+  }
+},
+    _createSibling = function _createSibling(element, i) {
+  if (element.parentNode && (_doc || _setDoc(element))) {
+    var svg = _svgOwner(element),
+        ns = svg ? svg.getAttribute("xmlns") || "http://www.w3.org/2000/svg" : "http://www.w3.org/1999/xhtml",
+        type = svg ? i ? "rect" : "g" : "div",
+        x = i !== 2 ? 0 : 100,
+        y = i === 3 ? 100 : 0,
+        css = "position:absolute;display:block;pointer-events:none;margin:0;padding:0;",
+        e = _doc.createElementNS ? _doc.createElementNS(ns.replace(/^https/, "http"), type) : _doc.createElement(type);
+
+    if (i) {
+      if (!svg) {
+        if (!_divContainer) {
+          _divContainer = _createSibling(element);
+          _divContainer.style.cssText = css;
+        }
+
+        e.style.cssText = css + "width:0.1px;height:0.1px;top:" + y + "px;left:" + x + "px";
+
+        _divContainer.appendChild(e);
+      } else {
+        _svgContainer || (_svgContainer = _createSibling(element));
+        e.setAttribute("width", 0.01);
+        e.setAttribute("height", 0.01);
+        e.setAttribute("transform", "translate(" + x + "," + y + ")");
+
+        _svgContainer.appendChild(e);
+      }
+    }
+
+    return e;
+  }
+
+  throw "Need document and parent.";
+},
+    _consolidate = function _consolidate(m) {
+  // replaces SVGTransformList.consolidate() because a bug in Firefox causes it to break pointer events. See https://greensock.com/forums/topic/23248-touch-is-not-working-on-draggable-in-firefox-windows-v324/?tab=comments#comment-109800
+  var c = new Matrix2D(),
+      i = 0;
+
+  for (; i < m.numberOfItems; i++) {
+    c.multiply(m.getItem(i).matrix);
+  }
+
+  return c;
+},
+    _getCTM = function _getCTM(svg) {
+  var m = svg.getCTM(),
+      transform;
+
+  if (!m) {
+    // Firefox returns null for getCTM() on root <svg> elements, so this is a workaround using a <g> that we temporarily append.
+    transform = svg.style[_transformProp];
+    svg.style[_transformProp] = "none"; // a bug in Firefox causes css transforms to contaminate the getCTM()
+
+    svg.appendChild(_gEl);
+    m = _gEl.getCTM();
+    svg.removeChild(_gEl);
+    transform ? svg.style[_transformProp] = transform : svg.style.removeProperty(_transformProp.replace(/([A-Z])/g, "-$1").toLowerCase());
+  }
+
+  return m || _identityMatrix.clone(); // Firefox will still return null if the <svg> has a width/height of 0 in the browser.
+},
+    _placeSiblings = function _placeSiblings(element, adjustGOffset) {
+  var svg = _svgOwner(element),
+      isRootSVG = element === svg,
+      siblings = svg ? _svgTemps : _divTemps,
+      parent = element.parentNode,
+      container,
+      m,
+      b,
+      x,
+      y,
+      cs;
+
+  if (element === _win) {
+    return element;
+  }
+
+  siblings.length || siblings.push(_createSibling(element, 1), _createSibling(element, 2), _createSibling(element, 3));
+  container = svg ? _svgContainer : _divContainer;
+
+  if (svg) {
+    if (isRootSVG) {
+      b = _getCTM(element);
+      x = -b.e / b.a;
+      y = -b.f / b.d;
+      m = _identityMatrix;
+    } else if (element.getBBox) {
+      b = element.getBBox();
+      m = element.transform ? element.transform.baseVal : {}; // IE11 doesn't follow the spec.
+
+      m = !m.numberOfItems ? _identityMatrix : m.numberOfItems > 1 ? _consolidate(m) : m.getItem(0).matrix; // don't call m.consolidate().matrix because a bug in Firefox makes pointer events not work when consolidate() is called on the same tick as getBoundingClientRect()! See https://greensock.com/forums/topic/23248-touch-is-not-working-on-draggable-in-firefox-windows-v324/?tab=comments#comment-109800
+
+      x = m.a * b.x + m.c * b.y;
+      y = m.b * b.x + m.d * b.y;
+    } else {
+      // may be a <mask> which has no getBBox() so just use defaults instead of throwing errors.
+      m = new Matrix2D();
+      x = y = 0;
+    }
+
+    if (adjustGOffset && element.tagName.toLowerCase() === "g") {
+      x = y = 0;
+    }
+
+    (isRootSVG ? svg : parent).appendChild(container);
+    container.setAttribute("transform", "matrix(" + m.a + "," + m.b + "," + m.c + "," + m.d + "," + (m.e + x) + "," + (m.f + y) + ")");
+  } else {
+    x = y = 0;
+
+    if (_hasOffsetBug) {
+      // some browsers (like Safari) have a bug that causes them to misreport offset values. When an ancestor element has a transform applied, it's supposed to treat it as if it's position: relative (new context). Safari botches this, so we need to find the closest ancestor (between the element and its offsetParent) that has a transform applied and if one is found, grab its offsetTop/Left and subtract them to compensate.
+      m = element.offsetParent;
+      b = element;
+
+      while (b && (b = b.parentNode) && b !== m && b.parentNode) {
+        if ((_win.getComputedStyle(b)[_transformProp] + "").length > 4) {
+          x = b.offsetLeft;
+          y = b.offsetTop;
+          b = 0;
+        }
+      }
+    }
+
+    cs = _win.getComputedStyle(element);
+
+    if (cs.position !== "absolute" && cs.position !== "fixed") {
+      m = element.offsetParent;
+
+      while (parent && parent !== m) {
+        // if there's an ancestor element between the element and its offsetParent that's scrolled, we must factor that in.
+        x += parent.scrollLeft || 0;
+        y += parent.scrollTop || 0;
+        parent = parent.parentNode;
+      }
+    }
+
+    b = container.style;
+    b.top = element.offsetTop - y + "px";
+    b.left = element.offsetLeft - x + "px";
+    b[_transformProp] = cs[_transformProp];
+    b[_transformOriginProp] = cs[_transformOriginProp]; // b.border = m.border;
+    // b.borderLeftStyle = m.borderLeftStyle;
+    // b.borderTopStyle = m.borderTopStyle;
+    // b.borderLeftWidth = m.borderLeftWidth;
+    // b.borderTopWidth = m.borderTopWidth;
+
+    b.position = cs.position === "fixed" ? "fixed" : "absolute";
+    element.parentNode.appendChild(container);
+  }
+
+  return container;
+},
+    _setMatrix = function _setMatrix(m, a, b, c, d, e, f) {
+  m.a = a;
+  m.b = b;
+  m.c = c;
+  m.d = d;
+  m.e = e;
+  m.f = f;
+  return m;
+};
+
+var Matrix2D = /*#__PURE__*/function () {
+  function Matrix2D(a, b, c, d, e, f) {
+    if (a === void 0) {
+      a = 1;
+    }
+
+    if (b === void 0) {
+      b = 0;
+    }
+
+    if (c === void 0) {
+      c = 0;
+    }
+
+    if (d === void 0) {
+      d = 1;
+    }
+
+    if (e === void 0) {
+      e = 0;
+    }
+
+    if (f === void 0) {
+      f = 0;
+    }
+
+    _setMatrix(this, a, b, c, d, e, f);
+  }
+
+  var _proto = Matrix2D.prototype;
+
+  _proto.inverse = function inverse() {
+    var a = this.a,
+        b = this.b,
+        c = this.c,
+        d = this.d,
+        e = this.e,
+        f = this.f,
+        determinant = a * d - b * c || 1e-10;
+    return _setMatrix(this, d / determinant, -b / determinant, -c / determinant, a / determinant, (c * f - d * e) / determinant, -(a * f - b * e) / determinant);
+  };
+
+  _proto.multiply = function multiply(matrix) {
+    var a = this.a,
+        b = this.b,
+        c = this.c,
+        d = this.d,
+        e = this.e,
+        f = this.f,
+        a2 = matrix.a,
+        b2 = matrix.c,
+        c2 = matrix.b,
+        d2 = matrix.d,
+        e2 = matrix.e,
+        f2 = matrix.f;
+    return _setMatrix(this, a2 * a + c2 * c, a2 * b + c2 * d, b2 * a + d2 * c, b2 * b + d2 * d, e + e2 * a + f2 * c, f + e2 * b + f2 * d);
+  };
+
+  _proto.clone = function clone() {
+    return new Matrix2D(this.a, this.b, this.c, this.d, this.e, this.f);
+  };
+
+  _proto.equals = function equals(matrix) {
+    var a = this.a,
+        b = this.b,
+        c = this.c,
+        d = this.d,
+        e = this.e,
+        f = this.f;
+    return a === matrix.a && b === matrix.b && c === matrix.c && d === matrix.d && e === matrix.e && f === matrix.f;
+  };
+
+  _proto.apply = function apply(point, decoratee) {
+    if (decoratee === void 0) {
+      decoratee = {};
+    }
+
+    var x = point.x,
+        y = point.y,
+        a = this.a,
+        b = this.b,
+        c = this.c,
+        d = this.d,
+        e = this.e,
+        f = this.f;
+    decoratee.x = x * a + y * c + e || 0;
+    decoratee.y = x * b + y * d + f || 0;
+    return decoratee;
+  };
+
+  return Matrix2D;
+}(); // Feed in an element and it'll return a 2D matrix (optionally inverted) so that you can translate between coordinate spaces.
+// Inverting lets you translate a global point into a local coordinate space. No inverting lets you go the other way.
+// We needed this to work around various browser bugs, like Firefox doesn't accurately report getScreenCTM() when there
+// are transforms applied to ancestor elements.
+// The matrix math to convert any x/y coordinate is as follows, which is wrapped in a convenient apply() method of Matrix2D above:
+//     tx = m.a * x + m.c * y + m.e
+//     ty = m.b * x + m.d * y + m.f
+
+function getGlobalMatrix(element, inverse, adjustGOffset, includeScrollInFixed) {
+  // adjustGOffset is typically used only when grabbing an element's PARENT's global matrix, and it ignores the x/y offset of any SVG <g> elements because they behave in a special way.
+  if (!element || !element.parentNode || (_doc || _setDoc(element)).documentElement === element) {
+    return new Matrix2D();
+  }
+
+  var zeroScales = _forceNonZeroScale(element),
+      svg = _svgOwner(element),
+      temps = svg ? _svgTemps : _divTemps,
+      container = _placeSiblings(element, adjustGOffset),
+      b1 = temps[0].getBoundingClientRect(),
+      b2 = temps[1].getBoundingClientRect(),
+      b3 = temps[2].getBoundingClientRect(),
+      parent = container.parentNode,
+      isFixed = !includeScrollInFixed && _isFixed(element),
+      m = new Matrix2D((b2.left - b1.left) / 100, (b2.top - b1.top) / 100, (b3.left - b1.left) / 100, (b3.top - b1.top) / 100, b1.left + (isFixed ? 0 : _getDocScrollLeft()), b1.top + (isFixed ? 0 : _getDocScrollTop()));
+
+  parent.removeChild(container);
+
+  if (zeroScales) {
+    b1 = zeroScales.length;
+
+    while (b1--) {
+      b2 = zeroScales[b1];
+      b2.scaleX = b2.scaleY = 0;
+      b2.renderTransform(1, b2);
+    }
+  }
+
+  return inverse ? m.inverse() : m;
+}
+ // export function getMatrix(element) {
+// 	_doc || _setDoc(element);
+// 	let m = (_win.getComputedStyle(element)[_transformProp] + "").substr(7).match(/[-.]*\d+[.e\-+]*\d*[e\-\+]*\d*/g),
+// 		is2D = m && m.length === 6;
+// 	return !m || m.length < 6 ? new Matrix2D() : new Matrix2D(+m[0], +m[1], +m[is2D ? 2 : 4], +m[is2D ? 3 : 5], +m[is2D ? 4 : 12], +m[is2D ? 5 : 13]);
+// }
 
 /***/ }),
 

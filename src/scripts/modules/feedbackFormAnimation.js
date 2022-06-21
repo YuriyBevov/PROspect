@@ -1,8 +1,9 @@
 import {gsap} from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import {MorphSVGPlugin} from 'gsap/MorphSVGPlugin';
-
-gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin);
+import {MotionPathPlugin} from 'gsap/MotionPathPlugin';
+import {MotionPathHelper} from 'gsap/MotionPathHelper';
+gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin, MotionPathPlugin, MotionPathHelper);
 
 const form = document.querySelector('.feedback form');
 
@@ -31,7 +32,41 @@ if(form) {
       ease: "ease-in"
     });
 
-    let planeTl1 = gsap.timeline({
+    //--- plane
+
+    const tween = gsap.to("#plane", {
+      repeat: -1,
+      repeatDelay: 4,
+      motionPath: {
+          path: "#path",
+          align: "#path",
+          alignOrigin: [0.5, 0.5],
+          autoRotate: true
+      },
+      transformOrigin: "50% 50%",
+      duration: 2,
+      scale: 0,
+      ease: "power2.ease"
+    });
+
+    /*const tween2 = gsap.to("#plane2", {
+      repeat: -1,
+      repeatDelay: 4,
+      motionPath: {
+          path: "#path2",
+          align: "#path2",
+          alignOrigin: [0.5, 0.5],
+          autoRotate: true
+      },
+      transformOrigin: "50% 50%",
+      duration: 2,
+      scale: 2.5,
+      ease: "ease-in-out"
+    });*/
+
+  // MotionPathHelper.create(tween);
+
+    /*let planeTl1 = gsap.timeline({
       scrollTrigger: {
         trigger: text,
         start: "top bottom",
@@ -66,5 +101,5 @@ if(form) {
       x: '150vw',
       y: '-40vh',
       ease: "power1.out",
-    });
+    });*/
 }
