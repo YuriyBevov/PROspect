@@ -49,7 +49,7 @@ if(form) {
       ease: "power2.ease"
     });
 
-   MotionPathHelper.create(tween);
+   //MotionPathHelper.create(tween);
 
     /*let planeTl1 = gsap.timeline({
       scrollTrigger: {

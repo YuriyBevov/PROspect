@@ -6105,8 +6105,8 @@ if (form) {
     duration: 2,
     scale: 0,
     ease: "power2.ease"
-  });
-  gsap_MotionPathHelper__WEBPACK_IMPORTED_MODULE_4__.MotionPathHelper.create(tween);
+  }); //MotionPathHelper.create(tween);
+
   /*let planeTl1 = gsap.timeline({
     scrollTrigger: {
       trigger: text,

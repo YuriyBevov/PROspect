@@ -4413,7 +4413,7 @@ select:-webkit-autofill:focus {
 }
 
 .form-container {
-  z-index: -3;
+  z-index: 3;
 }
 
 .plane-scene {
