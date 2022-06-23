@@ -36,7 +36,7 @@ if(form) {
 
     const tween = gsap.to("#plane", {
       repeat: -1,
-      repeatDelay: 4,
+      repeatDelay: 2.5,
       motionPath: {
           path: "#path",
           align: "#path",

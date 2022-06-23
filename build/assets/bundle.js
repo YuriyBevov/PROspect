@@ -6094,7 +6094,7 @@ if (form) {
 
   var tween = gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to("#plane", {
     repeat: -1,
-    repeatDelay: 4,
+    repeatDelay: 2.5,
     motionPath: {
       path: "#path",
       align: "#path",
@@ -7039,7 +7039,6 @@ if (videos) {
       loop: true,
       width: '100%'
     });
-    player.requestFullscreen();
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {

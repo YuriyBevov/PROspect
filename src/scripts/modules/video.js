@@ -2,7 +2,6 @@ import videojs from "video.js";
 const videos = document.querySelectorAll('video');
 
 if(videos) {
-
   videos.forEach(video => {
     let player = videojs(video, {
       preload: 'auto',
@@ -10,7 +9,6 @@ if(videos) {
       width: '100%',
     });
 
-    player.requestFullscreen();
     let observer = new IntersectionObserver(entries => {
       entries.forEach( entry => {
         if(entry.isIntersecting) {
@@ -33,6 +31,5 @@ if(videos) {
     }
 
     spinner.appendChild(loader);
-
   });
 };

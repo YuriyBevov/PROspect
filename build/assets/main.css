@@ -4424,9 +4424,9 @@ select:-webkit-autofill:focus {
   height: 100%;
 }
 .plane-scene #plane {
-  -webkit-transform: scale(3.5);
-  -ms-transform: scale(3.5);
-  transform: scale(3.5);
+  -webkit-transform: scale(3);
+  -ms-transform: scale(3);
+  transform: scale(3);
   z-index: 2;
 }
 
