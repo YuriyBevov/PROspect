@@ -32,7 +32,7 @@ if(form) {
       ease: "ease-in"
     });
 
-    //--- plane
+    //--- plane2
 
     const tween = gsap.to("#plane", {
       repeat: -1,
@@ -49,22 +49,7 @@ if(form) {
       ease: "power2.ease"
     });
 
-    /*const tween2 = gsap.to("#plane2", {
-      repeat: -1,
-      repeatDelay: 4,
-      motionPath: {
-          path: "#path2",
-          align: "#path2",
-          alignOrigin: [0.5, 0.5],
-          autoRotate: true
-      },
-      transformOrigin: "50% 50%",
-      duration: 2,
-      scale: 2.5,
-      ease: "ease-in-out"
-    });*/
-
-  // MotionPathHelper.create(tween);
+   MotionPathHelper.create(tween);
 
     /*let planeTl1 = gsap.timeline({
       scrollTrigger: {

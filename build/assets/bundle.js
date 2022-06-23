@@ -6090,7 +6090,7 @@ if (form) {
     opacity: 1,
     y: 0,
     ease: "ease-in"
-  }); //--- plane
+  }); //--- plane2
 
   var tween = gsap__WEBPACK_IMPORTED_MODULE_0__.gsap.to("#plane", {
     repeat: -1,
@@ -6106,22 +6106,7 @@ if (form) {
     scale: 0,
     ease: "power2.ease"
   });
-  /*const tween2 = gsap.to("#plane2", {
-    repeat: -1,
-    repeatDelay: 4,
-    motionPath: {
-        path: "#path2",
-        align: "#path2",
-        alignOrigin: [0.5, 0.5],
-        autoRotate: true
-    },
-    transformOrigin: "50% 50%",
-    duration: 2,
-    scale: 2.5,
-    ease: "ease-in-out"
-  });*/
-  // MotionPathHelper.create(tween);
-
+  gsap_MotionPathHelper__WEBPACK_IMPORTED_MODULE_4__.MotionPathHelper.create(tween);
   /*let planeTl1 = gsap.timeline({
     scrollTrigger: {
       trigger: text,
